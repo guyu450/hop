@@ -236,7 +236,7 @@
       "description": "Set this value to N if you don't want to automatically create a hop configuration file (hop-config.json) when it's missing"
     }
   ],
-  "LocaleDefault": "en_BE",
+  "LocaleDefault": "zh_CN",
   "guiProperties": {
     "FontFixedSize": "13",
     "MaxUndo": "100",

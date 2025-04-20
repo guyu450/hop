@@ -235,7 +235,7 @@
       "description" : "A variable allow or disallow doctype declarations in XML"
     }
   ],
-  "LocaleDefault": "en_BE",
+  "LocaleDefault": "zh_CN",
   "guiProperties": {
     "FontFixedSize": "13",
     "MaxUndo": "100",
