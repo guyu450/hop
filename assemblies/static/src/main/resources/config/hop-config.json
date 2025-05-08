@@ -1,10 +1,10 @@
 {
+  "LocaleDefault": "zh_CN",
   "projectsConfig": {
     "enabled": true,
     "projectMandatory": true,
     "defaultProject": "default",
     "standardParentProject": "default",
-    "LocaleDefault": "zh_CN",
     "projectConfigurations": [
       {
         "projectName": "default",
