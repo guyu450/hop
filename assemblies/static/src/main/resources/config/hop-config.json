@@ -1,5 +1,6 @@
 {
   "LocaleDefault": "zh_CN",
+  "doNotShowWelcomeDialog" : true,
   "projectsConfig": {
     "enabled": true,
     "projectMandatory": true,
