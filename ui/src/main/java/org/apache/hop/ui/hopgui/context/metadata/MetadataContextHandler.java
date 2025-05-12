@@ -76,7 +76,7 @@ public class MetadataContextHandler implements IGuiContextHandler {
             "CREATE_" + TranslateUtil.translate(hopMetadata.name(), metadataObjectClass),
             GuiActionType.Create,
             TranslateUtil.translate(hopMetadata.name(), metadataObjectClass),
-            "Creates a new "
+            "创建新的 "
                 + TranslateUtil.translate(hopMetadata.name(), metadataObjectClass)
                 + " : "
                 + TranslateUtil.translate(hopMetadata.description(), metadataObjectClass),
@@ -93,7 +93,7 @@ public class MetadataContextHandler implements IGuiContextHandler {
             "EDIT_" + TranslateUtil.translate(hopMetadata.name(), metadataObjectClass),
             GuiActionType.Modify,
             TranslateUtil.translate(hopMetadata.name(), metadataObjectClass),
-            "Edits a "
+            "编辑 "
                 + TranslateUtil.translate(hopMetadata.name(), metadataObjectClass)
                 + " : "
                 + TranslateUtil.translate(hopMetadata.description(), metadataObjectClass),
@@ -109,7 +109,7 @@ public class MetadataContextHandler implements IGuiContextHandler {
             "DELETE_" + TranslateUtil.translate(hopMetadata.name(), metadataObjectClass),
             GuiActionType.Delete,
             TranslateUtil.translate(hopMetadata.name(), metadataObjectClass),
-            "After confirmation this deletes a "
+            "确认后会删除 "
                 + TranslateUtil.translate(hopMetadata.name(), metadataObjectClass)
                 + " : "
                 + TranslateUtil.translate(hopMetadata.description(), metadataObjectClass),

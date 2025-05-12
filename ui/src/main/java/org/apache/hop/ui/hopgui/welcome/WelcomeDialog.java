@@ -216,9 +216,9 @@ public class WelcomeDialog {
       parentId = HopGui.ID_MAIN_MENU_HELP_PARENT_ID,
       type = GuiMenuElementType.MENU_ITEM,
       id = "help.welcome",
-      label = "Welcome",
+      label = "欢迎",
       image = "ui/images/logo_hop.svg")
   public void menuHelpWelcome() {
-    open();
+    //    open();
   }
 }
