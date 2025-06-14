@@ -23,6 +23,7 @@ cd "${0%/*}"
 
 # unzip files for docker image
 #
+unzip -qu ../assemblies/client/target/hop-client-*.zip -d ../assemblies/client/target/
 unzip -qu ../assemblies/web/target/hop.war -d ../assemblies/web/target/webapp
 unzip -qu ../assemblies/plugins/dist/target/hop-assemblies-*.zip -d ../assemblies/plugins/dist/target/
 unzip -quj ../assemblies/lib-jdbc/target/hop-assemblies-*.zip -d ../assemblies/lib-jdbc/target/jdbc-drivers
@@ -42,8 +43,9 @@ cp ../rap/target/hop-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib/
 cp ../plugins/engines/beam/target/hop-plugins*.jar ../assemblies/plugins/dist/target/plugins/engines/beam/
 
 #build docker image
-docker build ../ -f Dockerfile.web -t hop-web
+docker build ../ -f Dockerfile.web -t hfxt-web
 
 #cleanup
 rm -rf ../assemblies/web/target/webapp
 rm -rf ../assemblies/plugins/dist/target/plugins
+rm -rf ../assemblies/client/target/hop

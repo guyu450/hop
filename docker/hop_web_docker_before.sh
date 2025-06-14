@@ -21,31 +21,25 @@
 #
 cd "${0%/*}"
 
-REST_TARGET=../rest/target/webapp
-
 # unzip files for docker image
 #
-unzip -qu ../rest/target/hop-rest*.war -d ${REST_TARGET}
+unzip -qu ../assemblies/client/target/hop-client-*.zip -d ../assemblies/client/target/
+unzip -qu ../assemblies/web/target/hop.war -d ../assemblies/web/target/webapp
 unzip -qu ../assemblies/plugins/dist/target/hop-assemblies-*.zip -d ../assemblies/plugins/dist/target/
+unzip -quj ../assemblies/lib-jdbc/target/hop-assemblies-*.zip -d ../assemblies/lib-jdbc/target/jdbc-drivers
 
-# Copy recent changes in libraries.
+# copy recent changes in libraries...
 #
-echo "Copying Hop jar files from the target folders."
-cp ../core/target/hop-core-*SNAPSHOT.jar ${REST_TARGET}/WEB-INF/lib/
-cp ../engine/target/hop-engine-*SNAPSHOT.jar ${REST_TARGET}/WEB-INF/lib
-cp ../ui/target/hop-ui-*SNAPSHOT.jar ${REST_TARGET}/WEB-INF/lib/
-cp ../rap/target/hop-*SNAPSHOT.jar ${REST_TARGET}/WEB-INF/lib/
+ls -lrt ../assemblies/web/target/webapp/WEB-INF/lib/
 
-# Copy recent changes to a few plugins.
+echo "Copying Hop jar file from the target folders."
+cp ../core/target/hop-core-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib/
+cp ../engine/target/hop-engine-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib
+cp ../ui/target/hop-ui-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib/
+cp ../rap/target/hop-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib/
+
+# copy recent changes to a few plugins
 #
 cp ../plugins/engines/beam/target/hop-plugins*.jar ../assemblies/plugins/dist/target/plugins/engines/beam/
-cp ../plugins/misc/projects/target/hop-plugins*.jar ../assemblies/plugins/dist/target/plugins/misc/projects/
 
-# Build the docker image.
-#
-docker build ../ -f Dockerfile.rest -t hfxt-rest # --progress=plain --no-cache
-
-# Cleanup
-#
-# rm -rf ${REST_TARGET}/
-# rm -rf ../assemblies/plugins/dist/target/plugins
+echo "hop_web_docker_before finish ...."
