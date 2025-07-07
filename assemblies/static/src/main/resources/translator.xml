@@ -17,7 +17,7 @@
   -->
 
 <translator-config>
-    <reference-locale>en_US</reference-locale>
+    <reference-locale>zh_CN</reference-locale>
     <locale-list>
         <locale>en_US</locale>
         <locale>de_DE</locale>
