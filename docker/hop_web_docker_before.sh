@@ -25,9 +25,6 @@ cd "${0%/*}"
 #
 unzip -qu ../assemblies/client/target/hop-client-*.zip -d ../assemblies/client/target/
 unzip -qu ../assemblies/web/target/hop.war -d ../assemblies/web/target/webapp
-#plugins的所有内容，都已经被client给引入了，并且在dockerfile.web 中cp了client的内容，因此次行可以忽略
-#unzip -qu ../assemblies/plugins/target/hop-assemblies-*.zip -d ../assemblies/plugins/dist/target/
-#unzip -quj ../assemblies/lib-jdbc/target/hop-assemblies-*.zip -d ../assemblies/lib-jdbc/target/jdbc-drivers
 
 # copy recent changes in libraries...
 #
@@ -39,15 +36,4 @@ cp ../engine/target/hop-engine-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB
 cp ../ui/target/hop-ui-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib/
 cp ../rap/target/hop-*SNAPSHOT.jar ../assemblies/web/target/webapp/WEB-INF/lib/
 
-# copy recent changes to a few plugins
-#目录下无此文件
-#cp ../plugins/engines/beam/target/hop-plugins*.jar ../assemblies/plugins/dist/target/plugins/engines/beam/
-
-#build docker image
-docker build ../ -f Dockerfile.web -t hfxt-web
-
-
-#cleanup
-rm -rf ../assemblies/web/target/webapp
-#rm -rf ../assemblies/plugins/dist/target/plugins
-rm -rf ../assemblies/client/target/hop
+echo "hop_web_docker_before finish ...."
