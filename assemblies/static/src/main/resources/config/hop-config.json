@@ -17,5 +17,6 @@
       }
     ]
   },
-  "LocaleDefault": "zh_CN"
+  "LocaleDefault": "zh_CN",
+  "doNotShowWelcomeDialog" : true
 }

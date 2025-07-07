@@ -211,14 +211,14 @@ public class WelcomeDialog {
     shell.dispose();
   }
 
-  @GuiMenuElement(
-      root = HopGui.ID_MAIN_MENU,
-      parentId = HopGui.ID_MAIN_MENU_HELP_PARENT_ID,
-      type = GuiMenuElementType.MENU_ITEM,
-      id = "help.welcome",
-      label = "Welcome",
-      image = "ui/images/logo_hop.svg")
-  public void menuHelpWelcome() {
-    open();
-  }
+//  @GuiMenuElement(
+//      root = HopGui.ID_MAIN_MENU,
+//      parentId = HopGui.ID_MAIN_MENU_HELP_PARENT_ID,
+//      type = GuiMenuElementType.MENU_ITEM,
+//      id = "help.welcome",
+//      label = "Welcome",
+//      image = "ui/images/logo_hop.svg")
+//  public void menuHelpWelcome() {
+//    open();
+//  }
 }
