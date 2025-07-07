@@ -83,5 +83,48 @@
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <useProjectArtifact>false</useProjectArtifact>
         </dependencySet>
+
+        <!--自行添加-->
+        <dependencySet>
+            <includes>
+                <include>org.apache.hop:hop-core:jar</include>
+                <include>org.apache.hop:hop-engine:jar</include>
+                <include>org.apache.hop:hop-engine-beam:jar</include>
+                <include>org.apache.hop:hop-ui:jar</include>
+                <include>org.jboss:jandex:jar</include>
+            </includes>
+            <outputDirectory>WEB-INF/lib</outputDirectory>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
+        <dependencySet>
+            <includes>
+                <include>org.apache.hop:hop-core:zip</include>
+            </includes>
+            <unpack>true</unpack>
+            <outputDirectory>WEB-INF/</outputDirectory>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
+
+        <dependencySet>
+            <includes>
+                <include>org.apache.hop:hop-assemblies-plugins:zip</include>
+            </includes>
+            <unpack>true</unpack>
+            <outputDirectory>WEB-INF/lib</outputDirectory>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
+
+        <dependencySet>
+            <includes>
+                <include>org.jboss:jandex: jar</include>
+            </includes>
+            <unpack>true</unpack>
+            <outputDirectory>WEB-INF/lib</outputDirectory>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
     </dependencySets>
 </assembly>
