@@ -26,8 +26,6 @@ import org.apache.hop.core.config.HopConfig;
 import org.apache.hop.core.gui.plugin.GuiElements;
 import org.apache.hop.core.gui.plugin.GuiPlugin;
 import org.apache.hop.core.gui.plugin.GuiRegistry;
-import org.apache.hop.core.gui.plugin.menu.GuiMenuElement;
-import org.apache.hop.core.gui.plugin.menu.GuiMenuElementType;
 import org.apache.hop.core.svg.SvgCache;
 import org.apache.hop.core.svg.SvgCacheEntry;
 import org.apache.hop.core.svg.SvgFile;
@@ -211,14 +209,14 @@ public class WelcomeDialog {
     shell.dispose();
   }
 
-//  @GuiMenuElement(
-//      root = HopGui.ID_MAIN_MENU,
-//      parentId = HopGui.ID_MAIN_MENU_HELP_PARENT_ID,
-//      type = GuiMenuElementType.MENU_ITEM,
-//      id = "help.welcome",
-//      label = "Welcome",
-//      image = "ui/images/logo_hop.svg")
-//  public void menuHelpWelcome() {
-//    open();
-//  }
+  //  @GuiMenuElement(
+  //      root = HopGui.ID_MAIN_MENU,
+  //      parentId = HopGui.ID_MAIN_MENU_HELP_PARENT_ID,
+  //      type = GuiMenuElementType.MENU_ITEM,
+  //      id = "help.welcome",
+  //      label = "Welcome",
+  //      image = "ui/images/logo_hop.svg")
+  //  public void menuHelpWelcome() {
+  //    open();
+  //  }
 }
