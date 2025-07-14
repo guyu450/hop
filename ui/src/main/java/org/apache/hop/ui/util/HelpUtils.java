@@ -17,12 +17,7 @@
 
 package org.apache.hop.ui.util;
 
-import static org.apache.hop.core.Const.getDocUrl;
-
-import org.apache.hop.core.database.DatabasePluginType;
-import org.apache.hop.core.plugins.ActionPluginType;
 import org.apache.hop.core.plugins.IPlugin;
-import org.apache.hop.core.plugins.TransformPluginType;
 import org.apache.hop.core.util.StringUtil;
 import org.apache.hop.i18n.BaseMessages;
 import org.apache.hop.ui.core.PropsUi;
@@ -83,29 +78,38 @@ public class HelpUtils {
     if (shell == null || plugin == null) {
       return;
     }
-    if (isPluginDocumented(plugin)) {
-      try {
-        EnvironmentUtils.getInstance().openUrl(getDocUrl(plugin.getDocumentationUrl()));
-      } catch (Exception ex) {
-        new ErrorDialog(shell, "Error", "Error opening URL", ex);
-      }
-    } else {
-      MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
-      String msg = "";
-      // only supports Transform, Action, Database and Metadata - extend if required.
-      if (plugin.getPluginType().equals(TransformPluginType.class)) {
-        msg = BaseMessages.getString(PKG, "System.Help.Transform.IsNotAvailable", plugin.getName());
-      } else if (plugin.getPluginType().equals(ActionPluginType.class)) {
-        msg = BaseMessages.getString(PKG, "System.Help.Action.IsNotAvailable", plugin.getName());
-      } else if (plugin.getPluginType().equals(DatabasePluginType.class)) {
-        msg = BaseMessages.getString(PKG, "System.Help.Database.IsNotAvailable", plugin.getName());
-      } else {
-        msg = BaseMessages.getString(PKG, "System.Help.Metadata.IsNotAvailable", plugin.getName());
-      }
-
-      mb.setMessage(msg);
-      mb.setText(BaseMessages.getString(PKG, "System.Dialog.Error.Title"));
-      mb.open();
-    }
+    //    if (isPluginDocumented(plugin)) {
+    //      try {
+    //        EnvironmentUtils.getInstance().openUrl(getDocUrl(plugin.getDocumentationUrl()));
+    //      } catch (Exception ex) {
+    //        new ErrorDialog(shell, "Error", "Error opening URL", ex);
+    //      }
+    //    } else {
+    //      MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
+    //      String msg = "";
+    //      // only supports Transform, Action, Database and Metadata - extend if required.
+    //      if (plugin.getPluginType().equals(TransformPluginType.class)) {
+    //        msg = BaseMessages.getString(PKG, "System.Help.Transform.IsNotAvailable",
+    // plugin.getName());
+    //      } else if (plugin.getPluginType().equals(ActionPluginType.class)) {
+    //        msg = BaseMessages.getString(PKG, "System.Help.Action.IsNotAvailable",
+    // plugin.getName());
+    //      } else if (plugin.getPluginType().equals(DatabasePluginType.class)) {
+    //        msg = BaseMessages.getString(PKG, "System.Help.Database.IsNotAvailable",
+    // plugin.getName());
+    //      } else {
+    //        msg = BaseMessages.getString(PKG, "System.Help.Metadata.IsNotAvailable",
+    // plugin.getName());
+    //      }
+    //
+    //      mb.setMessage(msg);
+    //      mb.setText(BaseMessages.getString(PKG, "System.Dialog.Error.Title"));
+    //      mb.open();
+    //    }
+    MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
+    String msg = "请联系管理员";
+    mb.setMessage(msg);
+    mb.setText("注意");
+    mb.open();
   }
 }
