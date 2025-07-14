@@ -140,7 +140,7 @@ public class HopWeb implements ApplicationConfiguration {
     System.out.println("Hop web: selected theme is: " + themeId);
 
     Map<String, String> properties = new HashMap<>();
-    properties.put(WebClient.PAGE_TITLE, "Apache Hop Web");
+    properties.put(WebClient.PAGE_TITLE, "HFXT Web");
     properties.put(WebClient.FAVICON, "ui/images/logo_icon.png");
     properties.put(WebClient.THEME_ID, themeId);
     properties.put(WebClient.HEAD_HTML, readTextFromResource("head.html", "UTF-8"));
