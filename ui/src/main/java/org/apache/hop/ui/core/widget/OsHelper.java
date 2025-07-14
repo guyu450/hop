@@ -123,7 +123,7 @@ public class OsHelper {
 
         switch (item.getID()) {
           case SWT.ID_ABOUT:
-            item.addListener(SWT.Selection, event -> HopGui.getInstance().menuHelpAbout());
+//            item.addListener(SWT.Selection, event -> HopGui.getInstance().menuHelpAbout());
 
             break;
           case SWT.ID_PREFERENCES:
