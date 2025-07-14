@@ -1,0 +1,55 @@
+<!--
+~ Licensed to the Apache Software Foundation (ASF) under one or more
+~ contributor license agreements.  See the NOTICE file distributed with
+~ this work for additional information regarding copyright ownership.
+~ The ASF licenses this file to You under the Apache License, Version 2.0
+~ (the "License"); you may not use this file except in compliance with
+~ the License.  You may obtain a copy of the License at
+~
+~       http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~
+-->
+
+<!--
+This file can be used to add code snippets and strings that can not be executed.
+Example to block calls using any System. methods:
+<exclusions>
+<exclusion>System.</exclusion>
+</exclusions>
+-->
+
+<exclusions>
+    <exclusion>160-HopConfigurationPerspective</exclusion>
+    <exclusion>300-HopExplorerPerspective</exclusion>
+    <exclusion>400-HopSearchPerspective</exclusion>
+    <exclusion>500-HopPluginExplorerPerspective</exclusion>
+    <exclusion>150-HopExecutionPerspective</exclusion>
+    <exclusion>HopNeo4jPerspective</exclusion>
+    <exclusion>200-HopMetadataPerspective</exclusion>
+
+    <exclusion>toolbar-40000-project-label</exclusion>
+    <exclusion>toolbar-40010-project-list</exclusion>
+    <exclusion>toolbar-40020-project-edit</exclusion>
+    <exclusion>toolbar-40030-project-add</exclusion>
+    <exclusion>toolbar-40040-project-delete</exclusion>
+
+    <exclusion>toolbar-50000-environment-label</exclusion>
+    <exclusion>toolbar-50010-environment-list</exclusion>
+    <exclusion>toolbar-50020-environment-edit</exclusion>
+    <exclusion>toolbar-50030-environment-add</exclusion>
+    <exclusion>toolbar-50040-environment-delete</exclusion>
+
+    <exclusion>HopGuiPipelineGraph-ToolBar-20000-unit-tests-label</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-20010-unit-tests-combo</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-20015-unit-test-edit</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-20020-unit-tests-create</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-20030-unit-test-detach</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-20050-unit-tests-delete</exclusion>
+
+</exclusions>
