@@ -52,7 +52,6 @@ import org.apache.hop.ui.hopgui.file.workflow.HopWorkflowFileType;
 import org.apache.hop.ui.hopgui.perspective.HopPerspectivePlugin;
 import org.apache.hop.ui.hopgui.perspective.IHopPerspective;
 import org.apache.hop.ui.hopgui.perspective.TabClosable;
-import org.apache.hop.ui.hopgui.perspective.TabCloseHandler;
 import org.apache.hop.ui.hopgui.perspective.TabItemHandler;
 import org.apache.hop.workflow.WorkflowMeta;
 import org.apache.hop.workflow.engine.IWorkflowEngine;
@@ -166,7 +165,7 @@ public class HopDataOrchestrationPerspective implements IHopPerspective, TabClos
     tabFolder.addListener(SWT.Selection, this::handleTabSelectionEvent);
 
     // Create tab item context menu
-    new TabCloseHandler(this);
+    //    new TabCloseHandler(this);
 
     // Support reorder tab item
     new TabFolderReorder(tabFolder);

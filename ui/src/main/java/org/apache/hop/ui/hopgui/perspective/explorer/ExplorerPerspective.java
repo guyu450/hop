@@ -74,7 +74,6 @@ import org.apache.hop.ui.hopgui.file.empty.EmptyHopFileTypeHandler;
 import org.apache.hop.ui.hopgui.perspective.HopPerspectivePlugin;
 import org.apache.hop.ui.hopgui.perspective.IHopPerspective;
 import org.apache.hop.ui.hopgui.perspective.TabClosable;
-import org.apache.hop.ui.hopgui.perspective.TabCloseHandler;
 import org.apache.hop.ui.hopgui.perspective.TabItemHandler;
 import org.apache.hop.ui.hopgui.perspective.explorer.config.ExplorerPerspectiveConfigSingleton;
 import org.apache.hop.ui.hopgui.perspective.explorer.file.ExplorerFileType;
@@ -824,7 +823,7 @@ public class ExplorerPerspective implements IHopPerspective, TabClosable {
         });
     tabFolder.setTopRight(secondToolBar, SWT.RIGHT);
 
-    new TabCloseHandler(this);
+    //    new TabCloseHandler(this);
 
     // Support reorder tab item
     //

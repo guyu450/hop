@@ -66,7 +66,6 @@ import org.apache.hop.ui.hopgui.file.empty.EmptyHopFileTypeHandler;
 import org.apache.hop.ui.hopgui.perspective.HopPerspectivePlugin;
 import org.apache.hop.ui.hopgui.perspective.IHopPerspective;
 import org.apache.hop.ui.hopgui.perspective.TabClosable;
-import org.apache.hop.ui.hopgui.perspective.TabCloseHandler;
 import org.apache.hop.ui.hopgui.perspective.TabItemHandler;
 import org.apache.hop.ui.pipeline.transform.BaseTransformDialog;
 import org.apache.hop.ui.util.HelpUtils;
@@ -361,7 +360,7 @@ public class MetadataPerspective implements IHopPerspective, TabClosable {
         });
     tabFolder.setTopRight(tabToolBar, SWT.RIGHT);
 
-    new TabCloseHandler(this);
+    //    new TabCloseHandler(this);
 
     // Support reorder tab item
     //
