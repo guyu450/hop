@@ -52,4 +52,14 @@ Example to block calls using any System. methods:
     <exclusion>HopGuiPipelineGraph-ToolBar-20030-unit-test-detach</exclusion>
     <exclusion>HopGuiPipelineGraph-ToolBar-20050-unit-tests-delete</exclusion>
 
+    <exclusion>HopGuiPipelineGraph-ToolBar-10040-Check</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-10050-Preview</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-10060-Debug</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-10450-EditPipeline</exclusion>
+    <exclusion>HopGuiPipelineGraph-ToolBar-10475-ToExecutionInfo</exclusion>
+
+    <exclusion>HopGuiWorkflowGraph-ToolBar-10040-Check</exclusion>
+    <exclusion>HopGuiWorkflowGraph-ToolBar-10450-EditWorkflow</exclusion>
+    <exclusion>HopGuiWorkflowGraph-ToolBar-10475-ToExecutionInfo</exclusion>
+
 </exclusions>
