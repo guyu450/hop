@@ -42,7 +42,7 @@
                 <include>org.apache.hop:hop-engine:zip</include>
                 <include>org.apache.hop:hop-ui:zip</include>
                 <include>org.apache.hop:hop-engine-beam:zip</include>
-                <include>org.apache.hop:hop-engines-beam:zip</include>
+<!--                <include>org.apache.hop:hop-engines-beam:zip</include>-->
             </includes>
             <unpack>true</unpack>
             <outputDirectory>.</outputDirectory>

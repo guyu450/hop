@@ -67,12 +67,12 @@
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
-        <dependency>
-            <groupId>org.apache.hop</groupId>
-            <artifactId>hop-engines-beam</artifactId>
-            <version>${project.version}</version>
-            <type>zip</type>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hop</groupId>-->
+        <!--            <artifactId>hop-engines-beam</artifactId>-->
+        <!--            <version>${project.version}</version>-->
+        <!--            <type>zip</type>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.hop</groupId>
             <artifactId>hop-ui</artifactId>
