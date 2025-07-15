@@ -17,7 +17,11 @@
 #
 
 FROM tomcat:9-jdk17
-LABEL maintainer="Apache Hop Team"
+# 同时设置系统时区和JVM时区（双重保障）
+ENV TZ=Asia/Shanghai
+ENV JAVA_OPTS="-Duser.timezone=Asia/Shanghai"
+
+LABEL maintainer="HFXT Team"
 # path to where the artifacts should be deployed to
 ENV DEPLOYMENT_PATH=/usr/local/tomcat/webapps/ROOT
 ENV HOP_AES_ENCODER_KEY=""
@@ -48,6 +52,7 @@ ENV HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS=
 
 # Set TOMCAT start variables
 ENV CATALINA_OPTS='${HOP_OPTIONS} \
+  -DTZ="${TZ}" \
   -DHOP_AES_ENCODER_KEY="${HOP_AES_ENCODER_KEY}" \
   -DHOP_AUDIT_FOLDER="${HOP_AUDIT_FOLDER}" \
   -DHOP_CONFIG_FOLDER="${HOP_CONFIG_FOLDER}" \
@@ -70,9 +75,9 @@ RUN rm -rf webapps/* \
 # Copy resources
 COPY ./assemblies/web/target/webapp/ "${CATALINA_HOME}"/webapps/ROOT/
 COPY ./assemblies/client/target/hop/lib/core "${CATALINA_HOME}"/webapps/ROOT/WEB-INF/lib
-COPY ./assemblies/client/target/hop/lib/beam "${CATALINA_HOME}"/webapps/ROOT/WEB-INF/lib
+# COPY ./assemblies/client/target/hop/lib/beam "${CATALINA_HOME}"/webapps/ROOT/WEB-INF/lib
 COPY ./assemblies/client/target/hop/plugins "${CATALINA_HOME}"/plugins
-COPY ./assemblies/client/target/hop/lib/jdbc/ "${CATALINA_HOME}"/jdbc-drivers
+# COPY ./assemblies/client/target/hop/lib/jdbc/ "${CATALINA_HOME}"/jdbc-drivers
 COPY --chown=hop ./docker/resources/run-web.sh /tmp/
 
 # Fix hop-config.json
