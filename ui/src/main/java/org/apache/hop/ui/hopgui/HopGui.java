@@ -96,13 +96,11 @@ import org.apache.hop.ui.hopgui.context.GuiContextUtil;
 import org.apache.hop.ui.hopgui.context.IActionContextHandlersProvider;
 import org.apache.hop.ui.hopgui.context.IGuiContextHandler;
 import org.apache.hop.ui.hopgui.context.menu.MenuContextHandler;
-import org.apache.hop.ui.hopgui.context.metadata.MetadataContext;
 import org.apache.hop.ui.hopgui.delegates.HopGuiAuditDelegate;
 import org.apache.hop.ui.hopgui.delegates.HopGuiContextDelegate;
 import org.apache.hop.ui.hopgui.delegates.HopGuiFileDelegate;
 import org.apache.hop.ui.hopgui.delegates.HopGuiFileRefreshDelegate;
 import org.apache.hop.ui.hopgui.delegates.HopGuiUndoDelegate;
-import org.apache.hop.ui.hopgui.dialog.AboutDialog;
 import org.apache.hop.ui.hopgui.file.HopFileTypeRegistry;
 import org.apache.hop.ui.hopgui.file.IGraphSnapAlignDistribute;
 import org.apache.hop.ui.hopgui.file.IHopFileType;
@@ -1201,16 +1199,16 @@ public class HopGui
     // Nothing is done here.
   }
 
-  @GuiMenuElement(
-      root = ID_MAIN_MENU,
-      id = ID_MAIN_MENU_HELP_ABOUT,
-      label = "i18n::HopGui.Menu.Help.About",
-      parentId = ID_MAIN_MENU_HELP_PARENT_ID,
-      image = "ui/images/help.svg")
-  public void menuHelpAbout() {
-    AboutDialog dialog = new AboutDialog(getShell());
-    dialog.open();
-  }
+  //  @GuiMenuElement(
+  //      root = ID_MAIN_MENU,
+  //      id = ID_MAIN_MENU_HELP_ABOUT,
+  //      label = "i18n::HopGui.Menu.Help.About",
+  //      parentId = ID_MAIN_MENU_HELP_PARENT_ID,
+  //      image = "ui/images/help.svg")
+  //  public void menuHelpAbout() {
+  //    AboutDialog dialog = new AboutDialog(getShell());
+  //    dialog.open();
+  //  }
 
   protected void addMainToolbar() {
     mainToolbar = new ToolBar(shell, SWT.WRAP | SWT.LEFT | SWT.HORIZONTAL);
@@ -1688,7 +1686,7 @@ public class HopGui
 
     // Get all the metadata context handlers...
     //
-    contextHandlers.addAll(new MetadataContext(this, metadataProvider).getContextHandlers());
+    //    contextHandlers.addAll(new MetadataContext(this, metadataProvider).getContextHandlers());
 
     return contextHandlers;
   }
