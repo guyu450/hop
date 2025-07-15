@@ -716,7 +716,7 @@ public class SnowflakeBulkLoaderMeta
   @Override
   public void setDefault() {
     locationType = LOCATION_TYPE_CODES[LOCATION_TYPE_USER];
-    workDirectory = "${java.io.tmpdir}";
+    workDirectory = System.getProperty("java.io.tmpdir");
     onError = ON_ERROR_CODES[ON_ERROR_ABORT];
     removeFiles = true;
 

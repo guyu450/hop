@@ -20,6 +20,8 @@ FROM tomcat:9-jdk17
 # 同时设置系统时区和JVM时区（双重保障）
 ENV TZ=Asia/Shanghai
 ENV JAVA_OPTS="-Duser.timezone=Asia/Shanghai"
+# 设置临时目录
+ENV JAVA_TOOL_OPTIONS="-Djava.io.tmpdir=${CATALINA_HOME}/temp"
 
 LABEL maintainer="HFXT Team"
 # path to where the artifacts should be deployed to

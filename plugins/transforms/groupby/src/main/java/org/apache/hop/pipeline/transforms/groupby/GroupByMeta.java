@@ -200,7 +200,7 @@ public class GroupByMeta extends BaseTransformMeta<GroupBy, GroupByData> {
 
   @Override
   public void setDefault() {
-    directory = "${java.io.tmpdir}";
+    directory = System.getProperty("java.io.tmpdir");
     prefix = "grp";
 
     passAllRows = false;
