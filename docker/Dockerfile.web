@@ -17,6 +17,16 @@
 #
 
 FROM tomcat:9-jdk17
+# 安装必要工具（openssl用于签名验证）
+RUN apt-get update && apt-get install -y openssl procps && rm -rf /var/lib/apt/lists/*
+
+#Copy 许可证相关 文件
+# 复制公钥到镜像（用于验证许可证签名）
+COPY ./docker/lic/public.key /usr/local/share/public.key
+# 复制校验脚本到镜像并赋予执行权限
+COPY ./docker/lic/check_license.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/check_license.sh
+
 # 同时设置系统时区和JVM时区（双重保障）
 ENV TZ=Asia/Shanghai
 ENV JAVA_OPTS="-Duser.timezone=Asia/Shanghai"
@@ -104,5 +114,5 @@ ENV HOP_PLUGIN_BASE_FOLDERS=$CATALINA_HOME/plugins
 RUN chown -R hop:hop /usr/local/tomcat
 
 USER hop
-
+ENTRYPOINT ["/usr/local/bin/check_license.sh"]
 CMD ["/bin/bash", "/tmp/run-web.sh"]
