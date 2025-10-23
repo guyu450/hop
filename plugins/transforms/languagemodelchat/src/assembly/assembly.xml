@@ -70,6 +70,7 @@
                 <include>dev.langchain4j:langchain4j-hugging-face:jar</include>
                 <include>dev.langchain4j:langchain4j-anthropic:jar</include>
                 <include>dev.langchain4j:langchain4j-ollama:jar</include>
+                <include>com.squareup.okio::jar</include>
                 <!-- Ollama test containers
                 <include>org.testcontainers:testcontainers:jar</include>
                 <include>org.testcontainers:ollama:jar</include>
