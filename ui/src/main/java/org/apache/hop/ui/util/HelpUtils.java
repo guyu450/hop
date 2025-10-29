@@ -17,6 +17,8 @@
 
 package org.apache.hop.ui.util;
 
+import static org.apache.hop.core.Const.getDocUrl;
+
 import org.apache.hop.core.plugins.IPlugin;
 import org.apache.hop.core.util.StringUtil;
 import org.apache.hop.i18n.BaseMessages;
@@ -106,10 +108,19 @@ public class HelpUtils {
     //      mb.setText(BaseMessages.getString(PKG, "System.Dialog.Error.Title"));
     //      mb.open();
     //    }
-    MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
-    String msg = "请联系管理员";
-    mb.setMessage(msg);
-    mb.setText("注意");
-    mb.open();
+
+    if (isPluginDocumented(plugin)) {
+      try {
+        EnvironmentUtils.getInstance().openUrl(getDocUrl(plugin.getDocumentationUrl()));
+      } catch (Exception ex) {
+        new ErrorDialog(shell, "Error", "Error opening URL", ex);
+      }
+    } else {
+      MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
+      String msg = "请联系管理员";
+      mb.setMessage(msg);
+      mb.setText("注意");
+      mb.open();
+    }
   }
 }
