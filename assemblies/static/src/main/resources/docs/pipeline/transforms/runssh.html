@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>runssh.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="运行ssh命令">运行SSH命令</h1>
+<h2 id="描述">描述</h2>
+<p>“运行SSH命令”转换允许你通过安全外壳（ssh）TCP/IP协议执行命令。你可以在命令中将文本输出到标准输出（stdout）或标准错误（stderr）。然后，此转换可以获取这些信息，并将其作为一个字段传递给后续的转换。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">服务器名称/IP地址</td>
+<td
+style="text-align: left;">你可以指定要在其上执行命令的计算机的服务器或IP地址。</td>
+</tr>
+<tr>
+<td style="text-align: left;">服务器端口</td>
+<td
+style="text-align: left;">服务器上ssh协议使用的TCP/IP端口。默认值为22。</td>
+</tr>
+<tr>
+<td style="text-align: left;">超时时间</td>
+<td
+style="text-align: left;">以秒为单位的超时时间。如果设置为大于零的数字，则可以指定非默认的连接超时时间。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">用于登录的用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">要使用的密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用密钥</td>
+<td style="text-align: left;">如果你想使用私钥登录，请启用此选项</td>
+</tr>
+<tr>
+<td style="text-align: left;">私钥</td>
+<td
+style="text-align: left;">私钥文件。私钥/公钥RSA密钥对的私钥部分（请参阅：ssh-keygen）</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码短语</td>
+<td style="text-align: left;">生成密钥对时使用的可选密码短语。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理主机</td>
+<td
+style="text-align: left;">要使用的代理服务器主机（名称或IP地址）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理端口</td>
+<td style="text-align: left;">要使用的代理服务器端口。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理用户名</td>
+<td style="text-align: left;">代理用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理密码</td>
+<td style="text-align: left;">代理密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">测试连接</td>
+<td
+style="text-align: left;">使用此按钮查看提供的凭据是否足以登录到SSH服务器。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设置选项卡">设置选项卡</h3>
+<div>
+<p><strong>输出</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">响应字段名称</td>
+<td
+style="text-align: left;">将包含已执行命令输出的字符串输出字段的名称。这是标准输出和标准错误命令输出的串联。</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误响应字段名称</td>
+<td
+style="text-align: left;">一个布尔输出字段的名称，如果发生错误，该字段将包含true，如果ssh命令成功执行，则包含false。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>命令</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">从字段获取命令</td>
+<td
+style="text-align: left;">如果你想执行在输入字段中指定的命令，请启用此选项</td>
+</tr>
+<tr>
+<td style="text-align: left;">命令字段名称</td>
+<td style="text-align: left;">选择将包含要执行命令的输入字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">命令</td>
+<td style="text-align: left;">此字段允许你指定要执行的命令。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

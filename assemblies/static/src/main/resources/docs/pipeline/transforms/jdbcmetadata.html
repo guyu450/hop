@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>jdbcmetadata.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="jdbc元数据">JDBC元数据</h1>
+<h2 id="描述">描述</h2>
+<p>JDBC元数据转换允许您从数据库连接中获取元数据，这包括模式、表和其他对象。</p>
+<h2 id="方法和参数标签页">方法和参数标签页</h2>
+<div>
+<div>
+<p>在这个标签页中，您可以指定要调用的DatabaseMetaData对象的Java方法以获取元数据。它还控制该步骤行为的其他一些方面。</p>
+</div>
+<div>
+<p><strong>始终传递输入行：</strong>
+控制在没有元数据的情况下此步骤的行为。如果未选中此选项，该步骤将不会生成任何输出行。如果选中此选项，传入的行仍将被传递。在这种情况下，任何源自元数据结果集的输出字段都将为NULL。</p>
+</div>
+<div>
+<p><strong>元数据方法：</strong>
+此下拉列表可用于指定要在DatabaseMetaData对象上调用哪个元数据方法以获取元数据：</p>
+</div>
+<div>
+<ul>
+<li><p>目录：请参阅DatabaseMetaData.getCatalogs()</p></li>
+<li><p>最佳行标识符：请参阅
+DatabaseMetaData.getBestRowIdentifier()</p></li>
+<li><p>列权限：请参阅 DatabaseMetaData.getColumnPrivileges()</p></li>
+<li><p>列：请参阅 DatabaseMetaData.getColumns()</p></li>
+<li><p>交叉引用：请参阅 DatabaseMetaData.getCrossReferences()</p></li>
+<li><p>导出键列：请参阅 DatabaseMetaData.getExportedKeys()</p></li>
+<li><p>外键列：请参阅 DatabaseMetaData.getImportedKeys()</p></li>
+<li><p>主键列：请参阅 DatabaseMetaData.getPrimaryKeys()</p></li>
+<li><p>模式：请参阅DatabaseMetaData.getSchemas()</p></li>
+<li><p>表权限：请参阅 DatabaseMetaData.getTablePrivileges()</p></li>
+<li><p>表类型：请参阅DatabaseMetaData.getTableTypes()</p></li>
+<li><p>表：请参阅 DatabaseMetaData.getTables()</p></li>
+<li><p>数据类型：请参阅DatabaseMetaData.getTypeInfo()</p></li>
+<li><p>版本列：请参阅 DatabaseMetaData.getVersionColumns()</p></li>
+<li><p>选择一个方法后，字段将添加到该标签页，以便您可以指定该方法所需的任何参数。有关特定方法的参数及其含义的描述，请参阅每个方法的Java文档（上面有链接）。</p></li>
+</ul>
+</div>
+<div>
+<p><strong>从字段获取参数：</strong>
+如果选中此选项，可以通过从传入流中选择一个字段来指定方法的参数，并且该字段的值将用作实际参数值。如果未选中此选项，可以将参数值直接作为文本输入到参数字段中。</p>
+</div>
+<div>
+<p><strong>移除参数字段：</strong>
+当选中”从字段获取参数”时，此选项适用。选中此选项后，被选作参数字段的字段将从输出流中移除。当您按顺序链接多个JdbcMetaData步骤，使用上游步骤输出的字段作为下游步骤的参数字段时，此选项通常很方便。在这种情况下，使用此选项将移除许多重复字段。</p>
+</div>
+</div>
+<h2 id="输出字段标签页">输出字段标签页</h2>
+<div>
+<div>
+<p>此标签页允许您控制如何将输出元数据添加到输出流中。</p>
+</div>
+<div>
+<p><strong>输出字段：</strong>
+当您在”方法和参数”标签页中选择特定的元数据方法时，此网格将自动填充适当的字段。使用此网格视图可以移除或重命名输出字段。</p>
+</div>
+<div>
+<p><strong>获取字段：</strong>
+使用此按钮重新填充网格。这将重新添加任何移除的字段，但保留任何重命名的字段。</p>
+</div>
+</div>
+</body>
+</html>

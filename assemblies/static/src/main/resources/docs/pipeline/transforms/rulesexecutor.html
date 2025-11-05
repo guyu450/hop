@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>rulesexecutor.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="规则执行器">规则执行器</h1>
+<h2 id="描述">描述</h2>
+<p>规则执行器允许根据规则集对传入行的字段进行执行操作。这对于确定附加信息或将行路由到另一个转换可能很有用。目前Drools是规则引擎的实现方式，此转换可以参考其规则语言以供使用。Drools文档</p>
+<h2 id="详细信息">详细信息</h2>
+<div>
+<div>
+<p>对于规则执行器转换处理的每一行，每一列都会转换为一个<em>Rules.Column</em>，然后注入到规则引擎中，并根据规则集执行。<em>Rules.Column</em>包含四个属性：</p>
+</div>
+<div>
+<p><em>externalSource</em>：布尔属性，指示此Rules.Column是否从外部源注入（来自已处理行的字段）</p>
+</div>
+<div>
+<p><em>name</em>：此字段的名称</p>
+</div>
+<div>
+<p><em>type</em>：有效负载中存储的数据类型（ValueMetaInterface.typeCodes之一
+- 数字、字符串、整数、日期、布尔值等）</p>
+</div>
+<div>
+<p><em>payload</em>：此字段的值</p>
+</div>
+<div>
+<p>结果通过创建Rules.Column对象生成。转换被配置为按名称获取这些生成的对象。</p>
+</div>
+<h3 id="规则标签页">规则标签页</h3>
+<div>
+<p><em>规则</em>标签页是您输入规则定义或规则文件引用的地方。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">规则文件名</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">要执行的规则脚本</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则结果标签页">规则结果标签页</h3>
+<div>
+<p>规则结果标签页定义了规则输出字段的布局。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">结果列名称</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">结果列类型</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>所有规则定义都应包含”import
+org.apache.hfxt.pipeline.transforms.drools.Rules.Column;“，以便访问Rules.Column类。</p>
+</div>
+<div>
+<p>对于输入行：fica_seed（整数）、hi（字符串）、fica（整数）；规则引擎中将创建三个Rules.Column对象：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Rules.Row→row（映射）</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">有效负载</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">fica_seed</td>
+<td style="text-align: left;">整数</td>
+<td style="text-align: left;">-3561151667</td>
+</tr>
+<tr>
+<td style="text-align: left;">hi</td>
+<td style="text-align: left;">字符串</td>
+<td style="text-align: left;">test</td>
+</tr>
+<tr>
+<td style="text-align: left;">fica</td>
+<td style="text-align: left;">整数</td>
+<td style="text-align: left;">bad</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>可以定义并应用规则：</p>
+</div>
+<div>
+<div>
+<pre><code>rule &quot;Decline&quot;
+    dialect &quot;mvel&quot;
+    when
+        $fica : Column(name == &quot;fica&quot;, payload &lt; 550)
+
+    then
+        Column approvalStatus = new Column();
+        approvalStatus.name = &quot;approvalStatus&quot;
+        approvalStatus.type = String.class
+        approvalStatus.payload = &quot;declined&quot;
+
+        Column approvalClassification = new Column();
+        approvalClassification.name = &quot;approvalClass&quot;
+        approvalClassification.type = String.class
+        approvalClassification.payload = &quot;Declined: fica too low&quot;
+
+        insert(approvalStatus);
+        insert(approvalClassification);
+
+        System.out.println(&quot;Declined&quot;);
+end</code></pre>
+</div>
+</div>
+<div>
+<p>可以像上面左侧那样检查Rules.Column属性。</p>
+</div>
+<div>
+<p>可以像上面右侧那样创建Rules.Column对象以供获取。</p>
+</div>
+<div>
+<p>可以通过在转换的结果标签页中定义Rules.Column名称，告知转换获取生成的Rules.Column对象。也可以通过设置结果列类型来应用类型转换。</p>
+</div>
+</div>
+</body>
+</html>

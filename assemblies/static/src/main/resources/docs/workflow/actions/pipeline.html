@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pipeline.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="管道">管道</h1>
+<h2 id="描述">描述</h2>
+<p>“管道”操作会在工作流中运行先前定义的管道。此操作是从工作流到实际数据处理活动（管道）的接入点。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>管道</code>操作会在工作流中运行先前定义的管道。</p>
+</div>
+<div>
+<p>此操作是从工作流到实际数据处理活动（管道）的接入点。</p>
+</div>
+</div>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>一个常见工作流的示例包括获取FTP文件、检查必要的目标数据库表是否存在、运行一个填充该表的管道，以及在管道失败时发送错误日志邮件。对于此示例，“管道”操作定义了要运行哪个管道来填充该表。</p>
+</div>
+<div>
+<p>另请参阅：</p>
+</div>
+<div>
+<ul>
+<li><p>工作流操作，它从工作流中执行子工作流。</p></li>
+<li><p>工作流执行器转换，它从管道中执行工作流。</p></li>
+<li><p>管道执行器转换，它从管道中执行子管道。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>操作的名称。</td>
+</tr>
+<tr>
+<td>管道</td>
+<td><p>通过输入管道路径或点击”浏览”来指定管道。</p>
+<p>所选管道将自动转换为相对于 <code>${PROJECT_HOME}</code>
+的路径。例如，如果您的 <code>${PROJECT_HOME}</code> 是
+<code>/home/admin/hfxt/project/</code>，而您选择了一个管道
+<code>/home/adm in/hfxt/project/subfolder/sub.hpl</code>，那么路径将自动转换为
+<code>${PROJECT_HOME}/subfolder/sub.hpl</code>。</p></td>
+</tr>
+<tr>
+<td>运行配置</td>
+<td>管道可以在不同类型的 管道配置
+中运行。选择所需的运行配置，以控制管道的执行位置和方式。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="选项标签">选项标签</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">为每个结果行执行</td>
+<td
+style="text-align: left;">针对当前工作流中前一个管道（或工作流）的每个结果行运行一次管道。</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行前清除结果行</td>
+<td style="text-align: left;">确保在管道启动前清除结果行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行前清除结果文件</td>
+<td style="text-align: left;">确保在管道启动前清除结果文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">等待远程管道完成</td>
+<td
+style="text-align: left;">如果您选择”服务器”作为环境类型，请选择此选项，以阻止工作流，直到管道在服务器上运行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将本地中止信号传递给远程管道</td>
+<td
+style="text-align: left;">如果您选择”服务器”作为环境类型，请选择此选项，以远程发送本地中止信号。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日志记录标签">日志记录标签</h3>
+<div>
+<p>默认情况下，如果您未设置日志记录，
+Hfxt将获取生成的日志条目，并在工作流中创建一个日志记录。例如，假设一个工作流要运行三个管道，而您尚未设置日志记录。这些管道不会将信息记录到其他文件、位置或特殊配置中。在这种情况下，工作流运行并将信息记录到其主工作流日志中。</p>
+</div>
+<div>
+<p>在大多数情况下，工作流日志中提供日志信息就足够了。例如，如果您有加载维度，您希望加载维度运行的日志显示在工作流日志中。如果管道中出现错误，它们将显示在工作流日志中。但是，如果您希望将所有日志信息保存在一个地方，那么您必须设置日志记录。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">指定日志文件</td>
+<td style="text-align: left;">为运行此管道指定一个单独的日志文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td
+style="text-align: left;">指定日志文件的目录和基本名称（例如C:\logs）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">扩展名</td>
+<td style="text-align: left;">指定文件名扩展名（例如.log或.txt）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">日志级别</td>
+<td
+style="text-align: left;">指定运行管道的日志记录级别。有关更多详细信息，请参阅
+日志记录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">追加日志文件</td>
+<td
+style="text-align: left;">追加到日志文件，而不是创建一个新文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建父文件夹</td>
+<td
+style="text-align: left;">如果日志文件的父文件夹不存在，则创建它。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含日期</td>
+<td
+style="text-align: left;">将系统日期以YYYYMMDD格式（_20051231）添加到文件名中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含时间</td>
+<td
+style="text-align: left;">将系统时间以HHMMSS格式（_235959）添加到文件名中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参数标签">参数标签</h3>
+<div>
+<p><strong>向下游传递参数</strong>：在”参数”标签上，选中管道转换复选框以
+<code>将参数值传递给子管道</code>。参数必须已存在于管道中（例如在管道属性中），或者，在”参数”标签上，您可以指定新参数。“参数”标签允许您覆盖现有参数值，或者通过将值留空将其设为NULL。</p>
+</div>
+<div>
+<p><strong>向上游传递字段值</strong>：子管道需要一个”复制行到结果”转换才能向上游发送一行数据。这要求子管道中存在一行数据。请注意，工作流中不存在行数据，但您可以在后续子管道中使用”获取变量”来使用第一个子管道的字段值。</p>
+</div>
+<div>
+<p>如果您想从管道向上游传递单个值到工作流并对该变量进行操作，请使用”设置变量”。在这种情况下，您可以选择”在父工作流中有效”的作用域。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>将结果复制到参数</td>
+<td>使用”复制行到结果”转换
+，将前一个管道的结果作为管道的参数进行复制。</td>
+</tr>
+<tr>
+<td>将参数值传递给子管道</td>
+<td>将工作流的所有参数传递给子管道。</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>指定传递给管道的参数名称。</td>
+</tr>
+<tr>
+<td>流列名称</td>
+<td>指定前一个管道传入记录的字段作为参数。</td>
+</tr>
+<tr>
+<td>值</td>
+<td>通过以下操作之一指定管道参数值：<br />
+- 手动输入值（例如ETL工作流）。<br />
+- 使用另一个参数 设置值（例如${Internal.workflow.Name}）。<br />
+- 使用手动指定的值和参数值的组合（例如
+{openvar}FILE_PREFIX}_${FILE_DATE}.txt）。</td>
+</tr>
+<tr>
+<td>获取参数</td>
+<td>获取管道已关联的现有参数。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

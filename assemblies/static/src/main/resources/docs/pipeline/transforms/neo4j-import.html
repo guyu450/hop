@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>neo4j-import.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<p>Neo4j导入</p>
+<table style="width:86%;">
+<colgroup>
+<col style="width: 73%" />
+<col style="width: 12%" />
+</colgroup>
+<tbody>
+<tr>
+<td><div>
+<div>
+<h2 id="描述">描述</h2>
+<div>
+<div>
+<p>Neo4j导入转换使用提供的CSV文件运行导入命令。</p>
+</div>
+<div>
+<p>请查看 neo4j-admin-import 文档以获取完整详细信息。</p>
+</div>
+</div>
+</div>
+</div></td>
+<td><div>
+<div>
+<div>
+
+</div>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<p>选项</p>
+<p>默认值</p>
+<p>标题</p>
+<p>转换名称</p>
+<p>此转换在管道中使用的名称</p>
+<p>文件名字段</p>
+<p>从中获取要导入的文件名的字段</p>
+<p>文件类型字段</p>
+<p>从中获取要导入的文件类型的字段</p>
+<p>数据库文件名</p>
+<p>neo4j</p>
+<p>要导入到的Neo4j数据库</p>
+<p>neo4j-admin命令路径</p>
+<p>neo4j-admin</p>
+<p><code>neo4j-admin</code> 命令的（完整）路径</p>
+<p>基础文件夹（在import/文件夹下）</p>
+<p>从中读取导入文件的文件夹</p>
+<p>详细输出</p>
+<p>启用详细输出。</p>
+<p>高IO</p>
+<p>true</p>
+<p>忽略基于环境的启发式方法，并指定目标存储子系统是否能够支持高吞吐量的并行IO。</p>
+<p>通常对于固态硬盘、大型RAID阵列和网络附属存储，此选项为true。</p>
+<p>在堆上缓存？</p>
+<p>false</p>
+<p>确定是否允许在堆上为缓存分配内存。</p>
+<p>如果为false，则缓存仍将在堆外分配，但JVM内的额外可用内存将不会分配给缓存。</p>
+<p>使用此选项可更好地控制堆内存。</p>
+<p>忽略空字符串</p>
+<p>false</p>
+<p>确定是否忽略输入源中的空字符串字段，如 ""（视为null）。</p>
+<p>忽略额外列？</p>
+<p>false</p>
+<p>确定在导入期间是否应忽略未指定的列。</p>
+<p>传统样式引用？</p>
+<p>false</p>
+<p>确定是否将反斜杠转义的引号（例如 \"）解释为内部引号。</p>
+<p>字段可以有多行数据？</p>
+<p>false</p>
+<p>确定输入源中的字段是否可以跨多行，即包含换行符。</p>
+<p>设置 <code>--multiline-fields=true</code>
+可能会严重降低导入器的性能。因此，请谨慎使用，尤其是在进行大型导入时。</p>
+<p>规范化类型？</p>
+<p>false</p>
+<p>确定是否将属性类型规范化为Cypher类型，例如int变为long，float变为double。</p>
+<p>导入期间跳过记录不良条目？</p>
+<p>确定在导入期间是否跳过记录检测到的不良条目。</p>
+<p>跳过不良关系？</p>
+<p>false</p>
+<p>确定是否跳过导入引用缺失节点ID的关系，即起始或结束节点ID/组引用的节点未在节点输入数据中指定。</p>
+<p>跳过的关系将被记录，最多包含 <code>--bad-tolerance</code>
+指定的实体数量，除非 <code>--skip-bad-entries-logging</code>
+选项另有指定。</p>
+<p>跳过重复节点？</p>
+<p>false</p>
+<p>确定是否跳过导入具有相同ID/组的节点。</p>
+<p>如果同一组中有多个节点具有相同的ID，则将导入第一个遇到的节点，而后续遇到的此类节点将被跳过。</p>
+<p>跳过的节点将被记录，最多包含 <code>--bad-tolerance</code>
+指定的实体数量，除非 <code>--skip-bad-entries-logging</code>
+选项另有指定。</p>
+<p>修剪字符串？</p>
+<p>false</p>
+<p>确定是否应修剪字符串中的空白字符。</p>
+<p>不良容限</p>
+<p>1000</p>
+<p>在导入被视为失败之前的不良条目数量。</p>
+<p>此容限阈值主要适用于引用缺失节点的关系。输入数据中的格式错误仍将被视为错误。</p>
+<p>最大内存</p>
+<p>false</p>
+<p>neo4j-admin可用于各种数据结构和缓存以提高性能的最大内存。</p>
+<p>值可以是普通数字，如10000000，或20G表示20千兆字节。也可以指定为可用内存的百分比，例如70%。</p>
+<p>读取缓冲区大小</p>
+<p>4M</p>
+<p>读取输入数据的每个缓冲区的大小。</p>
+<p>它必须至少足够大，以容纳输入数据中的最大单个值。值可以是普通数字或字节单位字符串，例如128k、1m。</p>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>xslt.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="xsl管道">XSL管道</h1>
+<h2 id="描述">描述</h2>
+<p>XSL管道操作使用可扩展样式表语言转换（Extensible Stylesheet Language
+Transformations，简称XSLT）将XML文档转换为其他文档（XML或其他格式，如HTML或纯文本）。原始文档不会被更改；而是根据XML文件的内容创建一个新文档。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>XSL管道</code>操作使用可扩展样式表语言转换或 XSLT
+将XML文档转换为其他文档（XML或其他格式，如HTML或纯文本）。</p>
+</div>
+<div>
+<p>原始文档不会被更改；而是根据XML文件的内容创建一个新文档。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>文件</td>
+<td></td>
+</tr>
+<tr>
+<td>从先前结果获取文件名</td>
+<td>选中此选项后，将从先前 的结果集中读取XML文件名、XSL文件名和输出文
+件名。如果存在多行数据，将进行循环处理。此
+时，XML文件名是结果集中的第一个字段，XSL文
+件名是第二个字段，输出文件名是第三个字段。</td>
+</tr>
+<tr>
+<td>XML文件名</td>
+<td>源XML文件的完整名称</td>
+</tr>
+<tr>
+<td>XSL文件名</td>
+<td>XSL文件的完整名称</td>
+</tr>
+<tr>
+<td>输出文件名</td>
+<td>创建的文档的完整名称（XSL转换的结果）</td>
+</tr>
+<tr>
+<td>设置</td>
+<td></td>
+</tr>
+<tr>
+<td>转换工厂</td>
+<td>可以选择JAXP或SAXON作为转换工厂。</td>
+</tr>
+<tr>
+<td>如果文件已存在</td>
+<td><div>
+<div>
+<p>定义 当存在同名输出文件时的行为。可用选项如下：</p>
+</div>
+<div>
+<ul>
+<li><p>创 建唯一名称的新文件：将创建一个新的输出文件</p></li>
+<li><p>不执行任何操作：不会进行任何操作</p></li>
+<li><p>失败：工作流将失败</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>将文件添加到结果文件名</td>
+<td>将目标文件名添加到此工作流操作的
+结果文件列表中，以供下一个工作流操作使用。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="高级选项卡">高级选项卡</h3>
+<table style="width:82%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出属性</td>
+<td><div>
+<div>
+<p>一个包含XSL管道输出可能属性的表格。选项如下：</p>
+</div>
+<div>
+<ul>
+<li><p>方法</p></li>
+<li><p>版本</p></li>
+<li><p>编码</p></li>
+<li><p>独立</p></li>
+<li><p>缩进</p></li>
+<li><p>省略XML声明</p></li>
+<li><p>文档类型公共标识符</p></li>
+<li><p>文档类型系统标识符</p></li>
+<li><p>媒体类型</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>参数</td>
+<td>传递给XSL管道的参数名称和值列表</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

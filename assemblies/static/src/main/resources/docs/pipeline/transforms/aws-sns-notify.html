@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>aws-sns-notify.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="aws-sns通知">AWS SNS通知</h1>
+<h2 id="描述">描述</h2>
+<p>AWS SNS通知转换功能使您能够通过亚马逊网络服务简单通知服务（Amazon Web
+Services Simple Notification Service），从
+Hfxt管道向订阅用户发送通知。</p>
+<h2 id="前提条件">前提条件</h2>
+<div>
+<div>
+<p>在首次执行之前，您需要创建一个IAM角色（例如，用于在EC2/ECS上使用）或一个带有AWS密钥和机密的IAM用户，并附加通过SNS推送通知所需的策略。</p>
+</div>
+<div>
+<p>您还需要创建一个或多个要推送消息的订阅主题。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="aws设置标签">AWS设置标签</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">使用AWS凭证链</td>
+<td
+style="text-align: left;">Hfxt尝试从主机环境中获取AWS凭证。有关更多信息，请查看
+凭证 文档。</td>
+</tr>
+<tr>
+<td style="text-align: left;">AWS访问密钥</td>
+<td
+style="text-align: left;">您的AWS访问密钥（<code>AWS_ACCESS_KEY_ID</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;">AWS秘密访问密钥</td>
+<td
+style="text-align: left;">您的AWS访问密钥的秘密（<code>AWS_SECRET_ACCESS_KEY</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;">AWS区域</td>
+<td style="text-align: left;">服务运行所在的AWS区域。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="通知">通知</h3>
+<div>
+<p>在”通知”标签上，您可以定义发送通知时的行为、主题ARN、内容以及消息ID的字段。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件类型</td>
+<td><div>
+<div>
+<p>请选择是否应在以下情况下发送通知：</p>
+</div>
+<div>
+<ul>
+<li><p>第一行（推荐）</p></li>
+<li><p>或每行（注意不要向用户发送垃圾邮件！）。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>消息ID</td>
+<td>对于每个通知，都
+会从SNS获取一个消息ID。可以将其写入此处定义的输出字段。</td>
+</tr>
+<tr>
+<td>SNS字段表</td>
+<td><div>
+<div>
+<p><strong>在该表中只有三行</strong>
+是有效的（保存/加载转换时，所有其他行将被忽略并拒绝）。</p>
+</div>
+<div>
+<p>所有行都可以通过字段（<code>字段</code>
+列）或静态值（<code>静态值</code> 列）指定。使用
+<code>值在字段中？</code> 选项在字段或静态值之间切换。</p>
+</div>
+<div>
+<ul>
+<li><p>主题ARN：您的SNS主题的ARN</p></li>
+<li><p>主题：您要发送的通知的主题</p></li>
+<li><p>消息：您要发送的消息</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>unzip.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="解压文件">解压文件</h1>
+<h2 id="描述">描述</h2>
+<p>“解压文件”操作会将一个或多个文件解压到指定的目标位置。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“<code>解压文件</code>”操作会将一个或多个文件解压到指定的目标位置。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>操作名称</p>
+<p>工作流操作的名称。</p>
+<p>源文件</p>
+<p>从之前获取参数</p>
+<p>如果您想使用（来自之前工作流操作的）结果文件列表作为要解压的文件列表，请选中此选项。</p>
+<p>压缩文件名</p>
+<p>压缩文件的名称；如果想使用通配符，可以是一个文件夹。</p>
+<p>源通配符</p>
+<div>
+<div>
+<p>如果上一个选项是文件夹，您可以在此处输入正则表达式通配符。</p>
+</div>
+<div>
+<p>例如：要匹配 <code>/folder/test.zip</code>，正则表达式
+<code>te.\.zip</code> 将匹配不到任何内容。</p>
+</div>
+<div>
+<p>请使用 <code>.*te.\.zip</code> 来匹配它前面的文件夹。</p>
+</div>
+<div>
+<p>对于Windows文件路径，匹配时斜杠的方向会相反，因此请使用
+<code>\/</code> 而不是 <code>\\</code>。</p>
+</div>
+</div>
+<p>解压后的文件</p>
+<p>使用压缩文件名作为根目录</p>
+<p>如果您想为每个压缩文件名创建一个单独的目录（与文件名相同），请选中此项。</p>
+<p>目标目录</p>
+<p>解压到的目标目录</p>
+<p>创建文件夹</p>
+<p>如果您想创建目标文件夹，请选中此项。</p>
+<p>包含通配符</p>
+<p>使用此正则表达式选择压缩存档中要提取的文件</p>
+<p>排除通配符</p>
+<p>使用此正则表达式选择压缩存档中要提取的文件</p>
+<p>在文件名中包含日期</p>
+<p>在解压后的文件名中包含当前日期（格式：yyyyMMdd）</p>
+<p>在文件名中包含时间</p>
+<p>包含时间（格式：HHmmss）</p>
+<p>自行指定日期时间格式</p>
+<p>允许您自行指定日期时间格式（默认格式为：yyyyMMdd'_'HHmmss）</p>
+<p>如果文件已存在</p>
+<p>选择如果目标（解压后）文件已存在时要采取的操作：跳过、覆盖等。</p>
+<p>提取后</p>
+<div>
+<div>
+<p>选择压缩文件提取后要采取的操作：</p>
+</div>
+<div>
+<ul>
+<li><p>不执行任何操作，</p></li>
+<li><p>删除文件</p></li>
+<li><p>移动文件</p></li>
+</ul>
+</div>
+</div>
+<p>移动文件到</p>
+<p>如果上一个选项是”移动文件”，您可以在此处选择目标目录。</p>
+<h3 id="高级选项卡">高级选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结果文件名</td>
+<td></td>
+</tr>
+<tr>
+<td>将提取的文件添加到结果中</td>
+<td>将提取的文件名添加到此工作流操作的结
+果文件列表中，以供下一个工作流操作使用。</td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td></td>
+</tr>
+<tr>
+<td>成功条件为</td>
+<td><div>
+<div>
+<p>允许您指定此工作流操作的成功因素：</p>
+</div>
+<div>
+<ul>
+<li><p>一切正常（默认）</p></li>
+<li><p>至少成功解压了x个文件</p></li>
+<li><p>错误数量少于</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>限制文件数量</td>
+<td>根据上面为 <code>成功条件为</code> 选
+择的选项，指定解压的文件数量或错误数量。</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

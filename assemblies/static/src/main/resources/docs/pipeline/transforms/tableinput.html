@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tableinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="表输入">表输入</h1>
+<h2 id="描述">描述</h2>
+<p>表输入转换用于使用连接和SQL查询从关系数据库中读取信息。SQL查询可以通过变量进行参数化，并可以接受来自先前转换字段的输入。</p>
+<h2 id="从单个表中获取所有列">从单个表中获取所有列</h2>
+<div>
+<div>
+<p>通过点击 <code>获取SQL选择语句</code>
+按钮，可以自动生成基本的SQL语句。</p>
+</div>
+<div>
+<p>数据库资源管理器将打开，让您直接从可用数据库模式列表中选择一个表。</p>
+</div>
+<div>
+<p>视图可以作为视图或表显示并选择。有关更多详细信息，请查看您的数据库和JDBC驱动程序文档。</p>
+</div>
+<div>
+<p>选择表后，一个新的弹出对话框将询问您要生成哪种SQL语句：</p>
+</div>
+<div>
+<ul>
+<li><p>单独选择所有列，例如
+<code>select col_a, col_b, col_c from my_table;</code></p></li>
+<li><p>使用SQL通配符选择所有列，例如
+<code>select * from my_table;</code></p></li>
+</ul>
+</div>
+</div>
+<h2 id="接受来自先前字段的输入">接受来自先前字段的输入</h2>
+<div>
+<div>
+<p>表输入转换可以接受在 <code>从转换插入数据</code>
+选项中指定的先前转换的字段。</p>
+</div>
+<div>
+<p>如果选择了一个转换，此转换中的SQL查询将被指定为一个
+JDBC预编译语句。</p>
+</div>
+<div>
+<p>请注意，除了允许参数化之外，预编译语句最重要的优点是它们有助于防止SQL注入攻击。副作用是，并非SQL查询中的所有元素都可以通过预编译语句进行参数化。</p>
+</div>
+<div>
+<p>在SQL查询中使用 <code>?</code>
+来用输入转换提供的值替换参数。这些值将按照输入转换提供的顺序使用。使用
+选择值 转换来修改输入流，以便以正确的顺序为 <code>表输入</code>
+转换提供正确的字段。</p>
+</div>
+<div>
+<p><code>?</code> 选项不能用于为SQL <code>IN</code> 子句指定值。</p>
+</div>
+<div>
+<p>预编译语句 <code>?</code> 参数可以与下面描述的
+<code>在SQL语句中使用变量</code> 结合使用。</p>
+</div>
+<h3 id="示例">示例</h3>
+<div>
+<p><strong>使用数据行字段参数化查询的示例：</strong></p>
+</div>
+<div>
+<p><code>Select * from table1 where NameId = ? and AddressId = ?</code></p>
+</div>
+<div>
+<ul>
+<li><p>替换脚本中的变量：未选中</p></li>
+<li><p>从转换插入数据：&lt;指向包含字段的转换&gt;</p></li>
+</ul>
+</div>
+<div>
+<p><strong>使用日期范围的示例</strong>：</p>
+</div>
+<div>
+<p><code>SELECT * FROM customers WHERE changed_date BETWEEN ? AND ?</code></p>
+</div>
+<div>
+<p>此SQL语句请求两个日历日期以创建一个范围，这些日期从
+<code>从转换插入数据</code> 选项中读取。可以使用
+<code>获取系统信息</code>
+转换提供目标日期范围。例如，如果您想读取所有数据在昨天发生更改的客户，可以获取昨天的目标范围并读取客户数据。</p>
+</div>
+</div>
+<h2 id="在sql语句中使用变量">在SQL语句中使用变量</h2>
+<div>
+<div>
+<p>“表输入” 转换中的SQL查询可以通过使用变量进行参数化。</p>
+</div>
+<div>
+<p>要在查询中启用变量替换，请选中 <code>替换脚本中的变量</code>
+复选框。</p>
+</div>
+<div>
+<p>此选项将在将查询发送到数据库之前，用变量值替换SQL语句中的变量。请确保为查询语句应用正确的引号，例如
+<code>select '${variable value}' as free_text_col, col_a, col_b from my_table</code>。</p>
+</div>
+<div>
+<p>查询变量语句让您完全控制发送到数据库的SQL语句，但不像上面描述的
+<code>接受来自先前字段的输入</code> 选项那样防止SQL注入。</p>
+</div>
+<div>
+<p><code>在SQL语句中使用变量</code> 可以与上面描述的预编译语句
+<code>?</code> 参数结合使用。</p>
+</div>
+<h3 id="示例-1">示例</h3>
+<div>
+<p><strong>使用变量值参数化查询的示例</strong>：</p>
+</div>
+<div>
+<p>此示例使用一个整数。如果您使用的是字符串，很可能需要使用语法
+<code>${PRM_NAME}</code></p>
+</div>
+<div>
+<p><code>Select * from table1 where id = ${myId}</code></p>
+</div>
+<div>
+<ul>
+<li><p>替换脚本中的变量：选中</p></li>
+<li><p>从转换插入数据：&lt;空&gt;</p></li>
+</ul>
+</div>
+</div>
+<h2 id="专业提示">专业提示</h2>
+<div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">表输入转换不会将输入数据传递到输出，只有查询中的字段会返回到管道中，因此所有其他变量和数据都将丢失。您可以通过在查询中添加变量作为字段来解决此问题，或者在表输入之后放置一个
+<code>获取变量</code> 转换。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">如果您得到意外的查询结果，请使用清除数据库缓存图标（扫帚），或者您可以使用Hfxt菜单图标：工具
+/ 清除数据库缓存。此外，点击确定，保存管道，关闭并重新打开管道。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">笛卡尔连接转换将组合来自多个表输入的不同数量的字段，而无需键连接字段。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: left;">使用 “从转换插入数据”
+下拉菜单将阻塞，直到所选转换完成。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接</td>
+<td style="text-align: left;">从中读取数据的数据库连接</td>
+</tr>
+<tr>
+<td style="text-align: left;">SQL</td>
+<td
+style="text-align: left;">用于从数据库连接读取信息的SQL语句。您也可以点击
+“获取SQL选择语句…” 来浏览表并自动生成基本的选择语句。</td>
+</tr>
+<tr>
+<td style="text-align: left;">替换脚本中的变量？</td>
+<td
+style="text-align: left;">启用以替换脚本中的变量；提供此功能是为了让您可以测试是否执行变量替换。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从转换插入数据</td>
+<td
+style="text-align: left;">指定Hfxt期望信息来自的输入转换名称。然后，此信息可以插入到SQL语句中。Hfxt插入信息的位置用问号：?
+表示。</td>
+</tr>
+<tr>
+<td style="text-align: left;">为每行执行？</td>
+<td style="text-align: left;">启用可为每一行执行数据插入。</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制大小</td>
+<td style="text-align: left;">设置从数据库读取的行数；零 (0)
+表示读取所有行。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

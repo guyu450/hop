@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>getdatafromxml.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="从xml获取数据">从XML获取数据</h1>
+<h2 id="描述">描述</h2>
+<p>“从XML获取数据”转换功能支持使用XPath规范从任何类型的XML文件中读取数据。“从XML获取数据”可以两种模式（静态或动态）从三种来源（文件、流和URL）读取数据。另请参阅：示例（示例项目）：</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件选项卡">文件选项卡</h3>
+<div>
+<p>“文件”选项卡用于定义要从中读取数据的XML文件的位置。下表包含与”文件”选项卡相关的选项。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。在管道中必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">来自字段的XML源</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">XML源在字段中定义</td>
+<td
+style="text-align: left;">要使用的XML数据存在于输入流的某个字段中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">XML源是文件名</td>
+<td style="text-align: left;">XML数据存储在文件中并从文件读取。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将源读取为URL</td>
+<td style="text-align: left;">从URL指定的位置读取XML数据。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段获取XML源</td>
+<td style="text-align: left;">指定包含XML数据、文件名或URL的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件或目录</td>
+<td style="text-align: left;">指定输入文本文件的位置和/或名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">添加</td>
+<td
+style="text-align: left;">点击将文件/目录/通配符组合添加到下面选定文件列表（网格）中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">浏览</td>
+<td style="text-align: left;">点击浏览文件的位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;">正则表达式</td>
+<td
+style="text-align: left;">指定用于在先前选项指定的目录中选择多个文件的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">选定文件</td>
+<td
+style="text-align: left;">包含选定文件（或通配符选择）的列表以及一个指定文件是否为必需的属性。如果文件是必需的但未找到，则会生成错误；否则，将跳过文件名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除</td>
+<td style="text-align: left;">点击删除表格中选定的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编辑</td>
+<td style="text-align: left;">点击修改表格中选定的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件名...</td>
+<td
+style="text-align: left;">显示根据当前选定文件定义将加载的所有文件的列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容选项卡">内容选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设置</td>
+<td></td>
+</tr>
+<tr>
+<td>循环XPath</td>
+<td>对于XML文件或数据中的每个匹配项，会向
+输出中添加一行数据。这是用于将XML文件扁
+平化的主要规范。你可以使用”获取XPath节点
+“按钮在XML文档中搜索可能的重复节点，但是
+，如果XML文档很大，这可能需要一些时间。</td>
+</tr>
+<tr>
+<td>编码</td>
+<td>如果XML文档中未 指定编码，则为此处指定的XML文件名编码。</td>
+</tr>
+<tr>
+<td>是否支持命名空间？</td>
+<td>如果XML文档 在解析时需要考虑命名空间，请启用此选项。</td>
+</tr>
+<tr>
+<td>是否忽略注释？</td>
+<td>启用此 选项可在解析时忽略XML文档中的所有注释。</td>
+</tr>
+<tr>
+<td>是否验证XML？</td>
+<td>启用此选项可 在解析之前验证XML。当你想在XPath字段值中
+动态替换时，请使用令牌。令牌位于@_和 - （@_字
+段名-）之间。请参阅示例1了解其工作原理。</td>
+</tr>
+<tr>
+<td>使用令牌</td>
+<td>启用此选项可使用令牌验证XML。</td>
+</tr>
+<tr>
+<td>忽略空文件</td>
+<td>启用此选项可忽略任 何无内容的文件。这些不是有效的XML文档。</td>
+</tr>
+<tr>
+<td>如果没有文件则不引发错误</td>
+<td>启用此选项后，如果未找到
+文件则不执行任何操作。否则，将返回错误。</td>
+</tr>
+<tr>
+<td>限制</td>
+<td>指定要 返回的最大行数。零（0）表示返回所有行。</td>
+</tr>
+<tr>
+<td>修剪路径以处理大文件</td>
+<td>指定一 个类似于”循环XPath”的路径，用于处理XML文
+件中的数据块。每个匹配值定义一个要读取和
+处理的数据块。使用修剪路径可加快大文件的
+处理速度。你也可以使用此参数避免多次HTTP URL请求。你也可以使用
+XML输入流（StAX） 转换来实现此目的。</td>
+</tr>
+<tr>
+<td>附加字段</td>
+<td></td>
+</tr>
+<tr>
+<td>是否在输出中包含文件名？</td>
+<td>允许你指定一个字段名称，以
+便在该转换的输出中包含文件名（字符串）。</td>
+</tr>
+<tr>
+<td>文件名的字段名</td>
+<td>从中读取文件名值的字段。</td>
+</tr>
+<tr>
+<td>是否在输出中包含行号？</td>
+<td>允许你指定一个字段名称 ，以便在该转换的输出中包含行号（整数）。</td>
+</tr>
+<tr>
+<td>行号的字段名</td>
+<td><p>从中读取行号值的字段。</p>
+<p>+2</p></td>
+</tr>
+<tr>
+<td>添加到结果文件名</td>
+<td>将文件添加到结果文件名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段选项卡">字段选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>名称</td>
+<td>输出字段的名称</td>
+</tr>
+<tr>
+<td>XPath</td>
+<td>要读取的元素节点或属性的路径</td>
+</tr>
+<tr>
+<td>元素</td>
+<td>要读取的元素类型：节点或属性</td>
+</tr>
+<tr>
+<td>结果类型</td>
+<td><div>
+<div>
+<p>“值”或”单个节点”</p>
+</div>
+<div>
+<ul>
+<li><p>值： 检索XPath表达式的值，例如元素的内容或属性的值。</p></li>
+<li><p>单个节点：检索XPath表达式返回的XML内
+容。与”值”不同，“单个节点”的结果是一个XML片段。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>类型</td>
+<td>要转换到的数据类型</td>
+</tr>
+<tr>
+<td>格式</td>
+<td>数据类型转换中使用的格式或转换掩码</td>
+</tr>
+<tr>
+<td>长度</td>
+<td>输出数据值中的最大字符数</td>
+</tr>
+<tr>
+<td>精度</td>
+<td>输出数据中显示数字时使用的小数位数</td>
+</tr>
+<tr>
+<td>货币</td>
+<td>用于货币值的货币符号。</td>
+</tr>
+<tr>
+<td>小数</td>
+<td>用于浮点数的数字小数符号。</td>
+</tr>
+<tr>
+<td>分组</td>
+<td>用于在数据中分隔千位的数字分组符号</td>
+</tr>
+<tr>
+<td>修剪类型</td>
+<td>如何从值中删除空白字
+符，可从左侧（修剪前导空格）、右侧（修剪尾随空格
+）、两侧（修剪所有空白）或不进行（不进行修剪）。</td>
+</tr>
+<tr>
+<td>重复</td>
+<td>如果列值为空（null），则重复上一行的列值</td>
+</tr>
+<tr>
+<td>获取字段</td>
+<td>点击用输入流中的字段填充表格。</td>
+</tr>
+<tr>
+<td>从片段中选择字段</td>
+<td>点击用与循环XPath和必须在
+弹出对话框中提供的XML文档相对应的字段填充表格。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>===附加输出字段选项卡</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>短文件名字段</p>
+<p>用于存储文件名的字段，不包含路径或文件扩展名。</p>
+<p>扩展名字段</p>
+<p>用于存储文件扩展名的字段。</p>
+</body>
+</html>

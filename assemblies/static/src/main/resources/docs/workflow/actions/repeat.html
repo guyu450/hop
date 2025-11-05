@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>repeat.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="重复">重复</h1>
+<h2 id="描述">描述</h2>
+<p>“重复”操作会重复执行您选择的管道或工作流，直至满足特定条件。该条件可以是：
+除了工作流和管道执行器转换之外，“重复”和”结束重复”操作还允许您从工作流构建循环。使用此操作需要一个工作流或管道以及一个运行配置。该操作将持续执行指定的工作流或管道，直到满足以下条件之一：设置了某个变量，或者将变量设置为特定的可选值，或者在子工作流中触发了”结束重复”操作。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>重复</code>操作会重复执行您选择的管道或工作流，直至满足特定条件。该条件可以是：</p>
+</div>
+<div>
+<ul>
+<li><p>工作流中的某个变量被设置或被设置为某个特定值</p></li>
+<li><p>在指定的重复工作流中执行了”结束重复”操作</p></li>
+</ul>
+</div>
+<div>
+<p>除了工作流和管道执行器转换之外，“重复”和
+“结束重复”操作还允许您从工作流构建循环。使用此操作需要一个工作流或管道以及一个运行配置。该操作将持续执行指定的工作流或管道，直到满足以下条件之一：设置了某个变量，或者将变量设置为特定的可选值，或者在子工作流中触发了”结束重复”操作。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">如果您使用变量名来指定要重复的文件，请确保设置了带有文件扩展名的默认参数，以便Hfxt知道它是管道文件还是工作流文件。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">在管道中设置的作用域为”在JVM中有效”的变量，在重复管道的上游将无法访问。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>示例项目示例：<code>/loops/repeat-action.hwf</code> 和
+<code>child-check-set-counter-value.hpl</code>
+运行一个管道，每次运行时都会增加 <code>${COUNTER}</code>
+变量的值。如果变量值超过10，则会设置变量
+<code>${END_LOOP}</code>。“重复”操作会检测到这个变量，然后循环停止。由于工作流中
+<code>COUNTER</code>
+的变量作用域设置为”在当前工作流中有效”，因此当您在子工作流中设置
+<code>COUNTER</code> 时，新值会向上游传递。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作流操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>要重复的文件</td>
+<td>要重复执行的管道或工作流的文件名。</td>
+</tr>
+<tr>
+<td>运行配置</td>
+<td><div>
+<div>
+<p>要使用的管道或工作流运行配置。</p>
+</div>
+<div>
+<h2 id="section">– ——</h2>
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;">如果</td>
+</tr>
+<tr>
+<td
+style="text-align: center;">您在远程服务器上设置变量，目前该值不会</td>
+</tr>
+<tr>
+<td
+style="text-align: center;">被返回，因此目前仅支持本地工作流引擎。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-1">————————————–</h2>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>当此变量设置时停止重复</td>
+<td>指定在停止重复循环之前要检查的变量</td>
+</tr>
+<tr>
+<td>可选变量值</td>
+<td>仅当上述变量被设置且包含此 确切值时才停止重复。如果您在下游通过作
+用域为”在Java虚拟机中有效”设置的变量值
+来停止”重复”操作，那么您必须以相同的方
+式手动重置该变量，因为在”重复”的”参数
+/变量”选项卡中重置停止变量将不起作用。</td>
+</tr>
+<tr>
+<td>延迟秒数</td>
+<td>在所选工作 流或管道的重复执行之间添加x秒的延迟。</td>
+</tr>
+<tr>
+<td>执行后保留变量值</td>
+<td>此选项会在（重复）管道或工作流执行
+后保留变量值，以便注入到下一次迭代中。</td>
+</tr>
+<tr>
+<td>日志文件</td>
+<td></td>
+</tr>
+<tr>
+<td>是否将执行记录到文件？</td>
+<td>勾选此项表示您希望将所选 工作流或管道的重复执行记录到日志文件中</td>
+</tr>
+<tr>
+<td>日志文件基本名称</td>
+<td>要使用的日志文件基本 名称，以下选项可以选择附加到此名称后。</td>
+</tr>
+<tr>
+<td>日志文件扩展名</td>
+<td>日志文件要使用的扩展名</td>
+</tr>
+<tr>
+<td>是否在文件名中添加日期？</td>
+<td>在日志文件名中添加当前日期</td>
+</tr>
+<tr>
+<td>是否在文件名中添加时间？</td>
+<td>在日志文件名中添加当前时间</td>
+</tr>
+<tr>
+<td>是否在文件名中添加重复次数</td>
+<td>在日志文件名中添加重复次数</td>
+</tr>
+<tr>
+<td>追加到现有日志文件</td>
+<td>如果当前日志文 件已存在，则追加内容而不是创建新文件。</td>
+</tr>
+<tr>
+<td>日志文件更新间隔？</td>
+<td>更新日志文件的时间间隔（以毫秒为单位）</td>
+</tr>
+<tr>
+<td>要设置的参数/变量</td>
+<td><p>您可以在此对话框中指定任何参数或
+变量的值。这些值本身可以包含变量，在每
+次迭代之前都会解析这些变量。如果设置了 <code>执行后保留变量值</code>
+选项，我们 将在文件首次执行之前仅计算一次表达式。</p>
+<p>要将参数发送到”重复” 操作，请设置”参数/变量名称”和”值”列。”
+值”可以是硬编码的，也可以引用参数/变量
+名称。参数不会自动在”重复”操作中传递。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

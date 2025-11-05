@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>databaselookup.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="数据库查找">数据库查找</h1>
+<h2 id="描述">描述</h2>
+<p>数据库查找转换允许您在数据库表中查找值。查找值会作为新字段添加到流中。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr>
+<td>选项</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>到查找表的数据库连接。</td>
+</tr>
+<tr>
+<td>查找模式</td>
+<td>包含查找表的数据库模式。</td>
+</tr>
+<tr>
+<td>查找表</td>
+<td>用于查找的数据库表的名称。</td>
+</tr>
+<tr>
+<td>启用缓存？</td>
+<td><p>启用数据库查找的缓存。这意
+味着一旦查找了某个键（或一组键），查找的
+值就会被存储起来，下次查找这个键（或一组
+键）时将再次返回（无需进行数据库调用）。</p>
+<p><strong>重要</strong>：如 果其他进程正在更改您执行查找的表中的值，
+请不要缓存值。在所有其他情况下，缓存值会
+显著提高性能，因为数据库查找相对较慢。如
+果您无法使用缓存，可以考虑同时启动多个副
+本。同时启动可以通过不同的连接使数据库保
+持繁忙状态。请参阅”启动转换的多个副本”。</p></td>
+</tr>
+<tr>
+<td>缓存行数</td>
+<td>缓存的大小（行数），0 表示缓存所有内容。</td>
+</tr>
+<tr>
+<td>从表中加载所有数据</td>
+<td><p>用查找表中存在的所有数据预加载缓存。
+这可以通过避免数据库调用提高性能。但是，
+如果您的表很大，可能会有内存不足的风险。</p>
+<p><strong> 重要</strong>：由于数据库比较数据的方式不同，内
+存查找可能会导致不同的结果。例如，如果您
+的数据库表允许不区分大小写的比较，使用此
+选项可能会得到不同的结果。对于带有尾随空
+格的数据也是如此。在某些数据库中，使用某
+些字符数据类型时，这些空格会被忽略。有关
+此选项的更多详细信息，请参阅下面的注释。</p></td>
+</tr>
+<tr>
+<td>查找表的键</td>
+<td><p>执行数据库查找的键和条件。</p>
+<p><strong>提示</strong>：在键查找中使用 LIKE 运算符时，它不会自动在
+流值中添加通配符。因此，默认情况下，LIKE 运算符的行为类似于 "="（有关
+LIKE 运算符的特定 SQL 主题，请参阅
+您的数据库）。可以在数据库查找之前添加一
+个”字符串替换”转换来添加通配符。在替换转
+换中选择查找字段，然后使用正则表达式查找 (^.*) 并替换为 %$1%。
+这将为后续的查找任务在字段中添加通配符。</p></td>
+</tr>
+<tr>
+<td>返回表的值</td>
+<td><div>
+<div>
+<p>要添加到输出流中的查找表字段。如果数据
+库列名不合适，“新名称”允许您使用不同的名
+称。“默认值”是查找失败时返回的值（而不是 null）。</p>
+</div>
+<div>
+<p>注意事项：</p>
+</div>
+<div>
+<ul>
+<li><p>在数据库查找转换上启用错误
+处理将把所有查找失败的行重定向到错误处理
+转换，而不是将它们添加到主输出流中并带有 null/默认值。</p></li>
+<li><p><em>类型</em>是输出字段的类型。</p></li>
+<li><p>当我们使用 <em>修剪类型</em> 选项时，当前转换
+的行为是修剪所有空格，但保留转换在成功查
+找时提取的字符串中最终包含的任何换行符。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>查找失败时不传递该行</td>
+<td>启用此选项可在查找失败时避免传递该行。在 SQL 语法中
+，启用此选项将是内连接，否则将是外连接。</td>
+</tr>
+<tr>
+<td>查找返回多个结果时失败？</td>
+<td>启用此 选项可在查找返回多个结果时强制转换失败。</td>
+</tr>
+<tr>
+<td>排序依据</td>
+<td>如果查找查询返回多个结果，ORDER BY 子
+句可帮助您选择要使用的记录。例如，ORDER BY
+可让您在指定状态中选择销售额最高的客户。</td>
+</tr>
+<tr>
+<td>获取字段</td>
+<td>点击可返回转换的输入流中的可用字段列表。</td>
+</tr>
+<tr>
+<td>获取查找字段</td>
+<td>点击可返回查找 表中可添加到转换输出流中的可用字段列表。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>关于”从表中加载所有数据”选项的说明</strong>：例如：当存储类型为”CHAR(3)“的值时，许多数据库将使用
+3 个字符存储”ab”：“ab”（注意空格）。当您执行”SELECT * FROM
+my_lookup_table WHERE key_column = 'ab'“时，数据库很智能，在应用 where
+子句之前会添加一个空格（它查找的是 'ab ' 而不是 'ab'）。</p>
+</div>
+<div>
+<p>当您使用”从表中加载所有数据”预加载缓存时就会出现问题：在启动时，缓存是使用数据库中存在的所有值构建的，因此我们在缓存中存储
+'ab '。后来，查找 'ab' 失败，因为在 Java
+相等性比较中尾随空格很重要。</p>
+</div>
+<div>
+<p>请注意，如果禁用”从表中加载所有数据”，使用缓存时不会出现此问题。实际上，对
+'ab'
+的第一次查找将在缓存中找不到条目，调用数据库（数据库足够智能，可以处理尾随空白问题），获取正确的结果，并将其存储在
+Java 缓存中 'ab' 键下。因此，下次对 'ab' 的查找将在缓存中找到合适的结果
+：）</p>
+</div>
+</div>
+</body>
+</html>

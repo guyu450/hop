@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>azure-event-hubs-listener.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="azure事件中心监听器">Azure事件中心监听器</h1>
+<h2 id="描述">描述</h2>
+<p>Azure事件中心监听器转换会无限期地监听Microsoft
+Azure云平台上的事件中心。</p>
+<h2 id="连接选项">连接选项</h2>
+<div>
+<div>
+<ul>
+<li><p>事件中心命名空间：你的事件中心命名空间名称</p></li>
+<li><p>事件中心实例名称：事件中心的名称，即实例本身</p></li>
+<li><p>事件中心连接字符串：通常与共享访问签名（SAS）密钥连接字符串相同</p></li>
+<li><p>SAS策略密钥名称：Azure仪表板中事件中心命名空间的”共享访问策略”部分中的策略名称。此策略需要启用”发送”声明</p></li>
+<li><p>SAS密钥连接字符串：你可以使用标记为”连接字符串 -
+主密钥”的策略中的值</p></li>
+<li><p>批处理大小：每次调用Azure时在一批中发送的消息（事件）数量</p></li>
+<li><p>消息字段：包含用作事件的消息的字段。请注意，你可以使用诸如JSON输出或”JavaScript”之类的转换来组装消息</p></li>
+<li><p>使用者组名称：如果你没有创建特定的组，只需使用$Default</p></li>
+<li><p>存储容器名称：你的存储容器名称</p></li>
+<li><p>存储连接字符串：你的存储帐户”访问密钥”部分中的key1或key2连接字符串</p></li>
+</ul>
+</div>
+</div>
+<h2 id="优化选项">优化选项</h2>
+<div>
+<div>
+<ul>
+<li><p>批处理大小：一次从事件中心获取并（可选）传递到批处理管道的事件数量（见下文）</p></li>
+<li><p>预取大小：（可选）预取的事件数量</p></li>
+</ul>
+</div>
+</div>
+<h2 id="输出字段">输出字段</h2>
+<div>
+<div>
+<ul>
+<li><p>消息输出字段：包含消息（事件）的输出字段名称</p></li>
+<li><p>分区ID字段：分区ID的输出字段名称</p></li>
+<li><p>偏移量字段名称：事件偏移量的输出字段名称</p></li>
+<li><p>序列号字段名称：事件序列号的输出字段名称</p></li>
+<li><p>主机（所有者）字段名称：事件主机的输出字段名称</p></li>
+<li><p>入队时间字段名称：事件入队时间的输出字段名称</p></li>
+</ul>
+</div>
+</div>
+<h2 id="批处理选项">批处理选项</h2>
+<div>
+<div>
+<p>为了确保在检查点事件流之前安全处理所有记录，我们需要在执行此操作之前运行所有需要运行的逻辑，更新所有需要更新的内容。为此，我们将一批中读取的所有行传递到指定的批处理管道（将单线程运行）</p>
+</div>
+<div>
+<ul>
+<li><p>批处理管道：批处理管道文件名</p></li>
+<li><p>管道输入转换：批处理管道中用于发送事件的”注入器”或”从流中获取记录”转换的名称</p></li>
+<li><p>管道输出转换：（可选）批处理管道中读取并用作此监听器转换输出的转换名称</p></li>
+<li><p>最大等待时间（毫秒）：（可选但强烈建议！）即使批处理中可能没有指定数量的记录，在执行批处理管道之前等待的最长时间。当可能没有新事件从中心到达时，这对于防止陈旧记录长时间滞留在批处理管道输入中很有用</p></li>
+</ul>
+</div>
+</div>
+<h2 id="重要说明">重要说明</h2>
+<div>
+<div>
+<p>批处理管道以注入器转换开始。它接收以下字段：</p>
+</div>
+<div>
+<ul>
+<li><p>message（字符串）</p></li>
+<li><p>partitionId（字符串）</p></li>
+<li><p>offset（字符串）</p></li>
+<li><p>sequenceNumber（整数）</p></li>
+<li><p>host（字符串）</p></li>
+<li><p>enqueuedTime（时间戳）</p></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

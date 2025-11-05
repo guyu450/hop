@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>sftpput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="使用sftp上传文件">使用SFTP上传文件</h1>
+<h2 id="描述">描述</h2>
+<p>“使用SFTP上传文件”操作使用安全FTP协议将一个或多个文件推送到FTP服务器。如果指定的文件或文件模式上传成功，该操作返回true；如果上传文件时出现问题，则返回false。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>使用SFTP上传文件</code>操作使用安全FTP协议将一个或多个文件推送到FTP服务器。</p>
+</div>
+<div>
+<p>如果指定的文件或文件模式上传成功，该操作返回true；如果上传文件时出现问题，则返回false。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">如果在连接到SFTP服务器时遇到<code>算法协商失败</code>错误，请查看本页面末尾的
+算法协商失败错误 部分。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作流操作名称</td>
+<td>工作流操作的名称。<strong>注意</strong>：此名称
+在单个工作流中必须唯一。一个工作流操作可以多
+次放置在画布上，但它仍然是同一个工作流操作。</td>
+</tr>
+<tr>
+<td>SFTP服务器名称（IP）</td>
+<td>SFTP服务器的名称或IP地址。</td>
+</tr>
+<tr>
+<td>SFTP端口</td>
+<td>要使用的TCP端口。通常为22。</td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>登录到SFTP服务器的用户名。</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>登录到SFTP服务器的密码。</td>
+</tr>
+<tr>
+<td>使用私钥文件</td>
+<td>指示是否要使用私钥文件。</td>
+</tr>
+<tr>
+<td>私钥文件名</td>
+<td>如果选中”使用私钥文件”，则
+此字段启用。可以使用字段右侧的浏览按钮浏览文
+件。私钥应采用PEM文件格式。对于基于PuTTY的私
+钥，使用PuTTYgen将文件转换为”OpenSSH”格式。</td>
+</tr>
+<tr>
+<td>密钥密码短语</td>
+<td>如果选中”使用私钥文件”，则
+此字段启用。如果需要密码短语，请在此处输入。</td>
+</tr>
+<tr>
+<td>代理类型</td>
+<td>指定代理服务器的代理类型（SOCKS5、HTTP）。</td>
+</tr>
+<tr>
+<td>代理主机</td>
+<td>代理服务器的主机名或IP地址。</td>
+</tr>
+<tr>
+<td>代理端口</td>
+<td>要连接的代理服务器端口。</td>
+</tr>
+<tr>
+<td>代理用户名</td>
+<td>登录到代理服务器的用户名。</td>
+</tr>
+<tr>
+<td>代理密码</td>
+<td>与”代理用户名”关联的密码。</td>
+</tr>
+<tr>
+<td>压缩</td>
+<td><div>
+<div>
+<p>文件传输中要使用的压缩方式。当前选项有</p>
+</div>
+<div>
+<ul>
+<li><p>无（默认）</p></li>
+<li><p>zlib</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件选项卡">文件选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述 2+源（本地）文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>将上一步结果复制到参数</td>
+<td>如果要发送的 文件是由另一个工作流动态生成的，或者如
+果您想确定要发送的文件，请选中此选项。
+Hfxt将从上一步结果行中选择文件列表（不
+是结果文件，请参见下一个选项）并发送这
+些文件。如果找不到文件，Hfxt将忽略它。</td>
+</tr>
+<tr>
+<td>将上一步结果文件复制到参数</td>
+<td>如果要发送的文件是由另一个管 道或工作流操作动态生成的，或者如果您想
+确定要发送的文件，请选中此选项。Hfxt将
+从上一步文件结果操作中选择文件并发送这
+些文件。如果找不到文件，Hfxt将忽略它。</td>
+</tr>
+<tr>
+<td>本地目录</td>
+<td>运行H fxt的机器上要从中通过ftp发送文件的目录</td>
+</tr>
+<tr>
+<td>通配符（正则表达式）</td>
+<td><div>
+<div>
+<p>如果要选择多 个文件，请在此处指定正则表达式。例如：</p>
+</div>
+<div>
+<div>
+<pre><code>.*txt$   : 获取所有文本文件
+A.*[ENG:0-9].</code></pre>
+<p>txt : 以A开头、以数字和.txt结尾的文件</p>
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>无文件时视为成功</td>
+<td>如果工作流操作在没有文件要处理时必须
+成功，请选中此选项，否则工作流将失败。</td>
+</tr>
+<tr>
+<td>SFTP上传后操作</td>
+<td><div>
+<div>
+<p>文件传输后要执行的操作。可用选项有 * 不执行任何操作（默认） *
+删除文件 * 移动文件到</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>目标文件夹</td>
+<td>如果上述 <code>SFTP上传后操作</code> 选项设置为
+<code>移动文件到</code>，则 此字段启用。在此处指定要移动的源文件的
+目标位置。使用浏览按钮浏览目标文件夹。</td>
+</tr>
+<tr>
+<td>创建目标文件夹</td>
+<td>如果”SFTP上传后操作”设置为 “移动文件到”，则此字段启用。如果”目标
+文件夹”不存在，请选中此选项以创建它。</td>
+</tr>
+<tr>
+<td>将文件名添加到结果</td>
+<td>如果”SFTP上传后操 作”设置为”不执行任何操作”，则此字段启
+用。如果选中，文件名将添加到结果流中。</td>
+</tr>
+<tr>
+<td>目标（远程）文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>远程目录</td>
+<td>SFTP服务器上要上 传文件的远程目录。使用”测试文件夹”按钮
+连接到远程服务器并验证文件夹是否存在。</td>
+</tr>
+<tr>
+<td>创建文件夹</td>
+<td>如果目 标文件夹不存在且应创建，请选中此选项。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="算法协商失败错误">算法协商失败错误</h2>
+<div>
+<div>
+<p>如果您的 <code>使用SFTP上传文件</code>
+操作返回如下错误消息，则您（或您正在连接的服务器）可能正在使用在近期
+Hfxt版本中此操作所使用的依赖项里被视为不安全的密钥类型。</p>
+</div>
+<div>
+<p><code>com.jcraft.jsch.JSchhAlgoNegoFailException: 算法协商失败…​</code></p>
+</div>
+<div>
+<p>更好、更安全的选择是将您的密钥升级到更安全的类型。不过，您仍然可以通过在启动命令（在
+<code>hfxt-gui.sh/bat</code> 或 <code>hfxt-run.sh/bat</code>
+中，或者在您的 <code>HFXT_OPTIONS</code> 环境变量中）的
+<code>HFXT_OPTIONS</code> 变量中添加以下选项来连接到此SFTP服务器：</p>
+</div>
+<div>
+<p><code>-Djsch.client_pubkey=ssh-rsa,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256 -Djsch.server_host_key=ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa</code></p>
+</div>
+</div>
+</body>
+</html>

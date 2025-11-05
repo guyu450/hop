@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>orabulkloader.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="oracle批量加载器">Oracle批量加载器</h1>
+<h2 id="描述">描述</h2>
+<p>此转换允许您将数据批量加载到Oracle数据库。它会将接收到的数据写入合适的加载格式，然后调用Oracle
+SQL*Loader将其传输到指定的表中。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>目标表所在的数据库连接名称。</td>
+</tr>
+<tr>
+<td>目标模式</td>
+<td>要写入数据的表的模式名称。</td>
+</tr>
+<tr>
+<td>目标表</td>
+<td>目标表的名称。</td>
+</tr>
+<tr>
+<td>Sqldr路径</td>
+<td>sqlldr实用程序的完整路径（包括sqlldr）。</td>
+</tr>
+<tr>
+<td>加载方法</td>
+<td>加载数据时要使用的SQL*Loader方法： * 自动加载（结束时）将在接收
+到此转换中指定参数的所有输入后启动sqlldr。 *
+手动加载仅创建一个控制文件和数据文件，这可
+以用作后门：您可以让Hfxt生成数据并创建例如
+自己的控制文件来加载数据（在此转换之外）。 * 自动
+加载（实时）将启动sqlldr，并在该转换接收到
+输入时将数据通过管道传输到sqlldr作为输入。</td>
+</tr>
+<tr>
+<td>加载操作</td>
+<td>追加、插入、 替换、截断。这些对应于要执行的sqlldr操作。</td>
+</tr>
+<tr>
+<td>最大错误数</td>
+<td>达到此错误行数后， sqlldr将中止。这对应于sqlldr的”ERROR”属性。</td>
+</tr>
+<tr>
+<td>提交行数</td>
+<td>达到此行数后 提交，这对应于sqlldr的”ROWS”属性，该属性在
+使用常规路径加载和直接路径加载时有所不同。</td>
+</tr>
+<tr>
+<td>绑定大小</td>
+<td>对应于sqlldr的”BINDSIZE”属性。</td>
+</tr>
+<tr>
+<td>读取大小</td>
+<td>对应于sqlldr的”READSIZE”属性。</td>
+</tr>
+<tr>
+<td>控制文件</td>
+<td>用作sqlldr控制文件的文件名。</td>
+</tr>
+<tr>
+<td>数据文件</td>
+<td>将写入数据的数据文件名。</td>
+</tr>
+<tr>
+<td>日志文件</td>
+<td>日志文件名（可选）。</td>
+</tr>
+<tr>
+<td>错误文件</td>
+<td>将包含被拒绝记录的错误文件名（可选）。</td>
+</tr>
+<tr>
+<td>丢弃文件</td>
+<td>将包含未与控制文件中指定的任何记录选
+择标准匹配的过滤记录的丢弃文件名（可选）。</td>
+</tr>
+<tr>
+<td>编码</td>
+<td>以特定编码对数据进行编码，除
+下拉列表中的编码外，可选择任何有效的编码。</td>
+</tr>
+<tr>
+<td>Oracle字符集</td>
+<td>要使用的Oracle字符集。</td>
+</tr>
+<tr>
+<td>备用记录终止符</td>
+<td>指定此值可覆盖SQL*Loader的默认记录终止符。</td>
+</tr>
+<tr>
+<td>直接路径</td>
+<td>开启直 接路径加载（对应于sqlldr中的DIRECT=TRUE）。</td>
+</tr>
+<tr>
+<td>使用后删除cfg/dat文件</td>
+<td>此选项会在使用后删除控制文件和数据文件。</td>
+</tr>
+<tr>
+<td>遇到警告时失败</td>
+<td>此选项会导致转换在加载警告时失败。</td>
+</tr>
+<tr>
+<td>遇到错误时失败</td>
+<td>此选项会导致转换在加载错误时失败。</td>
+</tr>
+<tr>
+<td>并行加载数据</td>
+<td>此选项会导致数据并行加
+载。并行加载仅在使用直接路径选项时才可能。</td>
+</tr>
+<tr>
+<td>要加载的字段</td>
+<td><div>
+<div>
+<p>此 表包含要从中加载数据的字段列表，属性包括： *
+表字段：要加载到PostgreSQL表中的表字段； *
+流字段：要从传入行中获取的字段； * 日期掩码：“直通”、“日期”或”日期时
+间”，确定日期/时间戳在Oracle中的加载方式。</p>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

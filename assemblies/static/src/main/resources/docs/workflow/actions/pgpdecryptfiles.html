@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pgpdecryptfiles.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="使用pgp解密文件">使用PGP解密文件</h1>
+<h2 id="描述">描述</h2>
+<p>“使用PGP解密文件”操作可用于解密文件。运行时环境中必须安装GnuPG软件包，并将加密密钥添加到运行时用户密钥库中，此操作才能正常工作。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>使用PGP解密文件</code>操作可用于解密文件。</p>
+</div>
+<div>
+<p>运行时环境中必须安装GnuPG软件包，并将加密密钥添加到运行时用户密钥库中，此操作才能正常工作。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作名称</td>
+<td style="text-align: left;">工作流操作的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">GPG位置</td>
+<td style="text-align: left;">GnuPG可执行文件的文件路径（例如
+<code>/usr/bin/gpg</code>）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含子文件夹</td>
+<td style="text-align: left;">是否包含子文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将先前结果复制到参数</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">文件/文件夹源</td>
+<td
+style="text-align: left;">要解密的文件，可以使用”添加”按钮添加到”文件/文件夹”列表中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件/文件夹目标</td>
+<td style="text-align: left;">解密文件的目标位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;">通配符</td>
+<td style="text-align: left;">一个正则表达式通配符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件/文件夹</td>
+<td style="text-align: left;">要解密的文件。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="目标文件选项卡">目标文件选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标文件</td>
+<td></td>
+</tr>
+<tr>
+<td>创建目标文件夹</td>
+<td>是否创建目标文件夹。</td>
+</tr>
+<tr>
+<td>目标是文件</td>
+<td>目标是否为文件。</td>
+</tr>
+<tr>
+<td>不保留文件夹结构</td>
+<td>是否保留文件夹结构 。如果未选中，则文件夹结构将被扁平化。</td>
+</tr>
+<tr>
+<td>在文件名中添加日期</td>
+<td>在文件名中添加日期。</td>
+</tr>
+<tr>
+<td>在文件名中添加时间</td>
+<td>在文件名中添加时间。</td>
+</tr>
+<tr>
+<td>指定日期时间格式</td>
+<td>是否指定日期时间格式。</td>
+</tr>
+<tr>
+<td>日期时间格式</td>
+<td>日期时间的格式。</td>
+</tr>
+<tr>
+<td>在扩展名之前添加日期</td>
+<td>在扩展名之前还是之后。</td>
+</tr>
+<tr>
+<td>如果目标文件已存在</td>
+<td><div>
+<div>
+<ul>
+<li><p>不执行任何操作</p></li>
+<li><p>覆盖目标文件</p></li>
+<li><p>创建唯一名称的文件</p></li>
+<li><p>删除源文件</p></li>
+<li><p>将源文件移动到文件夹</p></li>
+<li><p>失败</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>移动到文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>目标文件夹</td>
+<td>目标文件夹。</td>
+</tr>
+<tr>
+<td>创建文件夹</td>
+<td>是否创建文件夹。</td>
+</tr>
+<tr>
+<td>添加日期</td>
+<td>添加日期。</td>
+</tr>
+<tr>
+<td>添加时间</td>
+<td>添加时间。</td>
+</tr>
+<tr>
+<td>指定格式</td>
+<td>是否指定日期时间格式。</td>
+</tr>
+<tr>
+<td>在扩展名之前添加日期</td>
+<td>日期时间的格式。</td>
+</tr>
+<tr>
+<td>如果目标文件夹中已存在文件</td>
+<td><div>
+<div>
+<ul>
+<li><p>不执行任何操作</p></li>
+<li><p>覆盖目标文件</p></li>
+<li><p>创建唯一名称的文件</p></li>
+<li><p>删除源文件</p></li>
+<li><p>将源文件移动到文件夹</p></li>
+<li><p>失败</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="目标文件选项卡-1">目标文件选项卡</h3>
+<table style="width:78%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>成功条件</td>
+<td></td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td><div>
+<div>
+<p>运行成功时要验证的条件</p>
+</div>
+<div>
+<ul>
+<li><p>全部成功时成功（默认）</p></li>
+<li><p>至少解密x个文件时成功</p></li>
+<li><p>错误数量小于指定值时成功</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>错误数量小于</td>
+<td>错误数量小于指定值时成功。</td>
+</tr>
+<tr>
+<td>结果文件名</td>
+<td></td>
+</tr>
+<tr>
+<td>将文件添加到结果文件名</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

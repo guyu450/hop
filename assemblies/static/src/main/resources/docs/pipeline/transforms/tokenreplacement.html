@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tokenreplacement.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="令牌替换">令牌替换</h1>
+<h2 id="描述">描述</h2>
+<p>令牌替换转换会替换输入字符串或文件中的令牌。然后，该转换可以将此数据输出到文件或流中的字段。一个令牌包含起始字符串、名称和结束字符串。例如，${my_token}
+可以是一个令牌。起始字符串和结束字符串是可配置的，可以是任何字符序列。在替换文件中的令牌时，此转换会读取整个文件。它不会一次处理一行。在替换文件中的令牌时，最佳做法也是将输出写入文件，以防止Hfxt将整个文件读入内存。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="输入选项卡">输入选项卡</h3>
+<div>
+<ul>
+<li><p>输入类型 -
+从何处读取要进行令牌替换的字段。可以是文本、字段或文件。</p></li>
+<li><p>输入类型为文本</p>
+<div>
+<ul>
+<li>输入文本 - 要进行令牌替换的文本</li>
+</ul>
+</div></li>
+<li><p>输入类型为字段</p>
+<div>
+<ul>
+<li>输入字段 - 要进行令牌替换的输入字段</li>
+</ul>
+</div></li>
+<li><p>输入类型为文件</p>
+<div>
+<ul>
+<li><p>输入文件名 - 要进行令牌替换的文件名</p></li>
+<li><p>文件名在字段中？</p>
+<div>
+<ul>
+<li>要进行令牌替换的文件名是否在字段中？</li>
+</ul>
+</div></li>
+<li><p>输入文件名所在字段 - 文件名所在的字段。</p></li>
+<li><p>将输入文件名添加到结果中？</p>
+<div>
+<ul>
+<li>将输入文件名添加到结果文件列表中。</li>
+</ul>
+</div></li>
+</ul>
+</div></li>
+</ul>
+</div>
+<h3 id="输出选项卡">输出选项卡</h3>
+<div>
+<ul>
+<li><p>输出类型 -
+将令牌替换后的字符串输出到何处。可以是字段或文件。</p></li>
+<li><p>输出类型为字段</p>
+<div>
+<ul>
+<li>输出字段名称 - 要将令牌替换后的字符串放入的字段名称。</li>
+</ul>
+</div></li>
+<li><p>输出类型为文件</p>
+<div>
+<ul>
+<li><p>输出文件名 - 要写入的文件名。</p></li>
+<li><p>文件名在字段中？</p>
+<div>
+<ul>
+<li>输出文件名是否在字段中？</li>
+</ul>
+</div></li>
+<li><p>输出文件名所在字段 - 输出文件名所在的字段名称。</p></li>
+<li><p>追加输出文件？</p>
+<div>
+<ul>
+<li>如果输出文件已存在，是否应追加到该文件。如果未选中，若文件存在，
+Hfxt将覆盖该文件。</li>
+</ul>
+</div></li>
+<li><p>创建父文件夹？</p>
+<div>
+<ul>
+<li>Hfxt是否应创建父文件夹？</li>
+</ul>
+</div></li>
+<li><p>输出格式 - 输出文件的换行符格式。</p></li>
+<li><p>输出编码 - 写入文件时使用的字符编码。</p></li>
+<li><p>每 - 行拆分 - 每n行将输出文件拆分为一个新文件。</p></li>
+<li><p>在文件名中包含副本编号？</p>
+<div>
+<ul>
+<li>是否应在输出文件名中包含转换的副本编号？</li>
+</ul>
+</div></li>
+<li><p>在文件名中包含分区编号？</p>
+<div>
+<ul>
+<li>是否应在输出文件名中包含分区编号？</li>
+</ul>
+</div></li>
+<li><p>在文件名中包含日期？</p>
+<div>
+<ul>
+<li>是否应在输出文件名中包含当前日期？</li>
+</ul>
+</div></li>
+<li><p>在文件名中包含时间？</p>
+<div>
+<ul>
+<li>是否应在输出文件名中包含当前时间？</li>
+</ul>
+</div></li>
+<li><p>指定日期格式？</p>
+<div>
+<ul>
+<li>是否要指定要包含在输出文件名中的日期格式？</li>
+</ul>
+</div></li>
+<li><p>日期时间格式 - 要包含在输出文件名中的日期/时间格式。</p></li>
+<li><p>将输出文件名添加到结果中？</p>
+<div>
+<ul>
+<li>将输出文件名添加到结果文件列表中。</li>
+</ul>
+</div></li>
+</ul>
+</div></li>
+</ul>
+</div>
+<h3 id="令牌选项卡">令牌选项卡</h3>
+<div>
+<ul>
+<li><p>令牌起始字符串 - 表示令牌开始的字符串。</p></li>
+<li><p>令牌结束字符串 -
+表示令牌结束的字符串。令牌起始字符串和令牌结束字符串之间的所有内容就是令牌名称。</p></li>
+<li><p>流名称 - 流中包含用于替换令牌的值的字段名称。</p></li>
+<li><p>令牌名称 - 要替换的令牌名称。</p></li>
+<li><p>获取字段按钮 -
+获取输入字段列表，并尝试通过精确名称匹配将它们映射到Avro字段。</p></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

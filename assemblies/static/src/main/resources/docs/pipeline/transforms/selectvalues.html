@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>selectvalues.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="选择值">选择值</h1>
+<h2 id="描述">描述</h2>
+<p>“选择值”转换对于选择、删除、重命名、更改数据类型以及配置流上字段的长度和精度非常有用。这些操作分为不同的类别：</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="选择与更改标签页">选择与更改标签页</h3>
+<div>
+<p>此标签页包含用于选择和更改数据类型及字段的选项。“获取要选择的字段”按钮将根据现有的输入转换检索可用字段，并填充此标签页中的条目。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称，此名称在单个管道中必须唯一</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段名</td>
+<td style="text-align: left;">输入流中的字段名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">重命名为</td>
+<td
+style="text-align: left;">字段的新名称。如果不想重命名字段，请留空</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td
+style="text-align: left;">如果要隐式选择输入流中在”字段”部分未明确选择的所有其他字段，请指定此值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td
+style="text-align: left;">精度选项取决于字段类型，但仅支持”数字”类型；它返回浮点数的位数</td>
+</tr>
+<tr>
+<td style="text-align: left;">按名称排序包含未指定的字段</td>
+<td
+style="text-align: left;">如果要隐式选择输入流中在”字段”部分未明确选择的所有其他字段，请启用此选项</td>
+</tr>
+</tbody>
+</table>
+<h4 id="编辑映射">编辑映射</h4>
+<div>
+<p>“编辑映射”对话框允许您轻松定义源字段和目标字段之间的多个映射。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">源字段</td>
+<td
+style="text-align: left;">可供映射的输入字段列表。选择一个字段开始映射</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标字段</td>
+<td
+style="text-align: left;">源字段可映射到的字段列表。选择源字段后，选择一个目标字段以创建映射</td>
+</tr>
+<tr>
+<td style="text-align: left;">添加</td>
+<td
+style="text-align: left;">将源字段和目标字段映射对添加到”映射”部分</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除</td>
+<td style="text-align: left;">删除选定的映射条目</td>
+</tr>
+</tbody>
+</table>
+<h3 id="删除标签页">删除标签页</h3>
+<div>
+<p>此标签页允许您从输入流中删除字段。点击”获取要删除的字段”以从先前的转换中导入字段。</p>
+</div>
+<h3 id="元数据标签页">元数据标签页</h3>
+<div>
+<p>此标签页下的选项允许您重命名输入字段、将其转换为不同的数据类型，并更改其长度和精度。点击”获取要更改的字段”以从先前的转换中导入字段。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段名</td>
+<td
+style="text-align: left;">导入字段的名称。注意：如果您在”选择与更改”标签页中重命名字段，此处的名称必须与重命名后的值匹配。</td>
+</tr>
+<tr>
+<td style="text-align: left;">重命名为</td>
+<td style="text-align: left;">如果要重命名字段，在此处输入新名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">此字段的数据类型</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">字段长度</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td
+style="text-align: left;">精度选项取决于字段类型，但仅支持”数字”类型；它返回浮点数的位数</td>
+</tr>
+<tr>
+<td style="text-align: left;">二进制转常规？</td>
+<td
+style="text-align: left;">在适当的时候将字符串转换为数字数据类型</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td style="text-align: left;">格式掩码（数字类型或日期格式）</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期格式宽松？</td>
+<td
+style="text-align: left;">确定日期解析器是严格还是宽松。宽松意味着将处理无效的日期值。如果设置为”N”，则仅接受严格有效的日期值；如果设置为”Y”，则解析器将尝试确定错误日期的意图（如果可能）并进行纠正。</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期区域设置</td>
+<td
+style="text-align: left;">指定用于日期转换和计算的日期区域设置。留空以使用系统上的默认编码，或从填充的列表中相应选择。</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期时区</td>
+<td
+style="text-align: left;">指定用于日期转换和计算的日期时区。留空以使用系统上的默认编码，或从填充的列表中相应选择。</td>
+</tr>
+<tr>
+<td style="text-align: left;">宽松数字转换</td>
+<td
+style="text-align: left;">当此选项设置为”Y”时，数字将被解析，直到找到非数字值（例如破折号或斜杠），然后停止解析而不报告错误。当设置为”N”时，数字将被严格解析，如果输入中存在无效数字，则会抛出错误。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td
+style="text-align: left;">指定要使用的文本文件编码。留空以使用系统上的默认编码。要使用Unicode，请指定UTF-8或UTF-16。首次使用时，Spoon会在您的系统中搜索可用的编码，并相应地填充此列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数点</td>
+<td style="text-align: left;">小数点；可以是点或逗号</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组</td>
+<td
+style="text-align: left;">在四位数或更多位数的数字中分隔千位的方法。可以是点或逗号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币</td>
+<td style="text-align: left;">用于表示货币的符号</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

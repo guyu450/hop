@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>shell.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="shell">Shell</h1>
+<h2 id="描述">描述</h2>
+<p>Shell操作会在运行工作流的主机上执行一个Shell脚本。例如，假设你有一个程序，它读取五个数据表并以指定格式创建一个文件。Shell允许你在
+Hfxt中完成部分工作，但可根据需要重用读取数据表的程序。Shell工作流操作与平台无关；你可以使用批处理文件、UNIX脚本等等。当你使用Shell工作流操作时，Hfxt会进行Java调用，以在指定位置执行程序。除了调用主机上的脚本外，你还可以直接在Shell操作中输入脚本（例如，Windows上的批处理脚本、Linux上的Shell脚本）。返回状态由操作系统调用提供。例如，在批处理脚本中，返回值1表示脚本执行成功；返回值0（零）表示执行失败。你可以为Shell工作流操作传递命令行参数并设置日志记录。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>Shell</code>操作会在运行工作流的主机上执行一个Shell脚本。</p>
+</div>
+<div>
+<p>例如，假设你有一个程序，它读取五个数据表并以指定格式创建一个文件。</p>
+</div>
+<h3 id="脚本或可执行文件">脚本或可执行文件</h3>
+<div>
+<p>Shell允许你在
+Hfxt中完成部分工作，但可根据需要重用读取数据表的程序。</p>
+</div>
+<div>
+<p>Shell工作流操作与平台无关；你可以使用批处理文件、UNIX脚本等等。</p>
+</div>
+<div>
+<p>当你使用Shell工作流操作时，Hfxt会进行Java调用，以在指定位置执行程序。</p>
+</div>
+<h3 id="嵌入式脚本">嵌入式脚本</h3>
+<div>
+<p>除了调用主机上的脚本外，你还可以直接在
+<code>Shell</code>操作中输入脚本（例如，Windows上的批处理脚本、Linux上的Shell脚本）。</p>
+</div>
+<h3 id="返回状态">返回状态</h3>
+<div>
+<p>返回状态由操作系统调用提供。</p>
+</div>
+<div>
+<p>例如，在批处理脚本中，返回值1表示脚本执行成功；返回值0（零）表示执行失败。</p>
+</div>
+<div>
+<p>你可以为Shell工作流操作传递命令行参数并设置日志记录。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>操作名称</p>
+<p>工作流操作的名称。</p>
+<p>插入脚本</p>
+<div>
+<div>
+<p>当你希望在”脚本”选项卡中执行脚本而不是执行脚本文件名时，请选中此选项。当你想要执行诸如dir、ls或ipconfig等操作系统命令而无需指定特定路径时，此选项也很有用。此选项会在工作目录中创建一个临时脚本并执行它。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: left;">给定变量时，会在脚本中解析变量。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>脚本文件名</p>
+<p>要启动的Shell脚本的文件名，应包含完整路径，否则将使用 ${user.dir}
+作为路径。</p>
+<p>工作目录</p>
+<p>将用作Shell脚本工作目录的目录。工作目录仅在Shell脚本启动时才生效，因此”文件名”仍应包含脚本的完整路径。如果此字段留空或工作目录无效，将使用
+${user.dir} 作为工作目录。</p>
+<p>日志记录设置</p>
+<p>指定日志文件</p>
+<p>启用此选项可指定一个单独的日志文件用于记录此工作流的执行情况。</p>
+<p>追加到日志文件</p>
+<p>启用此选项可将日志追加到现有日志文件，而不是创建一个新文件。</p>
+<p>日志文件名</p>
+<p>日志文件的目录和基本名称（例如 C:\logs）</p>
+<p>日志文件扩展名</p>
+<p>文件名扩展名（例如：log 或 txt）</p>
+<p>在文件名中包含日期？</p>
+<p>将系统日期添加到文件名中。（_20051231）</p>
+<p>在文件名中包含时间？</p>
+<p>将系统时间添加到文件名中。（_235959）</p>
+<p>日志级别</p>
+<p>指定Shell执行的日志记录级别。另请参阅.14 日志记录中的日志窗口。</p>
+<p>将上一步结果复制到参数？</p>
+<p>可以使用”将行复制到结果”转换将上一个管道的结果发送到Shell脚本（作为参数）。</p>
+<p>对每个输入行执行一次</p>
+<p>这实现了循环。如果上一个工作流操作返回一组结果行，你可以让此Shell脚本对找到的每一行执行一次。每次执行时，会将一行与”将上一步结果复制到参数”结合传递给此脚本。相应结果行的值可以在命令行参数
+$1、$2、…​（在Windows上为 %1、%2、%3、…​）中找到。</p>
+<p>参数字段</p>
+<p>指定用作Shell脚本参数的字符串。</p>
+<h3 id="脚本选项卡">脚本选项卡</h3>
+<div>
+<p>如果选中了
+<code>插入脚本</code>选项，此选项卡将包含你的批处理或Shell脚本。</p>
+</div>
+</body>
+</html>

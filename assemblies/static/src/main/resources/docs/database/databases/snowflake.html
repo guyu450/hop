@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>snowflake.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="雪花snowflake">雪花（Snowflake）</h1>
+<h2 id="配置">配置</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">关系型</td>
+</tr>
+<tr>
+<td style="text-align: left;">驱动程序</td>
+<td style="text-align: left;">已包含</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含的版本</td>
+<td style="text-align: left;">3.23.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hfxt依赖项</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">文档</td>
+<td style="text-align: left;">文档链接</td>
+</tr>
+<tr>
+<td style="text-align: left;">JDBC 网址</td>
+<td
+style="text-align: left;"><code>jdbc:snowflake://&lt;account_name&gt;.snowflakecomputing.com/?&lt;connection_params&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">驱动程序文件夹</td>
+<td style="text-align: left;">&lt;Hfxt 安装目录&gt;/lib/jdbc</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="建立雪花snowflakessl-认证连接">建立雪花（Snowflake）SSL
+认证连接</h2>
+<div>
+<h3 id="简介">简介</h3>
+<div>
+<p>本简短指南将引导我们创建一个雪花（Snowflake）用户，该用户配置为附加公钥的服务账户，并配置
+Hfxt，以便它能够使用私钥、角色、计算资源等进行连接，从而开展进一步的工作。</p>
+</div>
+<h3
+id="在雪花snowflake中创建-rsa-密钥对和-hfxt-服务用户">在雪花（Snowflake）中创建
+RSA 密钥对和 Hfxt 服务用户</h3>
+<div>
+<p>首先，您应该为要在连接雪花（Snowflake）时与 Hfxt
+一起使用的服务用户创建一个 RSA 密钥对。</p>
+</div>
+<div>
+<p>您可以在大多数 Linux / WSL（适用于 Linux 的 Windows
+子系统）上通过在终端窗口中运行以下命令来生成 RSA 密钥对。</p>
+</div>
+<div>
+<p><code>openssl rsa -in rsa_key.p8 -pubout -out rsa_key.pub</code></p>
+</div>
+<div>
+<p>然后，rsa_key.pub 文件的内容将用于雪花（Snowflake）的
+<code>CREATE USER</code> 语句中。</p>
+</div>
+<div>
+<div>
+<pre><code>USE ROLE SECURITYADMIN;
+
+CREATE USER SVC_ETL_HFXT_USER_TEST
+    DEFAULT_WAREHOUSE = ING_DEV_WH
+    DEFAULT_NAMESPACE = DB_DEV
+    DEFAULT_ROLE = SVC_ETL_DEV_ROLE
+    TYPE = SERVICE
+    RSA_PUBLIC_KEY = &#39;public key copy paste in single quotes&#39;
+    COMMENT = &#39;Test ETL service user&#39;;</code></pre>
+</div>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>在屏幕截图中，我们可以定义希望用户具备的所有属性，包括要使用的默认计算资源（仓库）、命名空间（数据库）和角色。我们还定义了一个特殊属性
+<code>TYPE = SERVICE</code>，以确保该用户无法使用登录页面登录，只能通过编程方式登录。</p>
+</div>
+<h3
+id="下载雪花snowflakejdbc-驱动程序和加密库">下载雪花（Snowflake）JDBC
+驱动程序和加密库</h3>
+<div>
+<p>下载 最新的雪花（Snowflake）JDBC 驱动程序。文件名的命名模式为
+<strong>snowflake-jdbc-3.19.0.jar</strong></p>
+</div>
+<div>
+<p>为了支持基于证书的身份验证，我们还需要从著名的 Java 加密 API 库提供商
+Bouncy Castle 下载 两个 jar 文件。</p>
+</div>
+<div>
+<p>第一个是提供程序 jar 文件，其名称表明了支持的 JRE/JDK
+版本。请确保下载与您的 JDK 版本以及 Hfxt
+所需版本相匹配的正确版本。第一个要下载的文件是
+<code>bcprov-jdk&lt;VERSION&gt;.jar</code></p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>其次，我们需要加密库，其文件名中也包含 JDK 版本支持信息。文件名是
+<strong><code>bcpkix-jdk&lt;version&gt;.jar</code></strong></p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>JDBC 驱动程序和两个 Bouncy Castle 加密库 jar 文件需要放入
+<strong><code>hfxt/lib/jdbc</code></strong> 目录中。请务必删除在
+<code>hfxt/lib/jdbc</code> 中找到的任何旧版本的雪花（Snowflake）JDBC
+驱动程序 jar 文件。雪花（Snowflake）驱动程序维护良好且经常更新。</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<h3 id="将-rsa-私钥放置在-hfxt-的文件夹中">将 RSA 私钥放置在 Hfxt
+的文件夹中</h3>
+<div>
+<p>私钥文件必须存储在 Hfxt 的根文件夹中。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: left;">除了 Hfxt
+根文件夹之外，可能还有其他方法可以包含私钥（例如在连接的
+<code>选项</code> 选项卡中定义），但目前尚不清楚。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<h3 id="收集雪花snowflake连接属性">收集雪花（Snowflake）连接属性</h3>
+<div>
+<p>让我们先看最终结果，然后再描述每个属性的来源和原因。</p>
+</div>
+<div>
+<p>Hfxt 中的大多数连接使用典型字段，如
+<code>服务器主机名</code>、<code>端口号</code>、<code>仓库</code>、<code>数据库名称</code>，但由于这是一个更高级的连接配置，我们需要利用可以在下面显示的
+<code>选项</code> 选项卡上设置的额外 JDBC 参数。</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>查看 <code>选项</code> 选项卡，我们使用了几个关键字，</p>
+<p><code>authenticator</code>、<code>private_key_file</code>、<code>role</code>、<code>schema</code>
+和 <strong><code>user</code></strong>。这些参数来自雪花（Snowflake）JDBC
+参数文档网站。</p>
+</div>
+<div>
+<p>我们首先告诉 JDBC 驱动程序我们将使用
+<strong><code>snowflake_jwt</code></strong>
+进行身份验证，这意味着它将期望看到某种私钥和公钥。</p>
+</div>
+<div>
+<p>在这种情况下，使用 <strong><code>private_key_file</code></strong>
+参数。例如，这可能来自 AWS
+秘密存储中的证书。在这种情况下，证书或密钥文件不必留在环境中，并且在镜像消失时会被处理掉。其他变量允许您对其进行编码（BASE64）等操作。</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>服务器主机名的 URL
+可以通过在雪花（Snowflake）控制台左下角点击您的名字，选择您的实例，然后有一个小链接图标来获取。当您将此粘贴到
+Hfxt 的对话框中时，去掉 <code>HTTPS://</code>
+部分，因为它不是必需的。连接始终是加密的。</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<h3 id="参考资料">参考资料</h3>
+<div>
+<p>为生成此工作配置而查阅的参考资料</p>
+</div>
+<div>
+<p>JDBC 配置</p>
+</div>
+<div>
+<p>雪花（Snowflake）账户标识符</p>
+</div>
+<div>
+<p>管理账户标识符</p>
+</div>
+<div>
+<p>雪花（Snowflake）JDBC
+连接参数（<code>authenticator</code>、<code>private_key_file</code>、<code>role</code>、<code>schema</code>、<code>user</code>）</p>
+</div>
+<div>
+<p>JDBC 参数</p>
+</div>
+</div>
+</body>
+</html>

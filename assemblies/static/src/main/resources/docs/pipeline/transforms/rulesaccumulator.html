@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>rulesaccumulator.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="规则累加器">规则累加器</h1>
+<h2 id="描述">描述</h2>
+<p>规则累加器收集传入的行，并根据规则集对其进行执行。这对于确定问题的答案或以其他方式分析数据集可能很有用。目前使用的规则引擎实现是Drools，此转换可以参考其规则语言以供使用。Drools文档</p>
+<h2 id="详细信息">详细信息</h2>
+<div>
+<div>
+<p>一旦规则累加器转换收集到所有传入的行（例如，上一个转换关闭），这些行就会被转换为Rules.Row对象，并传递到规则引擎中，以便根据给定的规则集执行。</p>
+</div>
+<div>
+<p>Rules.Row被定义为字段的键/值映射，其中键是字段的名称，值是字段的值；还有externalSource布尔属性，用于指示Rules.Row对象是在规则集中创建的还是从外部源注入的。</p>
+</div>
+<div>
+<p>行的字段通过”Row (column["&lt;字段名&gt;"])“进行访问。</p>
+</div>
+<h3 id="规则标签页">规则标签页</h3>
+<div>
+<p>“规则”标签页是您输入规则定义或规则文件引用的地方。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">规则文件名</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">要执行的规则脚本</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则结果标签页">规则结果标签页</h3>
+<div>
+<p>规则结果标签页定义了规则输出字段的布局。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">结果列名称</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">结果列类型</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>所有规则定义都应包含”import
+org.apache.hfxt.pipeline.transforms.drools.Rules.Row;“，以便能够访问Rules.Row类。</p>
+</div>
+<div>
+<p>对于具有行元数据（name（字符串）、position（整数）、color（字符串））的输入，将为每一行创建一个Rules.Row对象，该对象包含一个包含这些字段的映射。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Rules.Row→row（映射）</th>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">位置</th>
+<th style="text-align: left;">颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">弗雷德</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">蓝色</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">弗雷德</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">红色</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">鲍勃</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">蓝色</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">鲍勃</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">红色</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>可以定义并应用规则：</p>
+</div>
+<div>
+<div>
+<pre><code>rule &quot;高尔夫球手问题&quot;
+    dialect &quot;mvel&quot;
+    when
+
+    # 定义弗雷德
+    $fred : Row ( externalSource == true,
+        column[&quot;name&quot;] == &quot;弗雷德&quot;
+    )
+
+    # 定义鲍勃
+    $bob : Row ( externalSource == true,
+        column[&quot;name&quot;] == &quot;鲍勃&quot;,
+        column[&quot;position&quot;] != $fred.column[&quot;position&quot;],
+        column[&quot;color&quot;] == &quot;蓝色&quot;,
+        column[&quot;color&quot;] != $fred.column[&quot;color&quot;],
+    )
+
+    then
+
+      Row fredRow = new Row();
+      Row bobRow = new Row();
+
+      fredRow.addColumn(&quot;name&quot;, &quot;弗雷德&quot;);
+      fredRow.addColumn(&quot;position&quot;, $fred.column[&quot;position&quot;]);
+      fredRow.addColumn(&quot;color&quot;, $fred.column[&quot;color&quot;]);
+
+      bobRow.addColumn(&quot;name&quot;, &quot;鲍勃&quot;);
+      bobRow.addColumn(&quot;position&quot;, $bob.column[&quot;position&quot;]);
+      bobRow.addColumn(&quot;color&quot;, $bob.column[&quot;color&quot;]);
+
+
+      insert(fredRow);
+      insert(bobRow);
+
+end</code></pre>
+</div>
+</div>
+<div>
+<p>可以像上面左侧那样检查Rules.Row对象。</p>
+</div>
+<div>
+<p>可以像上面右侧那样为数据流创建Rules.Row对象。</p>
+</div>
+<div>
+<p>通过在转换的”结果”标签页中定义字段映射的名称，可以告知转换从生成的行对象中提取哪些字段。也可以通过设置结果列类型来应用类型转换。</p>
+</div>
+</div>
+</body>
+</html>

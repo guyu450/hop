@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>fake.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="虚假数据">虚假数据</h1>
+<h2 id="描述">描述</h2>
+<p>虚假数据转换功能允许您使用Java
+Faker库（文档）生成虚假数据。它可用于为开发、测试或展示项目生成美观的数据。例如，我们可以生成一些随机的宝可梦数据。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">区域设置</td>
+<td
+style="text-align: left;">区域设置可用于使生成的数据更特定于某个单一地点。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出字段名称</td>
+<td style="text-align: left;">生成字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">虚假数据类型</td>
+<td style="text-align: left;">数据类别。</td>
+</tr>
+<tr>
+<td style="text-align: left;">生成主题</td>
+<td style="text-align: left;">在数据类别内要生成的主题。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="类别类型">类别类型</h2>
+<div>
+<p>类型</p>
+</div>
+<p>主题</p>
+<p>地址</p>
+<div>
+<div>
+<ul>
+<li><p>街道名称</p></li>
+<li><p>街道门牌号</p></li>
+<li><p>街道地址</p></li>
+<li><p>…​</p></li>
+</ul>
+</div>
+</div>
+<p>古代</p>
+<div>
+<div>
+<ul>
+<li><p>神</p></li>
+<li><p>原初之神</p></li>
+<li><p>泰坦</p></li>
+<li><p>英雄</p></li>
+</ul>
+</div>
+</div>
+<p>动物</p>
+<div>
+<div>
+<ul>
+<li>名字</li>
+</ul>
+</div>
+</div>
+<p>应用程序</p>
+<div>
+<div>
+<ul>
+<li><p>名称</p></li>
+<li><p>版本</p></li>
+<li><p>作者</p></li>
+</ul>
+</div>
+</div>
+<p>《水栖少年饥饿部队》</p>
+<div>
+<div>
+<ul>
+<li>角色</li>
+</ul>
+</div>
+</div>
+<p>艺术家</p>
+<div>
+<div>
+<ul>
+<li>名字</li>
+</ul>
+</div>
+</div>
+<p>头像</p>
+<div>
+<div>
+<ul>
+<li>图片</li>
+</ul>
+</div>
+</div>
+<p>《回到未来》</p>
+<div>
+<div>
+<ul>
+<li><p>角色</p></li>
+<li><p>日期</p></li>
+<li><p>台词</p></li>
+</ul>
+</div>
+</div>
+<p>航空</p>
+<div>
+<div>
+<ul>
+<li><p>飞机</p></li>
+<li><p>机场</p></li>
+<li><p>气象报告（METAR）</p></li>
+</ul>
+</div>
+</div>
+<p>篮球</p>
+<div>
+<div>
+<ul>
+<li><p>球队</p></li>
+<li><p>教练</p></li>
+<li><p>位置</p></li>
+<li><p>球员</p></li>
+</ul>
+</div>
+</div>
+<p>啤酒</p>
+<div>
+<div>
+<ul>
+<li><p>名称</p></li>
+<li><p>风格</p></li>
+<li><p>啤酒花</p></li>
+<li><p>…​</p></li>
+</ul>
+</div>
+</div>
+<p>《马男波杰克》</p>
+<div>
+<div>
+<ul>
+<li><p>角色</p></li>
+<li><p>台词</p></li>
+<li><p>绕口令</p></li>
+</ul>
+</div>
+</div>
+<p>书籍</p>
+<div>
+<div>
+<ul>
+<li><p>作者</p></li>
+<li><p>标题</p></li>
+<li><p>出版商</p></li>
+<li><p>类型</p></li>
+</ul>
+</div>
+</div>
+<p>布尔值</p>
+<div>
+<div>
+<ul>
+<li>布尔值</li>
+</ul>
+</div>
+</div>
+<p>商业</p>
+<div>
+<div>
+<ul>
+<li><p>信用卡号码</p></li>
+<li><p>信用卡类型</p></li>
+<li><p>信用卡有效期</p></li>
+</ul>
+</div>
+</div>
+<p>查克·诺里斯</p>
+<div>
+<div>
+<ul>
+<li>趣事</li>
+</ul>
+</div>
+</div>
+<p>猫</p>
+<div>
+<div>
+<ul>
+<li><p>名字</p></li>
+<li><p>品种</p></li>
+<li><p>登记机构</p></li>
+</ul>
+</div>
+</div>
+<p>代码</p>
+<div>
+<div>
+<ul>
+<li><p>ISBN GS1编码</p></li>
+<li><p>ISBN组号</p></li>
+<li><p>ISBN注册机构</p></li>
+<li><p>…​</p></li>
+</ul>
+</div>
+</div>
+<p>硬币</p>
+<div>
+<div>
+<ul>
+<li>抛硬币结果</li>
+</ul>
+</div>
+</div>
+<p>颜色</p>
+<div>
+<div>
+<ul>
+<li><p>名称</p></li>
+<li><p>十六进制代码</p></li>
+</ul>
+</div>
+</div>
+<p>商业贸易</p>
+<div>
+<div>
+<ul>
+<li><p>颜色</p></li>
+<li><p>部门</p></li>
+<li><p>产品名称</p></li>
+<li><p>…​</p></li>
+</ul>
+</div>
+</div>
+<p>公司</p>
+<div>
+<div>
+<ul>
+<li><p>名称</p></li>
+<li><p>后缀</p></li>
+<li><p>行业</p></li>
+<li><p>…​</p></li>
+</ul>
+</div>
+</div>
+<p>加密</p>
+<div>
+<div>
+<ul>
+<li><p>MD5哈希值</p></li>
+<li><p>SHA1哈希值</p></li>
+<li><p>SHA256哈希值</p></li>
+<li><p>SHA512哈希值</p></li>
+</ul>
+</div>
+</div>
+<p>日期和时间</p>
+<div>
+<div>
+<ul>
+<li><p>未来日期</p></li>
+<li><p>指定时间段内的日期</p></li>
+<li><p>过去日期</p></li>
+<li><p>生日</p></li>
+</ul>
+</div>
+</div>
+<p>人口统计</p>
+<div>
+<div>
+<p>种族</p>
+<p>教育程度</p>
+</div>
+</div>
+</body>
+</html>

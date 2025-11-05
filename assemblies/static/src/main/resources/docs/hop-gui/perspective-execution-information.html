@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>perspective-execution-information.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="执行信息视角">执行信息视角</h1>
+<h2 id="描述">描述</h2>
+<p>执行信息视角提供了先前执行的工作流和管道的执行信息概述。该视角允许您浏览执行列表，并向上或向下钻取到父级或子级工作流和/或管道。此外，此视角还提供有关执行状态、日志记录信息、（管道）指标和分析数据的信息。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>执行信息视角提供了先前执行的工作流和管道的执行信息概述。该视角允许您浏览执行列表，并向上或向下钻取到父级或子级工作流和/或管道。此外，此视角还提供有关执行状态、日志记录信息、（管道）指标和分析数据的信息。</p>
+</div>
+</div>
+<h2 id="信息收集">信息收集</h2>
+<div>
+<div>
+<p>此视角中显示的执行信息不会自动收集。您需要在所选的 管道运行配置 或
+工作流运行配置 中指定要将执行信息发送到哪个 位置。</p>
+</div>
+</div>
+<h2 id="导航">导航</h2>
+<div>
+<div>
+<p>您可以通过在Hfxt GUI的垂直视角工具栏中点击</p>
+<p>图标来导航到此视角。</p>
+</div>
+<div>
+<p>执行相同操作的键盘快捷键是：<code>CTRL-Shift-I</code>。</p>
+</div>
+<div>
+<p>如果您想查看当前加载的管道（从数据编排视角）的 <em>最后一次</em>
+执行的信息，可以点击工具栏中的位置图标：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>如果您正在编辑工作流，也可以执行相同操作：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+</div>
+<h2 id="用法">用法</h2>
+<div>
+<h3 id="左侧面板">左侧面板</h3>
+<div>
+<p>该视角的左侧面板包含一个树，其中包含所有定义的 执行信息位置
+元数据元素。在这些位置的名称下方，您将看到有信息的管道和工作流的图标、名称和注册日期。例如：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>可能的操作：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">双击列出的执行记录</td>
+<td
+style="text-align: left;">有关管道或工作流的信息将加载到该视角右侧的新标签中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">点击刷新图标</td>
+<td
+style="text-align: left;">将从该位置加载最后100条无父级的执行记录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">点击删除图标</td>
+<td
+style="text-align: left;">当前选定的执行记录将被删除，或者（确认后）当前选定位置的所有执行记录将被删除。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="右侧标签文件夹">右侧标签文件夹</h3>
+<div>
+<p>右侧是在不同标签中打开的执行记录。例如，这是一个已完成工作流的单个执行信息标签：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>在底部，您有不同的标签：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">标签</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">信息</td>
+<td
+style="text-align: left;">在这里，您将找到有关您正在查看的管道或工作流的一般信息</td>
+</tr>
+<tr>
+<td style="text-align: left;">指标</td>
+<td
+style="text-align: left;">如果您正在检查管道执行情况，您可以查看总体转换指标（如果有）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">日志</td>
+<td
+style="text-align: left;">在这里，您可以找到管道或工作流的日志文本。日志文本在选择标签时按需加载。日志的第一部分将显示到配置视角中在
+<code>最大执行日志文本大小</code>
+选项下指定的限制（以字符数指定）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据</td>
+<td
+style="text-align: left;">在管道或工作流执行期间，Hfxt可以捕获各种数据。捕获哪些数据取决于正在进行的工作类型以及捕获的配置方式。例如，捕获的数据量取决于您为管道设置的
+执行数据配置文件，或者在操作执行后是否有有趣的信息。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="选择图标">选择图标</h3>
+<div>
+<p>如果您点击转换或工作流图标，该视角将自动尝试加载其拥有的所有相关数据。它将切换到底部的
+“数据” 标签。在那里，您将找到可以查看的数据集列表。</p>
+</div>
+<div>
+<p>以下是工作流操作可用的数据集：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">数据集</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作结果详情</td>
+<td
+style="text-align: left;">您将了解是否有任何错误、结果（真/假）是什么，或者操作是否已停止。</td>
+</tr>
+<tr>
+<td style="text-align: left;">操作结果文件</td>
+<td
+style="text-align: left;">如果操作结果包含任何文件名，它们将在此数据集中</td>
+</tr>
+<tr>
+<td style="text-align: left;">操作结果行</td>
+<td
+style="text-align: left;">如果操作结果包含任何行，它们将在此数据集中</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行前变量</td>
+<td
+style="text-align: left;">操作执行前有趣的（与工作流开始时不同）变量列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行后变量</td>
+<td style="text-align: left;">操作执行后有趣的变量（及其值）列表。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>以下是使用 执行数据配置文件 在工作流转换中可以捕获的一些数据集：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">数据集</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">…… 的第一行</td>
+<td style="text-align: left;">显示转换写入的第一行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">…… 的最后一行</td>
+<td style="text-align: left;">显示转换写入的最后一行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">…… 的随机行</td>
+<td style="text-align: left;">显示转换写入的随机行选择</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据剖析数据集</td>
+<td
+style="text-align: left;">根据您启用的数据剖析选项，您可以找到每列的统计信息以及示例行。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="向下钻取">向下钻取</h3>
+<div>
+<p>如果您想了解特定操作或转换执行期间发生了什么，可以选择它并点击工具栏中的向下箭头：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>如果转换以多个副本执行管道或工作流，您可以选择要跟踪的执行记录。对于在
+重复 操作或 开始
+循环中多次执行的工作流或管道也是如此。结果将是底层执行记录将在该视角的新标签中打开。</p>
+</div>
+<h3 id="导航到父级">导航到父级</h3>
+<div>
+<p>如果您正在查看由另一个管道或工作流启动的执行记录，您可以通过点击工具栏中的
+“向上箭头” 图标导航到该父级：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<h3 id="编辑管道或工作流">编辑管道或工作流</h3>
+<div>
+<p>如果您想从管道或工作流的执行信息快速导航到其编辑器，可以点击工具栏中的数据编排图标：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

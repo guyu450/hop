@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>excelwriter.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="excel写入器">Excel写入器</h1>
+<h2 id="描述">描述</h2>
+<p>Microsoft Excel写入器转换将来自”Hfxt out”的传入行写入到一个MS
+Excel文件中。它同时支持.xls和.xlsx文件格式。.xls文件使用二进制格式，更适合简单内容；而.xlsx文件使用Open
+XML格式，与模板配合使用效果良好，因为它能更好地保留图表和各种对象。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件与工作表标签">文件与工作表标签</h3>
+<div>
+<p><strong>文件部分</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">流式传输XLSX数据</td>
+<td
+style="text-align: left;">在写入大型XLSX文件时勾选此选项。它内部使用流式API，能够在没有任何内存限制的情况下写入大型文件（当然，不超过Excel的1,048,575行和16,384列的限制）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建父文件夹</td>
+<td style="text-align: left;">启用此选项可创建父文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">如果输出文件已存在</td>
+<td
+style="text-align: left;">在写入大型XLSX文件时勾选此选项。它内部使用流式API，能够在没有任何内存限制的情况下写入大型文件（当然，不超过Excel的1,048,575行和16,384列的限制）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果中</td>
+<td
+style="text-align: left;">勾选此选项可将文件名添加到结果文件名中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在创建文件前等待第一行数据</td>
+<td
+style="text-align: left;">勾选此选项后，转换操作将在接收到一行数据后才创建文件。如果禁用此选项，则无论是否实际向文件写入行数据，都会始终创建输出文件。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>工作表部分</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">工作表名称</td>
+<td
+style="text-align: left;">转换操作将向其写入行数据的工作表名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">设为此活动工作表</td>
+<td style="text-align: left;">如果勾选此选项，在MS
+Excel中打开Excel文件时，默认将打开上述工作表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">如果输出文件中已存在工作表</td>
+<td
+style="text-align: left;">当输出文件中已经存在此工作表时（例如使用模板或写入现有文件时），您可以选择写入现有工作表，或者替换它。</td>
+</tr>
+<tr>
+<td style="text-align: left;">保护工作表</td>
+<td
+style="text-align: left;">XLS文件格式允许保护整个工作表不被更改。如果勾选此选项，您需要提供一个密码。Excel将显示该工作表是由您在此处提供的用户保护的。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>模板部分</strong></p>
+</div>
+<div>
+<p>在创建新文件时（当替换现有文件或创建全新文件时），您可以选择创建现有模板文件的副本。请确保模板文件与输出文件类型相同（两者必须分别为xls或xlsx）。</p>
+</div>
+<div>
+<p>在创建新工作表时，转换操作可以从当前文档（模板或转换操作正在写入的其他现有文件）复制一个工作表。如果目标工作表不存在，或者根据上述配置需要替换现有工作表，则会创建一个新工作表。</p>
+</div>
+<h3 id="内容标签">内容标签</h3>
+<div>
+<p><strong>内容选项部分</strong></p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从单元格开始写入</td>
+<td>这是以Excel表示法 （字母列，数字行）表示的开始写入的单元格。</td>
+</tr>
+<tr>
+<td>写入行时</td>
+<td>转 换操作可以覆盖现有单元格（快速），或者将现
+有单元格向下移动（在工作表顶部追加新行）。</td>
+</tr>
+<tr>
+<td>写入标题</td>
+<td>如 果勾选此选项，写入的第一行将包含字段名称。</td>
+</tr>
+<tr>
+<td>写入页脚</td>
+<td>如果 勾选此选项，写入的最后一行将包含字段名称。</td>
+</tr>
+<tr>
+<td>自动调整列宽</td>
+<td>如果勾选此选项，转换操作将尝试自
+动调整列宽以适应其内容。由于这不是xls(x)文
+件格式直接支持的功能，结果可能会有所不同。</td>
+</tr>
+<tr>
+<td>强制公式重新计算</td>
+<td><div>
+<div>
+<p>如果勾选此选项，转换操作将尝
+试确保输出文件中的所有公式字段都得到更新。</p>
+</div>
+<div>
+<ul>
+<li><p>XLS文件格式支持一个 “脏”标志，转换操作会设置该标志。当文件在MS
+Excel中打开时，公式将立即重新计算。</p></li>
+<li><p>对于XLSX文件格式，转换操作必须自行
+尝试重新计算公式字段。由于底层的POI库尚未
+支持完整的Excel公式集，这可能会导致错误。
+如果转换操作无法重新计算公式，将抛出错误。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>保持现有单元格样式不变</td>
+<td>如果勾选此选项，转换操 作将不会尝试设置正在写入的现有单元格的样式
+。这在写入预定义样式的模板工作表时很有用。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>写入现有工作表部分</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">从工作表末尾开始写入</td>
+<td
+style="text-align: left;">转换操作将尝试找到工作表的最后一行，并从那里开始写入。</td>
+</tr>
+<tr>
+<td style="text-align: left;">偏移……行</td>
+<td
+style="text-align: left;">任何非零数字将使转换操作在写入行之前向下（正数）或向上（负数）移动指定数量的行。如果您需要追加到工作表，但仍保留预定义样式的页脚，负数可能会很有用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">先写入……空行</td>
+<td
+style="text-align: left;">转换操作将尝试找到工作表的最后一行，并从那里开始写入。</td>
+</tr>
+<tr>
+<td style="text-align: left;">省略标题</td>
+<td
+style="text-align: left;">任何非零数字将使转换操作在写入行之前向下（正数）或向上（负数）移动指定数量的行。如果您需要追加到工作表，但仍保留预定义样式的页脚，负数可能会很有用。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>字段部分</strong></p>
+</div>
+<div>
+<p>字段部分用于指定必须写入Excel文件的字段。您可以选择使用 模式定义
+或手动定义所需字段的布局。</p>
+</div>
+<div>
+<p>如果您决定使用 模式定义 来定义字段布局，请使用 模式映射
+转换根据所选的 模式定义 调整传入流。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">模式定义</td>
+<td style="text-align: left;">我们要引用的 模式定义 的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">要写入的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td
+style="text-align: left;">在工作表中使用的Excel格式。请查阅Excel手册以获取有效格式。也有一些在线参考资料。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从单元格获取样式</td>
+<td
+style="text-align: left;">一个单元格（例如A1、B3等），从此单元格复制此列的样式（通常是模板中某个预定义样式的单元格）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段标题</td>
+<td
+style="text-align: left;">如果设置了此选项，则用于标题/页脚，而不是”Hfxt”字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">标题/页脚从单元格获取样式</td>
+<td
+style="text-align: left;">一个单元格，从此单元格复制标题/页脚的样式（通常是模板中某个预定义样式的单元格）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段包含公式</td>
+<td
+style="text-align: left;">如果字段包含Excel公式（无前导”=“），则设置为”是”。</td>
+</tr>
+<tr>
+<td style="text-align: left;">超链接</td>
+<td
+style="text-align: left;">一个字段，包含要链接到的目标。支持的目标包括链接到其他单元格、http、ftp、电子邮件和本地文档。</td>
+</tr>
+<tr>
+<td style="text-align: left;">单元格注释/单元格作者</td>
+<td
+style="text-align: left;">XLSX格式允许在单元格上添加注释。如果您想生成注释，可以为给定列指定包含注释和作者的字段。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

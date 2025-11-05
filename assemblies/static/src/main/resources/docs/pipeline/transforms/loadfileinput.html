@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>loadfileinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="将文件内容加载到内存中">将文件内容加载到内存中</h1>
+<h2 id="描述">描述</h2>
+<p>“将文件内容加载到内存中”转换操作会将文件内容加载到内存里。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件标签">文件标签</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">文件名在字段中定义</td>
+<td style="text-align: left;">从字段中获取文件名</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段获取文件名</td>
+<td style="text-align: left;">包含文件名的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件或目录</td>
+<td style="text-align: left;">要添加的文件或目录路径</td>
+</tr>
+<tr>
+<td style="text-align: left;">添加</td>
+<td style="text-align: left;">将文件或目录添加到选定文件中</td>
+</tr>
+<tr>
+<td style="text-align: left;">浏览</td>
+<td style="text-align: left;">使用本地文件浏览器选择路径</td>
+</tr>
+<tr>
+<td style="text-align: left;">正则表达式</td>
+<td style="text-align: left;">允许根据正则表达式包含文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">排除正则表达式</td>
+<td style="text-align: left;">允许根据正则表达式排除文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">选定文件</td>
+<td style="text-align: left;">要加载到内存中的选定文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件名</td>
+<td style="text-align: left;">预览选定的文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容标签">内容标签</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">编码</td>
+<td style="text-align: left;">文件编码（UTF、ISO等）</td>
+</tr>
+<tr>
+<td style="text-align: left;">忽略空文件</td>
+<td style="text-align: left;">忽略空文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">忽略缺失路径</td>
+<td style="text-align: left;">忽略缺失路径</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制</td>
+<td style="text-align: left;">限制从文件中加载的行数</td>
+</tr>
+<tr>
+<td style="text-align: left;">在输出中包含文件名？</td>
+<td style="text-align: left;">允许在输出中包含文件名</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名字段名</td>
+<td style="text-align: left;">包含文件名的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">在输出中包含行号？</td>
+<td style="text-align: left;">允许在输出中包含行号</td>
+</tr>
+<tr>
+<td style="text-align: left;">行号文件名</td>
+<td style="text-align: left;">包含行号的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件添加到结果文件名</td>
+<td style="text-align: left;">将文件添加到生成的文件名中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段标签">字段标签</h3>
+<div>
+<p>要从文件中加载的字段。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">导入字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">元素</td>
+<td style="text-align: left;">文件内容或大小</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">此字段的数据类型</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td style="text-align: left;">格式掩码</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">字段长度</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td
+style="text-align: left;">精度选项取决于字段类型，但仅支持数字类型；它返回浮点数的小数位数</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币</td>
+<td style="text-align: left;">用于表示货币的符号</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数</td>
+<td style="text-align: left;">小数点；可以是点号或逗号</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组</td>
+<td
+style="text-align: left;">在四位数及以上的数字中分隔千位的方法。可以是点号或逗号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">修剪类型</td>
+<td style="text-align: left;">修剪类型：无、左、右、两边</td>
+</tr>
+<tr>
+<td style="text-align: left;">重复</td>
+<td
+style="text-align: left;">如果希望在当前行对应值为空时重用最后一个非空行的值，请输入”Y”。输入”N”则使该行留空。</td>
+</tr>
+<tr>
+<td style="text-align: left;">获取字段</td>
+<td style="text-align: left;">根据文件内容检索可用字段</td>
+</tr>
+</tbody>
+</table>
+<h3 id="附加输出标签">附加输出标签</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">短文件名字段</td>
+<td
+style="text-align: left;">包含不带路径信息但带有扩展名的文件名的字段名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">扩展名字段</td>
+<td style="text-align: left;">包含文件名扩展名的字段名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">路径字段</td>
+<td style="text-align: left;">包含操作系统格式路径的字段名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">是否隐藏字段</td>
+<td style="text-align: left;">包含文件是否隐藏（布尔值）的字段名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">最后修改字段</td>
+<td style="text-align: left;">包含最后修改时间的字段名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Uri字段</td>
+<td style="text-align: left;">包含URI的字段名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">根Uri字段</td>
+<td style="text-align: left;">仅包含URI根部分的字段名。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="按钮">按钮</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">预览行</td>
+<td style="text-align: left;">预览此转换生成的行。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

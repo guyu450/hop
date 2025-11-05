@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>snowflakebulkloader.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="雪花批量加载器">雪花批量加载器</h1>
+<h2 id="描述">描述</h2>
+<p>雪花批量加载器转换使用雪花复制命令来加载数据，而不是通过表输出转换发送单个插入语句。它通过一个三步流程执行此批量加载操作：</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="批量加载器选项卡">批量加载器选项卡</h3>
+<div>
+<ul>
+<li><p><strong>连接</strong>：批量加载时要使用的数据库连接</p></li>
+<li><p><strong>模式</strong>：（可选）包含要加载表的模式。</p></li>
+<li><p><strong>表名</strong>：要加载的表的名称。</p></li>
+<li><p><strong>暂存位置类型</strong>：用于存储文件的雪花阶段类型。</p>
+<div>
+<ul>
+<li><p><strong>用户位置</strong>：使用用户的主目录来存储正在加载的文件。</p></li>
+<li><p><strong>表位置</strong>：使用表的内部阶段来存储正在加载的文件。</p></li>
+<li><p><strong>内部阶段</strong>：使用已创建的内部阶段来存储正在加载的文件。</p></li>
+</ul>
+</div></li>
+<li><p><strong>内部阶段名称</strong>：（当暂存位置类型 =
+内部阶段时）要使用的内部阶段的名称。</p></li>
+<li><p><strong>工作目录</strong>：在将临时文件加载到雪花之前存储它们的本地工作目录。</p></li>
+<li><p><strong>出错时</strong>：（中止、跳过文件、跳过文件百分比、继续）加载时遇到错误的行为。</p></li>
+<li><p><strong>错误限制</strong>：（当出错时 =
+跳过文件或跳过文件百分比）在跳过文件之前的错误限制。如果为空或为0，则在遇到第一个错误时将跳过文件。</p></li>
+<li><p><strong>每……行拆分加载</strong>：将临时文件拆分为多个较小的文件将允许雪花并行执行批量加载，从而提高性能。这是每个文件应包含的行数。</p></li>
+<li><p><strong>加载后删除文件</strong>：（是/否）加载后是否应从雪花阶段删除文件？你还需要将变量
+<code>SNOWFLAKE_DEBUG_MODE</code> 设置为 <code>true</code>
+以保留文件。</p></li>
+</ul>
+</div>
+<h3 id="数据类型选项卡">数据类型选项卡</h3>
+<div>
+<ul>
+<li><p><strong>数据类型</strong>：正在批量加载的数据的类型。</p>
+<div>
+<ul>
+<li><p><strong>CSV</strong>:</p></li>
+<li><p><strong>去除空白字符</strong>：（是/否）在加载到雪花时是否应去除字段值周围的任何空白字符。</p></li>
+<li><p><strong>为空值如果</strong>：一个逗号分隔的字符串列表，在加载到雪花时应将这些字符串转换为空值。这些字符串无需加引号。</p></li>
+<li><p><strong>列数不匹配时出错</strong>：如果表中的列数与输出的列数不匹配，则不加载该行并抛出错误。</p></li>
+<li><p><strong>JSON</strong>：正在加载的数据在输入流中作为包含JSON的单个字段接收。</p></li>
+<li><p><strong>去除空值</strong>：是否应去除JSON中的空值，从而减少所需的存储量。</p></li>
+<li><p><strong>忽略UTF8错误？</strong>：解析JSON时忽略任何UTF8字符编码错误。</p></li>
+<li><p><strong>允许重复元素</strong>：允许JSON多次包含相同的元素。如果同一元素多次出现，该元素的最后一个值将存储在雪花中。</p></li>
+<li><p><strong>解析八进制数</strong>：将JSON中存储的任何数字解析为八进制而不是十进制。</p></li>
+</ul>
+</div></li>
+</ul>
+</div>
+<h3 id="字段选项卡">字段选项卡</h3>
+<div>
+<ul>
+<li><p><strong>数据类型CSV</strong></p>
+<div>
+<ul>
+<li><p><strong>指定字段</strong>：（是/否）是否明确指定从Hfxt到雪花的字段映射。如果未指定字段映射，则此转换的输入字段顺序必须与表中的字段顺序匹配。</p></li>
+<li><p><strong>字段映射表</strong>：（当选中指定字段时）字段无需按任何顺序排列。</p></li>
+<li><p><strong>流字段</strong>：输入流上的字段</p></li>
+<li><p><strong>表字段</strong>：要将输入字段映射到的表中的字段。</p></li>
+<li><p><strong>获取字段按钮</strong>：从输入流获取字段，并将它们映射到表中同名的字段。</p></li>
+<li><p><strong>输入字段映射按钮</strong>：打开一个窗口，帮助用户指定输入字段到表字段的映射。</p></li>
+</ul>
+</div></li>
+<li><p><strong>数据类型JSON</strong></p>
+<div>
+<ul>
+<li><strong>JSON字段</strong>：输入流上包含要加载的JSON数据的字段。</li>
+</ul>
+</div></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>regexeval.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="正则表达式评估">正则表达式评估</h1>
+<h2 id="描述">描述</h2>
+<p>正则表达式评估转换会将输入字段的字符串与您使用正则表达式（regex）定义的文本模式进行匹配。此转换使用java.util.regex包。此转换所使用的正则表达式创建语法在java.util.regex.Pattern的Java文档中有定义。您可以使用此转换来解析复杂的文本字符串，并通过捕获组（由括号定义）从输入字段中创建新的字段。</p>
+<h2 id="用法">用法</h2>
+<div>
+<h3 id="模式匹配">模式匹配</h3>
+<div>
+<p>此转换的主要用途是检查输入字段是否与给定模式匹配：会向流中添加一个布尔字段，指示是否匹配。</p>
+</div>
+<div>
+<p>该模式旨在匹配整个输入字段，而不仅仅是其中一部分。例如，给定输入：</p>
+</div>
+<div>
+<div>
+<pre><code>&quot;作者, 安&quot; - 53 篇文章</code></pre>
+</div>
+</div>
+<div>
+<p>像 <code>\d* 篇文章</code>
+这样的正则表达式将不会匹配，即使输入的一部分（<code>53 篇文章</code>）确实与该模式匹配。要实现实际匹配，您需要在模式中添加
+<code>.*</code>：</p>
+</div>
+<div>
+<div>
+<pre><code>.*\d* 篇文章</code></pre>
+</div>
+</div>
+<h3 id="捕获文本">捕获文本</h3>
+<div>
+<p>此转换还可以捕获输入的部分内容，并将其存储在流的新字段中：为此，只需在正则表达式中添加常用的分组运算符（简单括号）。</p>
+</div>
+<div>
+<p>对于与上述相同的输入文本，创建一个带有两个捕获组的正则表达式：</p>
+</div>
+<div>
+<div>
+<pre><code>^&quot;([^&quot;]*)&quot; - (\d*) 篇文章$</code></pre>
+</div>
+</div>
+<div>
+<p>该转换将捕获值 <code>作者, 安</code> 和
+<code>53</code>，因此您可以在管道中创建两个新字段（即一个用于姓名，一个用于文章数量）。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="捕获组字段">捕获组字段</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">新字段</td>
+<td style="text-align: left;">从正则表达式生成的新字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">字段的长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td style="text-align: left;">数字类型字段的浮点数位数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td
+style="text-align: left;">用于转换原始字段格式的可选掩码。有关此转换中可以使用的常见有效日期和数字格式的信息，请参阅常见格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组</td>
+<td style="text-align: left;">分组可以是 “,”（例如 10,000.00）或
+“.”（例如 5.000,00）</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数</td>
+<td style="text-align: left;">用作小数点的字符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币</td>
+<td style="text-align: left;">货币符号（例如 $ 或 €）</td>
+</tr>
+<tr>
+<td style="text-align: left;">设为空值如果</td>
+<td style="text-align: left;">将此值视为空值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">默认值</td>
+<td
+style="text-align: left;">当传入文件中的字段未指定（为空）时的默认值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">修剪</td>
+<td style="text-align: left;">应用于字符串的修剪方法。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设置选项卡">设置选项卡</h3>
+<div>
+<p>设置选项卡包含以下选项：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">要评估的字段</td>
+<td
+style="text-align: left;">指定传入的Hfxt流中要与正则表达式进行匹配的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">结果字段名称</td>
+<td
+style="text-align: left;">指定输出字段的名称。此字段将添加到传出的Hfxt流中，值为Y表示输入字段的值与正则表达式匹配，值为N表示不匹配。</td>
+</tr>
+<tr>
+<td style="text-align: left;">为捕获组创建字段</td>
+<td
+style="text-align: left;">选择根据正则表达式中的捕获组创建新字段。选择此选项后，捕获组中的子字符串将被提取并存储在您在捕获组字段表中指定的新输出字段中。捕获组字段表中必须为每个捕获组定义一个字段。表中字段的顺序必须与正则表达式中捕获组的顺序相同。您可以使用表中的列更改数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">替换先前的字段</td>
+<td
+style="text-align: left;">如果字段名称相同，选择用为捕获组字段名称创建的字段替换传入的Hfxt流中的字段。如果不选择此选项，则会为每个捕获组字段向传出的Hfxt流中添加新字段。只有在选择为捕获组创建字段选项时，此选项才可用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">正则表达式</td>
+<td
+style="text-align: left;">指定您的正则表达式。点击测试正则表达式可打开正则表达式评估窗口。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用变量替换</td>
+<td
+style="text-align: left;">选择在评估正则表达式模式之前将变量引用扩展为其值。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="测试正则表达式">测试正则表达式</h3>
+<div>
+<p>您可以使用以下正则表达式评估窗口针对三个不同的输入字符串测试您的正则表达式。如果您的表达式包含一个组字段，请在比较部分中输入一个字符串，并且该字符串下方的选项将根据您的组进行拆分。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">请输入新的正则表达式或进行修改</td>
+<td style="text-align: left;">指定您的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">要测试的值</td>
+<td
+style="text-align: left;">指定要测试字符串的值（值1、值2或值3）。如果该值与您的表达式匹配，背景将变为绿色；如果不匹配，背景将变为红色。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从值中捕获</td>
+<td style="text-align: left;">显示捕获字符串的值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">捕获的字段</td>
+<td style="text-align: left;">显示捕获组的值。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容选项卡">内容选项卡</h3>
+<div>
+<p>内容选项卡包含以下选项：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>忽略Unicode编码差异</td>
+<td>选择忽略不同 的Unicode字符编码。此操作可能会提高性
+能，但您的数据只能包含美国ASCII字符。</td>
+</tr>
+<tr>
+<td>启用不区分大小写的匹配</td>
+<td><div>
+<div>
+<p>选择使 用不区分大小写的匹配。仅匹配美国ASCI
+I字符集中的字符。通过与此标志一起指定 “Unicode感知的不区分大小写……”
+标志，可 以启用Unicode感知的不区分大小写匹配。</p>
+</div>
+<div>
+<ul>
+<li>执行标志是 <code>(?i)</code>。</li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>允许模式中出现空白和注释</td>
+<td><div>
+<div>
+<p>选择忽略从 <code>#</code> 开始到行尾的空白和
+嵌入式注释。在这种模式下，您必须使用 <code>\s</code> 令
+牌来匹配空白。如果未启用此选项，正则
+表达式中出现的空白字符将按原样匹配。</p>
+</div>
+<div>
+<ul>
+<li>执行标志是 <code>(?x)</code>。</li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>启用dotall模式</td>
+<td><div>
+<div>
+<p>选择 将行终止符包含在点字符表达式匹配中。</p>
+</div>
+<div>
+<ul>
+<li>执行标志是 <code>(?s)</code>。</li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>启用多行模式</td>
+<td><div>
+<div>
+<p>选择匹配输入序列的行首 <code>^</code> 或行尾
+<code>$</code>。默认情况下，这些表达
+式仅在整个输入序列的开头和结尾匹配。</p>
+</div>
+<div>
+<ul>
+<li>执行标志是 <code>(?m)</code>。</li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>启用Unicode感知的大小写折叠</td>
+<td><div>
+<div>
+<p>与启用不区分大小 写的匹配选项一起选择此选项，以执行与
+Unicode标准一致的不区分大小写的匹配。</p>
+</div>
+<div>
+<ul>
+<li>执行标志是 <code>(?u)</code>。</li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>启用Unix行模式</td>
+<td><div>
+<div>
+<p>选择仅在 <code>.</code>、<code>^</code> 和 <code>$</code>
+的行为中识别行终止符。</p>
+</div>
+<div>
+<ul>
+<li>执行标志是 <code>(?d)</code>。</li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="section"></h2>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>workflow-executor.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="工作流执行器">工作流执行器</h1>
+<h2 id="描述">描述</h2>
+<p>工作流执行器转换可在管道内执行一个Hfxt工作流。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>默认情况下，指定的工作流将为每一行输入数据执行一次（可在”行分组”选项卡中更改此设置）。</p>
+</div>
+<div>
+<p>数据行中的字段可用于设置参数和变量，并以结果行的形式传递给工作流。请记住，每个管道或工作流中必须至少定义一次所有参数（编辑管道/工作流属性）。当您从”参数”选项卡向工作流执行器发送字段/参数/变量时，就是在传递参数。</p>
+</div>
+<div>
+<p>您还可以根据某个字段的值（当该值发生变化时执行工作流）或时间来传递一组记录。在这些情况下，组中的第一行或多行将用于设置工作流中的参数或变量。</p>
+</div>
+<div>
+<p>可以启动此转换的多个副本，以促进并行工作流处理。</p>
+</div>
+<div>
+<p>另请参阅：</p>
+</div>
+<div>
+<ul>
+<li><p>工作流操作，它可从一个工作流中执行一个子工作流。</p></li>
+<li><p>管道操作，它可从一个工作流中执行一个管道。</p></li>
+<li><p>管道执行器转换，它可从一个管道中执行一个子管道。</p></li>
+<li><p>Hfxt中的循环操作指南。</p></li>
+</ul>
+</div>
+<div>
+<p>示例（示例项目）</p>
+</div>
+<div>
+<ul>
+<li>loops/workflow-executor.hpl</li>
+</ul>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">工作流</td>
+<td
+style="text-align: left;">使用此选项指定存储在文件（.hwf文件）中的工作流。</td>
+</tr>
+<tr>
+<td style="text-align: left;">运行配置</td>
+<td style="text-align: left;">指定用于执行的工作流运行配置。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参数选项卡">参数选项卡</h3>
+<div>
+<p>在此选项卡中，您可以指定使用哪个字段来设置某个参数或变量值。如果您指定了一个输入字段，则不会使用静态输入值。如果将多行数据传递给工作流，则将使用第一行来设置参数或变量。</p>
+</div>
+<div>
+<p>该选项卡的右下角有一个按钮，可插入指定工作流的所有已定义参数。为提供信息，参数的描述将插入到静态输入值字段中。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">如果您保持选中”从管道继承所有变量”选项（默认情况下是选中的），则当前管道中定义的所有变量都将传递给子工作流。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<p>该选项卡右下角的”获取参数”按钮将插入指定工作流的所有已定义参数及其描述。</p>
+</div>
+<div>
+<p>该选项卡右下角的”映射参数”按钮可让您将当前管道中的字段映射到子工作流中的参数。</p>
+</div>
+<h3 id="行分组选项卡">行分组选项卡</h3>
+<div>
+<p>在此选项卡中，您可以指定以结果行的形式传递给工作流的输入行数。</p>
+</div>
+<div>
+<p>使用以下方法之一指定如何对结果行进行分组：</p>
+</div>
+<div>
+<ul>
+<li><p>特定的行数。</p></li>
+<li><p>特定的字段。</p></li>
+<li><p>指定的时间段。</p></li>
+</ul>
+</div>
+<div>
+<p>您可以在管道或工作流操作中使用结果行，也可以通过在管道中使用”从结果中获取行”操作直接检索记录。</p>
+</div>
+<div>
+<p>要访问”用于分组行的字段”或”收集行时的持续时间”选项，请删除”发送到管道的行数”选项中的默认值（1）。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>发送到管道的行数</strong></td>
+<td style="text-align: left;">指定一个数字。每处理完 <strong>n</strong>
+行数据后，将执行工作流，并将这 <strong>n</strong>
+行数据传递给管道。默认值：1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>用于分组行的字段</strong></td>
+<td
+style="text-align: left;">指定一个用于分组行的字段。只要字段值保持不变，行就会累积在一个组中。如果值发生变化，将执行工作流，并将累积的行传递给工作流。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>收集行时的持续时间</strong></td>
+<td
+style="text-align: left;">以毫秒为单位指定一个持续时间。这是转换在执行工作流之前累积行所花费的时间。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>请注意，您只能指定一种分组方法。</p>
+</div>
+<h3 id="执行结果选项卡">执行结果选项卡</h3>
+<div>
+<p>您可以指定结果字段以及将它们发送到哪个转换。如果您不需要某个结果，只需留空输入字段。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">执行结果的目标转换</td>
+<td
+style="text-align: left;">使用下拉菜单选择管道中的一个转换作为接收工作流结果的目标转换。</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行时间（毫秒）</td>
+<td style="text-align: left;">指定工作流执行时间的字段名称。</td>
+<td style="text-align: left;">ExecutionTime</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行结果</td>
+<td style="text-align: left;">指定工作流执行结果的字段名称。</td>
+<td style="text-align: left;">ExecutionResult</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误数量</td>
+<td
+style="text-align: left;">指定工作流执行期间错误数量的字段名称。</td>
+<td style="text-align: left;">ExecutionNrErrors</td>
+</tr>
+<tr>
+<td style="text-align: left;">读取的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间读取的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesRead</td>
+</tr>
+<tr>
+<td style="text-align: left;">写入的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间写入的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesWritten</td>
+</tr>
+<tr>
+<td style="text-align: left;">输入的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间输入的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesInput</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间输出的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesOutput</td>
+</tr>
+<tr>
+<td style="text-align: left;">拒绝的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间拒绝的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesRejected</td>
+</tr>
+<tr>
+<td style="text-align: left;">更新的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间更新的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesUpdated</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除的行数</td>
+<td
+style="text-align: left;">指定工作流执行期间删除的总行数的字段名称。</td>
+<td style="text-align: left;">ExecutionLinesDeleted</td>
+</tr>
+<tr>
+<td style="text-align: left;">检索的文件数</td>
+<td
+style="text-align: left;">指定工作流执行期间检索的文件总数的字段名称。</td>
+<td style="text-align: left;">ExecutionFilesRetrieved</td>
+</tr>
+<tr>
+<td style="text-align: left;">退出状态</td>
+<td style="text-align: left;">指定工作流执行退出状态的字段名称。</td>
+<td style="text-align: left;">ExecutionExitStatus</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行日志文本</td>
+<td style="text-align: left;">指定工作流执行日志文本的字段名称。</td>
+<td style="text-align: left;">ExecutionLogText</td>
+</tr>
+<tr>
+<td style="text-align: left;">日志通道ID</td>
+<td
+style="text-align: left;">指定工作流执行期间使用的日志通道ID的字段名称。</td>
+<td style="text-align: left;">ExecutionLogChannelID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="结果行选项卡">结果行选项卡</h3>
+<div>
+<p>在”结果行”选项卡中，您可以指定此工作流预期结果行的布局，以及执行后将它们发送到哪个转换。</p>
+</div>
+<div>
+<p>工作流执行器会对我们在此选项卡中声明的作为要接收输出的字段进行一致性检查。检查将通过确保我们要求的字段确实存在于结果流中，并且每个字段的类型确实是我们预期的类型来进行。如果有任何差异，将抛出一个错误。该错误将为您提供有关哪些字段缺失和/或哪些字段声明的数据类型错误的完整信息。</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>结果行的目标转换</p>
+<p>使用下拉菜单选择管道中的一个转换作为目标转换。</p>
+<p>字段名称</p>
+<p>指定字段的名称。</p>
+<p>数据类型</p>
+<p>使用下拉菜单指定字段的数据类型，如数字、日期或字符串。</p>
+<p>长度</p>
+<p>如果适用，指定字段的长度。</p>
+</body>
+</html>

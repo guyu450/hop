@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ftpdelete.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="ftp删除">FTP删除</h1>
+<h2 id="描述">描述</h2>
+<p>FTP删除操作可删除FTP服务器上的文件。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>FTP删除</code>操作可删除FTP服务器上的文件。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:76%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>服务器</td>
+<td></td>
+</tr>
+<tr>
+<td>协议</td>
+<td><div>
+<div>
+<ul>
+<li><p>FTP</p></li>
+<li><p>FTPS</p></li>
+<li><p>SFTP</p></li>
+<li><p>SSH</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>FTP服务器名称/IP地址</td>
+<td>服务器名称或IP地址。</td>
+</tr>
+<tr>
+<td>服务器端口</td>
+<td>FTP服务器的端口号。</td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>与FTP服务器账户关联的用户名。</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>与FTP服务器账户关联的密码。</td>
+</tr>
+<tr>
+<td>连接类型</td>
+<td><div>
+<div>
+<p>FTPS连接类型。</p>
+</div>
+<div>
+<ul>
+<li><p>FTP</p></li>
+<li><p>隐式SSL</p></li>
+<li><p>认证SSL</p></li>
+<li><p>加密FTP连接的隐式SSL</p></li>
+<li><p>认证TLS</p></li>
+<li><p>隐式TLS</p></li>
+<li><p>加密FTP连接的隐式TLS</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>使用代理</td>
+<td>是否使用代理。</td>
+</tr>
+<tr>
+<td>代理主机</td>
+<td>代理服务器主机名。</td>
+</tr>
+<tr>
+<td>代理端口</td>
+<td>代理服务器端口号。</td>
+</tr>
+<tr>
+<td>代理用户名</td>
+<td>代理服务器账户用户名。</td>
+</tr>
+<tr>
+<td>代理密码</td>
+<td>代理服务器账户密码。</td>
+</tr>
+<tr>
+<td>使用公钥</td>
+<td>使用SSH连接时是否使用公钥。</td>
+</tr>
+<tr>
+<td>密钥文件</td>
+<td>公钥文件。</td>
+</tr>
+<tr>
+<td>浏览…​</td>
+<td>在文件系统中浏览公钥文件。</td>
+</tr>
+<tr>
+<td>密钥密码短语</td>
+<td>公钥密码短语。</td>
+</tr>
+<tr>
+<td>测试连接</td>
+<td>测试配置的连接。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件选项卡">文件选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高级</td>
+<td></td>
+</tr>
+<tr>
+<td>超时</td>
+<td>超时时间。</td>
+</tr>
+<tr>
+<td>使用主动FTP连接</td>
+<td>如果使用主动模式连接到FTP服务器，请
+启用此选项；必须设置防火墙以接受对FTP客
+户端将打开的端口的连接。默认是被动模式。</td>
+</tr>
+<tr>
+<td>远程</td>
+<td></td>
+</tr>
+<tr>
+<td>将上一个结果复制到参数？</td>
+<td>远程目录</td>
+</tr>
+<tr>
+<td>远程FTP服务器上的目录。</td>
+<td>检查文件夹</td>
+</tr>
+<tr>
+<td>检查目录是否存在。</td>
+<td>通配符（正则表达式）</td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td></td>
+</tr>
+<tr>
+<td>成功条件为</td>
+<td><div>
+<div>
+<p>成功条件</p>
+</div>
+<div>
+<ul>
+<li><p>一切正常</p></li>
+<li><p>至少删除x个文件</p></li>
+<li><p>错误数量少于</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>限制文件数量</td>
+<td>设置删除文件数量的限制（默认10个）。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="socks代理选项卡">Socks代理选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">主机</td>
+<td style="text-align: left;">Socks代理主机名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">端口</td>
+<td style="text-align: left;">Socks代理端口号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">与Socks代理账户关联的用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">与Socks代理账户关联的密码。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

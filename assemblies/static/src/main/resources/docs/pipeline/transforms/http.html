@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>http.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="http客户端">HTTP客户端</h1>
+<h2 id="描述">描述</h2>
+<p>HTTP客户端转换会使用附加选项对基础URL执行简单调用。格式为http://?param1=value1&amp;param2=value2&amp;param3...
+结果会存储在指定名称的字符串字段中。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称；此名称在单个管道中必须唯一</td>
+</tr>
+<tr>
+<td style="text-align: left;">URL</td>
+<td style="text-align: left;">基础URL字符串</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段接受URL？</td>
+<td
+style="text-align: left;">如果要从上一个转换获取URL，请启用此选项。启用此选项还可以指定输入字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">URL字段名称</td>
+<td style="text-align: left;">包含URL的传入字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接超时</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">套接字超时</td>
+<td style="text-align: left;">如果服务器未返回数据，等待的秒数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接关闭等待时间</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">结果字段名称</td>
+<td style="text-align: left;">存储结果的字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP状态码字段名称</td>
+<td
+style="text-align: left;">存储HTTP响应代码（例如200、404）的字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">响应时间（毫秒）字段名称</td>
+<td style="text-align: left;">存储响应时间的字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP登录名</td>
+<td
+style="text-align: left;">在HTTP（基本）身份验证期间传递的用户名</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP密码</td>
+<td style="text-align: left;">在HTTP（基本）身份验证期间传递的密码</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理主机</td>
+<td style="text-align: left;">要使用的代理服务器的主机名</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理端口</td>
+<td style="text-align: left;">要使用的代理服务器的端口号</td>
+</tr>
+<tr>
+<td style="text-align: left;">参数</td>
+<td
+style="text-align: left;">在此区域定义要在URL上传递的参数名称-值对</td>
+</tr>
+<tr>
+<td style="text-align: left;">自定义HTTP头</td>
+<td style="text-align: left;">在此区域定义可选的HTTP头</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="常见问题解答">常见问题解答</h2>
+<div>
+<h3 id="http客户端转换没有任何作用">HTTP客户端转换没有任何作用</h3>
+<div>
+<p><strong>问</strong>：HTTP客户端转换没有任何作用，我该如何使其工作？</p>
+</div>
+<div>
+<p><strong>答</strong>：HTTP客户端转换需要被触发。使用行生成器转换生成例如1个空行，并通过跳转将其与HTTP客户端转换链接起来。</p>
+</div>
+<h3 id="http客户端转换与soap">HTTP客户端转换与SOAP</h3>
+<div>
+<p><strong>问</strong>：HTTP客户端支持SOAP吗？</p>
+</div>
+<div>
+<p><strong>答</strong>：不支持，它只是使用参数调用一个URL。未来的转换可能会提供SOAP功能，目前正在开发支持WSDL的Web服务转换。</p>
+</div>
+</div>
+</body>
+</html>

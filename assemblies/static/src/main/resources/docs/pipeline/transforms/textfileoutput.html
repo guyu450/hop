@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>textfileoutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="文本文件输出">文本文件输出</h1>
+<h2 id="描述">描述</h2>
+<p>文本文件输出转换用于将数据导出为文本文件格式。这通常用于生成可由电子表格应用程序读取的逗号分隔值（CSV文件）。也可以通过在”字段”选项卡中设置字段长度来生成固定宽度的文件。您可以选择使用架构定义或手动定义所需的字段布局。如果您决定使用架构定义来定义字段布局，请使用”架构映射”转换根据所选的架构定义调整传入的数据流。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件选项卡">文件选项卡</h3>
+<div>
+<p>“文件”选项卡用于定义正在创建的文件的基本属性，例如：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称。此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名</td>
+<td
+style="text-align: left;">指定输出文本文件的文件名和位置。点击”浏览”选择位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将输出传递给Servlet</td>
+<td
+style="text-align: left;">启用此选项可通过Web服务返回数据，而不是写入文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建父文件夹</td>
+<td
+style="text-align: left;">启用此选项可在创建文件时创建父文件夹。否则，该文件夹必须已经存在，否则写入将失败。</td>
+</tr>
+<tr>
+<td style="text-align: left;">启动时不创建文件</td>
+<td
+style="text-align: left;">启用此选项可在没有处理任何行时避免创建空文件。否则，在处理任何数据之前就会创建文件，可能会生成空文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段接受文件名？</td>
+<td
+style="text-align: left;">启用此选项可在输入流的字段中指定文件名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名字段</td>
+<td
+style="text-align: left;">启用上一个选项后，指定在运行时将包含文件名的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">扩展名</td>
+<td
+style="text-align: left;">指定文件扩展名。创建文件时，这会在文件名和扩展名之间自动添加句点字符。例如，name.txt。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含转换编号</td>
+<td
+style="text-align: left;">如果多次运行此转换（启动同一转换的多个副本），副本编号将包含在文件名中，位于扩展名之前，并用下划线与文件名分隔。例如，name_0。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含分区编号？</td>
+<td
+style="text-align: left;">在文件名中包含数据分区编号，如果数据未分区，则为null。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含日期</td>
+<td
+style="text-align: left;">在文件名中包含系统日期。这用下划线与文件名分隔，默认格式为YYYYMMDD。例如，name_20230405。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含时间</td>
+<td
+style="text-align: left;">在文件名中包含系统时间。这用下划线与文件名分隔，默认格式为hhmmss。例如，name_235959。</td>
+</tr>
+<tr>
+<td style="text-align: left;">指定日期时间格式</td>
+<td
+style="text-align: left;">启用此选项可指定日期和时间格式。否则，这些组件将使用默认格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期时间格式</td>
+<td
+style="text-align: left;">从列表中选择日期和时间格式，应用于附加到文件名的日期和时间值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件名</td>
+<td style="text-align: left;">查看将生成的文件列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果</td>
+<td
+style="text-align: left;">这会将所有处理过的文件名添加到内部结果文件名集中，以便进一步处理。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容选项卡">内容选项卡</h3>
+<div>
+<p>“内容”选项卡包含以下用于描述正在读取的内容的选项：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>追加</td>
+<td>选中此选项可将行追加 到指定文件的末尾。否则，文件将被替换。</td>
+</tr>
+<tr>
+<td>分隔符</td>
+<td>指定在一行文本 中分隔字段的字符。通常是”;“或制表符。</td>
+</tr>
+<tr>
+<td>插入制表符</td>
+<td>点击可在”分隔符”字段中插入制表符。</td>
+</tr>
+<tr>
+<td>包围符</td>
+<td>一对字符串可 用于包围某些字段。这允许字段中包含分隔
+符或包围符字符。包围符字符串是可选的。</td>
+</tr>
+<tr>
+<td>强制在字段周围使用包围符？</td>
+<td>此选项强 制传入的字符串类型的所有字段（与文本文
+件输出字段定义中最终更改的字段类型无关
+）用上述”包围符”属性中指定的字符包围。</td>
+</tr>
+<tr>
+<td>禁用包围符修正？</td>
+<td>当字符串字段包含包围符时，它 会被包围，并且包围符字符会被转义。当字
+符串字段包含分隔符时，它也会被包围。如
+果不需要此逻辑，请选中此选项。由于需要
+扫描字符串中的包围符和分隔符，这还会带
+来额外的性能负担。因此，如果您确定不需
+要此逻辑，因为您的字符串中没有这些字符
+，并且您想提高性能，请取消选中此选项。</td>
+</tr>
+<tr>
+<td>标题</td>
+<td>如果希望文本文件有 标题行（文件的第一行），请启用此选项。</td>
+</tr>
+<tr>
+<td>页脚</td>
+<td>如果希望文本文件有页脚行（文件
+的最后一行），请启用此选项。注意：在追
+加模式下使用此选项时要小心，因为在追加
+新行之前无法从文件内容中删除页脚。在某
+些用例中可能需要此选项，例如在管道每次
+运行后添加页脚以分隔文件中的不同部分。</td>
+</tr>
+<tr>
+<td>格式</td>
+<td><p>可以是 DOS或UNIX。UNIX文件的行以换行符分隔。</p>
+<p>DOS文件的行以回车符和换行符分隔。</p>
+<p>选项有：CR+LF终止（Windows、DOS）/ LF终止（Unix）/ CR终止 /
+无换行终止符</p></td>
+</tr>
+<tr>
+<td>编码</td>
+<td><p>指定要使用的文本 文件编码，或留空以使用系统的默认编码。</p>
+<p>要使用Unicode，请指定UTF-8或UTF-16。</p></td>
+</tr>
+<tr>
+<td>压缩</td>
+<td><p>允许您压缩文件并指定压 缩类型，即.zip或.gzip，用于压缩输出。</p>
+<p>注意：单个压缩存档中仅放置一个文件。</p></td>
+</tr>
+<tr>
+<td>右对齐填充字段</td>
+<td>在 字段末尾添加空格（或删除末尾的字符），
+直到它们达到”字段”选项卡中指定的长度。</td>
+</tr>
+<tr>
+<td>快速数据转储（无格式）</td>
+<td>在将大量数据转储到文本文件
+时，通过不包含任何格式信息来提高性能。</td>
+</tr>
+<tr>
+<td>每……行拆分</td>
+<td>指定将文件拆分为指定行数的块的行数。</td>
+</tr>
+<tr>
+<td>添加文件结束行</td>
+<td>指定输出文件的替代结束行。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段选项卡">字段选项卡</h3>
+<div>
+<p>“字段”选项卡用于定义要导出的字段的属性。下表描述了配置字段属性的每个选项：</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>架构定义</p>
+<p>我们要引用的 架构定义 的名称。</p>
+<p>名称</p>
+<p>字段的名称。</p>
+<p>类型</p>
+<p>字段的数据类型。可以是字符串、日期或数字。</p>
+<p>格式</p>
+<p>选择要应用于字段值的格式。仅适用于数字和日期。</p>
+<p>长度</p>
+<div>
+<div>
+<p>长度选项取决于字段类型：</p>
+</div>
+<div>
+<ul>
+<li><p>数字 - 数字中的总有效位数</p></li>
+<li><p>字符串 - 字符串的总长度</p></li>
+<li><p>日期 - 字符串打印输出的长度（例如，. 仅返回年份）</p></li>
+</ul>
+</div>
+</div>
+<p>精度</p>
+<p>对于数字，指定浮点数的小数位数</p>
+<p>货币符号</p>
+<p>用于表示货币的符号，如美元（$10,000.00）或欧元（€5,000.00）</p>
+<p>小数点</p>
+<p>用于表示浮点数中小数点的字符。小数点可以是”.”（10,000.00）或”,“（5,000.00）。</p>
+<p>分组符号</p>
+<p>用于表示数字中千位分隔符的字符。可以是”,“（10,000.00）或”.”（5,000.00）</p>
+<p>修剪类型</p>
+<p>用于从字符串值中删除空白字符的修剪方法。可以是左（删除前导空格）、右（删除尾随空格）、两者都有或无。</p>
+<p>注意：仅在未指定字段长度时修剪才有效。</p>
+</body>
+</html>

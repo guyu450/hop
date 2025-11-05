@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>excelinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="microsoft-excel输入">Microsoft Excel输入</h1>
+<h2 id="描述">描述</h2>
+<p>Microsoft Excel输入转换从Microsoft
+Excel电子表格读取数据。默认的电子表格类型（引擎）设置为Excel
+XLSX、XLS。当您读取其他文件类型（如OpenOffice
+ODS）并使用特殊功能（如受保护的工作表）时，您需要在”内容”选项卡中相应地更改电子表格类型（引擎）。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件选项卡">“文件”选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换 的名称；该名称在单个转换中必须是唯一的。</td>
+</tr>
+<tr>
+<td>电子表格类型（引擎）</td>
+<td><div>
+<div>
+<p>此字段允 许您指定电子表格类型。目前支持以下类型：</p>
+</div>
+<div>
+<ul>
+<li><p>Excel XLSX、XLS ：这是默认类型，如果您选择此电子表格类型
+，您可以读取所有已知的Excel文件类型。由 POI项目提供功能支持。</p></li>
+<li><p>Excel XLSX（流式处理）
+：此电子表格类型允许读取大型Excel文件。</p></li>
+<li><p>Open Office ODS：通过选择此类型，您可
+以使用ODFDOM引擎读取OpenOffice电子表格。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>文件或目录</td>
+<td>指定输入文本文件的位置和/ 或名称。注意：点击”添加”将文件/目录/通配
+符组合添加到下面选定文件（网格）列表中。</td>
+</tr>
+<tr>
+<td>正则表达式</td>
+<td>指定要用于在先 前选项中指定的目录中选择文件的正则表达式
+。例如，您想要处理所有扩展名为.txt的文件
+。（有关更多详细信息，请参阅”文本文件输
+入”转换和”使用正则表达式选择文件”部分）</td>
+</tr>
+<tr>
+<td>排除正则表达式</td>
+<td>排除（给定位置 中）符合此正则表达式指定标准的所有文件。</td>
+</tr>
+<tr>
+<td>选定文件</td>
+<td>包含选定文件 （或通配符选择）的列表以及一个指定文件是
+否为必需的属性。如果一个文件是必需的但未
+找到，则会生成错误；否则，将跳过文件名。</td>
+</tr>
+<tr>
+<td>接受来自先前转换的文件名</td>
+<td>允许您从转换中的先前转换读取文
+件名。您还必须指定要从哪个转换导入，以及
+将从中检索文件名数据的该转换中的输入字段</td>
+</tr>
+<tr>
+<td>显示文件名...</td>
+<td>显示根 据当前选定文件定义将加载的所有文件的列表</td>
+</tr>
+<tr>
+<td>预览行</td>
+<td>点击”预览”以检查指定Excel文件的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="工作表">工作表</h3>
+<div>
+<p>在此选项卡中，您可以指定要读取的Excel工作簿中的工作表名称。对于每个工作表名称，您可以指定开始读取的行和列。</p>
+</div>
+<h3 id="内容">内容</h3>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">选项</td>
+<td style="text-align: left;">描述</td>
+</tr>
+<tr>
+<td style="text-align: left;">标题行</td>
+<td
+style="text-align: left;">如果指定的工作表包含要跳过的标题行，请启用此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">无空行</td>
+<td
+style="text-align: left;">如果您不希望此转换的输出中包含空行，请启用此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">遇到空行停止</td>
+<td
+style="text-align: left;">当遇到空行时，使转换停止读取文件的当前工作表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制</td>
+<td style="text-align: left;">将行数限制为此数字（零 (0)
+表示所有行）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td
+style="text-align: left;">指定要使用的文本文件编码。留空以使用系统默认编码。要使用Unicode，请指定UTF-8或UTF-16。首次使用时，Spoon会在您的系统中搜索可用编码。）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误处理">错误处理</h3>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">选项</td>
+<td style="text-align: left;">描述</td>
+</tr>
+<tr>
+<td style="text-align: left;">严格数据类型？</td>
+<td
+style="text-align: left;">如果选中，Hfxt将报告输入中的数据类型错误。</td>
+</tr>
+<tr>
+<td style="text-align: left;">忽略错误？</td>
+<td
+style="text-align: left;">如果您想在解析过程中忽略错误，请启用此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">跳过错误行？</td>
+<td
+style="text-align: left;">如果选中，Hfxt将跳过包含错误的行。通过在下面的”失败行号文件目录”字段中指定路径，这些行可以转储到单独的文件中。如果未选中，包含错误的行将在输出中显示为NULL值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">警告文件目录</td>
+<td
+style="text-align: left;">生成警告时，它们将放置在此目录中。该文件的名称为
+&lt;警告目录&gt;/文件名.&lt;日期时间&gt;.&lt;警告扩展名&gt;</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误文件目录</td>
+<td
+style="text-align: left;">发生错误时，它们将放置在此目录中。该文件的名称为
+&lt;错误文件目录&gt;/文件名.&lt;日期时间&gt;.&lt;错误文件扩展名&gt;</td>
+</tr>
+<tr>
+<td style="text-align: left;">失败行号文件目录</td>
+<td
+style="text-align: left;">当某一行发生解析错误时，该行号将放置在此目录中。该文件的名称为
+&lt;错误行目录&gt;/文件名.&lt;日期时间&gt;.&lt;错误行扩展名&gt;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段选项卡">“字段”选项卡</h3>
+<div>
+<p>“字段”选项卡用于指定必须从Excel文件中读取的字段。您可以选择使用
+模式定义 或手动定义所需字段的布局。</p>
+</div>
+<div>
+<p>如果工作表有标题行，请使用”从标题行获取字段”自动填充可用字段。</p>
+</div>
+<div>
+<p>“类型”列对给定字段执行类型转换。例如，如果您要读取日期，而Excel文件中有一个字符串值，请指定转换掩码。注意：在数字到日期的转换（例如，20051028
+-&gt;
+2005年10月28日）的情况下，请指定转换掩码yyyyMMdd，因为在进行字符串到日期的转换之前会进行隐式的数字到字符串的转换。</p>
+</div>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">选项</td>
+<td style="text-align: left;">描述</td>
+</tr>
+<tr>
+<td style="text-align: left;">模式定义</td>
+<td style="text-align: left;">我们要引用的 模式定义 的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">字段的数据类型；字符串、日期或数字。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td
+style="text-align: left;">长度选项取决于字段类型。数字：数字中的有效数字总数；字符串：字符串的总长度；日期：确定打印或记录的日期字符串的长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td
+style="text-align: left;">精度选项取决于字段类型，但仅支持数字类型；它返回浮点数的位数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">修剪类型</td>
+<td
+style="text-align: left;">在处理之前截断字段（左、右、两侧）。对于没有固定长度的字段很有用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">重复</td>
+<td
+style="text-align: left;">如果设置为Y，如果下一行中的字段为空，将重复此值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td
+style="text-align: left;">格式掩码（数字类型）。有关格式符号的完整描述，请参阅”文本文件输入”转换和”数字格式”部分。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币</td>
+<td style="text-align: left;">用于表示货币的符号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数</td>
+<td style="text-align: left;">小数点；可以是点或逗号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组</td>
+<td
+style="text-align: left;">一种在四位数或更大的数字中分隔千位单位的方法。可以是点或逗号。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="附加输出字段选项卡">“附加输出字段”选项卡</h3>
+<div>
+<p>此选项卡检索自定义元数据字段以添加到转换的输出中。每个字段的用途在其名称中定义，但您可以根据需要使用这些字段。每个项目定义一个输出字段，该字段将包含以下信息。其中一些信息可能缺失。</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>完整文件名字段</p>
+<p>完整的文件名加上扩展名。</p>
+<p>工作表名称字段</p>
+<p>您正在使用的工作表名称。</p>
+<p>工作表行号字段</p>
+<p>当前工作表的行号。</p>
+<p>写入的行号字段</p>
+<p>写入的行数。</p>
+<p>短文件名字段</p>
+<p>包含不带路径信息但带有扩展名的文件名的字段名称。</p>
+</body>
+</html>

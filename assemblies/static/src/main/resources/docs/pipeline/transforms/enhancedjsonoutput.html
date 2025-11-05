@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>enhancedjsonoutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="增强的json输出">增强的JSON输出</h1>
+<h2 id="描述">描述</h2>
+<p>增强的JSON输出转换功能允许您根据输入的转换值生成JSON块。根据转换设置，输出的JSON将以Javascript数组或Javascript对象的形式提供。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<div>
+<p>常规选项卡用于指定转换操作的类型、输出JSON结构以及转换输出文件。此文件将用于转储所有生成的JSON。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称；此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td>操作</td>
+<td><div>
+<div>
+<p>指定转换操作类型。目前有3种操作类型可用：</p>
+</div>
+<div>
+<ol type="1">
+<li>输出值 -</li>
+</ol>
+<p>仅将输出JSON作为转换输出字段传递，不转储到输出文件</p>
+<ol start="2" type="1">
+<li><p>写入文件 - 仅写入文件，不传递到输出字段</p></li>
+<li><p>输出值并写入文件 -
+转储到文件并将生成的JSON作为转换输出文件传递</p></li>
+</ol>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>JSON块名称</td>
+<td>此值将用作JSON块的名称。可以
+为空字符串，这将影响输出JSON结构，详细说明见下文。</td>
+</tr>
+<tr>
+<td>输出值</td>
+<td>此值将用作转换
+输出字段。根据转换设置，它将包含生成的JSON输出块。</td>
+</tr>
+<tr>
+<td>强制JSON为数组</td>
+<td>如果 选中，JSON输出将被强制设置为一个内容为数组的单项。</td>
+</tr>
+<tr>
+<td>强制单个分组项</td>
+<td>分组值 将存储在JSON内部的数组中，而不是创建一个JSON数组。</td>
+</tr>
+<tr>
+<td>美化打印JSON</td>
+<td>如果选中，JSON输出将进行美化打印。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="输出文件">输出文件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">文件名</td>
+<td style="text-align: left;">输出文件的完整路径</td>
+</tr>
+<tr>
+<td style="text-align: left;">追加</td>
+<td style="text-align: left;">如果未选中 -
+每次运行转换时都会创建一个新文件。如果具有指定名称的文件已存在，它将被新文件替换。如果选中
+-
+新的JSON输出将追加到现有文件的末尾。或者，如果文件不存在，将像之前的情况一样创建文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">每n行拆分JSON</td>
+<td
+style="text-align: left;">如果此数字N大于零，将生成的JSON文件拆分为多个部分，每个部分包含N行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建父文件夹</td>
+<td
+style="text-align: left;">通常文件名包含一些路径文件夹作为父文件夹。如果父文件夹不存在且选中此选项，将创建父文件夹作为新文件夹。否则
+- 文件将找不到，转换将失败。</td>
+</tr>
+<tr>
+<td style="text-align: left;">启动时不打开/创建</td>
+<td style="text-align: left;">如果未选中 -
+文件（在某些情况下还有父文件夹）将在管道初始化期间创建/打开以进行写入。如果选中
+- 文件和父文件夹将仅在转换获取任何第一个输入数据后创建。</td>
+</tr>
+<tr>
+<td style="text-align: left;">扩展名</td>
+<td style="text-align: left;">输出文件的扩展名。默认值为'js'</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td style="text-align: left;">输出文件的编码</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名中包含日期？</td>
+<td style="text-align: left;">如果选中 - 输出文件名将包含文件名值 +
+当前日期。这可能有助于生成唯一的输出文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名中包含时间</td>
+<td style="text-align: left;">如果选中 -
+输出文件名将包含文件创建时间。与”文件名中包含日期”选项相同</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件名按钮</td>
+<td
+style="text-align: left;">这对于测试完整的输出文件路径可能很有用</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件添加到结果文件名？</td>
+<td style="text-align: left;">如果选中 -
+创建的输出文件路径将可从转换结果中访问</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分组键选项卡">分组键选项卡</h3>
+<div>
+<p>此选项卡用于映射输入转换字段键，以正确生成输出JSON值。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段名</td>
+<td
+style="text-align: left;">输入转换字段名称，将有助于定义输入转换字段键。使用”获取字段”按钮发现可用的输入字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">元素名称</td>
+<td style="text-align: left;">JSON元素名称。例如”A”：“B” -
+A是元素名称，B是为此元素名称映射的实际输入值。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段选项卡">字段选项卡</h3>
+<div>
+<p>此选项卡用于将输入转换字段映射到输出JSON值。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段名</td>
+<td
+style="text-align: left;">输入转换字段名称。使用”获取字段”按钮发现可用的输入字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">元素名称</td>
+<td style="text-align: left;">作为键的JSON元素名称。例如”A”：“B” -
+A是元素名称，B是为此元素名称映射的实际输入值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">JSON片段</td>
+<td
+style="text-align: left;">如果该值设置为Y，则该字段中包含的值是一个JSON块，并将相应地进行处理。</td>
+</tr>
+<tr>
+<td style="text-align: left;">移除元素名称</td>
+<td
+style="text-align: left;">如果该值设置为Y，它将忽略元素名称，并在不包装的情况下插入JSON片段。仅在JSON片段
+= Y时有效。</td>
+</tr>
+<tr>
+<td style="text-align: left;">空白时移除</td>
+<td
+style="text-align: left;">如果该值设置为Y且传入字段中的值为null，则相关属性将从JSON输出中省略。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="注意事项">注意事项</h2>
+<div>
+<div>
+<p>查看提供的示例<em>json-output-generate-nested-structure.hpl</em>，以更好地了解此转换的工作原理。</p>
+</div>
+</div>
+</body>
+</html>

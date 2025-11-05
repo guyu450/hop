@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dimensionlookup.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="维度查找更新">维度查找/更新</h1>
+<h2 id="描述">描述</h2>
+<p>维度查找/更新转换允许您针对两种类型（类型I（更新）和类型II（插入））实现拉尔夫·金博尔（Ralph
+Kimball）的缓慢变化维度，并具备一些附加功能。此转换可用于填充维度表或在缓慢变化维度中查找值而不进行任何更改。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="通用字段">通用字段</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr>
+<td>选项</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>更新维度？</td>
+<td>启用此选项可根据输入流中的信息更新维度；如果未
+启用，维度仅执行查找操作，并将技术键字段添加到流中。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>维度表所在的数据库连接名称。</td>
+</tr>
+<tr>
+<td>目标模式</td>
+<td>这允许您指定一个模式名称。</td>
+</tr>
+<tr>
+<td>目标表</td>
+<td>维度表的名称。</td>
+</tr>
+<tr>
+<td>提交大小</td>
+<td>定义提交大小，例如，将
+提交大小设置为10会在每10次插入或更新后生成一次提交。</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td><div>
+<div>
+<ul>
+<li><p>启用缓存？如果您想在此转换中启
+用数据缓存，请启用此选项；在以前的版本中设置缓存大小 &gt;=0，或设置为 -1
+以禁用缓存。</p></li>
+<li><p>预加载缓存？在执行查找
+之前读取维度表的完整内容可以提高性能。通过消除与数据
+库的往返次数以及使用排序列表查找算法，性能得到提升。</p></li>
+<li><p>缓存行数：为了通过减少与数据库
+的往返次数来加快查找速度，将保存在内存中的缓存行数。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>获取字段按钮</td>
+<td>填充输入流中除您指定的键之外的所有可用字段。</td>
+</tr>
+<tr>
+<td>SQL按钮</td>
+<td>生成用于构建维度的SQL，并允许您执行此SQL。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="键标签页">键标签页</h3>
+<div>
+<p>指定流和维度表中的键名称。这将使转换能够执行查找操作。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">维度字段</td>
+<td
+style="text-align: left;">源系统中使用的键字段。例如：客户编号、产品ID等。</td>
+</tr>
+<tr>
+<td style="text-align: left;">流字段</td>
+<td style="text-align: left;">包含从源系统键字段获取的值的流字段。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段标签页">字段标签页</h3>
+<div>
+<p>对于维度中必须包含的每个字段，您可以指定是要更新值（对于所有版本，这是类型I操作），还是要将值作为新版本插入维度。在屏幕截图中使用的示例中，出生日期是不会随时间变化的信息，因此如果出生日期发生变化，则意味着以前版本中的信息有误。那么，在维度条目的所有版本中更正以前的值是合乎逻辑的。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">维度字段</td>
+<td style="text-align: left;">包含维度实际信息的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">与之比较的流字段</td>
+<td
+style="text-align: left;">包含要分配给该表字段的传入值的流字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">维度更新类型</td>
+<td
+style="text-align: left;">应用的更新类型（请参阅本文档”更新”部分的详细信息）。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="技术键标签页">技术键标签页</h3>
+<div>
+<p>此标签页包含与维度记录的代理键创建相关的详细信息。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>技术键字段</td>
+<td>维度的主键；也称为代理键。使用”新名称”选项在查
+找后重命名技术键。例如，如果您需要查找不同类型的产品
+，如ORIGINAL_PRODUCT_TK、REPLACEMENT_PRODUCT_TK等。</td>
+</tr>
+<tr>
+<td>技术键的创建</td>
+<td><div>
+<div>
+<p>指示 技术键的生成方式，与您的连接类型不兼容的选项将变灰：</p>
+</div>
+<div>
+<ul>
+<li><p>使用表最大值 + 1：将根据表中的最大键创建一个新的技术键。请注意
+，新的最大值始终被缓存，因此无需为每一行计算最大值。</p></li>
+<li><p>使用序列：如果您想在表连接上使用数据库序列生成
+技术键（例如，这在Oracle中很常见），请指定序列名称。</p></li>
+<li><p>使用自动递增字段：使用数据库表
+中的自动递增字段生成技术键（例如，DB2支持此功能）。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="版本控制标签页">版本控制标签页</h3>
+<div>
+<p>此标签页定义了记录版本的生成方式</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>版本字段</td>
+<td>存储版本（修订号）的字段名称。</td>
+</tr>
+<tr>
+<td>流日期字段</td>
+<td>如果您有维度条目 最后更改的日期，可以在此处指定该字段的名称
+。这允许根据日期范围准确描述维度条目。如果
+您没有这样的日期，将采用系统日期。当查找维
+度条目（未选择”更新维度”）时，输入到”流日
+期字段”中的日期字段将用于根据维度记录中的
+“起始日期”和”结束日期”选择合适的维度版本。</td>
+</tr>
+<tr>
+<td>日期范围起始字段</td>
+<td>指定维度条目的起始范围名称。</td>
+</tr>
+<tr>
+<td>是否使用替代起始日期？</td>
+<td><div>
+<div>
+<p>启 用后，您可以选择替代使用的”最小年份”/01/01
+00:00:00日期。您可以使用以下任何一种：</p>
+</div>
+<div>
+<ul>
+<li><p>系统日期：使用系统日期作为可变日期/时间</p></li>
+<li><p>管道起始 日期：使用管道开始时的系统日期作为起始日期</p></li>
+<li><p>空（null）值</p></li>
+<li><p>列值：选择一个列以从中获取值。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>表日期范围结束</td>
+<td>维度条目的结束范围名称</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="一般注意事项">一般注意事项</h2>
+<div>
+<div>
+<p>作为此转换类型的查找或更新操作的结果，一个包含维度技术键的字段将被添加到流中。如果未找到该字段，则返回维度条目的”未找到”值（0或1，具体取决于数据库类型）。</p>
+</div>
+<div>
+<p>一些可选字段（在”字段”标签页中）由转换自动管理。您可以在”维度字段”列中指定表字段名称。这些是可选字段：</p>
+</div>
+<div>
+<ul>
+<li><p>最后插入或更新日期（无流字段作为源）：添加并管理一个日期字段</p></li>
+<li><p>最后插入日期（无流字段作为源）：添加并管理一个日期字段</p></li>
+<li><p>最后更新日期（无流字段作为源）：添加并管理一个日期字段</p></li>
+<li><p>最后版本（无流字段作为源）：添加并管理一个布尔字段。（根据您的数据库连接设置和此类数据类型的可用性，转换为Char(1)
+或布尔数据库数据类型）</p></li>
+<li><p>这用作最后版本的当前有效维度条目指示器：因此，当类型II属性发生变化并创建新版本（以跟踪历史记录）时，上一版本中的”最后版本”属性将设置为”False/N”，而最新版本的新记录将设置为”True/Y”。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="功能">功能</h2>
+<div>
+<div>
+<p>正如转换的名称所示，该转换的功能分为两类，查找和更新……</p>
+</div>
+<h3 id="查找">查找</h3>
+<div>
+<p>在只读模式（更新选项禁用）下，转换仅在缓慢变化维度中执行查找操作。转换将在指定的数据库连接和指定的模式下的维度表中执行查找。为了进行查找，它不仅使用指定的自然键（使用”等于”条件），还使用指定的”流日期字段”（见下文）。应用的条件是：</p>
+</div>
+<div>
+<div>
+<div>
+<p>“表日期范围起始” ⇐ “流日期字段” 且 “表日期范围结束” &gt;
+“流日期字段”</p>
+</div>
+</div>
+</div>
+<div>
+<p>如果未指定”流日期字段”，我们将使用当前系统日期来查找正确的维度版本记录。</p>
+</div>
+<div>
+<p>如果未找到行，则返回”未知”键。（“未知”键将为0或1，具体取决于您是否为技术键字段选择了自动递增字段）。请注意，我们不区分”未知”、“未找到”、“空”、“非法格式”等。但是，这些细微差别可以手动添加。在数据到达此转换之前，没有什么可以阻止您使用过滤器、正则表达式等清除这些类型的数据。我们建议您为这些特殊维度条目情况手动添加值
+-1、-2、-3等，就像在填充维度表之前添加”未知”行的具体细节一样。</p>
+</div>
+<div>
+<ul>
+<li><p>请勿在自然键中使用NULL值。NULL值无法进行比较，并且大多数数据库不会对其建立索引。即使我们支持在键中使用NULL值（这无论如何都没有太大意义），也很可能会导致严重的查找性能问题。</p></li>
+<li><p>如果输入流中的数据类型与自然键中的数据类型不同，请注意可能出现的数据转换问题。例如，如果转换输入中是字符串，而数据库中使用的是整数，请确保您能够将字符串转换为数字。将此视为最佳实践，在进行此转换之前完成，以确保其按计划工作。另一个典型的问题示例是浮点数比较。请避免使用这些。我们建议您使用合理的数据类型，如整数或长整数。避免使用双精度、十进制或像Oracle的Number（无长度或精度；它隐式使用精度38，导致我们使用较慢的BigNumber数据类型）这样的通用数据类型。</p></li>
+</ul>
+</div>
+<h3 id="更新">更新</h3>
+<div>
+<p>&lt;</p>
+</div>
+</div>
+</body>
+</html>

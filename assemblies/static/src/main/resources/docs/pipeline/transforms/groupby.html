@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>groupby.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="分组依据">分组依据</h1>
+<h2 id="描述">描述</h2>
+<p>“分组依据”转换会根据指定的一个字段或一组字段，对来自源的行进行分组。为每个组生成一个新行。它还可以为这些组生成一个或多个聚合值。常见用途包括计算每个产品的平均销售额，以及统计库存中某一物品的数量。“分组依据”转换是为已排序的输入设计的。如果输入未排序，只有连续的两行会被正确分组。如果在Hfxt外部对数据进行排序，字段中数据的大小写敏感性可能会产生意外的分组结果。可以使用”内存分组依据”转换来处理未排序的输入。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>包含所有行？</td>
+<td>如果希望输出中包含所有行，而不仅仅是聚
+合行，请启用此选项；为了在输出中区分这两种
+类型的行，输出中需要一个标志。在这种情况下
+，必须指定标志字段的名称（类型为布尔值）。</td>
+</tr>
+<tr>
+<td>临时文件目录</td>
+<td>存储临时文件的目录（当 启用”包含所有行”选项且分组后的行数超过5000
+行时需要此目录）；默认是系统的标准临时目录</td>
+</tr>
+<tr>
+<td>TMP文件前缀</td>
+<td>指定命名临时文件时使用的文件前缀</td>
+</tr>
+<tr>
+<td>添加行号，每组重新开始</td>
+<td>启用 此选项可添加一个行号，每行组从1重新开始。</td>
+</tr>
+<tr>
+<td>行号字段名称</td>
+<td>添加的用于包含行号的字段名称。</td>
+</tr>
+<tr>
+<td>始终返回一行</td>
+<td>如果启用此选项，“分组依 据”转换将始终返回一个结果行，即使没有输入
+行。如果要统计行数，此选项会很有用。不启用
+此选项，永远不会得到计数为零（0）的结果。</td>
+</tr>
+<tr>
+<td>分组字段表</td>
+<td>指定要依据其进行分组的字段
+。点击”获取字段”可从输入流中添加所有字段。</td>
+</tr>
+<tr>
+<td>聚合表</td>
+<td><div>
+<div>
+<p>指定必须进行聚合的字段、聚合方法以及
+生成的新字段的名称。以下是可用的聚合方法：</p>
+</div>
+<div>
+<ul>
+<li><p>求和</p></li>
+<li><p>平均值（均值）</p></li>
+<li><p>中位数</p></li>
+<li><p>百分位数</p></li>
+<li><p>最小值</p></li>
+<li><p>最大值</p></li>
+<li><p>值的数量（N）</p></li>
+<li><p>用逗号（,）分隔连接字符串</p></li>
+<li><p>第一个非空值</p></li>
+<li><p>最后一个非空值</p></li>
+<li><p>第一个值（包括空值）</p></li>
+<li><p>最后一个值（包括空值）</p></li>
+<li><p>累积求和（仅”所有行”选项可用！）</p></li>
+<li><p>累积平均值（仅”所有行”选项可用！）</p></li>
+<li><p>标准差（总体）</p></li>
+<li><p>用 &lt;值&gt;</p></li>
+</ul>
+<p>分隔连接字符串：在”值”列中指定分隔符（支持 十六进制）</p>
+<ul>
+<li><p>不同值的数量</p></li>
+<li><p>行数（无字段参数）</p></li>
+<li><p>标准差（样本）</p></li>
+<li><p>百分位数（最近秩方法）</p></li>
+<li><p>用换行符（CRLF）分隔连接字符串</p></li>
+<li><p>用 &lt;值&gt;</p></li>
+</ul>
+<p>分隔连接不同值：在”值”列中指定分隔符（支持 十六进制）</p>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

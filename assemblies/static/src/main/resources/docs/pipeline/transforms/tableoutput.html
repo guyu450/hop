@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tableoutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="表输出">表输出</h1>
+<h2 id="描述">描述</h2>
+<p>“表输出”转换将数据插入到关系数据库表中。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称，此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>写入数据的数据库连接</td>
+</tr>
+<tr>
+<td>目标模式</td>
+<td>要写入数据的表的模式名称
+。这对于允许表名中包含句点的数据源很重要。</td>
+</tr>
+<tr>
+<td>目标表</td>
+<td>写入数据的表的名称。</td>
+</tr>
+<tr>
+<td>提交大小</td>
+<td>使用事务将行插入数据库表。如果N大于零 (0)，则每N行提
+交一次连接；否则，不使用事务。（速度较慢）</td>
+</tr>
+<tr>
+<td>截断表</td>
+<td>如果希 望在将第一行插入表之前截断表，请选择此选项</td>
+</tr>
+<tr>
+<td>在第一行时截断</td>
+<td>如果希 望在转换接收到第一行时截断表，请选择此选项</td>
+</tr>
+<tr>
+<td>忽略插入错误</td>
+<td>使Hfxt忽略 所有插入错误，例如违反主键的错误。不过，最
+多将记录20条警告。此选项不适用于批量插入。</td>
+</tr>
+<tr>
+<td>指定数据库字段</td>
+<td>启用此选项可在”数据库字段”选项卡中
+指定字段。否则，默认情况下将考虑所有字段。</td>
+</tr>
+<tr>
+<td>跨表分区数据</td>
+<td><div>
+<div>
+<p>用于将数据拆分到多个表中。例如，不
+是将所有数据插入到SALES表中，而是将数据放
+入SALES_200510、SALES_200511、SALES_200512
+等表中。在没有分区表且/或不允许插入到UNION
+ALL视图或继承表的主表的系统上使用此
+选项。SALES视图可让您报告完整的销售情况：</p>
+</div>
+<div>
+<div>
+<pre><code>CREATE OR REPLACE VIEW SALES AS
+SELECT * FROM SALES_200501
+UNION ALL
+SELECT * FROM SALES_200502
+UNION ALL
+SELECT * FROM SALES_200503
+UNION ALL
+SELECT * FROM SALES_200504
+...</code></pre>
+</div>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>使用批量更新进行插入</td>
+<td>如果希望使用批量插入，请启用此选
+项。此功能将插入语句分组，以减少与数据库的
+往返次数。这是最快的选项，默认情况下启用。</td>
+</tr>
+<tr>
+<td>表名是否在字段中定义？</td>
+<td>使用这些选项可将数据拆分到一个或
+多个表中；目标表的名称在您指定的字段中定义
+。例如，如果将客户数据存储在gender字段中，
+数据可能最终存储在M和F表中（男性和女性）。
+有一个选项可排除包含表名的字段插入到表中。</td>
+</tr>
+<tr>
+<td>包含表名的字段</td>
+<td>当启用”表名是否在字段中定
+义？“选项时，在此处输入要使用的字段名称。</td>
+</tr>
+<tr>
+<td>存储表名字段</td>
+<td>当启用”表名是否在字段中定义？
+“选项时，您可以选择是否将此字段写入表中。</td>
+</tr>
+<tr>
+<td>返回自动生成的键</td>
+<td>如果希望 获取通过将行插入表中生成的键，请启用此选项</td>
+</tr>
+<tr>
+<td>自动生成键字段的名称</td>
+<td>指定输出行中包含自动生成键的新字段的名称</td>
+</tr>
+<tr>
+<td>SQL</td>
+<td>自动生成用于创建输出表的SQL</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

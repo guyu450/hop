@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>kafkaconsumer.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="kafka消费者">Kafka消费者</h1>
+<h2 id="描述">描述</h2>
+<p>Kafka消费者转换从Kafka提取流数据。它运行一个子管道，该子管道根据消息批次大小或持续时间执行，使您能够近乎实时地处理连续的记录流。此子管道必须以注入器转换开始。您可以定义要接受处理的消息数量，以及流活动数据和系统指标的特定数据格式。您可以设置此转换来收集监控事件、跟踪用户对数据流的消耗以及监控警报。Kafka记录存储在主题中，并且包含记录发布到的类别。主题被划分为一组称为分区的日志。Kafka通过在消费者组之间分配分区来扩展主题消费。消费者组是共享一个公共组标识符的一组消费者。由于Kafka消费者转换会持续摄取流数据，您可能希望在父管道或子管道中使用中止转换，以针对特定工作流停止从Kafka消费记录。例如，您可以按定时计划运行父管道，或者如果传感器数据超过预设范围则中止子管道。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 83%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>此转换的名称</td>
+</tr>
+<tr>
+<td>Kafka管道</td>
+<td><p>通过输入其路径或点击 <em>浏览</em>
+并选择路径来指定要执行的管道。</p>
+<p><strong>注意：</strong> 此管道 <strong>必须</strong>
+以注入器转换开始。</p></td>
+</tr>
+</tbody>
+</table>
+<h3 id="设置">设置</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>引导服务器</td>
+<td>Kafka集群中引导服务器的逗号分隔列表</td>
+</tr>
+<tr>
+<td>主题</td>
+<td>输入要从中消费流数据（消息）的每个Kafka主题的名称。</td>
+</tr>
+<tr>
+<td>消费者组</td>
+<td><p>输入希望此消费者成为其成员的组的名称。每个Kafka消费
+者转换将启动一个用于消费的单线程。如果留空，它将默认为
+<em>Hfxt</em>。</p>
+<p>当作为消费者组的一部分时，每个消费者
+将被分配到它订阅的主题的分区的一个子集，这将锁定这些分
+区。Kafka消费者转换的每个实例将仅运行一个消费者线程。</p></td>
+</tr>
+</tbody>
+</table>
+<h3 id="批次">批次</h3>
+<div>
+<p>使用此选项卡确定在处理之前要消费多少消息。您可以指定消息计数和/或特定的时间量。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">虽然任何一个选项都会触发消费，但第一个满足的选项将启动批次的管道。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>持续时间（毫秒）</td>
+<td>以毫秒为单位指定时间。此值是转换在
+执行管道之前收集记录所花费的时间量。如果设置为值
+“0”，则记录数量触发消费。</td>
+</tr>
+<tr>
+<td>记录数量</td>
+<td>指定一个数字。每收到 “X” 条记录后，将执行指定的管道，并且这 “X”
+条记录将被传递到管道。如果设置为值 “0”，则持续时间触发消费。</td>
+</tr>
+<tr>
+<td>偏移管理</td>
+<td><div>
+<div>
+<p>选择何时提交</p>
+</div>
+<div>
+<ul>
+<li><p>读取记录时</p></li>
+<li><p>批次完成时</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段">字段</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入名称</td>
+<td><div>
+<div>
+<p>输入名称从Kafka流接收。默认接收以下内容：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>键</strong>：确定
+消息到分区的分布。如果不存在键，消息将从分区中随机分布。</p></li>
+<li><p><strong>消息</strong>：记录中包
+含的单个消息。每个记录由一个键、一个值和一个时间戳组成。</p></li>
+<li><p><strong>主题</strong>：记录发布到的类别。</p></li>
+<li><p><strong>分区</strong>：
+一个不断追加的有序记录序列。消费者数量不能超过分区数量。</p></li>
+<li><p><strong>偏移量</strong>：Kaf
+ka为每个记录分配的顺序ID号。它在分区内唯一标识每个记录。</p></li>
+<li><p><strong>时间戳</strong>：消息在服务器上接收的时间。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>输出名称</td>
+<td>“输出名称” 可以映射到订阅者和成员要求。</td>
+</tr>
+<tr>
+<td>类型</td>
+<td><div>
+<div>
+<p>“类型” 字段定义流记录的
+数据格式。您必须选择生成记录的相同数据类型。此字段适用于 “键” 和 “消息”
+输入名称。选项包括：</p>
+</div>
+<div>
+<ul>
+<li><p>字符串</p></li>
+<li><p>布尔值</p></li>
+<li><p>数字</p></li>
+<li><p>整数</p></li>
+<li><p>二进制</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="结果字段">结果字段</h2>
+<div>
+<div>
+<p>从子管道中的转换返回字段，以便在此管道中进行进一步处理。</p>
+</div>
+<h3 id="选项-1">选项</h3>
+<div>
+<p>使用此选项卡配置Kafka消费者代理源的属性格式。为方便起见，已包含一些最常见的属性格式。您可以输入任何所需的Kafka属性。有关这些输入名称的更多信息，请参阅
+Kafka文档站点：https://kafka.apache.org/documentation/。</p>
+</div>
+<div>
+<p>默认包含的选项如下：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">auto.offset.reset</td>
+<td style="text-align: left;">latest</td>
+</tr>
+<tr>
+<td style="text-align: left;">ssl.key.password</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ssl.keystore.location</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ssl.keystore.password</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ssl.truststore.location</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">ssl.truststore.password</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误处理">错误处理</h3>
+<div>
+<p>Kafka消费者支持错误处理，但这
+<strong>仅限于批次大小等于1的情况</strong>（来自Kafka队列的记录逐个处理）。在这种情况下，每当来自Kafka队列的记录在调用的子管道中产生错误时，该记录将被发送到错误路径进行进一步处理。进入错误路径的记录将在Kafka中提交，并且队列中的下一条记录可以毫无问题地进行处理。除了错误处理插入的错误字段外，流入错误路径的记录布局将是
+“字段” 选项卡中指定的布局。</p>
+</div>
+<div>
+<p>在任何情况下，如果Kafka队列中有一条记录阻止进一步记录的处理（因为它在处理过程中产生错误），并且我们希望将其从队列中
+“移除”，以便我们可以处理队列中的其余记录，此功能都非常有用。失败的记录可以保存到某个位置（例如保存到文件或数据库表）以供进一步调查。</p>
+</div>
+<h3 id="avro和模式注册表">Avro和模式注册表</h3>
+<div>
+<p>以下是从Kafka服务器消费Avro记录值所需的一些选项。Avro值的模式不会发送到Kafka，而是发送到模式注册表。因此，您需要有一个可用的模式注册表。以下是在Confluent
+Cloud
+Kafka实例上使其工作所需设置的一些选项。软件堆栈的各个部分需要进行身份验证，因此存在一些冗余。我们建议您将这些选项放在环境配置文件的变量中。</p>
+</div>
+<p>选项</p>
+</div>
+<p>示例</p>
+<p>schema.registry.url</p>
+<p>https://abcd-12345x.europe-west3.gcp.confluent.cloud</p>
+<p>key.deserializer</p>
+<p>org.apache.kafka.common.serialization.StringDeserializer</p>
+<p>value.deserializer</p>
+<p>io.confluent.kafka.serializers.KafkaAvroDeserializer</p>
+<p>value.converter.schema.registry.url</p>
+<p>https://abcd-12345x.europe-west3.gcp.confluent.cloud</p>
+<p>sasl.jaas.config</p>
+<p>org.apache.kafka.common.security.plain.PlainLoginModule required
+username="CLUSTER_API_KEY" password="CLUSTER_API_SECRET";</p>
+<p>security.protocol</p>
+<p>SASL_SSL</p>
+<p>basic.auth.credentials.source</p>
+<p>USER_INFO</p>
+<p>basic.auth.user.info</p>
+<p>CLUSTER_API_KEY:CLUSTER_API_SECRET</p>
+<p>schema.registry.basic.auth.user.info</p>
+<p>SCHEMA_REGISTRY_API_KEY:SCHEMA_REGISTRY_API_SECRET</p>
+<p>sasl.mechanism</p>
+<p>PLAIN</p>
+</body>
+</html>

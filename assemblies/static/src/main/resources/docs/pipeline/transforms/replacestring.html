@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>replacestring.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="字符串替换">字符串替换</h1>
+<h2 id="描述">描述</h2>
+<p>“字符串替换”转换操作会对字符串字段执行简单的搜索和替换操作。它还支持正则表达式和组引用。在替换字符串中，组引用以
+$n 的形式表示，其中 n 是组的编号。你还可以使用十六进制替换特殊字符。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称。在一个插件中，此名称必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输入流字段</td>
+<td style="text-align: left;">需要进行替换操作的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出流字段</td>
+<td
+style="text-align: left;">结果字段。如果你将”输出流字段”留空，它将替换”输入流字段”中的值。否则，替换后的值将输出到一个新字段中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用正则表达式</td>
+<td
+style="text-align: left;">指定是否使用正则表达式来指定要替换的值。此值必须为
+Y 或 N。</td>
+</tr>
+<tr>
+<td style="text-align: left;">搜索</td>
+<td style="text-align: left;">搜索特定模式。你可以使用通配符 (*)
+匹配多个字符。如果你使用正则表达式，请在此字段中指定模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">替换为</td>
+<td
+style="text-align: left;">指定用于替换搜索模式的值。如果你使用正则表达式，请在此处指定字符串的替换部分。</td>
+</tr>
+<tr>
+<td style="text-align: left;">设置为空字符串？</td>
+<td style="text-align: left;">指定是否将字段值替换为空字符串。此值必须为
+Y 或 N。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用字段替换</td>
+<td style="text-align: left;">用你指定的字段值替换搜索模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">全字匹配</td>
+<td
+style="text-align: left;">指定是否必须全字匹配搜索模式才能进行替换。此值必须为
+Y 或 N。</td>
+</tr>
+<tr>
+<td style="text-align: left;">区分大小写</td>
+<td style="text-align: left;">指定搜索是否区分大小写。此值必须为 Y 或
+N。</td>
+</tr>
+<tr>
+<td style="text-align: left;">是否为 Unicode</td>
+<td style="text-align: left;">指定搜索是否使用 Unicode 编码。此值必须为
+Y 或 N。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>你可以按如下方式解析字符串的各个部分</p>
+</div>
+<div>
+<ul>
+<li><p>正则表达式 = ^([0-9]{4})([0-9]{7})$</p></li>
+<li><p>替换为 = $2</p></li>
+</ul>
+</div>
+<div>
+<p>这将把任何 11 位数字替换为最后 7 位数字。</p>
+</div>
+</div>
+</body>
+</html>

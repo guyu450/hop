@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>userdefinedjavaclass.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="用户自定义java类">用户自定义Java类</h1>
+<h2 id="描述">描述</h2>
+<p>用户自定义Java类转换允许您输入用户自定义Java类，以驱动完整转换的功能。本质上，此转换允许您在转换中编写自己的插件。此转换的目标不是让用户在转换中进行全面的Java开发。显然，我们有一整套插件系统来协助完成这部分工作。目标是让用户用尽可能少的代码定义方法和逻辑，并尽可能快速地执行。为此，我们使用Janino项目库，它能在运行时以类的形式编译Java代码。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div>
+<div>
+<p>转换名称</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>转换的名称。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><div>
+<div>
+<p>类代码</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>Java代码。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><div>
+<div>
+<p>字段</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>输出字段列表。</p>
+</div>
+<div>
+<ul>
+<li><p>字段名：输出字段的名称。</p></li>
+<li><p>类型：字段的类型。</p></li>
+<li><p>长度：字段的长度。</p></li>
+<li><p>精度：字段的精度。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><div>
+<div>
+<p>参数</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>您可以使用”参数”表来
+避免使用硬编码的字符串值，例如字段名（例如”customer”）。</p>
+</div>
+<div>
+<ul>
+<li><p>标签：参数标签。</p></li>
+<li><p>值：参数值。</p></li>
+<li><p>描述：参数的描述。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><div>
+<div>
+<p>信息转换</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>从中读取数据的附加转换</p>
+</div>
+<div>
+<ul>
+<li><p>标签</p></li>
+<li><p>转换：从哪个转换读取数据。</p></li>
+<li><p>描述</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><div>
+<div>
+<p>目标转换</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>目标转换</p>
+</div>
+<div>
+<ul>
+<li><p>标签</p></li>
+<li><p>转换：输出到哪个转换。</p></li>
+<li><p>描述</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><div>
+<div>
+<p>测试类</p>
+</div>
+</div></td>
+<td><div>
+<div>
+<p>测试该类。</p>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="用法">用法</h2>
+<div>
+<h3 id="处理行">处理行</h3>
+<div>
+<p>处理器代码定义了processRow()方法，它是转换的核心。管道会在一个紧密的循环中调用此方法，并且会一直持续，直到返回false。</p>
+</div>
+<div>
+<div>
+<pre><code>String firstnameField;
+String lastnameField;
+String nameField;
+
+public boolean processRow() throws HfxtException
+{
+    // 出于性能考虑，我们只查找一次参数。
+    //
+    if (first) {
+      firstnameField = getParameter(&quot;FIRSTNAME_FIELD&quot;);
+      lastnameField = getParameter(&quot;LASTNAME_FIELD&quot;);
+      nameField = getParameter(&quot;NAME_FIELD&quot;);
+      first=false;
+    }
+
+    // 首先，从默认输入分支获取一行数据
+    //
+    Object[] r = getRow();
+
+    // 如果行对象为null，我们就完成了处理。
+    //
+    if (r == null) {
+      setOutputDone();
+      return false;
+    }
+
+    // 调用createOutputRow()始终是最安全的，以确保输出行的Object[]足够大
+    // 能够处理您在这个转换中创建的任何新字段。
+    //
+    Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+    String firstname = get(Fields.In, firstnameField).getString(r);
+    String lastname = get(Fields.In, lastnameField).getString(r);
+
+    // 在输出字段中设置值
+    //
+    String name = firstname+&quot; &quot;+lastname;
+    get(Fields.Out, nameField).setValue(outputRow, name);
+
+    // putRow会将该行数据发送到默认输出分支。
+    //
+    putRow(data.outputRowMeta, outputRow);
+
+    return true;</code></pre>
+</div>
+</div>
+<h3 id="错误处理">错误处理</h3>
+<div>
+<p>如果您希望Hfxt处理在管道中运行您的类时可能发生的错误，您必须实现自己的错误处理代码。在添加任何错误处理代码之前，在Hfxt客户端画布上右键单击”用户自定义Java类”转换，然后在出现的菜单中选择”错误处理”。生成的转换错误处理设置对话框包含用于指定错误目标转换以及相关字段名称的选项，您将在定义的代码中使用这些选项来实现错误处理。</p>
+</div>
+<div>
+<div>
+<pre><code>try {
+
+Object     numList = strsList.stream()
+                        .map( new ToInteger() )
+                     .sorted( new ReverseCase() )
+                     .collect( Collectors.toList() );
+
+    get( Fields.Out, &quot;reverseOrder&quot; ).setValue( row, numList.toString() );
+
+} catch (NumberFormatException ex) {
+    // 数字列表包含一个无法转换为整数的值。
+    rowInError = true;
+    errMsg = ex.getMessage();
+    errCnt = errCnt + 1;
+}
+
+if ( !rowInError ) {
+    putRow( data.outputRowMeta, row );
+} else {
+    // 将错误输出到错误分支。右键单击转换并选择“错误处理...”
+    putError(data.outputRowMeta, row, errCnt, errMsg, &quot;Not allowed&quot;, &quot;DEC_0&quot;);
+}</code></pre>
+</div>
+</div>
+<div>
+<p>上面代码示例中的try语句用于测试numList是否包含有效的数字。如果列表中包含无效数字，则使用putError来处理错误，并将其定向到示例管道中的wlog:
+ErrorPath转换。ErrorPath转换也在”用户自定义Java类”转换的”目标转换”选项卡中指定。</p>
+</div>
+<h3 id="日志记录">日志记录</h3>
+<div>
+<p>如果您希望Hfxt记录您的类中的数据操作（如读取、写入、输出或更新数据），则需要在定义的转换中实现日志记录。以下代码是如何实现日志记录的示例：</p>
+</div>
+<div>
+<div>
+<pre><code>putRow( data.outputMeta, r );
+
+if ( checkFeedback( getLinesOutput() ) ) {
+  if ( log.isBasic() ) {
+    logBasic( &quot;Have I got rows for you! &quot; + getLinesOutput() );
+  }
+}</code></pre>
+</div>
+</div>
+<h3 id="类和代码片段">类和代码片段</h3>
+<div>
+<p>您可以通过”类和代码片段”面板浏览定义的类以及相关代码片段和字段。您可以右键单击此树中的任何项目，以进行删除、重命名或显示示例操作。</p>
+</div>
+<div>
+<p><strong>类</strong></p>
+</div>
+<div>
+<p>“类”文件夹指示哪些类在”类代码”面板中有对应的代码块标签。</p>
+</div>
+<div>
+<p><strong>代码片段</strong></p>
+</div>
+<div>
+<p>“代码片段”文件夹显示与”用户自定义Java类”转换相关的内部Hfxt代码。这些片段作为您的类代码的参考显示。</p>
+</div>
+<div>
+<p><strong>输入字段</strong></p>
+</div>
+<div>
+<p>“输入字段”文件夹包含您在代码中定义的任何输入字段。在处理定义的代码时，您将处理输入和输出字段。处理输入字段有很多方法。例如，首先，请查看以下关于输入行的描述。</p>
+</div>
+<div>
+<div>
+<pre><code>IRowMeta inputRowMeta = getInputRowMeta();</code></pre>
+</div>
+</div>
+<div>
+<p>inputRowMeta对象包含输入行的元数据。它包括所有字段、它们的数据类型、长度、名称、格式掩码等等。您可以使用此对象查找输入字段。例如，如果您要查找名为”customer”的字段，您可以使用以下代码。</p>
+</div>
+<div>
+<div>
+<pre><code>IValueMeta customer = inputRowMeta.searchValueMeta(&quot;year&quot;);</code></pre>
+</div>
+</div>
+<div>
+<p>如果您需要为通过管道的每一行查找字段名，这可能会很慢，因此您可以在第一段代码中提前查找字段名，如下例所示：</p>
+</div>
+<div>
+<div>
+<pre><code>if (first) {
+ yearIndex = getInputRowMeta().indexOfValue(getParameter(&quot;YEAR&quot;));
+ if (yearIndex&lt;0) {
+   throw new HfxtException(&quot;Year field not found in the input row, check parameter &#39;YEAR&#39;\!&quot;);
+ }
+}</code></pre>
+</div>
+</div>
+<div>
+<p>要获取”year”字段中包含的整数值，您可以使用以下结构。</p>
+</div>
+<div>
+<div>
+<pre><code>Object[] r = getRow();
+...
+Long year = inputRowMeta().getInteger(r, yearIndex);</code></pre>
+</div>
+</div>
+<div>
+<p>为了使这个过程更简单，您可以使用以下形式的快捷方式。</p>
+</div>
+<div>
+<div>
+<pre><code>Long year = get(Fields.In, &quot;year&quot;).getInteger(r);</code></pre>
+</div>
+</div>
+<div>
+<p>此方法也考虑了上面提到的基于索引的优化。</p>
+</div>
+</div>
+<h2 id="阻止特定代码">阻止特定代码</h2>
+<div>
+<div>
+<p>作为一项简单的安全措施，您可以阻止包含特定字符串的代码执行。这可以通过在位于&lt;Hfxt安装目录&gt;/plugins/transforms/janino的<code>codeExclusions.xml</code>文件中添加排除项来实现。</p>
+</div>
+<div>
+<p>示例：</p>
+</div>
+<div>
+<div>
+<pre><code>    &lt;exclusions&gt;
+        &lt;exclusion&gt;System.&lt;/exclusion&gt;
+        &lt;exclusion&gt;HfxtVfs.&lt;/exclusion&gt;
+    &lt;/exclusions&gt;</code></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

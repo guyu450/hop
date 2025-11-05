@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>filterrows.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="筛选行">筛选行</h1>
+<h2 id="描述">描述</h2>
+<p>“筛选行”转换允许您根据条件和比较来筛选行。如果将”真”或”假”结果/分支连接到另一个转换，它将影响工作流。有3个路径可用作输出（真/假/主输出）。主输出仅遵循”真”路径。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>一旦此转换连接到上一个转换（一个或多个并接收输入），您可以点击”&lt;字段&gt;“、”=“和”&lt;值&gt;“区域来构建一个条件。下游转换可以连接到”真”或”假”分支。</p>
+</div>
+<div>
+<p>右键单击一个条件以进行编辑、删除、移动或添加子条件。</p>
+</div>
+<div>
+<p>您可以在”筛选行”转换中使用正则表达式。有关更多信息，请参阅”转换”部分下的”筛选行”。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: left;">要输入”IN
+LIST”运算符，请使用用分号分隔的字符串值。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">列表也适用于数值，如整数。在这种情况下，值列表必须以字符串数据类型输入，例如：2;3;7;8。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<p>请记住，所有转换都是并行执行的，因此在某些情况下，“真”和”假”路径都会运行。</p>
+</div>
+<div>
+<p>“筛选行”转换仅检测输入流中的字段。如果您想根据变量值筛选行，可以修改上一个转换。例如，表输入转换可以在SQL中将变量作为另一个字段包含在内，例如”select
+field1, field2, ${myvar} as field3 from
+table1”，然后在筛选行条件中您可以说field1 =
+field3。或者，您可以使用”获取变量”转换在字段中设置参数。有各种SQL查询语句，例如，如果您始终需要返回字段和结果，可以使用”IF
+EXISTS”或”IS NULL”始终返回结果。</p>
+</div>
+<div>
+<p>在名为”filter-rows-basic.hpl”的示例项目中可以找到一个示例。</p>
+</div>
+<div>
+<p>如果由于元数据注入，您无法选择所需的字段，因为该字段尚不存在，请参阅此文档：https://hfxt.apache.org//manual/latest/pipeline/transforms/filterrows.html#_mdi_example
+以及示例项目中的示例：metadata-injection/filter-rows-mdi-parent.hpl。</p>
+</div>
+<div>
+<p>本质上，要使用尚不可选的MDI字段（例如在”筛选行”转换中），您可以设置一个具有相似字段和相似条件的转换。然后在文本编辑器中打开管道，并将字段名称更新为尚不存在的MDI字段名称。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>您可以根据需要选择更改此转换的名称。</td>
+</tr>
+<tr>
+<td>将”真”数据发送到转换</td>
+<td>指定条件为真的行将被发送到此转换</td>
+</tr>
+<tr>
+<td>将”假”数据发送到转换</td>
+<td>指定条件为假的行将被发送到此转换</td>
+</tr>
+<tr>
+<td>条件</td>
+<td></td>
+</tr>
+<tr>
+<td>添加条件</td>
+<td><p>点击添加条件。添加条件会将原始条件转换为子级条件。</p>
+<p>* 点击子条件可在条件树中向下一级进行编辑。</p>
+<p>* 右键单击条件可进行编辑、删除、移动或添加子条件。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="筛选">筛选</h2>
+<div>
+<h3 id="基于变量值筛选行">基于变量值筛选行</h3>
+<div>
+<p>“筛选行”转换仅检测输入流中的字段。如果您想根据变量值筛选行，可以像修改表输入转换那样修改上一个转换。例如，表输入转换可以在SQL中将变量作为另一个字段包含在内，例如</p>
+</div>
+<div>
+<div>
+<pre><code>SELECT field1, field2, ${myvar} AS field3 FROM table1</code></pre>
+</div>
+</div>
+<div>
+<p>，然后在筛选行条件中您可以说field1 =
+field3。或者，您可以使用”获取变量”转换在字段中设置参数。</p>
+</div>
+<div>
+<p>您可以在”筛选行”转换中使用正则表达式。</p>
+</div>
+<div>
+<p>一个查询：</p>
+</div>
+<div>
+<div>
+<pre><code>SELECT field1,
+field2,
+${myvar} AS field3
+FROM table
+WHERE field1=xxxx</code></pre>
+</div>
+</div>
+<div>
+<p>然后在筛选行条件中，您可以有：</p>
+</div>
+<div>
+<div>
+<pre><code>field1 = field3</code></pre>
+</div>
+</div>
+<div>
+<p><strong>仅供参考</strong> -
+除了像上面所示的那样向表输入添加字段外，您还可以使用”获取变量”转换向流中添加字段。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">您可以在”筛选行”转换中使用正则表达式。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<p>请记住，所有转换都是并行执行的，因此在某些情况下，“真”和”假”路径都会运行。在某些情况下，在SQL查询中使用where筛选比使用”筛选行”转换更好。如果您需要返回任何一种情况（真/假）的输入行，您可以使用各种SQL查询方法，例如使用”IF
+EXISTS”或”IS NULL”始终返回结果。</p>
+</div>
+<h3 id="筛选特殊字符">筛选特殊字符</h3>
+<div>
+<p>要筛选特殊字符，如显式EOF（例如来自旧的COBOL文件），请在”筛选行”转换中使用正则表达式，语法为：“\x${1A}”，其中\x表示十六进制表示，括号中的1A是要匹配的十六进制格式的EOF字符。</p>
+</div>
+</div>
+<h2 id="元数据注入支持">元数据注入支持</h2>
+<div>
+<div>
+<p>此转换的所有字段都支持元数据注入。您可以将此转换与ETL元数据注入一起使用，以便在运行时将元数据传递到您的管道中。</p>
+</div>
+<div>
+<p>如果由于元数据注入，您无法选择所需的字段，因为该字段尚不存在，请参阅此文档：https://hfxt.apache.org//manual/latest/pipeline/transforms/filterrows.html#_mdi_example
+以及示例项目中的此示例：metadata-injection/filter-rows-mdi-parent.hpl。</p>
+</div>
+<div>
+<p>本质上，要使用尚不可选的MDI字段（例如在”筛选行”转换中），您可以设置一个具有相似字段和相似条件的转换。然后在文本编辑器中打开管道，并将字段名称更新为尚不存在的MDI字段名称。</p>
+</div>
+</div>
+<h2 id="条件字段的特殊注意事项">条件字段的特殊注意事项</h2>
+<div>
+<div>
+<p>“筛选行”转换是一个特殊的MDI场景，因为它具有筛选条件的嵌套结构。条件以XML格式给出。条件XML的格式与我们在.HPL文件中以XML格式存储管道元数据的格式相同。我们没有.HPL
+XML格式的DTD（文档类型定义），也没有条件的DTD。</p>
+</div>
+<div>
+<p>获取XML条件很容易：</p>
+</div>
+<div>
+<ol type="1">
+<li><p>使用您需要的不同条件创建一个示例筛选转换。这个示例转换为您提供所有信息，例如您使用的函数的值。</p></li>
+<li><p>选择转换，将其复制到剪贴板，然后粘贴到文本编辑器中。或者，您可以存储.HPL文件，然后在文本编辑器中打开.HPL文件。</p></li>
+<li><p>找到&lt;condition&gt;元素及其嵌套元素，并相应地进行修改，以便在您的MDI场景中使用。</p></li>
+</ol>
+</div>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>示例项目在”filter-rows-basic.hpl”文件中演示了一些概念。</p>
+</div>
+</div>
+<h2 id="mdi示例">MDI示例</h2>
+<div>
+<div>
+<p>下面的示例筛选条件将以下筛选条件注入到”筛选行”转换中。</p>
+</div>
+<div>
+<p>完整的示例管道可在示例项目中找到，文件名为
+<code>metadata-injection/filter-rows-mdi-parent.hpl</code> 和
+<code>metadata-injection/filter-rows-mdi-child.hpl</code></p>
+</div>
+<div>
+<div>
+<pre><code>stateCode = FL
+AND
+housenr &gt; 100</code></pre>
+</div>
+</div>
+<div>
+<div>
+<pre><code>&lt;condition&gt;
+            &lt;negated&gt;N&lt;/negated&gt;
+            &lt;conditions&gt;
+                &lt;condition&gt;
+                    &lt;negated&gt;N&lt;/negated&gt;
+                    &lt;leftvalue&gt;stateCode&lt;/leftvalue&gt;
+                    &lt;function&gt;=&lt;/function&gt;
+                    &lt;rightvalue/&gt;
+                    &lt;value&gt;
+                        &lt;name&gt;constant&lt;/name&gt;
+                        &lt;type&gt;String&lt;/type&gt;
+                        &lt;text&gt;FL&lt;/text&gt;
+                        &lt;length&gt;-1&lt;/length&gt;
+                        &lt;precision&gt;-1&lt;/precision&gt;
+                        &lt;isnull&gt;N&lt;/isnull&gt;
+                        &lt;mask/&gt;
+                    &lt;/value&gt;
+                &lt;/condition&gt;
+                &lt;condition&gt;
+                    &lt;negated&gt;N&lt;/negated&gt;
+                    &lt;operator&gt;AND&lt;/operator&gt;
+                    &lt;leftvalue&gt;housenr&lt;/leftvalue&gt;
+                    &lt;function&gt;&amp;gt;&lt;/function&gt;
+                    &lt;rightvalue/&gt;
+                    &lt;value&gt;
+                        &lt;name&gt;constant&lt;/name&gt;
+                        &lt;type&gt;Integer&lt;/type&gt;
+                        &lt;text&gt;100&lt;/text&gt;
+                        &lt;length&gt;-1&lt;/length&gt;
+                        &lt;precision&gt;0&lt;/precision&gt;
+                        &lt;isnull&gt;N&lt;/isnull&gt;
+                        &lt;mask&gt;####0;-####0&lt;/mask&gt;
+                    &lt;/value&gt;
+                &lt;/condition&gt;
+            &lt;/conditions&gt;
+        &lt;/condition&gt;</code></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

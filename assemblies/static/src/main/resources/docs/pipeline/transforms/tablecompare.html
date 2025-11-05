@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tablecompare.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="表格对比">表格对比</h1>
+<h2 id="描述">描述</h2>
+<p>表格对比转换功能会比较两个表格中的数据（前提是它们具有相同的布局），找出两个表格数据之间的差异并记录下来。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="参考对比数据标签页">参考/对比数据标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">参考连接 / 对比连接</td>
+<td
+style="text-align: left;">用于获取参考/对比表格数据的数据库连接。</td>
+</tr>
+<tr>
+<td style="text-align: left;">参考模式字段 / 对比模式字段</td>
+<td style="text-align: left;">包含参考/对比表格的模式名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">参考表字段 / 对比表字段</td>
+<td
+style="text-align: left;">包含实际的表名。这意味着只要两个表具有相同的列名，你就可以对比名称不同的两个表。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他字段标签页">其他字段标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">键字段</td>
+<td
+style="text-align: left;">应包含一个以逗号分隔的字段列表，这些字段构成了你要对比的表的”主键”。需要主键是因为没有此信息，两个表就无法正确连接。</td>
+</tr>
+<tr>
+<td style="text-align: left;">排除字段</td>
+<td
+style="text-align: left;">包含一个以逗号分隔的列列表，你希望将这些列排除在对比之外。例如，因为它们存在于第一个表中，但不存在于第二个表中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="附加字段标签页">附加字段标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">错误数量字段</td>
+<td
+style="text-align: left;">允许你指定输出列的名称，该列将包含在对比表时发现的错误总数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">参考/对比表记录数字段</td>
+<td
+style="text-align: left;">允许你指定字段的名称，该字段将包含在每个表中找到的实际记录数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">左/内/右连接错误数字段</td>
+<td
+style="text-align: left;">允许你指定字段名称，这些字段将包含每种连接类型发现的错误数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误处理键描述输入字段</td>
+<td
+style="text-align: left;">允许你指定出现错误记录的”where子句”的输出字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误处理参考/对比值输入字段</td>
+<td style="text-align: left;">允许你指定实际不同值的输出字段名称。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

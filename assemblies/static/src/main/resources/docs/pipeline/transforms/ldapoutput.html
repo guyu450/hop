@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ldapoutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="ldap输出">LDAP输出</h1>
+<h2 id="描述">描述</h2>
+<p>LDAP输出转换允许您将用户、角色和其他数据等信息写入LDAP服务器。以下部分介绍LDAP输出转换的可用选项。</p>
+<h2 id="常规选项卡">常规选项卡</h2>
+<div>
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称；此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td>主机</td>
+<td>主机可以是LDAP目录服务器的IP地址或其DNS名称。</td>
+</tr>
+<tr>
+<td>端口</td>
+<td>LDAP目录服务器的端口号。</td>
+</tr>
+<tr>
+<td>引用</td>
+<td><div>
+<div>
+<p>确定如何处理引用。</p>
+</div>
+<div>
+<ul>
+<li><p>忽略：忽略引用。</p></li>
+<li><p>跟随：自动跟随任何引用。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>取消别名引用</td>
+<td><div>
+<div>
+<p>确定如何取消别名引用。</p>
+</div>
+<div>
+<ul>
+<li><p>始终：始终取消别名引用。</p></li>
+<li><p>从不：从不取消别名引用。</p></li>
+<li><p>查找时：仅在名称解析期间取消别名引用。</p></li>
+<li><p>搜索后：仅在名称解析后取消别名引用。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>协议</td>
+<td><div>
+<div>
+<p>确定使用哪种协议。</p>
+</div>
+<div>
+<ul>
+<li><p>LDAP</p></li>
+<li><p>LDAP SSL</p></li>
+<li><p>LDAP TLS</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>使用身份验证</td>
+<td>启用LDAP身份验证。</td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>身份验证期间传递的用户名。</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>身份验证期间传递的密码。</td>
+</tr>
+<tr>
+<td>使用证书</td>
+<td>启用证书的使用。</td>
+</tr>
+<tr>
+<td>信任库路径</td>
+<td></td>
+</tr>
+<tr>
+<td>信任库密码</td>
+<td></td>
+</tr>
+<tr>
+<td>信任所有证书</td>
+<td></td>
+</tr>
+<tr>
+<td>测试连接</td>
+<td>测试配置的到LDAP服务器的连接。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="设置">设置</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作</td>
+<td
+style="text-align: left;">插入、更新、插入或更新、添加属性、删除、重命名DN（专有名称）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">多值字段分隔符</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">不存在则失败</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">DN字段名</td>
+<td style="text-align: left;">包含专有名称的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">旧DN字段名</td>
+<td style="text-align: left;">包含旧专有名称（重命名）的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">新DN字段名</td>
+<td style="text-align: left;">包含新专有名称（重命名）的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除RDN</td>
+<td style="text-align: left;">是否删除RDN（相对专有名称）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="字段选项卡">字段选项卡</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段搜索基</td>
+<td style="text-align: left;">从何处开始查找字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">属性</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">流字段</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">更新</td>
+<td style="text-align: left;">是否更新字段（是/否）</td>
+</tr>
+<tr>
+<td style="text-align: left;">获取字段</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">编辑映射</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>http.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="http">HTTP</h1>
+<h2 id="描述">描述</h2>
+<p>HTTP操作使用HTTP协议从Web服务器检索文件。此操作可用于访问合作伙伴网站上的数据。例如，每日数据导出或每日客户列表位于指定的网站。此外，软件即服务（SaaS）提供商可能会提供一个URL来定位报告。您可以调用该URL来检索包含数据的Excel文件或ZIP文件。Salesforce要求您使用SOAP
+API来检索数据。如果您公司环境中的HTTP流量过大，您可以选择使用带有HTTP身份验证的代理服务器。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>HTTP</code>操作使用HTTP协议从Web服务器检索文件。</p>
+</div>
+<div>
+<p>此操作可用于访问合作伙伴网站上的数据。</p>
+</div>
+<div>
+<p>例如，每日数据导出或每日客户列表位于指定的网站。</p>
+</div>
+<div>
+<p>此外，软件即服务（SaaS）提供商可能会提供一个URL来定位报告。</p>
+</div>
+<div>
+<p>您可以调用该URL来检索包含数据的Excel文件或ZIP文件。</p>
+</div>
+<div>
+<p>Salesforce要求您使用SOAP API来检索数据。</p>
+</div>
+<div>
+<p>如果您公司环境中的HTTP流量过大，您可以选择使用带有HTTP身份验证的代理服务器。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作名称</td>
+<td style="text-align: left;">工作流操作的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">URL</td>
+<td style="text-align: left;">要检索的文件的HTTP
+URL，或用于存储上传文件的目录名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">对每个结果行都运行？</td>
+<td
+style="text-align: left;">如果要对前一个管道生成的每一行运行此操作，请选中此选项。使用”将行复制到结果”。如果选中，将为每个结果发出HTTP请求。否则，仅检索一次文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含URL的输入字段</td>
+<td
+style="text-align: left;">如果选择了”对每个结果行都运行？“选项，此处指定的字段将确定每行的文件URL。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含上传文件名的输入字段</td>
+<td
+style="text-align: left;">如果选择了”对每个结果行都运行？“选项，此处指定的字段将确定要上传到与”包含URL的输入字段”关联的URL的本地文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含目标文件名的输入字段</td>
+<td
+style="text-align: left;">如果选择了”对每个结果行都运行？“选项，此处指定的字段将确定从与”包含URL的输入字段”关联的URL下载结果的本地文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">身份验证</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td
+style="text-align: left;">如果网站需要身份验证，请使用此用户名登录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">如果定义了用户名，这是其密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">上传用代理服务器</td>
+<td style="text-align: left;">您要通过其连接到HTTP
+URL的代理服务器的URL。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理端口</td>
+<td
+style="text-align: left;">如果定义了代理服务器，这是它监听的端口号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">对主机忽略代理</td>
+<td
+style="text-align: left;">代理重定向的正则表达式例外列表。在内联网或VPN上工作时这可能很有用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">上传文件</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">上传文件</td>
+<td
+style="text-align: left;">如果您要上传文件，这将是它在远程服务器上的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Web服务器回复</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">目标文件</td>
+<td
+style="text-align: left;">如果您要下载文件，这是它在您本地文件系统上的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">追加到指定目标文件？</td>
+<td
+style="text-align: left;">如果选中，并且目标文件已存在，Hfxt将把所有新数据追加到文件末尾。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中添加日期和时间？</td>
+<td
+style="text-align: left;">如果选中，HTTP请求的日期和时间（格式为yyyMMdd_HHmmss）将添加到目标文件名中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标文件扩展名</td>
+<td
+style="text-align: left;">如果选择了上一个选项，此字段指定目标文件名的扩展名（点后面的字母）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果文件名</td>
+<td
+style="text-align: left;">从此操作复制的任何文件都将作为结果显示；显示在此操作中复制的文件列表。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="标头选项卡">标头选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">#</td>
+<td style="text-align: left;">应处理标头的顺序</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">此HTTP标头的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">值</td>
+<td style="text-align: left;">要传递的实际标头值</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cloudera-impala</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<head>
+<meta charset="UTF-8">
+</head>
+<article>
+<h1>
+Cloudera Impala
+</h1>
+<div>
+<pre><code>    &lt;p&gt;您可以使用低延迟的SQL实现Impala在Hadoop上查询数据。如需了解更多信息，请参阅 &lt;a&gt; Impala概述&lt;/a&gt;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div&gt; 
+    &lt;p&gt;Impala本身已成为一个项目，您可以在 &lt;a&gt; Impala主页&lt;/a&gt; 找到它。&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div&gt; 
+    &lt;p&gt;查看 &lt;a&gt;文档&lt;/a&gt;，了解如何使用Kerberos安全连接到Cloudera Impala。在关系数据库连接元数据的“选项”选项卡中设置所需的选项：&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div&gt; 
+    &lt;ul&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;AllowSelfSignedCerts=1&lt;/p&gt; 
+        &lt;/li&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;AuthMech=1&lt;/p&gt; 
+        &lt;/li&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;KrbHostFQDN=&lt;code&gt;IMPALA主机名&lt;/code&gt;&lt;/p&gt; 
+        &lt;/li&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;KrbRealm=&lt;code&gt;Kerberos领域&lt;/code&gt;&lt;/p&gt; 
+        &lt;/li&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;KrbServiceName=&lt;code&gt;Impala服务名称&lt;/code&gt;&lt;/p&gt; 
+        &lt;/li&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;SSL=1&lt;/p&gt; 
+        &lt;/li&gt; 
+        &lt;li&gt; 
+            &lt;p&gt;principal=&lt;code&gt;主体名称&lt;/code&gt;&lt;/p&gt; 
+        &lt;/li&gt; 
+    &lt;/ul&gt; 
+&lt;/div&gt; 
+&lt;table&gt; 
+    &lt;colgroup&gt; 
+        &lt;col&gt; 
+        &lt;col&gt; 
+    &lt;/colgroup&gt; 
+    &lt;thead&gt; 
+        &lt;tr&gt; 
+            &lt;th&gt;选项&lt;/th&gt; 
+            &lt;th&gt;信息&lt;/th&gt; 
+        &lt;/tr&gt; 
+    &lt;/thead&gt; 
+    &lt;tbody&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;类型&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;关系型&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;驱动程序&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;使用Cloudera Impala驱动程序。您可以从Cloudera网站 &lt;a&gt;下载&lt;/a&gt; 最新版本。&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;包含的版本&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;无&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;Hfxt依赖项&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;Cloudera Impala数据库插件&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;文档&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;&lt;a&gt;文档链接&lt;/a&gt;&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;JDBC URL&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;jdbc:impala://主机名:端口;principal=主体名称&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt; 
+            &lt;td&gt;&lt;p&gt;驱动程序文件夹&lt;/p&gt;&lt;/td&gt; 
+            &lt;td&gt;&lt;p&gt;&amp;lt;Hfxt安装目录&amp;gt;/lib/jdbc&lt;/p&gt;&lt;/td&gt; 
+        &lt;/tr&gt; 
+    &lt;/tbody&gt; 
+&lt;/table&gt; </code></pre>
+</article>
+</div>
+</body>
+</html>

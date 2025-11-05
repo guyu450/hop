@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>snowflake-whm.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="snowflake仓库管理器">Snowflake仓库管理器</h1>
+<div>
+<div>
+<div>
+<p><code>Snowflake仓库管理器</code>
+操作提供了创建、删除、恢复、暂停和更改Snowflake仓库的功能。</p>
+</div>
+<div>
+<p>这使得
+Hfxt工作流能够在加载数据之前恢复仓库，完成后立即暂停仓库，还能根据部分加载任务可能需要更多处理能力的情况调整仓库大小。</p>
+</div>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<div>
+<ul>
+<li><p><strong>连接</strong>：要使用的到Snowflake数据库的连接</p></li>
+<li><p><strong>仓库名称</strong>：仓库的名称</p></li>
+<li><p><strong>操作</strong>：（创建、删除、恢复、暂停、更改）你希望对仓库执行的操作。</p></li>
+</ul>
+</div>
+<h3 id="操作创建仓库">操作：创建仓库</h3>
+<div>
+<p>此操作使用你提供的设置创建一个新仓库。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">替换？</td>
+<td
+style="text-align: left;">如果仓库已存在，用你的新设置替换现有仓库。</td>
+</tr>
+<tr>
+<td style="text-align: left;">若仓库存在则失败？</td>
+<td style="text-align: left;">如果仓库已存在，此操作将失败。如果未选中且
+“替换？” 也未选中，若仓库已存在，此操作将不执行任何操作。</td>
+</tr>
+<tr>
+<td style="text-align: left;">仓库大小</td>
+<td
+style="text-align: left;">（超小、小、中、大、超大、2倍超大、3倍超大）要创建的仓库大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">仓库类型</td>
+<td
+style="text-align: left;">（标准、企业）要创建的仓库类型。企业仓库比标准仓库有更多可用内存。</td>
+</tr>
+<tr>
+<td style="text-align: left;">最大集群大小</td>
+<td style="text-align: left;">集群化仓库的最大集群大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">最小集群大小</td>
+<td style="text-align: left;">集群化仓库的最小集群大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">自动暂停</td>
+<td style="text-align: left;">仓库在闲置多少分钟后将自动暂停。</td>
+</tr>
+<tr>
+<td style="text-align: left;">自动恢复？</td>
+<td
+style="text-align: left;">对仓库运行查询时，仓库是否应自动恢复？</td>
+</tr>
+<tr>
+<td style="text-align: left;">初始时暂停？</td>
+<td style="text-align: left;">创建的仓库是否应处于暂停状态。</td>
+</tr>
+<tr>
+<td style="text-align: left;">资源监控器</td>
+<td
+style="text-align: left;">用于跟踪Snowflake使用情况和计费的资源监控器。</td>
+</tr>
+<tr>
+<td style="text-align: left;">注释</td>
+<td style="text-align: left;">关于仓库的注释。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="操作删除仓库">操作：删除仓库</h3>
+<div>
+<p>此操作从Snowflake中删除一个仓库。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">若仓库不存在则失败？</td>
+<td style="text-align: left;">如果仓库不存在，此操作将失败。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="操作恢复仓库">操作：恢复仓库</h3>
+<div>
+<p>此操作在Snowflake中恢复一个仓库。在此操作之前，仓库必须处于暂停状态，否则操作将失败。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">若仓库不存在则失败？</td>
+<td style="text-align: left;">如果仓库不存在，此操作将失败。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="操作暂停仓库">操作：暂停仓库</h3>
+<div>
+<p>此操作在Snowflake中暂停一个仓库。在此操作之前，仓库必须处于启动状态，否则操作将失败。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">若仓库不存在则失败？</td>
+<td style="text-align: left;">如果仓库不存在，此操作将失败。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="操作更改仓库">操作：更改仓库</h3>
+<div>
+<p>此操作更改仓库，使用户能够调整大小、更改仓库类型、更改自动暂停设置等。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">若仓库不存在则失败？</td>
+<td style="text-align: left;">如果仓库不存在，此操作将失败。</td>
+</tr>
+<tr>
+<td style="text-align: left;">仓库大小</td>
+<td
+style="text-align: left;">（超小、小、中、大、超大、2倍超大、3倍超大）要创建的仓库大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">仓库类型</td>
+<td
+style="text-align: left;">（标准、企业）要创建的仓库类型。企业仓库比标准仓库有更多可用内存。</td>
+</tr>
+<tr>
+<td style="text-align: left;">最大集群大小</td>
+<td style="text-align: left;">集群化仓库的最大集群大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">最小集群大小</td>
+<td style="text-align: left;">集群化仓库的最小集群大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">自动暂停</td>
+<td style="text-align: left;">仓库在闲置多少分钟后将自动暂停。</td>
+</tr>
+<tr>
+<td style="text-align: left;">自动恢复？</td>
+<td
+style="text-align: left;">对仓库运行查询时，仓库是否应自动恢复？</td>
+</tr>
+<tr>
+<td style="text-align: left;">资源监控器</td>
+<td
+style="text-align: left;">用于跟踪Snowflake使用情况和计费的资源监控器。</td>
+</tr>
+<tr>
+<td style="text-align: left;">注释</td>
+<td style="text-align: left;">关于仓库的注释。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

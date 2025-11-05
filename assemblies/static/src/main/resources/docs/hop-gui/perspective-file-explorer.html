@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>perspective-file-explorer.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="文件资源管理器视角">文件资源管理器视角</h1>
+<h2 id="描述">描述</h2>
+<p>文件资源管理器视角是您进行大量文件操作的地方。此视角包含Hfxt已知的最常见文件类型的处理程序。这些显然包括hwf（工作流）和hpl（管道），但也包括JSON、CSV、TXT、XML、Markdown、SVG、日志和SAS
+7
+BDAT文件。文件资源管理器视角也是您通过Git集成来管理项目版本控制的地方。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>文件资源管理器视角是您进行大量文件操作的地方。此视角包含Hfxt已知的最常见文件类型的处理程序。这些显然包括hwf（工作流）和hpl（管道），但也包括JSON、CSV、TXT、XML、Markdown、SVG、日志和SAS
+7 BDAT文件。文件资源管理器视角也是您通过 Git集成
+来管理项目版本控制的地方。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">尽管功能齐全，但文件资源管理器中大多数文件类型的编辑器相当基础。预计这些将在Hfxt的后续版本中得到改进，或者如果您想通过贡献文件编辑器来帮助我们改进Hfxt，请查看
+代码贡献指南。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="文件操作">文件操作</h2>
+<div>
+<div>
+<p>文件操作可通过多个工具栏选项实现：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<ul>
+<li><p>打开选定文件：使用右箭头或双击打开选定文件。您也可以直接双击文件来打开它。如果这是一个工作流或管道，它将在
+数据编排 视角中打开。在所有其他情况下，文件将在新标签中打开。</p></li>
+<li><p>创建文件夹：添加新文件夹。</p></li>
+<li><p>删除：删除选定的文件或文件夹。</p></li>
+<li><p>重命名：重命名文件或文件夹。</p></li>
+<li><p>刷新：刷新文件列表。</p></li>
+<li><p>显示或隐藏文件：显示或隐藏文件或目录。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="git集成">Git集成</h2>
+<div>
+<h3 id="描述-2">描述</h3>
+<div>
+<p>如果安装了git插件（文件夹
+<code>plugins/misc/git</code>），文件资源管理器将在项目主文件夹中查找
+<code>.git/config</code>
+文件。如果存在此文件，资源管理器视角将开始对列出的文件进行颜色编码：</p>
+</div>
+<div>
+<ul>
+<li><p>红色：文件尚未添加到git（未暂存）。</p></li>
+<li><p>蓝色：文件已更改（已暂存）。</p></li>
+<li><p>灰色：文件被git忽略。</p></li>
+</ul>
+</div>
+<h3 id="git">Git</h3>
+<h4 id="git信息">Git信息</h4>
+<div>
+<p>如果有关于所选文件或文件夹的信息，工具栏中的”Git信息”图标将启用。如果您点击它，您将能够在新标签中查看有关git历史记录的各种信息：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>在修订历史记录下方，您可以看到文件的修订版本。如果您选择一个修订版本，您不仅能够查看两个修订版本之间的文本差异，还可以使用标签右侧的”可视化差异”按钮。如果您选择”可视化差异”选项，GUI将切换到数据编排视角，在该视角中将打开两个新标签，分别显示更改前后的管道或工作流状态。</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>各种转换、操作和步骤将添加小信息图标，以指示它们是被更改、删除还是添加。</p>
+</div>
+<h3 id="右键菜单选项">右键菜单选项</h3>
+<div>
+<p>Hfxt
+Git集成中的右键菜单提供了几个有用的选项，可帮助您直接从界面管理文件和Git操作。以下是每个选项的详细说明：</p>
+</div>
+<div>
+<ul>
+<li><p>创建文件夹：在选定目录中创建新文件夹。这对于组织工作流、管道和其他项目资源很有用。</p></li>
+<li><p>打开：打开选定的文件或文件夹。对于工作流和管道，它将在数据编排视角中启动它们，而其他文件类型将在新标签中打开。</p></li>
+<li><p>重命名：允许您更改选定文件或文件夹的名称，帮助您保持项目文件的组织和清晰标记。</p></li>
+<li><p>复制名称：将选定文件或文件夹的名称复制到剪贴板，便于在其他地方粘贴和引用。</p></li>
+<li><p>复制路径：将选定文件或文件夹的完整路径复制到剪贴板，对于快速导航或与他人共享位置很有用。</p></li>
+<li><p>Git信息：显示所选文件的Git状态的详细信息，包括任何最近的更改。</p></li>
+<li><p>Git添加：将选定的文件暂存以进行提交，这意味着更改已准备好包含在您的下一次Git提交中。</p></li>
+<li><p>Git还原：还原对选定文件所做的任何更改，将其恢复到上次提交的状态。当您需要撤销意外修改时，这很有帮助。</p></li>
+<li><p>Git提交：打开一个对话框，用于将暂存的更改提交到本地Git存储库。您可以添加描述性的提交消息来总结您的更新。</p></li>
+<li><p>删除：从项目中删除选定的文件或文件夹。请务必谨慎使用此选项，因为它会从您的目录中永久删除该项目。</p></li>
+</ul>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<h4 id="git操作">Git操作</h4>
+<div>
+<p>以下是支持的基本git操作：</p>
+</div>
+<div>
+<ul>
+<li><p>Git添加：将文件暂存以包含在提交中。</p></li>
+<li><p>Git提交：将更改提交到原点。</p></li>
+<li><p>Git还原：检出文件或文件夹以还原更改。</p></li>
+<li><p>Git推送：推送更改。</p></li>
+<li><p>Git拉取：拉取更改。</p></li>
+</ul>
+</div>
+<div>
+<p>您可以从文件资源管理器树上方的工具栏访问这些操作：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

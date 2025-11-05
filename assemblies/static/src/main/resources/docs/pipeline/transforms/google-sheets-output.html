@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>google-sheets-output.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="谷歌表格输出">谷歌表格输出</h1>
+<h2 id="描述">描述</h2>
+<p>谷歌表格输出转换将数据写入谷歌表格工作表。此转换需要一个谷歌服务账号（JSON文件）以及一个启用了谷歌云端硬盘和谷歌表格API的谷歌云项目。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="服务账号标签页">服务账号标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">JSON凭证密钥文件</td>
+<td
+style="text-align: left;">允许您指定或浏览服务账号云端硬盘中已有的电子表格，或与服务账号电子邮件共享的电子表格。</td>
+</tr>
+<tr>
+<td style="text-align: left;">应用名称</td>
+<td
+style="text-align: left;">您在谷歌开发者控制台中为服务账号设置的应用名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">超时时间</td>
+<td
+style="text-align: left;">允许您指定一个https超时时间（以分钟为单位，默认值为5）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">模拟身份</td>
+<td style="text-align: left;">允许您模拟服务账号。有关更多信息，请查看
+谷歌文档。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>点击 <code>测试连接</code>
+按钮，以验证您为服务账号指定的JSON凭证密钥文件是否可以使用谷歌云端硬盘和电子表格API，并有权访问您的谷歌电子表格。成功时，您将看到一条
+<code>谷歌云端硬盘API：成功！</code> 的消息。</p>
+</div>
+<h3 id="电子表格标签页">电子表格标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">电子表格密钥</td>
+<td
+style="text-align: left;">允许您指定或浏览服务账号云端硬盘中已有的电子表格，或与服务账号电子邮件共享的电子表格。如果您输入一个（在云端硬盘中不存在的）工作表名称，并且勾选了”创建”复选框，它将尝试创建一个工作表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">工作表ID</td>
+<td
+style="text-align: left;">应从选定的电子表格密钥中浏览获取。如果您想创建一个新文件，请输入任何将成为创建的电子表格中工作表名称的密钥。</td>
+</tr>
+<tr>
+<td style="text-align: left;">追加到工作表</td>
+<td style="text-align: left;">将行 <strong>不包括标题</strong>
+追加到现有电子表格中。这与下面的”创建”选项不兼容。</td>
+</tr>
+<tr>
+<td style="text-align: left;">如果不存在则创建新工作表</td>
+<td
+style="text-align: left;">如果勾选此复选框，那么如果在”电子表格密钥”字段中指定的电子表格密钥不存在，它将在服务账号云端硬盘中创建一个新的电子表格（请注意，此账号没有用户界面）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">与……共享完全权限（读写）</td>
+<td
+style="text-align: left;">“共享给用户电子邮件”字段允许您指定一个用户的电子邮件，该用户将对新创建的文件获得完全权限。</td>
+</tr>
+<tr>
+<td style="text-align: left;">域范围权限</td>
+<td
+style="text-align: left;">允许与您的整个域共享（如果在谷歌云端硬盘中进行了配置）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

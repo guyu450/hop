@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>calculator.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="计算器">计算器</h1>
+<h2 id="描述">描述</h2>
+<p>计算器转换为您提供了预定义函数，这些函数可以对输入字段值执行。除了参数（字段A、字段B和字段C）外，您还必须指定函数的返回类型。在所有值计算完成后，您可以选择（通过”移除”选项）从结果（输出）中移除字段。当您使用一些临时值，且这些临时值最终不需要出现在管道字段中时，此功能非常有用。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">列</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">新字段</td>
+<td
+style="text-align: left;">计算结果的输出字段。对于计算后续字段所需但最终结果中不需要的临时字段，将
+<code>移除</code> 设置为 <code>是</code>。</td>
+</tr>
+<tr>
+<td style="text-align: left;">计算</td>
+<td style="text-align: left;">此新字段所需的计算。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段A</td>
+<td style="text-align: left;">计算中使用的第一个字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段B</td>
+<td style="text-align: left;">计算中使用的第二个字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段C</td>
+<td style="text-align: left;">计算中使用的第三个字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">值类型</td>
+<td style="text-align: left;">此计算结果要使用的数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">为此计算结果设置的长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td style="text-align: left;">为此计算结果设置的精度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">移除</td>
+<td
+style="text-align: left;">要设置的布尔标志。对于仅在中间计算中需要且不需要包含在输出中的临时字段，设置为
+<code>是</code>。</td>
+</tr>
+<tr>
+<td style="text-align: left;">转换掩码</td>
+<td style="text-align: left;">应用于日期或数字字段的转换掩码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数点符号</td>
+<td style="text-align: left;">在输出字段中设置的小数点符号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组符号</td>
+<td style="text-align: left;">在输出字段中设置的分组符号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币符号</td>
+<td style="text-align: left;">在输出字段中设置的货币符号。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>下表列出了 <code>计算器</code> 转换中支持的计算：</p>
+</div>
+<p>函数（Hfxt GUI视图）</p>
+</div>
+<p>函数（元数据注入视图）</p>
+<p>描述</p>
+<p>将字段设置为常量A</p>
+<p>常量</p>
+<p>创建字段A的副本</p>
+<p>字段副本</p>
+<p>A + B</p>
+<p>加法</p>
+<p>A加B。</p>
+<p>A - B</p>
+<p>减法</p>
+<p>A减B。</p>
+<p>A * B</p>
+<p>乘法</p>
+<p>A乘以B。</p>
+<p>A / B</p>
+<p>除法</p>
+<p>A除以B。</p>
+<p>A * A</p>
+<p>平方</p>
+<p>A的平方。</p>
+<p>SQRT( A )</p>
+<p>平方根</p>
+<p>A的平方根。</p>
+<p>100 * A / B</p>
+<p>百分比1</p>
+<p>A在B中的百分比。</p>
+<p>A - ( A * B / 100 )</p>
+<p>百分比2</p>
+<p>减去A的B%。</p>
+<p>A + ( A * B / 100 )</p>
+<p>百分比3</p>
+<p>给A加上B%。</p>
+<p>A + B *C</p>
+<p>组合1</p>
+<p>A加上B乘以C。</p>
+<p>SQRT( A*A + B*B )</p>
+<p>组合2</p>
+<p>计算 √(A² + B²)。</p>
+<p>ROUND( A )</p>
+<p>四舍五入1</p>
+<p>返回与参数最接近的整数。结果通过加上1/2、取结果的下限并将结果转换为整数类型来四舍五入为整数。换句话说，结果等于表达式的值：floor
+(a + 0.5)。如果您需要”四舍五入到偶数”的舍入方法，请使用以下方法ROUND( A,
+B ) 且小数位数为0（B = 0）。</p>
+<p>ROUND( A, B )</p>
+<p>四舍五入2</p>
+<p>将A四舍五入到最接近的偶数，保留B位小数。使用的舍入方法是”四舍五入到偶数”，也称为无偏舍入、收敛舍入、统计学家舍入、荷兰舍入、高斯舍入、奇偶舍入、银行家舍入或破折号舍入，在簿记中广泛使用。这是IEEE
+754计算函数和运算符中使用的默认舍入模式。在德国，它通常被称为”Mathematisches
+Runden”。</p>
+<p>STDROUND( A )</p>
+<p>标准四舍五入1</p>
+<p>将A四舍五入到最接近的整数。使用的舍入方法是”四舍五入远离零”，也称为标准或常见舍入。在德国，它被称为”kaufmÃ¤nnische
+Rundung”（在DIN 1333中定义）。</p>
+<p>STDROUND( A, B )</p>
+<p>标准四舍五入2</p>
+<p>与STDROUND (A) 使用相同的舍入方法，但保留B位小数。</p>
+<p>CEIL( A )</p>
+<p>向上取整</p>
+<p>向上取整函数将一个数字映射到下一个最小的整数。</p>
+<p>FLOOR( A )</p>
+<p>向下取整</p>
+<p>向下取整函数将一个数字映射到上一个最大的整数。</p>
+<p>NVL( A, B )</p>
+<p>空值处理</p>
+<p>如果A不为空，则返回A，否则返回B。请注意，有时您的变量可能不是空值，而是空字符串。</p>
+<p>日期A + B天</p>
+<p>增加天数</p>
+<p>给日期字段A加上B天。注意：仅支持B为整数值。如果您需要非整数计算，请添加第二个带小时的计算。</p>
+<p>日期A的年份</p>
+<p>日期年份</p>
+<p>计算日期A的年份。</p>
+<p>日期A的月份</p>
+<p>日期月份</p>
+<p>计算日期A的月份数字。</p>
+<p>日期A的年中第几天</p>
+<p>年中第几天</p>
+</body>
+</html>

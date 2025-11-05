@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>csvinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="csv文件输入">CSV文件输入</h1>
+<h2 id="描述">描述</h2>
+<p>CSV文件输入转换从分隔文件中读取数据。您可以选择使用模式定义，也可以手动定义所需字段的布局。此转换的CSV标签其实不太准确，因为您可以定义任何想要使用的分隔符，例如竖线、制表符和分号；并不局限于使用逗号。内部处理机制使此转换能够快速处理数据。此转换的选项是文本文件输入转换选项的子集。与常规的文本文件输入转换相比，此转换的整体选项较少，但它有一些优势：
+有关此转换中使用的有效日期和数字格式的信息，请查看日期格式化表和数字格式化表。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名 <strong>或</strong>
+文件名字段（来自先前转换的数据）</td>
+<td style="text-align: left;">指定要读取的CSV文件的名称。
+<strong>或</strong>
+选择将包含要读取的文件名的字段名。如果此转换从先前的转换接收数据，则此选项以及在输出中包含文件名的选项将启用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">分隔符</td>
+<td
+style="text-align: left;">指定目标文件中使用的文件分隔符字符。特殊字符（例如CHAR
+HEX01）可以使用格式$[值]设置，例如$[01]或$[6F,FF,00,1F]。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包围符</td>
+<td
+style="text-align: left;">指定目标文件中使用的包围符字符。特殊字符（例如CHAR
+HEX01）可以使用格式$[值]设置，例如$[01]或$[6F,FF,00,1F]。</td>
+</tr>
+<tr>
+<td style="text-align: left;">NIO缓冲区大小</td>
+<td
+style="text-align: left;">这是读取缓冲区的大小。它表示一次从磁盘读取的字节数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">延迟转换</td>
+<td
+style="text-align: left;">延迟转换算法将尝试避免不必要的数据类型转换，如果可行，这可以显著提高性能。典型的例子是从文本文件读取数据并写回到文本文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">是否存在标题行？</td>
+<td
+style="text-align: left;">如果目标文件的第一行包含带有列名的标题行，请启用此选项。如果我们错误地在第一行没有任何列名的文件上设置此标志，Hfxt将把特定列在其特定位置找到的值设置为列名。如果在该特定位置，列的值为空，Hfxt将把列名设置为EmptyField_&lt;n&gt;，其中n是列在列集中的位置。
+<strong>注意：</strong>
+还要记得检查在文件分析后设置的猜测数据类型和列说明符，因为由于Hfxt在查看示例数据集时做出的错误假设，它们可能是错误的。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果</td>
+<td
+style="text-align: left;">将读取的CSV文件名添加到此管道的结果中。内存中会保留一个唯一列表，可在工作流的下一个工作流操作中使用，例如在另一个管道中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">行号字段名（可选）</td>
+<td
+style="text-align: left;">将在该转换的输出中包含行号的整数字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">是否并行运行？</td>
+<td
+style="text-align: left;">如果要运行此转换的多个实例（转换副本），并且希望每个实例读取CSV文件的不同部分，请选中此框。读取多个文件时，将考虑所有文件的总大小以拆分工作负载。在这种特定情况下，请确保所有转换副本都接收所有需要读取的文件，否则，并行算法将无法正常工作（原因很明显）。警告：由于技术原因，仅支持对其中字段不包含换行符或回车符的文件进行CSV文件的并行读取。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件编码</td>
+<td style="text-align: left;">指定要读取的文件的编码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">模式定义</td>
+<td style="text-align: left;">我们要引用的 模式定义 的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段表</td>
+<td
+style="text-align: left;">此表包含要从目标文件读取的字段的有序列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">预览按钮</td>
+<td style="text-align: left;">点击以预览来自目标文件的数据。</td>
+</tr>
+<tr>
+<td style="text-align: left;">获取字段按钮</td>
+<td
+style="text-align: left;">点击以根据当前设置（即分隔符、包围符等）返回目标文件的字段列表。所有识别出的字段都将添加到字段表中。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

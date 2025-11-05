@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>salesforceupsert.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1
+id="销售云salesforce插入或更新upsert">销售云（Salesforce）插入或更新（Upsert）</h1>
+<h2 id="描述">描述</h2>
+<p>销售云（Salesforce）插入或更新（Upsert）转换通过销售云（Salesforce）网络服务，对现有记录进行更新，并将新记录插入到您的销售云（Salesforce）数据库中。您还可以使用以下其他转换来修改您的销售云（Salesforce）数据库：</p>
+<h2 id="常规">常规</h2>
+<div>
+<div>
+<p>在转换名称字段中输入以下信息：</p>
+</div>
+<div>
+<ul>
+<li>转换名称：指定画布上销售云（Salesforce）插入或更新（Upsert）转换的唯一名称。您可以自定义名称，也可以保留默认名称。</li>
+</ul>
+</div>
+<h3 id="连接">连接</h3>
+<div>
+<p>在以下转换选项中输入连接信息：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>选项</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>销售云（Salesforce）网络服务URL</td>
+<td><div>
+<div>
+<p>指定销售 云（Salesforce）网络服务的URL。<br />
+</p>
+</div>
+<div>
+<p>默认值：https://login.sa lesforce.com/services/Soap/u/50.0</p>
+</div>
+<div>
+<p>如果您的公司在销售云 （Salesforce）上使用”我的域名（My Dom
+ain）“，则可能需要更新此URL。如果 是这种情况，请向您的销售云（Sale
+sforce）管理员咨询URL。一般格式为 https
+://NAME.my.salesforce.com/service s/Soap/u/50.0。您也可以在此处使用
+沙盒的URL来访问沙盒。强烈建议使用 变量 来填充这些值。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>指定用于向销售云（ Salesforce）进行身份验证的用户名</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>指定 用于向销售云（Salesforce）进行身
+份验证的密码。输入您的密码，后面 跟上安全令牌。例如，如果您的密码
+是PASSWORD，安全令牌是TOKEN，那么 您应在此字段中输入PASSWORDTOKEN。</td>
+</tr>
+<tr>
+<td>测试连接</td>
+<td>点击此按 钮，以验证是否可以连接到您指定的
+销售云（Salesforce）网络服务URL。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设置">设置</h3>
+<div>
+<p>在以下转换选项中输入插入过程设置：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>超时时间</td>
+<td>指定转换超时前的超时时间间隔（以毫秒为单位）。</td>
+</tr>
+<tr>
+<td>使用压缩</td>
+<td>选择此选项可在Hfx
+t与销售云（Salesforce）之间连接时压缩（.gzip）数据。</td>
+</tr>
+<tr>
+<td>回滚所有更改</td>
+<td>除非所有记录都成功处理，否则将回滚更改。当您
+选择此选项时，无错误的记录将被插入，而有错误的记录将
+在插入结果中标记为失败。默认行为是允许插入部分成功。</td>
+</tr>
+<tr>
+<td>批处理大小</td>
+<td>指定在提交插入操作之前收集的最大记录数。</td>
+</tr>
+<tr>
+<td>模块</td>
+<td><div>
+<div>
+<p>选择要插入记录的模块（表）。<br />
+</p>
+</div>
+<div>
+<h2 id="section">– ————————–</h2>
+<pre><code> 使用&quot;测试连接&quot;按钮成功向</code></pre>
+<p>销售云（Salesforce）进行身份验证后，此列表将被填充。 – ————————–
+—————————————————-</p>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">插入或更新（Upsert）比较字段</td>
+<td
+style="text-align: left;">指定用作比较基础的字段的销售云（Salesforce）ID，以确定是要更新现有记录还是插入新记录。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="输出字段">输出字段</h3>
+<div>
+<p>在以下转换选项中输入输出信息：</p>
+</div>
+<div>
+<p>销售云（Salesforce）ID字段名称：指定用于包含您更新和插入的记录集（批处理）中第一条记录的销售云（Salesforce）ID的字段。</p>
+</div>
+<h3 id="字段">字段</h3>
+<div>
+<p>您可以通过”字段”表指定要插入到销售云（Salesforce）数据库中的字段。点击”获取字段”，用Hfxt数据流中的输入填充该表。</p>
+</div>
+<div>
+<p>该表包含以下列：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模块字段</td>
+<td>模块内的字段名称</td>
+</tr>
+<tr>
+<td>流字段</td>
+<td>Hfxt数据流中的字段名称</td>
+</tr>
+<tr>
+<td>使用外部ID？</td>
+<td><div>
+<div>
+<p>指 示该字段是否链接到外部ID的标志。为了解析ID，销售云（
+Salesforce）需要对象类型、列名和关系名，语法如下：<br />
+</p>
+</div>
+<div>
+<div>
+<pre><code>对象名称:列名/关系</code></pre>
+</div>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>或者，点击”编辑映射”以指定自定义映射。例如，您可以将单个Hfxt字段映射到多个销售云（Salesforce）字段。</p>
+</div>
+</div>
+</body>
+</html>

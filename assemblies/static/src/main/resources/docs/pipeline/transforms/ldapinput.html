@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ldapinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="ldap输入">LDAP输入</h1>
+<h2 id="描述">描述</h2>
+<p>LDAP输入转换允许您从LDAP服务器读取诸如用户、角色和其他数据等信息。以下各节介绍LDAP输入转换的可用选项。</p>
+<h2 id="常规选项卡">常规选项卡</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称；此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">主机</td>
+<td
+style="text-align: left;">主机可以是LDAP目录服务器的IP地址或其DNS名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">端口</td>
+<td style="text-align: left;">LDAP目录服务器的端口号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用身份验证</td>
+<td style="text-align: left;">启用LDAP身份验证</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">身份验证期间传递的用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">身份验证期间传递的密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用证书</td>
+<td style="text-align: left;">启用证书的使用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">信任库路径</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">信任库密码</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">信任所有证书</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">测试连接</td>
+<td style="text-align: left;">测试配置的到LDAP服务器的连接。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="搜索选项卡">搜索选项卡</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">动态搜索基</td>
+<td style="text-align: left;">启用搜索基字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">搜索基字段名</td>
+<td style="text-align: left;">包含LDAP基本节点的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">搜索基</td>
+<td style="text-align: left;">用于搜索LDAP内容的LDAP基本节点。</td>
+</tr>
+<tr>
+<td style="text-align: left;">动态筛选字符串</td>
+<td style="text-align: left;">启用筛选字符串字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">筛选字符串字段名</td>
+<td style="text-align: left;">包含筛选字符串的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">筛选字符串</td>
+<td
+style="text-align: left;">用于搜索自定义内容的LDAP筛选器，在当前阶段仅支持”单筛选格式”，例如：mail=*</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="高级选项卡">高级选项卡</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">在输出中包含行号？</td>
+<td style="text-align: left;">向输出中添加行号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">行号字段名</td>
+<td style="text-align: left;">包含行号的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制</td>
+<td style="text-align: left;">限制返回的结果数量。</td>
+</tr>
+<tr>
+<td style="text-align: left;">时间限制</td>
+<td style="text-align: left;">限制返回结果的时间。</td>
+</tr>
+<tr>
+<td style="text-align: left;">多值字段分隔符</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">设置分页</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">页面大小</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">搜索范围</td>
+<td style="text-align: left;">对象范围、一级范围、子树范围</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="字段选项卡">字段选项卡</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名称</td>
+<td
+style="text-align: left;">导入字段的名称。注意：如果您在”选择和修改”选项卡中重命名字段，此处的名称必须与重命名后的值匹配。</td>
+</tr>
+<tr>
+<td style="text-align: left;">属性</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">提取为</td>
+<td style="text-align: left;">字符串、二进制</td>
+</tr>
+<tr>
+<td style="text-align: left;">是否为排序键？</td>
+<td style="text-align: left;">是/否</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">此字段的数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td style="text-align: left;">格式掩码（数字类型或日期格式）</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">字段长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td
+style="text-align: left;">精度选项取决于字段类型，但仅支持数字类型；它返回浮点数的位数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币</td>
+<td style="text-align: left;">用于表示货币的符号</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数</td>
+<td style="text-align: left;">小数点；可以是点或逗号</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组</td>
+<td
+style="text-align: left;">在四位数或更多位数的数字中分隔千位的方法。可以是点或逗号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">修剪类型</td>
+<td style="text-align: left;">在何处修剪字段，左、右、两边、不修剪</td>
+</tr>
+<tr>
+<td style="text-align: left;">重复</td>
+<td
+style="text-align: left;">如果LDAP为某个属性返回空值，则使用上一行的值</td>
+</tr>
+<tr>
+<td style="text-align: left;">获取字段</td>
+<td style="text-align: left;">获取结果字段</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

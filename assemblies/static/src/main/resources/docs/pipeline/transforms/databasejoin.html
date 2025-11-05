@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>databasejoin.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="数据库连接">数据库连接</h1>
+<h2 id="描述">描述</h2>
+<p>数据库连接转换允许您使用从先前转换中获取的数据对数据库运行查询。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>此查询的参数按如下方式指定：</p>
+</div>
+<div>
+<p>转换属性对话框中的数据网格。这使您可以选择从源跃点传入的数据。在SQL查询中用问号（?）表示。当转换运行时，这些问号将被数据网格中定义的字段传入的数据替换。问号将按照数据网格中定义的顺序被替换。例如，数据库连接允许您运行查询，查找购买特定产品的最年长者，如下所示：</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: left;">数据库连接转换比标准的 数据库查找
+转换为您提供了更大的灵活性。请记住，您的查询决定了此转换的性能。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<div>
+<pre><code>SELECT      customernr
+FROM        product_orders, customer
+WHERE       orders.customernr = customer.customernr
+AND         orders.productnr =?
+ORDER BY    customer.date_of_birth</code></pre>
+</div>
+</div>
+<div>
+<p>然后，网格定义如下：</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>当转换运行时，SQL查询中定义的（?）占位符将被源跃点传入的productnr字段值替换。要定义和使用多个参数，请按它们在SQL语句中要被替换的顺序列出字段。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>转换名称</p>
+<p>转换的名称；此名称在单个管道中必须是唯一的</p>
+<p>连接</p>
+<p>用于查询的数据库连接。</p>
+<p>启用缓存？</p>
+<p>启用数据库查找的缓存。这意味着一旦查找了一个键（或一组键），查找的值将被存储，并且下次查找此键（或一组键）时将再次返回（无需承担数据库调用的成本）。</p>
+<p><strong>重要</strong>：如果其他进程正在更改您执行查找的表中的值，请不要缓存值。在所有其他情况下，缓存值会显著提高性能，因为数据库查找相对较慢。如果您无法使用缓存，可以考虑同时启动多个副本。同时启动通过不同的连接使数据库保持繁忙。请参阅启动转换的多个副本。</p>
+<p>缓存行数</p>
+<p>缓存的大小（行数），0表示缓存所有内容。</p>
+<p>SQL</p>
+<p>用于形成连接的SQL查询；使用问号作为参数占位符</p>
+<p>返回的行数</p>
+<p>零（0）返回所有行；任何其他数字限制返回的行数。</p>
+<p>外连接？</p>
+<p>启用此选项可始终返回结果，即使查询未返回结果</p>
+<p>参数字段表</p>
+<p>指定包含参数的字段。参数类型是必需的。</p>
+</body>
+</html>

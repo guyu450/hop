@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>evalfilesmetrics.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="评估文件指标">评估文件指标</h1>
+<h2 id="描述">描述</h2>
+<p>“评估文件指标”操作可用于评估文件的大小或数量。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“<code>评估文件指标</code>”操作可用于评估文件的大小或数量。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:85%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>源文件</td>
+<td><div>
+<div>
+<p>源类型。</p>
+</div>
+<div>
+<ul>
+<li><p>文件/文件夹</p></li>
+<li><p>文件名结果</p></li>
+<li><p>上一结果行</p></li>
+</ul>
+</div>
+<div>
+<p>根据所选选项，以下字段将启用/禁用。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>通配符</td>
+<td>正则表达式通配符。</td>
+</tr>
+<tr>
+<td>文件结果字段</td>
+<td></td>
+</tr>
+<tr>
+<td>通配符结果字段</td>
+<td></td>
+</tr>
+<tr>
+<td>包含子文件夹结果字段</td>
+<td></td>
+</tr>
+<tr>
+<td>评估</td>
+<td><div>
+<div>
+<p>评估类型</p>
+</div>
+<div>
+<ul>
+<li><p>文件总大小</p></li>
+<li><p>文件总数</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>文件/文件夹源</td>
+<td>文件或文件夹路径。</td>
+</tr>
+<tr>
+<td>通配符</td>
+<td>正则表达式通配符。</td>
+</tr>
+<tr>
+<td>添加</td>
+<td>将源添加到”文件/文件夹”列表。</td>
+</tr>
+<tr>
+<td>文件…​</td>
+<td>浏览文件系统选择一个文件。</td>
+</tr>
+<tr>
+<td>文件夹…​</td>
+<td>浏览文件系统选择一个文件夹。</td>
+</tr>
+<tr>
+<td>文件/文件夹</td>
+<td>文件和/或文件夹列表。</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>从列表中删除一个源。</td>
+</tr>
+<tr>
+<td>编辑</td>
+<td>编辑一个源。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>指定文件夹和通配符（正则表达式）后，使用 <code>添加</code>
+按钮将文件/文件夹选择添加到表格中。使用 <code>删除</code> 或
+<code>编辑</code> 按钮删除或编辑表格中选定的行。</p>
+</div>
+<h3 id="高级选项卡">高级选项卡</h3>
+<table style="width:47%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单位换算</td>
+<td><div>
+<div>
+<ul>
+<li><p>字节</p></li>
+<li><p>千字节</p></li>
+<li><p>兆字节</p></li>
+<li><p>吉字节</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td><div>
+<div>
+<ul>
+<li><p>如果值等于</p></li>
+<li><p>如果值等于</p></li>
+<li><p>如果值小于</p></li>
+<li><p>如果值小于或等于</p></li>
+<li><p>如果值大于</p></li>
+<li><p>如果值大于或等于</p></li>
+<li><p>如果值介于</p></li>
+<li><p>如果值在列表中</p></li>
+<li><p>如果值不在列表中</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>值</td>
+<td>用于比较的值。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

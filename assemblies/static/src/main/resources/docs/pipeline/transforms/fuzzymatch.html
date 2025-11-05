@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>fuzzymatch.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="模糊匹配">模糊匹配</h1>
+<h2 id="描述">描述</h2>
+<p>模糊匹配转换使用重复检测算法来查找可能匹配的字符串，这些算法会计算两个数据流的相似度。此转换会按照用户定义的最小值或最大值要求，将匹配值作为一个分隔列表返回。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">此转换在管道工作区中显示的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">查找转换</td>
+<td style="text-align: left;">标识包含要匹配字段的转换</td>
+</tr>
+<tr>
+<td style="text-align: left;">查找字段</td>
+<td style="text-align: left;">标识要匹配的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">主流字段</td>
+<td style="text-align: left;">标识要与查找字段进行匹配的主流</td>
+</tr>
+<tr>
+<td style="text-align: left;">算法</td>
+<td
+style="text-align: left;">标识要使用的字符串匹配算法，选项包括莱文斯坦（Levenshtein）、达默劳
+-
+莱文斯坦（Damerau-Levenshtein）、Needleman-Wunsch、Jaro、Jaro-Winkler、双字母相似度、变音位（Metaphone）、双倍变音位（Double
+Metaphone）、SoundEx 或改进的 SoundEx</td>
+</tr>
+<tr>
+<td style="text-align: left;">区分大小写</td>
+<td
+style="text-align: left;">标识数据流是否可以根据大写和小写字母的使用情况而有所不同，仅适用于莱文斯坦算法</td>
+</tr>
+<tr>
+<td style="text-align: left;">获取最接近值</td>
+<td
+style="text-align: left;">选中时，返回相似度得分最高的单个结果；未选中时，将所有满足最小值和最大值设置的匹配项作为一个分隔列表返回，分隔符为值分隔符</td>
+</tr>
+<tr>
+<td style="text-align: left;">最小值</td>
+<td style="text-align: left;">标识可能的最低相似度得分</td>
+</tr>
+<tr>
+<td style="text-align: left;">最大值</td>
+<td style="text-align: left;">标识可能的最高相似度得分</td>
+</tr>
+<tr>
+<td style="text-align: left;">值分隔符</td>
+<td
+style="text-align: left;">标识用于分隔匹配项的字符串。仅在特定算法且”获取最接近值”选项未选中时可用。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>算法定义</strong></p>
+</div>
+<div>
+<p>在”算法”字段中，有几个选项可用于比较和匹配字符串。</p>
+</div>
+<div>
+<ul>
+<li><p>莱文斯坦（Levenshtein） 和 达默劳 -
+莱文斯坦（Damerau-Levenshtein）：通过查看从一个字符串转换为另一个字符串所需的编辑转换次数来计算两个字符串之间的距离。前者仅考虑插入、删除和替换。后者增加了换位。得分表示所需的最少更改次数。例如，“John”和”Jan”之间的差异为两次；要将”John”转换为”Jan”，需要一次转换将”O”替换为”A”，另一次转换删除”H”。</p></li>
+<li><p>Needleman-Wunsch：计算两个序列的相似度，主要用于生物信息学。该算法会计算间隙罚分。上述示例的得分将为负二。</p></li>
+<li><p>Jaro 和
+Jaro-Winkler：计算两个字符串之间的相似度指数。结果是一个介于零（表示无相似度）和一（表示完全匹配）之间的分数。</p></li>
+<li><p>双字母相似度：将两个字符串拆分为字母对，并通过将公共字母对的数量除以两个字符串的字母对总数来计算两个字符串的相似度。</p></li>
+<li><p>变音位（Metaphone）、双倍变音位（Double Metaphone）、SoundEx
+和改进的 SoundEx：是
+https://en.wikipedia.org/wiki/Phonetic_algorithm#:~:text=A%20phonetic%20algorithm%20is%20an,indexing%20words%20in%20other%20languages[语音算法]，它们试图根据字符串的发音来匹配字符串。每种算法都基于英语，对于比较其他语言可能无用。</p>
+<div>
+<ul>
+<li><p>变音位算法（Metaphone algorithm）
+根据给定单词的英语发音返回一个编码值。“John”和”Jan”这两个名字的编码值都将返回”JN”。</p></li>
+<li><p>双倍变音位（Double Metaphone）
+算法在其前身的基础上进行了根本性的设计改进，并使用更复杂的编码规则集。它可以为一个字符串返回一个主编码值和一个次编码值。“John”和”Jan”这两个名字各自返回的变音位键值为”JN”和”AN”。</p></li>
+<li><p>SoundEx 算法
+为一个名字返回一个由一个字母后跟三个数字组成的单个编码值。字母是名字的首字母，数字对其余辅音进行编码。</p></li>
+<li><p>改进的 SoundEx
+算法是对其前身的改进。此算法的编码值为六位数字，对首字符进行编码，并且一个名字可以返回多个可能的编码。使用此算法，“John”这个名字返回的值为”160000”和”460000”，“Jan”也是如此。</p></li>
+</ul>
+</div></li>
+</ul>
+</div>
+<h3 id="字段选项卡">字段选项卡</h3>
+<div>
+<p>“字段”选项卡使您能够定义如何返回比较结果。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">匹配字段</td>
+<td style="text-align: left;">定义包含比较值的列的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">值字段</td>
+<td style="text-align: left;">定义要返回值的相似度得分</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>您还可以指定要从查找流中检索的其他字段列表。</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>movefiles.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="移动文件">移动文件</h1>
+<h2 id="描述">描述</h2>
+<p>“移动文件”操作可将多个文件和/或文件夹移动到文件系统中的其他位置。通过虚拟文件系统（VFS），此操作也适用于远程文件系统，例如使用FTP协议。以下是在FTP服务器上移动（重命名）文件的示例（必须为源和目标提供用户名/密码）。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“<code>移动文件</code>”操作可将多个文件和/或文件夹移动到文件系统中的其他位置。</p>
+</div>
+<div>
+<p>通过 VFS，此操作也适用于远程文件系统，例如使用FTP协议。</p>
+</div>
+<div>
+<p>以下是在FTP服务器上移动（重命名）文件的示例（必须为源和目标提供用户名/密码）。</p>
+</div>
+<div>
+<ul>
+<li><p>文件源：ftp://username:password@ftpserver/dir/testfile_partly.txt</p></li>
+<li><p>文件目标：ftp://username:password@ftpserver/dir/testfile.txt</p></li>
+<li><p>在”目标文件”选项卡中勾选”目标是文件”。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<div>
+<p>在此选项卡中，您可以指定要移动的文件和/或文件夹。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作名称</td>
+<td style="text-align: left;">工作流操作的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">设置</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">包含子文件夹</td>
+<td style="text-align: left;">同时移动子文件夹的内容</td>
+</tr>
+<tr>
+<td style="text-align: left;">移动空文件夹</td>
+<td style="text-align: left;">同时移动空文件夹</td>
+</tr>
+<tr>
+<td style="text-align: left;">模拟</td>
+<td style="text-align: left;">不实际移动任何内容，仅查看是否可行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将上一步结果复制到参数</td>
+<td
+style="text-align: left;">使用上一个工作流操作（多个操作）的结果文件作为要移动的文件和/或文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件/文件夹</td>
+<td
+style="text-align: left;">您可以在此网格中使用目标和通配符指定文件或文件夹列表。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>指定文件夹和通配符（正则表达式）后，使用 <code>添加</code>
+按钮将文件/文件夹选择添加到表格中。使用 <code>删除</code> 或
+<code>编辑</code> 按钮删除或编辑表格中选定的行。</p>
+</div>
+<h3 id="目标文件选项卡">目标文件选项卡</h3>
+<div>
+<p>在此选项卡中，您可以指定文件和/或文件夹的目标位置及其新文件名。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标文件</td>
+<td></td>
+</tr>
+<tr>
+<td>创建目标文件夹</td>
+<td>使用此选项创建目标文件夹</td>
+</tr>
+<tr>
+<td>目标是文件</td>
+<td>如果要移动文件，请勾选此选项</td>
+</tr>
+<tr>
+<td>不保留文件夹结构</td>
+<td>如果 使用了任何子文件夹，则展平子文件夹结构</td>
+</tr>
+<tr>
+<td>在目标文件名中添加日期</td>
+<td>在目标文件名中添加日期（yyyyMMdd 或 20091231）</td>
+</tr>
+<tr>
+<td>在目标文件名中添加时间</td>
+<td>在目标文件名中添加时间（HHmmss 或 235959）</td>
+</tr>
+<tr>
+<td>指定日期时间格式</td>
+<td><div>
+<div>
+<p>允 许您指定自己的日期时间格式。默认格式为 yyyyMMdd'_'HHmmss</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>在文件扩展名前添加日期</td>
+<td>在文件扩展名前添加日期部分。</td>
+</tr>
+<tr>
+<td>如果目标文件已存在</td>
+<td><div>
+<div>
+<p>选择以下选项之一：</p>
+</div>
+<div>
+<ul>
+<li><p>不执行任何操作</p></li>
+<li><p>覆盖目标文件</p></li>
+<li><p>创建唯一名称的文件</p></li>
+<li><p>删除源文件</p></li>
+<li><p>将源文件移动到文件夹：使
+用对话框的下部（此网格中的下一个选项）</p></li>
+<li><p>失败</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>移动到文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>目标文件夹</td>
+<td>要移动到的目标文件夹</td>
+</tr>
+<tr>
+<td>创建文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>添加日期</td>
+<td></td>
+</tr>
+<tr>
+<td>添加时间</td>
+<td></td>
+</tr>
+<tr>
+<td>指定格式</td>
+<td><div>
+<div>
+<p>允 许您指定自己的日期时间格式。默认格式为 yyyyMMdd'_'HHmmss</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>如果目标文件夹中已存在文件</td>
+<td><div>
+<div>
+<p>选择以下选项之一：</p>
+</div>
+<div>
+<ul>
+<li><p>不执行任何操作</p></li>
+<li><p>覆盖文件</p></li>
+<li><p>唯一名称</p></li>
+<li><p>失败</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="高级选项卡">高级选项卡</h3>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>成功条件</td>
+<td></td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td><div>
+<div>
+<p>选择以下选项之一：</p>
+</div>
+<div>
+<ul>
+<li><p>所有操作正常时成功（默认）</p></li>
+<li><p>至少移动 x 个文件时成功（在下面的限制字段中指定 x）</p></li>
+<li><p>错误数量小于（在下面的限制字段中指定最大错误数）时成功</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>错误数量小于</td>
+<td>根据上述成功选项，为移动的文件数量或错误数量</td>
+</tr>
+<tr>
+<td>结果文件名</td>
+<td>将文件添加到结果文件名中</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

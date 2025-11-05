@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>eval.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="javascript">JavaScript</h1>
+<h2 id="描述">描述</h2>
+<p>JavaScript操作会运行JavaScript代码并返回一个布尔表达式。该结果可用于确定接下来将执行哪个操作。你可以使用函数、过程调用、与（AND）、与符号（&amp;）、或（OR）、等于（EQUAL）等。JavaScript工作流操作会计算并返回true或false。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>JavaScript</code>操作会运行JavaScript代码并返回一个布尔表达式。</p>
+</div>
+<div>
+<p>该结果可用于确定接下来将执行哪个操作。</p>
+</div>
+<div>
+<p>你可以使用函数、过程调用、与（AND）、与符号（&amp;）、或（OR）、等于（EQUAL）等。</p>
+</div>
+<div>
+<p>JavaScript工作流操作会计算并返回true或false。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作名称</td>
+<td style="text-align: left;">工作流操作的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">JavaScript</td>
+<td style="text-align: left;">JavaScript字段。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<div>
+<pre><code>typeof parent_workflow.getVariable(&quot;DETAIL_ID_DATASOURCE_ID&quot;) != &quot;undefined&quot; &amp;&amp; parent_workflow.getVariable(&quot;DETAIL_ID_DATASOURCE_ID&quot;).toString() == &quot;&quot;</code></pre>
+</div>
+</div>
+<div>
+<div>
+<pre><code>parent_workflow.getVariable(&quot;API_RETRY_COUNTER&quot;) != parent_workflow.getVariable(&quot;API_RETRY_LIMIT&quot;)</code></pre>
+</div>
+</div>
+</div>
+<h2 id="故障排除">故障排除</h2>
+<div>
+<div>
+<ul>
+<li>在JavaScript中尽可能去除换行符。</li>
+</ul>
+</div>
+</div>
+<h2 id="评估">评估</h2>
+<div>
+<div>
+<p>JavaScript操作的结果要么是true，要么是false。换句话说，它需要以一个布尔表达式结束。</p>
+</div>
+<div>
+<p>以下是一些可能用于结束脚本的评估：</p>
+</div>
+<div>
+<div>
+<pre><code>lines_input &gt; 100</code></pre>
+</div>
+</div>
+<div>
+<p>或者</p>
+</div>
+<div>
+<div>
+<pre><code>true</code></pre>
+</div>
+</div>
+<div>
+<p>或者</p>
+</div>
+<div>
+<div>
+<pre><code>parent_workflow.getVariable(&quot;INPUT_DIRECTORY&quot;).equals(&quot;/tmp&quot;);</code></pre>
+</div>
+</div>
+<div>
+<p>以下变量可用于表达式：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">变量</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>errors</code></td>
+<td
+style="text-align: left;">上一个工作流操作中的错误数量（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>lines_input</code></td>
+<td
+style="text-align: left;">从数据库或文件中读取的行数（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>lines_output</code></td>
+<td style="text-align: left;">写入数据库或文件的行数（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>lines_updated</code></td>
+<td style="text-align: left;">数据库表中更新的行数（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>lines_read</code></td>
+<td
+style="text-align: left;">从之前的管道转换中读取的行数（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>lines_written</code></td>
+<td style="text-align: left;">写入下一个管道转换的行数（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>files_retrieved</code></td>
+<td
+style="text-align: left;">从FTP服务器检索到的文件数量（长整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>exit_status</code></td>
+<td style="text-align: left;">shell脚本的退出状态（整型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>nr</code></td>
+<td
+style="text-align: left;">上一个工作流操作的工作流操作编号（长整型）；在每个后续工作流操作中递增。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>is_windows</code></td>
+<td
+style="text-align: left;">如果Hfxt在Windows上运行则使用（布尔型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>parent_workflow</code></td>
+<td style="text-align: left;">当前工作流操作的父工作流。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><em><code>action</code></em></td>
+<td style="text-align: left;">当前工作流操作。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="变量">变量</h2>
+<div>
+<div>
+<p>以下是如何评估变量字符串的内容：</p>
+</div>
+<div>
+<div>
+<pre><code>parent_workflow.getVariable(&quot;NR_OF_ROWS&quot;) == 1000000;</code></pre>
+</div>
+</div>
+<div>
+<p>由于我们可以访问parent_workflow对象，我们也可以通过以下方式在父工作流中设置变量：</p>
+</div>
+<div>
+<div>
+<pre><code>parent_workflow.setVariable(&quot;NR_OF_ROWS&quot;, &quot;1000000&quot;);</code></pre>
+</div>
+</div>
+<div>
+<p>例如，你可以在这个工作流操作中执行以下操作来操作变量：</p>
+</div>
+<div>
+<div>
+<pre><code>useDate = parent_workflow.getVariable(&quot;use_date&quot;).equals(&quot;1&quot;);
+if (useDate == 0) {
+  date = new java.util.Date();
+  date.setDate(date.getDate()-1); //Go back 1 full day
+  dateFormat = new java.text.SimpleDateFormat(&quot;yyyyMMdd&quot;);
+  newDateStr = dateFormat.format(date);
+  parent_workflow.setVariable(&quot;start_date&quot;, newDateStr);
+}
+true;</code></pre>
+</div>
+</div>
+</div>
+<h2 id="上一个结果">上一个结果</h2>
+<div>
+<div>
+<p>当一个工作流操作完成时，执行结果将是一个Result对象，作为”previous_result”暴露给JavaScript引擎：</p>
+</div>
+<p>表达式</p>
+</div>
+<p>替代项</p>
+<p>数据类型</p>
+<p>含义</p>
+<p><code>previous_result.getResult()</code></p>
+<p>布尔型</p>
+<p>如果上一个工作流操作成功执行，则为true；如果有错误，则为false。</p>
+<p><code>previous_result.getExitStatus()</code></p>
+<p>exit_status</p>
+<p>整型</p>
+<p>上一个shell脚本工作流操作的退出状态</p>
+<p><code>previous_result.getActionNr()</code></p>
+<p>nr</p>
+<p>整型</p>
+<p>每次执行工作流操作时，操作编号都会增加。</p>
+<p><code>previous_result.getNrErrors()</code></p>
+<p>errors</p>
+<p>长整型</p>
+<p>错误数量，也可作为变量”errors”使用。</p>
+<p><code>previous_result.getNrLinesInput()</code></p>
+<p>lines_input</p>
+<p>长整型</p>
+<p>从文件或数据库中读取的行数。</p>
+<p><code>previous_result.getNrLinesOutput()</code></p>
+<p>lines_output</p>
+<p>长整型</p>
+<p>写入文件或数据库的行数。</p>
+<p><code>previous_result.getNrLinesRead()</code></p>
+<p>lines_read</p>
+<p>长整型</p>
+<p>从之前的转换中读取的行数。</p>
+<p><code>previous_result.getNrLinesUpdated()</code></p>
+<p>lines_updated</p>
+<p>长整型</p>
+<p>在文件或数据库中更新的行数。</p>
+<p><code>previous_result.getNrLinesWritten()</code></p>
+<p>lines_written</p>
+<p>长整型</p>
+<p>写入下一个转换的行数。</p>
+<p><code>previous_result.getNrLinesDeleted()</code></p>
+<p>lines_deleted</p>
+<p>长整型</p>
+<p>删除的行数。</p>
+<p><code>previous_result.getNrLinesRejected()</code></p>
+<p>lines_rejected</p>
+<p>长整型</p>
+</body>
+</html>
