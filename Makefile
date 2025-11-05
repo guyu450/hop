@@ -27,7 +27,7 @@ SERVICE_REPOSITORY ?= "${REPOSITORY_PREF}"
 WEB_REPOSITORY ?= "${REPOSITORY_PREF}-web"
 
 #$ sudo docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
-TAG ?= 2.12.0
+TAG ?= 2.14.0
 COMMIT_ID := $(shell git rev-parse HEAD)
 
 default: build-all-image
@@ -44,8 +44,8 @@ build-hfxt:
 		-Prelease \
 		clean install
 
-
-build-hfxt-image: build-hfxt
+#build-hfxt-image: build-hfxt
+build-hfxt-image:
 	@echo "build hfxt image"
 	@docker buildx build \
 		-t ${REGISTRY}/${SERVICE_REPOSITORY}:${TAG} \
@@ -57,13 +57,14 @@ build-hfxt-image: build-hfxt
 #		${HFXT_HOME}
 
 build-hfxt-web-image: build-hfxt
+#build-hfxt-web-image:
 	@echo "build-hfxt-web image"
 	@echo "./docker/create_hop_web_container.sh"
 	@sh ./docker/create_hop_web_container.sh
-#	@docker buildx build --platform linux/amd64 --load \
-#		-t ${REGISTRY}/${WEB_REPOSITORY}:${TAG} \
-#	    -f ${HFXT_HOME}/docker/Dockerfile.web \
-#		${HFXT_HOME}
+	@docker buildx build --platform linux/amd64 --load \
+		-t ${REGISTRY}/${WEB_REPOSITORY}:${TAG} \
+	    -f ${HFXT_HOME}/docker/Dockerfile.web \
+		${HFXT_HOME}
 
 
 
@@ -76,17 +77,19 @@ publish-all-images: publish-hfxt-image publish-hfxt-web-image
 publish-hfxt-image: build-hfxt
 	@echo "build and push hfxt image"
 	@docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
-	@docker buildx build --push \
+	@docker buildx build --platform linux/amd64 --load \
 		-t registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt:${VERSION} \
 		-f ${HFXT_HOME}/docker/Dockerfile \
-        .
+        .	\
+        --push \
 
 publish-hfxt-web-image: build-hfxt
+#publish-hfxt-web-image:
 	@echo "build and push hfxt-web image"
 	@sh docker/hop_web_docker_before.sh
 	@echo "====docker login"
 	@docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
-	@docker buildx build \
+	@docker buildx build --platform linux/amd64 --load \
 		-t registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt-web:${VERSION} \
 		-f docker/Dockerfile.web \
 		.	\

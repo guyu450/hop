@@ -17,6 +17,11 @@
 
 FROM alpine
 LABEL maintainer="Apache Hop Team"
+
+# 安装必要工具（openssl用于签名验证）
+RUN apk update && apk add --no-cache openssl jq xxd procps vim-common && rm -rf /var/cache/apk/*ENV TZ=Asia/Shanghai
+ENV JAVA_OPTS="-Duser.timezone=Asia/Shanghai"
+
 # path to where the artifacts should be deployed to
 ENV DEPLOYMENT_PATH=/opt/hop
 # volume mount point
@@ -109,11 +114,22 @@ RUN apk update \
   && chown hop:hop ${DEPLOYMENT_PATH} \
   && chown hop:hop ${VOLUME_MOUNT_POINT}
 
+#RUN unzip -qu ./assemblies/client/target/hop-client-*.zip -d ./assemblies/client/target/
+# copy the hop package from the local resources folder to the container image directory   RUN ls -la ./assemblies/client/target/ && \
+#
+#   RUN ls -la ./assemblies/client/target/ && \
+#       unzip -qu ./assemblies/client/target/hop-client-*.zip -d ./assemblies/client/target/
 
-# copy the hop package from the local resources folder to the container image directory
 COPY --chown=hop:hop ./assemblies/client/target/hop/ ${DEPLOYMENT_PATH}
-COPY --chown=hop:hop ./docker/resources/run.sh ${DEPLOYMENT_PATH}/run.sh
 COPY --chown=hop:hop ./docker/resources/load-and-execute.sh ${DEPLOYMENT_PATH}/load-and-execute.sh
+# 复制校验脚本到镜像并赋予执行权限
+COPY ./docker/resources/run.sh ${DEPLOYMENT_PATH}/run.sh
+COPY ./docker/resources/check_license.sh ${DEPLOYMENT_PATH}/check_license.sh
+COPY ./docker/resources/run-lic.sh ${DEPLOYMENT_PATH}/run-lic.sh
+
+RUN chmod 555 ${DEPLOYMENT_PATH}/run.sh && chown root:root ${DEPLOYMENT_PATH}/run.sh
+RUN chmod 555 ${DEPLOYMENT_PATH}/check_license.sh && chown root:root ${DEPLOYMENT_PATH}/check_license.sh
+RUN chmod 555 ${DEPLOYMENT_PATH}/run-lic.sh && chown root:root ${DEPLOYMENT_PATH}/run-lic.sh
 
 # expose 8080/8079 for Hop Server
 EXPOSE 8080 8079
@@ -124,4 +140,4 @@ USER hop
 ENV PATH=$PATH:${DEPLOYMENT_PATH}/hop
 WORKDIR /home/hop
 # CMD ["/bin/bash"]
-ENTRYPOINT ["/bin/bash", "/opt/hop/run.sh"]
+CMD ["/bin/bash", "/opt/hop/run-lic.sh"]
