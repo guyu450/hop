@@ -18,7 +18,7 @@
 # s2:
 #	 echo s2
 HFXT_HOME :=  "."
-VERSION ?= "2.14.0"
+VERSION ?= "2.16.0"
 
 #REGISTRY ?= "192.168.8.210:8080/library"
 REGISTRY ?= "registry.cn-hangzhou.aliyuncs.com"
