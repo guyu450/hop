@@ -22,11 +22,11 @@
     <parent>
         <groupId>org.apache.hop</groupId>
         <artifactId>hop-plugins-transforms</artifactId>
-        <version>2.14.0</version>
+        <version>2.16.0</version>
     </parent>
 
     <artifactId>hop-transform-synchronizeaftermerge</artifactId>
     <packaging>jar</packaging>
-    <name>Hop Plugins Transforms Switch Case</name>
+    <name>Hop Plugins Transforms Synchronize After Merge</name>
 
 </project>

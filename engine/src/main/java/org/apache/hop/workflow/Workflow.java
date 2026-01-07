@@ -34,6 +34,7 @@ import org.apache.commons.vfs2.FileName;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.hop.core.Const;
 import org.apache.hop.core.HopEnvironment;
+import org.apache.hop.core.HopVersionProvider;
 import org.apache.hop.core.IExecutor;
 import org.apache.hop.core.IExtensionData;
 import org.apache.hop.core.Result;
@@ -148,8 +149,6 @@ public abstract class Workflow extends Variables
 
   /** The result of the workflow, after execution. */
   protected Result result;
-
-  protected boolean interactive;
 
   protected List<IExecutionFinishedListener<IWorkflowEngine<WorkflowMeta>>>
       executionFinishedListeners;
@@ -353,16 +352,16 @@ public abstract class Workflow extends Variables
     return result;
   }
 
-  private void emergencyWriteWorkflowTracker(Result res) {
-    ActionResult jerFinalResult =
+  private void emergencyWriteWorkflowTracker(Result result) {
+    ActionResult actionResult =
         new ActionResult(
-            res,
+            result,
             this.getLogChannelId(),
             BaseMessages.getString(PKG, CONST_WORKFLOW_FINISHED),
             null,
             null,
             null);
-    WorkflowTracker finalTrack = new WorkflowTracker(this.getWorkflowMeta(), jerFinalResult);
+    WorkflowTracker finalTrack = new WorkflowTracker(this.getWorkflowMeta(), actionResult);
     // workflowTracker is up to date too.
     this.workflowTracker.addWorkflowTracker(finalTrack);
   }
@@ -681,6 +680,22 @@ public abstract class Workflow extends Variables
       return res;
     }
 
+    // If previous is not null then that action has finished
+    if (previous != null && log.isBasic()) {
+      log.logBasic(
+          BaseMessages.getString(
+              PKG,
+              "Workflow.Log.FinishedAction",
+              previous.getName(),
+              previousResult.isResult() + ""));
+    }
+
+    // Start this action!
+    if (log.isBasic()) {
+      log.logBasic(
+          BaseMessages.getString(PKG, "Workflow.Log.StartingAction", actionMeta.getName()));
+    }
+
     // if we didn't have a previous result, create one, otherwise, copy the content...
     //
     final Result newResult;
@@ -731,35 +746,34 @@ public abstract class Workflow extends Variables
 
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       Thread.currentThread().setContextClassLoader(action.getClass().getClassLoader());
-      // Execute this action..
-      IAction cloneJei = (IAction) action.clone();
-      cloneJei.copyFrom(this);
-      cloneJei.getLogChannel().setLogLevel(getLogLevel());
-      cloneJei.setMetadataProvider(metadataProvider);
-      cloneJei.setParentWorkflow(this);
-      cloneJei.setParentWorkflowMeta(this.getWorkflowMeta());
+
+      // Execute this action
+      IAction cloneAction = (IAction) action.clone();
+      cloneAction.copyFrom(this);
+      cloneAction.getLogChannel().setLogLevel(getLogLevel());
+      cloneAction.setMetadataProvider(metadataProvider);
+      cloneAction.setParentWorkflow(this);
+      cloneAction.setParentWorkflowMeta(this.getWorkflowMeta());
       final long start = System.currentTimeMillis();
 
-      cloneJei.getLogChannel().logDetailed("Starting action");
+      cloneAction.getLogChannel().logDetailed("Starting action");
       for (IActionListener actionListener : actionListeners) {
-        actionListener.beforeExecution(this, actionMeta, cloneJei);
+        actionListener.beforeExecution(this, actionMeta, cloneAction);
       }
-      if (interactive) {
-        getActiveActions().add(actionMeta.clone());
-      }
-      log.snap(Metrics.METRIC_ACTION_START, cloneJei.toString());
-      newResult = cloneJei.execute(prevResult, nr);
-      log.snap(Metrics.METRIC_ACTION_STOP, cloneJei.toString());
+
+      activeActions.add(actionMeta.clone());
+
+      log.snap(Metrics.METRIC_ACTION_START, cloneAction.toString());
+      newResult = cloneAction.execute(prevResult, nr);
+      log.snap(Metrics.METRIC_ACTION_STOP, cloneAction.toString());
 
       // Action execution duration
       newResult.setElapsedTimeMillis(System.currentTimeMillis() - start);
 
-      if (interactive) {
-        getActiveActions().remove(actionMeta);
-      }
+      activeActions.remove(actionMeta);
 
       for (IActionListener actionListener : actionListeners) {
-        actionListener.afterExecution(this, actionMeta, cloneJei, newResult);
+        actionListener.afterExecution(this, actionMeta, cloneAction, newResult);
       }
 
       Thread.currentThread().setContextClassLoader(cl);
@@ -769,7 +783,7 @@ public abstract class Workflow extends Variables
       //
       LoggingBuffer loggingBuffer = HopLogStore.getAppender();
       StringBuffer logTextBuffer =
-          loggingBuffer.getBuffer(cloneJei.getLogChannel().getLogChannelId(), false);
+          loggingBuffer.getBuffer(cloneAction.getLogChannel().getLogChannelId(), false);
       newResult.setLogText(logTextBuffer.toString() + newResult.getLogText());
 
       // Save this result as well...
@@ -777,7 +791,7 @@ public abstract class Workflow extends Variables
       ActionResult jerAfter =
           new ActionResult(
               newResult,
-              cloneJei.getLogChannel().getLogChannelId(),
+              cloneAction.getLogChannel().getLogChannelId(),
               BaseMessages.getString(PKG, CONST_ACTION_FINISHED),
               null,
               actionMeta.getName(),
@@ -828,7 +842,7 @@ public abstract class Workflow extends Variables
       if (hopMeta.isUnconditional()) {
         nextComment = BaseMessages.getString(PKG, "Workflow.Comment.FollowedUnconditional");
       } else {
-        if (newResult.getResult()) {
+        if (newResult.isResult()) {
           nextComment = BaseMessages.getString(PKG, "Workflow.Comment.FollowedSuccess");
         } else {
           nextComment = BaseMessages.getString(PKG, "Workflow.Comment.FollowedFailure");
@@ -841,19 +855,11 @@ public abstract class Workflow extends Variables
       // green or red, execute the next action...
       //
       if (hopMeta.isUnconditional()
-          || (actionMeta.isEvaluation() && (hopMeta.isEvaluation() == newResult.getResult()))) {
+          || (actionMeta.isEvaluation() && (hopMeta.isEvaluation() == newResult.isResult()))) {
 
         // If the next action is a join, only execute once
-        if (nextAction.isJoin()) {
-          if (activeActions.contains(nextAction)) {
-            continue;
-          }
-        }
-
-        // Start this next action!
-        if (log.isBasic()) {
-          log.logBasic(
-              BaseMessages.getString(PKG, "Workflow.Log.StartingAction", nextAction.getName()));
+        if (nextAction.isJoin() && activeActions.contains(nextAction)) {
+          continue;
         }
 
         // Pass along the previous result, perhaps the next workflow can use it...
@@ -873,8 +879,15 @@ public abstract class Workflow extends Variables
           Runnable runnable =
               () -> {
                 try {
+                  // Pass a previous result without rows to the parallel branch so that
+                  // branch-local result rows start from a clean slate but still inherit
+                  // metrics/files/etc.
+                  Result prevWithoutRows = newResult.lightClone();
+                  prevWithoutRows.setRows(null); // ensure rows are empty
+
                   Result threadResult =
-                      executeFromStart(nr + 1, newResult, nextAction, actionMeta, nextComment);
+                      executeFromStart(
+                          nr + 1, prevWithoutRows, nextAction, actionMeta, nextComment);
                   threadResults.add(threadResult);
                 } catch (Throwable e) {
                   log.logError(Const.getStackTracker(e));
@@ -889,6 +902,7 @@ public abstract class Workflow extends Variables
               };
           Thread thread = new Thread(runnable);
           threads.add(thread);
+          thread.setName("Workflow " + workflowMeta.getName() + ':' + nextAction.getName());
           thread.start();
           if (log.isBasic()) {
             log.logBasic(
@@ -905,14 +919,6 @@ public abstract class Workflow extends Variables
             throw new HopException(
                 BaseMessages.getString(PKG, "Workflow.Log.UnexpectedError", nextAction.toString()),
                 e);
-          }
-          if (log.isBasic()) {
-            log.logBasic(
-                BaseMessages.getString(
-                    PKG,
-                    "Workflow.Log.FinishedAction",
-                    nextAction.getName(),
-                    res.getResult() + ""));
           }
         }
       }
@@ -950,7 +956,7 @@ public abstract class Workflow extends Variables
       res = prevResult;
     }
 
-    // See if there where any errors in the parallel execution
+    // See if there were any errors in the parallel execution
     //
     if (!threadExceptions.isEmpty()) {
       res.setResult(false);
@@ -965,9 +971,9 @@ public abstract class Workflow extends Variables
       throw threadExceptions.poll();
     }
 
-    // In parallel execution, we aggregate all the results, simply add them to
-    // the previous result...
-    //
+    // In parallel execution, aggregate full results from branches. Since we started each
+    // branch with no previous rows, any rows present here were produced by the branch and
+    // should be included in the final result.
     for (Result threadResult : threadResults) {
       res.add(threadResult);
     }
@@ -977,6 +983,12 @@ public abstract class Workflow extends Variables
     //
     if (res.getNrErrors() > 0) {
       res.setResult(false);
+    }
+    // Log the final action that has finished
+    if (res.getEntryNr() == nr && log.isBasic()) {
+      log.logBasic(
+          BaseMessages.getString(
+              PKG, "Workflow.Log.FinishedAction", actionMeta.getName(), res.isResult() + ""));
     }
 
     return res;
@@ -998,7 +1010,7 @@ public abstract class Workflow extends Variables
   }
 
   /**
-   * Add a number of errors to the total number of erros that occured during execution.
+   * Add a number of errors to the total number of errors that occurred during execution.
    *
    * @param nrToAdd nr of errors to add.
    */
@@ -1206,6 +1218,9 @@ public abstract class Workflow extends Variables
     } else {
       this.setVariable(Const.INTERNAL_VARIABLE_WORKFLOW_PARENT_ID, null);
     }
+
+    HopVersionProvider versionProvider = new HopVersionProvider();
+    setVariable(Const.HOP_VERSION, versionProvider.getVersion()[0]);
   }
 
   /**
@@ -1215,8 +1230,7 @@ public abstract class Workflow extends Variables
    * @param filename the filename if there is any
    * @param name the name of the workflow
    */
-  public static final void setInternalHopVariables(
-      IVariables variables, String filename, String name) {
+  public static void setInternalHopVariables(IVariables variables, String filename, String name) {
     boolean hasFilename = !Utils.isEmpty(filename);
     if (hasFilename) { // we have a filename that's defined.
       try {
@@ -1484,7 +1498,7 @@ public abstract class Workflow extends Variables
    */
   @Override
   public boolean isInteractive() {
-    return interactive;
+    return true;
   }
 
   /**
@@ -1493,9 +1507,7 @@ public abstract class Workflow extends Variables
    * @param interactive the interactive to set
    */
   @Override
-  public void setInteractive(boolean interactive) {
-    this.interactive = interactive;
-  }
+  public void setInteractive(boolean interactive) {}
 
   /**
    * Gets the active actions.

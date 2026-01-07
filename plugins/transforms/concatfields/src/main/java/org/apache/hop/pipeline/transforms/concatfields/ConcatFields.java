@@ -125,10 +125,8 @@ public class ConcatFields extends BaseTransform<ConcatFieldsMeta, ConcatFieldsDa
               + " : "
               + data.outputRowMeta.getString(row));
     }
-    if (checkFeedback(getLinesRead())) {
-      if (isBasic()) {
-        logBasic(BaseMessages.getString(PKG, "ConcatFields.Log.LineNumber") + getLinesRead());
-      }
+    if (checkFeedback(getLinesRead()) && isBasic()) {
+      logBasic(BaseMessages.getString(PKG, "ConcatFields.Log.LineNumber") + getLinesRead());
     }
 
     return true;
@@ -181,6 +179,9 @@ public class ConcatFields extends BaseTransform<ConcatFieldsMeta, ConcatFieldsDa
       String trimType)
       throws HopValueException {
 
+    if (meta.isForceEnclosure()) {
+      targetField.append(meta.getEnclosure());
+    }
     if (valueMeta.isNull(valueData)) {
       targetField.append(nullString);
     } else {
@@ -189,6 +190,9 @@ public class ConcatFields extends BaseTransform<ConcatFieldsMeta, ConcatFieldsDa
             Const.trimToType(
                 valueMeta.getString(valueData), ValueMetaBase.getTrimTypeByCode(trimType)));
       }
+    }
+    if (meta.isForceEnclosure()) {
+      targetField.append(meta.getEnclosure());
     }
   }
 

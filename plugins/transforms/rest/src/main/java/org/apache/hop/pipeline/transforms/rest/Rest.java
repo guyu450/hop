@@ -17,6 +17,18 @@
 
 package org.apache.hop.pipeline.transforms.rest;
 
+import static org.apache.hop.core.Const.NVL;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MultivaluedHashMap;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriBuilder;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,16 +38,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.util.List;
 import javax.net.ssl.SSLContext;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hop.core.Const;
 import org.apache.hop.core.encryption.Encr;
@@ -94,7 +96,7 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
 
     // get dynamic url ?
     if (meta.isUrlInField()) {
-      if (!Utils.isEmpty(meta.getConnectionName())) {
+      if (!Utils.isEmpty(data.connectionName)) {
         data.realUrl = baseUrl + data.inputRowMeta.getString(rowData, data.indexOfUrlField);
       } else {
         data.realUrl = data.inputRowMeta.getString(rowData, data.indexOfUrlField);
@@ -175,21 +177,18 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
 
       // set the Authentication/Authorization header from the connection first, if available.
       // this transform's headers will override this value if available.
-      if (connection != null) {
-        if (!StringUtils.isEmpty(resolve(connection.getAuthorizationHeaderName())))
-          if (!Utils.isEmpty(resolve(connection.getAuthorizationHeaderName()))) {
-            if (!StringUtils.isEmpty(resolve(connection.getAuthorizationPrefix()))) {
-              invocationBuilder.header(
-                  resolve(connection.getAuthorizationHeaderName()),
-                  resolve(connection.getAuthorizationPrefix())
-                      + " "
-                      + resolve(connection.getAuthorizationHeaderValue()));
-            } else {
-              invocationBuilder.header(
-                  resolve(connection.getAuthorizationHeaderName()),
-                  resolve(connection.getAuthorizationHeaderValue()));
-            }
-          }
+      if (connection != null && !Utils.isEmpty(resolve(connection.getAuthorizationHeaderName()))) {
+        if (!StringUtils.isEmpty(resolve(connection.getAuthorizationPrefix()))) {
+          invocationBuilder.header(
+              resolve(connection.getAuthorizationHeaderName()),
+              resolve(connection.getAuthorizationPrefix())
+                  + " "
+                  + resolve(connection.getAuthorizationHeaderValue()));
+        } else {
+          invocationBuilder.header(
+              resolve(connection.getAuthorizationHeaderName()),
+              resolve(connection.getAuthorizationHeaderValue()));
+        }
       }
 
       String contentType = null; // media type override, if not null
@@ -214,7 +213,7 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
       String entityString = null;
       if (data.useBody) {
         // Set Http request entity
-        entityString = Const.NVL(data.inputRowMeta.getString(rowData, data.indexOfBodyField), null);
+        entityString = NVL(data.inputRowMeta.getString(rowData, data.indexOfBodyField), null);
         if (isDebug()) {
           logDebug(BaseMessages.getString(PKG, "Rest.Log.BodyValue", entityString));
         }
@@ -235,7 +234,9 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
             response = invocationBuilder.put(Entity.entity(entityString, data.mediaType));
           }
         } else if (data.method.equals(RestMeta.HTTP_METHOD_DELETE)) {
-          response = invocationBuilder.delete();
+          Invocation invocation =
+              invocationBuilder.build("DELETE", Entity.entity(entityString, data.mediaType));
+          response = invocation.invoke();
         } else if (data.method.equals(RestMeta.HTTP_METHOD_HEAD)) {
           response = invocationBuilder.head();
         } else if (data.method.equals(RestMeta.HTTP_METHOD_OPTIONS)) {
@@ -337,6 +338,7 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
       data.config.connectorProvider(new ApacheConnectorProvider());
       data.config.property(
           ClientProperties.REQUEST_ENTITY_PROCESSING, RequestEntityProcessing.BUFFERED);
+      data.config.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
 
       data.config.property(ClientProperties.READ_TIMEOUT, data.realReadTimeout);
       data.config.property(ClientProperties.CONNECT_TIMEOUT, data.realConnectionTimeout);
@@ -438,8 +440,8 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
         }
       } else {
         // Static URL
-        if (!Utils.isEmpty(meta.getConnectionName())) {
-          data.realUrl = baseUrl + resolve(meta.getUrl());
+        if (!Utils.isEmpty(data.connectionName)) {
+          data.realUrl = baseUrl + NVL(resolve(meta.getUrl()), "");
         } else {
           data.realUrl = resolve(meta.getUrl());
         }
@@ -479,7 +481,7 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
       }
       if (RestMeta.isActiveParameters(meta.getMethod())) {
         // Parameters
-        int nrparams = meta.getParameterFields() != null ? 0 : meta.getParameterFields().size();
+        int nrparams = meta.getParameterFields() == null ? 0 : meta.getParameterFields().size();
         if (nrparams > 0) {
           data.nrParams = nrparams;
           data.paramNames = new String[nrparams];
@@ -568,10 +570,11 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
     if (super.init()) {
 
       // use the information from the selection line if we have one.
-      if (!Utils.isEmpty(meta.getConnectionName())) {
+      data.connectionName = resolve(meta.getConnectionName());
+      if (!Utils.isEmpty(data.connectionName)) {
         try {
           this.connection =
-              metadataProvider.getSerializer(RestConnection.class).load(meta.getConnectionName());
+              metadataProvider.getSerializer(RestConnection.class).load(data.connectionName);
           baseUrl = resolve(connection.getBaseUrl());
 
         } catch (Exception e) {
@@ -606,7 +609,7 @@ public class Rest extends BaseTransform<RestMeta, RestData> {
       data.trustStoreFile = resolve(meta.getTrustStoreFile());
       data.trustStorePassword = resolve(meta.getTrustStorePassword());
 
-      String applicationType = Const.NVL(meta.getApplicationType(), "");
+      String applicationType = NVL(meta.getApplicationType(), "");
       if (applicationType.equals(RestMeta.APPLICATION_TYPE_XML)) {
         data.mediaType = MediaType.APPLICATION_XML_TYPE;
       } else if (applicationType.equals(RestMeta.APPLICATION_TYPE_JSON)) {

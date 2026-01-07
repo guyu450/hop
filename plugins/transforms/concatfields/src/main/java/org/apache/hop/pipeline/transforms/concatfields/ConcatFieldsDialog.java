@@ -72,6 +72,8 @@ public class ConcatFieldsDialog extends BaseTransformDialog {
 
   private Button wRemove;
 
+  private Button wForceEnclosure;
+
   private TableView wFields;
 
   private final ConcatFieldsMeta input;
@@ -223,6 +225,25 @@ public class ConcatFieldsDialog extends BaseTransformDialog {
     fdEnclosure.right = new FormAttachment(100, 0);
     wEnclosure.setLayoutData(fdEnclosure);
     lastControl = wEnclosure;
+
+    // Force enclosure
+    Label wlForceEnclosure = new Label(shell, SWT.RIGHT);
+    wlForceEnclosure.setText(
+        BaseMessages.getString(PKG, "ConcatFieldsDialog.ForceEnclosure.Label"));
+    PropsUi.setLook(wlForceEnclosure);
+    FormData fdlForceEnclosure = new FormData();
+    fdlForceEnclosure.left = new FormAttachment(0, 0);
+    fdlForceEnclosure.top = new FormAttachment(lastControl, margin);
+    fdlForceEnclosure.right = new FormAttachment(middle, -margin);
+    wlForceEnclosure.setLayoutData(fdlForceEnclosure);
+    wForceEnclosure = new Button(shell, SWT.CHECK | SWT.LEFT);
+    PropsUi.setLook(wForceEnclosure);
+    FormData fdForceEnclosure = new FormData();
+    fdForceEnclosure.left = new FormAttachment(middle, 0);
+    fdForceEnclosure.top = new FormAttachment(wlForceEnclosure, 0, SWT.CENTER);
+    fdForceEnclosure.right = new FormAttachment(100, 0);
+    wForceEnclosure.setLayoutData(fdForceEnclosure);
+    lastControl = wForceEnclosure;
 
     // Remove concatenated fields from input...
     Label wlRemove = new Label(shell, SWT.RIGHT);
@@ -433,6 +454,7 @@ public class ConcatFieldsDialog extends BaseTransformDialog {
     wTargetFieldLength.setText("" + input.getExtraFields().getTargetFieldLength());
     wSeparator.setText(Const.NVL(input.getSeparator(), ""));
     wEnclosure.setText(Const.NVL(input.getEnclosure(), ""));
+    wForceEnclosure.setSelection(input.isForceEnclosure());
     wRemove.setSelection(input.getExtraFields().isRemoveSelectedFields());
 
     logDebug("getting fields info...");
@@ -474,6 +496,7 @@ public class ConcatFieldsDialog extends BaseTransformDialog {
     meta.getExtraFields().setTargetFieldLength(Const.toInt(wTargetFieldLength.getText(), 0));
     meta.setSeparator(wSeparator.getText());
     meta.setEnclosure(wEnclosure.getText());
+    meta.setForceEnclosure(wForceEnclosure.getSelection());
     meta.getExtraFields().setRemoveSelectedFields(wRemove.getSelection());
 
     input.getOutputFields().clear();
@@ -514,23 +537,21 @@ public class ConcatFieldsDialog extends BaseTransformDialog {
       if (r != null) {
         ITableItemInsertListener listener =
             (tableItem, v) -> {
-              if (v.isNumber()) {
-                if (v.getLength() > 0) {
-                  int le = v.getLength();
-                  int pr = v.getPrecision();
+              if (v.isNumber() && v.getLength() > 0) {
+                int le = v.getLength();
+                int pr = v.getPrecision();
 
-                  if (v.getPrecision() <= 0) {
-                    pr = 0;
-                  }
-
-                  StringBuilder mask = new StringBuilder();
-                  mask.append("0".repeat(Math.max(0, le - pr)));
-                  if (pr > 0) {
-                    mask.append(".");
-                  }
-                  mask.append("0".repeat(Math.max(0, pr)));
-                  tableItem.setText(3, mask.toString());
+                if (v.getPrecision() <= 0) {
+                  pr = 0;
                 }
+
+                StringBuilder mask = new StringBuilder();
+                mask.append("0".repeat(Math.max(0, le - pr)));
+                if (pr > 0) {
+                  mask.append(".");
+                }
+                mask.append("0".repeat(Math.max(0, pr)));
+                tableItem.setText(3, mask.toString());
               }
               return true;
             };

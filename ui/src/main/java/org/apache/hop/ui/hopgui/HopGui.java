@@ -27,13 +27,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSystemException;
 import org.apache.hop.core.Const;
 import org.apache.hop.core.DbCache;
 import org.apache.hop.core.HopEnvironment;
@@ -42,6 +45,7 @@ import org.apache.hop.core.config.DescribedVariablesConfigFile;
 import org.apache.hop.core.config.HopConfig;
 import org.apache.hop.core.database.DatabaseMeta;
 import org.apache.hop.core.exception.HopException;
+import org.apache.hop.core.exception.HopFileException;
 import org.apache.hop.core.exception.HopXmlException;
 import org.apache.hop.core.extension.ExtensionPointHandler;
 import org.apache.hop.core.extension.HopExtensionPoint;
@@ -69,6 +73,7 @@ import org.apache.hop.core.util.TranslateUtil;
 import org.apache.hop.core.variables.DescribedVariable;
 import org.apache.hop.core.variables.IVariables;
 import org.apache.hop.core.variables.Variables;
+import org.apache.hop.core.vfs.HopVfs;
 import org.apache.hop.core.xml.XmlHandler;
 import org.apache.hop.i18n.BaseMessages;
 import org.apache.hop.i18n.LanguageChoice;
@@ -147,6 +152,8 @@ import org.w3c.dom.Node;
 
 @GuiPlugin(description = "The main hop graphical user interface")
 @SuppressWarnings("java:S1104")
+@Getter
+@Setter
 public class HopGui
     implements IActionContextHandlersProvider, ISearchableProvider, IHasHopMetadataProvider {
   private static final Class<?> PKG = HopGui.class;
@@ -317,15 +324,16 @@ public class HopGui
     PROVIDER = (ISingletonProvider) ImplementationLoader.newInstance(HopGui.class);
   }
 
-  public static final HopGui getInstance() {
+  public static HopGui getInstance() {
     return (HopGui) PROVIDER.getInstanceInternal();
   }
 
   public static void main(String[] arguments) {
     try {
-
       setupConsoleLogging();
-      HopEnvironment.init();
+      if (!HopEnvironment.isInitialized()) {
+        HopEnvironment.init();
+      }
       OsHelper.setAppName();
       Display display = setupDisplay();
 
@@ -334,7 +342,9 @@ public class HopGui
 
       // Initialize the logging backend
       //
-      HopLogStore.init();
+      if (!HopLogStore.isInitialized()) {
+        HopLogStore.init();
+      }
       Locale.setDefault(LanguageChoice.getInstance().getDefaultLocale());
 
       HopGui hopGui = HopGui.getInstance();
@@ -381,7 +391,7 @@ public class HopGui
   protected void open() {
     shell.setImage(GuiResource.getInstance().getImageHopUiTaskbar());
 
-    /**
+    /*
      * On macOs the image gets loaded too soon, add a listener to set the image when the shell is
      * loaded
      */
@@ -506,16 +516,34 @@ public class HopGui
 
     // Try loading code exclusions
     try {
-      String path = Const.HOP_CONFIG_FOLDER + File.separator + "disabledGuiElements.xml";
+      FileObject applicationFolderFile = HopVfs.getFileObject("./disabledGuiElements.xml");
+      FileObject configFolderFile =
+          HopVfs.getFileObject(
+              Const.HOP_CONFIG_FOLDER + File.separator + "disabledGuiElements.xml");
+      String path = null;
 
-      Document document = XmlHandler.loadXmlFile(path);
-      Node exclusionsNode = XmlHandler.getSubNode(document, "exclusions");
-      List<Node> exclusionNodes = XmlHandler.getNodes(exclusionsNode, "exclusion");
+      if (applicationFolderFile.exists()) {
+        path = applicationFolderFile.getPath().toAbsolutePath().toString();
+        Document document = XmlHandler.loadXmlFile(path);
+        Node exclusionsNode = XmlHandler.getSubNode(document, "exclusions");
+        List<Node> exclusionNodes = XmlHandler.getNodes(exclusionsNode, "exclusion");
 
-      for (Node exclusionNode : exclusionNodes) {
-        excludedGuiElements.add(exclusionNode.getTextContent());
+        for (Node exclusionNode : exclusionNodes) {
+          excludedGuiElements.add(exclusionNode.getTextContent());
+        }
       }
-    } catch (HopXmlException e) {
+
+      if (configFolderFile.exists()) {
+        path = configFolderFile.getPath().toAbsolutePath().toString();
+        Document document = XmlHandler.loadXmlFile(path);
+        Node exclusionsNode = XmlHandler.getSubNode(document, "exclusions");
+        List<Node> exclusionNodes = XmlHandler.getNodes(exclusionsNode, "exclusion");
+
+        for (Node exclusionNode : exclusionNodes) {
+          excludedGuiElements.add(exclusionNode.getTextContent());
+        }
+      }
+    } catch (HopXmlException | FileSystemException | HopFileException e) {
       // ignore
     }
 
@@ -529,7 +557,7 @@ public class HopGui
 
       // Sort by id
       //
-      Collections.sort(perspectivePlugins, Comparator.comparing(p -> p.getIds()[0]));
+      perspectivePlugins.sort(Comparator.comparing(p -> p.getIds()[0]));
 
       for (Plugin perspectivePlugin : perspectivePlugins) {
 
@@ -1429,181 +1457,6 @@ public class HopGui
   }
 
   /**
-   * Gets shell
-   *
-   * @return value of shell
-   */
-  public Shell getShell() {
-    return shell;
-  }
-
-  public void setShell(Shell shell) {
-    this.shell = shell;
-  }
-
-  /**
-   * Gets display
-   *
-   * @return value of display
-   */
-  public Display getDisplay() {
-    return display;
-  }
-
-  /**
-   * Gets commandLineArguments
-   *
-   * @return value of commandLineArguments
-   */
-  public List<String> getCommandLineArguments() {
-    return commandLineArguments;
-  }
-
-  /**
-   * @param commandLineArguments The commandLineArguments to set
-   */
-  public void setCommandLineArguments(List<String> commandLineArguments) {
-    this.commandLineArguments = commandLineArguments;
-  }
-
-  /**
-   * Gets mainPerspectivesComposite
-   *
-   * @return value of mainPerspectivesComposite
-   */
-  public Composite getMainPerspectivesComposite() {
-    return mainPerspectivesComposite;
-  }
-
-  /**
-   * @param mainPerspectivesComposite The mainPerspectivesComposite to set
-   */
-  public void setMainPerspectivesComposite(Composite mainPerspectivesComposite) {
-    this.mainPerspectivesComposite = mainPerspectivesComposite;
-  }
-
-  /**
-   * Gets perspectiveManager
-   *
-   * @return value of perspectiveManager
-   */
-  public HopPerspectiveManager getPerspectiveManager() {
-    return perspectiveManager;
-  }
-
-  /**
-   * @param perspectiveManager The perspectiveManager to set
-   */
-  public void setPerspectiveManager(HopPerspectiveManager perspectiveManager) {
-    this.perspectiveManager = perspectiveManager;
-  }
-
-  /**
-   * Gets the variables
-   *
-   * @return value of variables
-   */
-  public IVariables getVariables() {
-    return variables;
-  }
-
-  /**
-   * @param variables The variables to set
-   */
-  public void setVariables(IVariables variables) {
-    this.variables = variables;
-  }
-
-  /**
-   * Gets props
-   *
-   * @return value of props
-   */
-  public PropsUi getProps() {
-    return props;
-  }
-
-  /**
-   * @param props The props to set
-   */
-  public void setProps(PropsUi props) {
-    this.props = props;
-  }
-
-  /**
-   * Gets log
-   *
-   * @return value of log
-   */
-  public ILogChannel getLog() {
-    return log;
-  }
-
-  /**
-   * Gets mainMenu
-   *
-   * @return value of mainMenu
-   */
-  public Menu getMainMenu() {
-    return mainMenu;
-  }
-
-  /**
-   * @param mainMenu The mainMenu to set
-   */
-  public void setMainMenu(Menu mainMenu) {
-    this.mainMenu = mainMenu;
-  }
-
-  /**
-   * Gets mainToolbar
-   *
-   * @return value of mainToolbar
-   */
-  public ToolBar getMainToolbar() {
-    return mainToolbar;
-  }
-
-  /**
-   * @param mainToolbar The mainToolbar to set
-   */
-  public void setMainToolbar(ToolBar mainToolbar) {
-    this.mainToolbar = mainToolbar;
-  }
-
-  /**
-   * Gets perspectivesToolbar
-   *
-   * @return value of perspectivesToolbar
-   */
-  public ToolBar getPerspectivesToolbar() {
-    return perspectivesToolbar;
-  }
-
-  /**
-   * @param perspectivesToolbar The perspectivesToolbar to set
-   */
-  public void setPerspectivesToolbar(ToolBar perspectivesToolbar) {
-    this.perspectivesToolbar = perspectivesToolbar;
-  }
-
-  /**
-   * Gets mainHopGuiComposite
-   *
-   * @return value of mainHopGuiComposite
-   */
-  public Composite getMainHopGuiComposite() {
-    return mainHopGuiComposite;
-  }
-
-  /**
-   * @param mainHopGuiComposite The mainHopGuiComposite to set
-   */
-  public void setMainHopGuiComposite(Composite mainHopGuiComposite) {
-    this.mainHopGuiComposite = mainHopGuiComposite;
-  }
-
-  /**
    * Activates the given perspective.
    *
    * @param perspective The perspective to active
@@ -1767,8 +1620,6 @@ public class HopGui
   /**
    * Create a list of all the searcheables locations. By default this means HopGui, the the current
    * metadata
-   *
-   * @return
    */
   @Override
   public List<ISearchablesLocation> getSearchablesLocations() {
@@ -1818,178 +1669,5 @@ public class HopGui
   public void nextPerspective() {
     IHopPerspective perspective = getActivePerspective();
     getPerspectiveManager().showNextPerspective(perspective);
-  }
-
-  /**
-   * Gets databaseMetaManager
-   *
-   * @return value of databaseMetaManager
-   */
-  public MetadataManager<DatabaseMeta> getDatabaseMetaManager() {
-    return databaseMetaManager;
-  }
-
-  /**
-   * @param databaseMetaManager The databaseMetaManager to set
-   */
-  public void setDatabaseMetaManager(MetadataManager<DatabaseMeta> databaseMetaManager) {
-    this.databaseMetaManager = databaseMetaManager;
-  }
-
-  /**
-   * Gets partitionManager
-   *
-   * @return value of partitionManager
-   */
-  public MetadataManager<PartitionSchema> getPartitionManager() {
-    return partitionManager;
-  }
-
-  /**
-   * @param partitionManager The partitionManager to set
-   */
-  public void setPartitionManager(MetadataManager<PartitionSchema> partitionManager) {
-    this.partitionManager = partitionManager;
-  }
-
-  /**
-   * Gets fileDelegate
-   *
-   * @return value of fileDelegate
-   */
-  public HopGuiFileDelegate getFileDelegate() {
-    return fileDelegate;
-  }
-
-  /**
-   * @param fileDelegate The fileDelegate to set
-   */
-  public void setFileDelegate(HopGuiFileDelegate fileDelegate) {
-    this.fileDelegate = fileDelegate;
-  }
-
-  /**
-   * Gets undoDelegate
-   *
-   * @return value of undoDelegate
-   */
-  public HopGuiUndoDelegate getUndoDelegate() {
-    return undoDelegate;
-  }
-
-  /**
-   * @param undoDelegate The undoDelegate to set
-   */
-  public void setUndoDelegate(HopGuiUndoDelegate undoDelegate) {
-    this.undoDelegate = undoDelegate;
-  }
-
-  /**
-   * Gets activePerspective
-   *
-   * @return value of activePerspective
-   */
-  public IHopPerspective getActivePerspective() {
-    return activePerspective;
-  }
-
-  /**
-   * Gets loggingObject
-   *
-   * @return value of loggingObject
-   */
-  public ILoggingObject getLoggingObject() {
-    return loggingObject;
-  }
-
-  /**
-   * Gets mainMenuWidgets
-   *
-   * @return value of mainMenuWidgets
-   */
-  public GuiMenuWidgets getMainMenuWidgets() {
-    return mainMenuWidgets;
-  }
-
-  /**
-   * @param mainMenuWidgets The mainMenuWidgets to set
-   */
-  public void setMainMenuWidgets(GuiMenuWidgets mainMenuWidgets) {
-    this.mainMenuWidgets = mainMenuWidgets;
-  }
-
-  /**
-   * Gets mainToolbarWidgets
-   *
-   * @return value of mainToolbarWidgets
-   */
-  public GuiToolbarWidgets getMainToolbarWidgets() {
-    return mainToolbarWidgets;
-  }
-
-  /**
-   * @param mainToolbarWidgets The mainToolbarWidgets to set
-   */
-  public void setMainToolbarWidgets(GuiToolbarWidgets mainToolbarWidgets) {
-    this.mainToolbarWidgets = mainToolbarWidgets;
-  }
-
-  /**
-   * Gets openingLastFiles
-   *
-   * @return value of openingLastFiles
-   */
-  public boolean isOpeningLastFiles() {
-    return openingLastFiles;
-  }
-
-  /**
-   * @param openingLastFiles The openingLastFiles to set
-   */
-  public void setOpeningLastFiles(boolean openingLastFiles) {
-    this.openingLastFiles = openingLastFiles;
-  }
-
-  /**
-   * Gets the unique id of this HopGui instance
-   *
-   * @return value of id
-   */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * Gets eventsHandler
-   *
-   * @return value of eventsHandler
-   */
-  public HopGuiEventsHandler getEventsHandler() {
-    return eventsHandler;
-  }
-
-  /**
-   * @param eventsHandler The eventsHandler to set
-   */
-  public void setEventsHandler(HopGuiEventsHandler eventsHandler) {
-    this.eventsHandler = eventsHandler;
-  }
-
-  /**
-   * Gets reOpeningFiles
-   *
-   * @return value of reOpeningFiles
-   */
-  public boolean isReOpeningFiles() {
-    return reOpeningFiles;
-  }
-
-  /**
-   * Sets reOpeningFiles
-   *
-   * @param reOpeningFiles value of reOpeningFiles
-   */
-  public void setReOpeningFiles(boolean reOpeningFiles) {
-    this.reOpeningFiles = reOpeningFiles;
   }
 }

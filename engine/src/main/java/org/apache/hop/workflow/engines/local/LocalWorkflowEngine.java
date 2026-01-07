@@ -137,7 +137,7 @@ public class LocalWorkflowEngine extends Workflow implements IWorkflowEngine<Wor
               // All fine?  Commit!
               //
               try {
-                if (result.getResult() && !result.isStopped() && result.getNrErrors() == 0) {
+                if (result.isResult() && !result.isStopped() && result.getNrErrors() == 0) {
                   try {
                     database.commit(true);
                     workflow
@@ -340,7 +340,7 @@ public class LocalWorkflowEngine extends Workflow implements IWorkflowEngine<Wor
 
     // Schedule the task to run regularly
     //
-    executionInfoTimer = new Timer();
+    executionInfoTimer = new Timer("LocalWorkflowEngine execution timer: " + getWorkflowName());
     executionInfoTimer.schedule(sampleTask, delay, interval);
 
     // When the workflow is done, register one more time and stop the timer

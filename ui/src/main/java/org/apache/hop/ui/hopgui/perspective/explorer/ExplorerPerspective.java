@@ -50,6 +50,7 @@ import org.apache.hop.core.svg.SvgCache;
 import org.apache.hop.core.svg.SvgCacheEntry;
 import org.apache.hop.core.svg.SvgFile;
 import org.apache.hop.core.svg.SvgImage;
+import org.apache.hop.core.util.Utils;
 import org.apache.hop.core.vfs.HopVfs;
 import org.apache.hop.i18n.BaseMessages;
 import org.apache.hop.ui.core.PropsUi;
@@ -251,7 +252,7 @@ public class ExplorerPerspective implements IHopPerspective, TabClosable {
     createTree(sash);
     createTabFolder(sash);
 
-    sash.setWeights(20, 80);
+    sash.setWeights(new int[] {20, 80});
 
     // refresh the file explorer when project activated or updated.
     //
@@ -783,6 +784,8 @@ public class ExplorerPerspective implements IHopPerspective, TabClosable {
               case SWT.ESC:
                 text.dispose();
                 break;
+              default:
+                break;
             }
           });
 
@@ -807,21 +810,25 @@ public class ExplorerPerspective implements IHopPerspective, TabClosable {
 
     // Show/Hide tree
     //
-    ToolBar secondToolBar = new ToolBar(tabFolder, SWT.FLAT);
-    final ToolItem item = new ToolItem(secondToolBar, SWT.PUSH);
-    item.setImage(GuiResource.getInstance().getImageMinimizePanel());
+    ToolBar tabToolBar = new ToolBar(tabFolder, SWT.FLAT);
+    tabFolder.setTopRight(tabToolBar, SWT.RIGHT);
+    PropsUi.setLook(tabToolBar);
+
+    final ToolItem item = new ToolItem(tabToolBar, SWT.PUSH);
+    item.setImage(GuiResource.getInstance().getImageMaximizePanel());
     item.addListener(
         SWT.Selection,
         e -> {
           if (sash.getMaximizedControl() == null) {
             sash.setMaximizedControl(tabFolder);
-            item.setImage(GuiResource.getInstance().getImageMaximizePanel());
+            item.setImage(GuiResource.getInstance().getImageMinimizePanel());
           } else {
             sash.setMaximizedControl(null);
-            item.setImage(GuiResource.getInstance().getImageMinimizePanel());
+            item.setImage(GuiResource.getInstance().getImageMaximizePanel());
           }
         });
-    tabFolder.setTopRight(secondToolBar, SWT.RIGHT);
+    int height = tabToolBar.computeSize(SWT.DEFAULT, SWT.DEFAULT).y;
+    tabFolder.setTabHeight(Math.max(height, tabFolder.getTabHeight()));
 
     //    new TabCloseHandler(this);
 
@@ -1122,7 +1129,7 @@ public class ExplorerPerspective implements IHopPerspective, TabClosable {
             BaseMessages.getString(PKG, "ExplorerPerspective.CreateFolder.Header"),
             BaseMessages.getString(PKG, "ExplorerPerspective.CreateFolder.Message", tif.path));
     String folder = dialog.open();
-    if (folder != null && !folder.isEmpty()) {
+    if (!Utils.isEmpty(folder)) {
       String newPath = tif.path;
       if (!newPath.endsWith("/") && !newPath.endsWith("\\")) {
         newPath += "/";
