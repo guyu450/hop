@@ -56,15 +56,26 @@ build-hfxt-image:
 #	    -f ${HFXT_HOME}/docker/Dockerfile \
 #		${HFXT_HOME}
 
+# build-hfxt-web-image: build-hfxt
+# #build-hfxt-web-image:
+# 	@echo "build-hfxt-web image"
+# 	@echo "./docker/create_hop_web_container.sh"
+# 	@sh ./docker/create_hop_web_container.sh
+# 	@docker buildx build --platform linux/amd64 --load \
+# 		-t ${REGISTRY}/${WEB_REPOSITORY}:${TAG} \
+# 	    -f ${HFXT_HOME}/docker/Dockerfile.web \
+# 		${HFXT_HOME}
 build-hfxt-web-image: build-hfxt
 #build-hfxt-web-image:
 	@echo "build-hfxt-web image"
 	@echo "./docker/create_hop_web_container.sh"
-	@sh ./docker/create_hop_web_container.sh
+#	@sh ./docker/create_hop_web_container.sh
+	@sh docker/hop_web_docker_before.sh
 	@docker buildx build --platform linux/amd64 --load \
 		-t ${REGISTRY}/${WEB_REPOSITORY}:${TAG} \
 	    -f ${HFXT_HOME}/docker/Dockerfile.web \
 		${HFXT_HOME}
+	@sh docker/hop_web_docker_after.sh
 
 
 
