@@ -31,7 +31,7 @@ Example to block calls using any System. methods:
     <exclusion>500-HopPluginExplorerPerspective</exclusion>
     <exclusion>150-HopExecutionPerspective</exclusion>
     <exclusion>HopNeo4jPerspective</exclusion>
-    <exclusion>200-HopMetadataPerspective</exclusion>
+<!--    <exclusion>200-HopMetadataPerspective</exclusion>-->
 
     <exclusion>toolbar-40000-project-label</exclusion>
     <exclusion>toolbar-40010-project-list</exclusion>

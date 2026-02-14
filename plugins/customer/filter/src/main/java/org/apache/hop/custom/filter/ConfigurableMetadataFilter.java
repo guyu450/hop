@@ -15,8 +15,14 @@
  * limitations under the License.
  */
 
-package org.apache.hop.plugins.metadata.filter;
+package org.apache.hop.custom.filter;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
+import org.apache.hop.core.Const;
 import org.apache.hop.core.extension.ExtensionPoint;
 import org.apache.hop.core.extension.IExtensionPoint;
 import org.apache.hop.core.logging.ILogChannel;
@@ -25,27 +31,24 @@ import org.apache.hop.core.variables.IVariables;
 import org.apache.hop.core.vfs.HopVfs;
 import org.apache.hop.ui.hopgui.perspective.metadata.MetadataPerspective;
 
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.JsonNode;
-
 @ExtensionPoint(
     id = "ConfigurableMetadataFilter",
     extensionPointId = "MetadataTypeFilter",
     description = "Filter metadata types based on configuration file")
-public class ConfigurableMetadataFilter implements IExtensionPoint<MetadataPerspective.MetadataTypeFilter> {
+public class ConfigurableMetadataFilter
+    implements IExtensionPoint<MetadataPerspective.MetadataTypeFilter> {
 
   private static final String CONFIG_FILE_NAME = "metadata-filter-config.json";
-  private static final String DEFAULT_CONFIG_PATH = "config/" + CONFIG_FILE_NAME;
-  
+  private static final String DEFAULT_CONFIG_PATH =
+      Const.HOP_CONFIG_FOLDER + "/" + CONFIG_FILE_NAME;
+
   private Set<String> excludedMetadataKeys;
   private Set<String> includedMetadataKeys;
   private boolean initialized = false;
 
   @Override
-  public void callExtensionPoint(ILogChannel log, IVariables variables, MetadataPerspective.MetadataTypeFilter filter) {
+  public void callExtensionPoint(
+      ILogChannel log, IVariables variables, MetadataPerspective.MetadataTypeFilter filter) {
     // 初始化配置
     if (!initialized) {
       initializeConfig(log, variables);
@@ -68,7 +71,7 @@ public class ConfigurableMetadataFilter implements IExtensionPoint<MetadataPersp
 
       // 加载配置文件
       log.logBasic("Loading metadata filter configuration from: " + configPath);
-      
+
       try (InputStream inputStream = HopVfs.getInputStream(configPath)) {
         if (inputStream != null) {
           // 解析JSON配置

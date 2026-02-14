@@ -18,7 +18,7 @@
 # s2:
 #	 echo s2
 HFXT_HOME :=  "."
-VERSION ?= "2.16.0"
+VERSION ?= "2.16.1"
 
 #REGISTRY ?= "192.168.8.210:8080/library"
 REGISTRY ?= "registry.cn-hangzhou.aliyuncs.com"
@@ -27,7 +27,7 @@ SERVICE_REPOSITORY ?= "${REPOSITORY_PREF}"
 WEB_REPOSITORY ?= "${REPOSITORY_PREF}-web"
 
 #$ sudo docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
-TAG ?= 2.14.0
+TAG ?= 2.16.1
 COMMIT_ID := $(shell git rev-parse HEAD)
 
 default: build-all-image

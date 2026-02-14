@@ -1,5 +1,6 @@
 {
-  "excluded": [
-    "rdbms"
+  "included": [
+    "rdbms",
+    "MinioConnectionDefinition"
   ]
 }
