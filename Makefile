@@ -18,7 +18,7 @@
 # s2:
 #	 echo s2
 HFXT_HOME :=  "."
-VERSION ?= "2.14.0"
+VERSION ?= "2.16.1"
 
 #REGISTRY ?= "192.168.8.210:8080/library"
 REGISTRY ?= "registry.cn-hangzhou.aliyuncs.com"
@@ -27,7 +27,7 @@ SERVICE_REPOSITORY ?= "${REPOSITORY_PREF}"
 WEB_REPOSITORY ?= "${REPOSITORY_PREF}-web"
 
 #$ sudo docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
-TAG ?= 2.14.0
+TAG ?= 2.16.1
 COMMIT_ID := $(shell git rev-parse HEAD)
 
 default: build-all-image
@@ -56,15 +56,26 @@ build-hfxt-image:
 #	    -f ${HFXT_HOME}/docker/Dockerfile \
 #		${HFXT_HOME}
 
+# build-hfxt-web-image: build-hfxt
+# #build-hfxt-web-image:
+# 	@echo "build-hfxt-web image"
+# 	@echo "./docker/create_hop_web_container.sh"
+# 	@sh ./docker/create_hop_web_container.sh
+# 	@docker buildx build --platform linux/amd64 --load \
+# 		-t ${REGISTRY}/${WEB_REPOSITORY}:${TAG} \
+# 	    -f ${HFXT_HOME}/docker/Dockerfile.web \
+# 		${HFXT_HOME}
 build-hfxt-web-image: build-hfxt
 #build-hfxt-web-image:
 	@echo "build-hfxt-web image"
 	@echo "./docker/create_hop_web_container.sh"
-	@sh ./docker/create_hop_web_container.sh
+#	@sh ./docker/create_hop_web_container.sh
+	@sh docker/hop_web_docker_before.sh
 	@docker buildx build --platform linux/amd64 --load \
 		-t ${REGISTRY}/${WEB_REPOSITORY}:${TAG} \
 	    -f ${HFXT_HOME}/docker/Dockerfile.web \
 		${HFXT_HOME}
+	@sh docker/hop_web_docker_after.sh
 
 
 

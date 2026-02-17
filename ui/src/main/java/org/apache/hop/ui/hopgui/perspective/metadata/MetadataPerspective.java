@@ -25,6 +25,7 @@ import lombok.Getter;
 import org.apache.hop.core.Const;
 import org.apache.hop.core.Props;
 import org.apache.hop.core.exception.HopException;
+import org.apache.hop.core.extension.ExtensionPointHandler;
 import org.apache.hop.core.gui.plugin.GuiPlugin;
 import org.apache.hop.core.gui.plugin.key.GuiKeyboardShortcut;
 import org.apache.hop.core.gui.plugin.key.GuiOsxKeyboardShortcut;
@@ -810,7 +811,48 @@ public class MetadataPerspective implements IHopPerspective, TabClosable {
             return a1.name().compareTo(a2.name());
           });
 
+      // 创建过滤后的元数据类型列表
+      List<Class<IHopMetadata>> filteredMetadataClasses = new ArrayList<>();
+
       for (Class<IHopMetadata> metadataClass : metadataClasses) {
+        HopMetadata annotation = HopMetadataUtil.getHopMetadataAnnotation(metadataClass);
+
+        // 检查是否应该包含此元数据类型
+        boolean include = true;
+        try {
+          // 创建元数据类型过滤器
+          MetadataTypeFilter filter = new MetadataTypeFilter(metadataClass, annotation.key());
+
+          // 触发元数据类型过滤扩展点
+          ExtensionPointHandler.callExtensionPoint(
+              LogChannel.GENERAL,
+              HopGui.getInstance().getVariables(),
+              "MetadataTypeFilter",
+              filter);
+
+          // 使用扩展点返回的过滤结果
+          include = filter.isInclude();
+        } catch (HopException e) {
+          // 如果扩展点抛出异常，默认包含
+          LogChannel.GENERAL.logError(
+              "Error in metadata type filter extension point: " + e.getMessage());
+        }
+
+        if (include) {
+          filteredMetadataClasses.add(metadataClass);
+        }
+      }
+
+      // 对过滤后的元数据类型排序
+      Collections.sort(
+          filteredMetadataClasses,
+          (cl1, cl2) -> {
+            HopMetadata a1 = HopMetadataUtil.getHopMetadataAnnotation(cl1);
+            HopMetadata a2 = HopMetadataUtil.getHopMetadataAnnotation(cl2);
+            return a1.name().compareTo(a2.name());
+          });
+
+      for (Class<IHopMetadata> metadataClass : filteredMetadataClasses) {
         HopMetadata annotation = HopMetadataUtil.getHopMetadataAnnotation(metadataClass);
         Image image =
             GuiResource.getInstance()
@@ -1126,6 +1168,34 @@ public class MetadataPerspective implements IHopPerspective, TabClosable {
       emptyString.setData(KEY_TYPE, "Label");
       emptyString.setForeground(tree.getDisplay().getSystemColor(SWT.COLOR_GRAY));
       newFolder.setExpanded(true);
+    }
+  }
+
+  /** 元数据类型过滤类，用于扩展点机制 */
+  public static class MetadataTypeFilter {
+    private final Class<IHopMetadata> metadataClass;
+    private final String metadataKey;
+    private boolean include = true;
+
+    public MetadataTypeFilter(Class<IHopMetadata> metadataClass, String metadataKey) {
+      this.metadataClass = metadataClass;
+      this.metadataKey = metadataKey;
+    }
+
+    public Class<IHopMetadata> getMetadataClass() {
+      return metadataClass;
+    }
+
+    public String getMetadataKey() {
+      return metadataKey;
+    }
+
+    public boolean isInclude() {
+      return include;
+    }
+
+    public void setInclude(boolean include) {
+      this.include = include;
     }
   }
 }

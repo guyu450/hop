@@ -1,0 +1,6 @@
+{
+  "included": [
+    "rdbms",
+    "MinioConnectionDefinition"
+  ]
+}

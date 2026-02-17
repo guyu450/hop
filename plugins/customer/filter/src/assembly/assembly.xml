@@ -16,20 +16,20 @@
   ~
   -->
 
-<translator-config>
-    <reference-locale>en_US</reference-locale>
-    <locale-list>
-        <locale>en_US</locale>
-        <locale>de_DE</locale>
-        <locale>fr_FR</locale>
-        <locale>it_IT</locale>
-        <locale>zh_CN</locale>
-        <locale>ja_JP</locale>
-        <locale>ko_KR</locale>
-        <locale>nl_NL</locale>
-        <locale>pt_PT</locale>
-        <locale>pt_BR</locale>
-        <locale>no_NO</locale>
-        <locale>es_ES</locale>
-        <locale>es_AR</locale>
-    </locale-list>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 http://maven.apache.org/xsd/assembly-2.2.0.xsd">
+    <id>hop-metadata-filter-plugin</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>.</baseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>org.apache.hop:hop-metadata-filter-plugin:jar</include>
+            </includes>
+            <outputDirectory>plugins/custom/plugin</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+</assembly>
