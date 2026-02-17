@@ -1,0 +1,10 @@
+
+version: '3.8'
+
+services:
+  hfxt-web:
+    image: registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt-web:2.16.2
+    ports:
+      - "8080:8080"
+    volumes:
+      - 你的许可证目录:/etc/lic
