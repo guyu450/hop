@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>avro-file-output.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="avro文件输出">Avro文件输出</h1>
+<h2 id="描述">描述</h2>
+<p>Avro文件输出转换可以将 Avro消息写入文件或字段</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称。注意：此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出类型</td>
+<td
+style="text-align: left;">所需的输出类型，可以是二进制文件、二进制消息或JSON消息。选择消息时，它将被发送到输出字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件名</td>
+<td style="text-align: left;">保存Avro数据文件的文件路径。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出字段</td>
+<td
+style="text-align: left;">不写入文件时，这是用于输出消息的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">自动创建模式</td>
+<td
+style="text-align: left;">可以选择现有模式，也可以根据”字段”选项卡中的字段创建模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将模式写入文件</td>
+<td style="text-align: left;">选择此选项可将模式写入单独的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Avro命名空间</td>
+<td style="text-align: left;">Avro文件中使用的命名空间。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Avro记录名称</td>
+<td style="text-align: left;">用于Avro记录的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Avro文档</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">模式文件名</td>
+<td style="text-align: left;">写入或读取模式的文件路径。</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建父文件夹</td>
+<td
+style="text-align: left;">创建文件时，如果要创建父文件夹，请选择此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">压缩编解码器</td>
+<td style="text-align: left;">写入文件时用于Avro消息的压缩方式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含转换编号</td>
+<td style="text-align: left;">将转换实例编号添加到文件名中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含分区编号</td>
+<td style="text-align: left;">将分区编号添加到文件名中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含日期</td>
+<td style="text-align: left;">在文件名中包含文件创建日期</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含时间</td>
+<td style="text-align: left;">在文件名中包含文件创建时间</td>
+</tr>
+<tr>
+<td style="text-align: left;">指定日期格式</td>
+<td style="text-align: left;">指定要附加到文件名的自定义日期和格式</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期时间格式</td>
+<td style="text-align: left;">用于格式化的日期时间规范</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果中</td>
+<td style="text-align: left;">将创建的结果文件名添加到文件名结果中</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>字段选项卡：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">流中的源字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Avro模式路径</td>
+<td
+style="text-align: left;">目标字段，指定现有模式时，此字段将填充模式中的字段，以便将输入字段映射到这些字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Avro类型</td>
+<td style="text-align: left;">Avro目标文件中字段的Avro类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">可为空</td>
+<td style="text-align: left;">此字段是否可为空？</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="元数据注入支持">元数据注入支持</h2>
+<div>
+<div>
+<p>要注入Avro字段类型，请使用以下代码</p>
+</div>
+<div>
+<p>AVRO_TYPE_NONE = 0<br />
+AVRO_TYPE_BOOLEAN = 1<br />
+AVRO_TYPE_DOUBLE = 2<br />
+AVRO_TYPE_FLOAT = 3<br />
+AVRO_TYPE_INT = 4<br />
+AVRO_TYPE_LONG = 5<br />
+AVRO_TYPE_STRING = 6<br />
+AVRO_TYPE_ENUM = 7</p>
+</div>
+</div>
+</body>
+</html>

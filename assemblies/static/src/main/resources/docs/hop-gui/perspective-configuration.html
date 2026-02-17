@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>perspective-configuration.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="配置视角">配置视角</h1>
+<h2 id="描述">描述</h2>
+<p>配置视角为所有 Hfxt配置选项提供了一个集中的位置。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>配置视角为所有 Hfxt配置选项提供了一个集中的位置。</p>
+</div>
+</div>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>配置视角将配置选项分组到以下标签中：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>常规</strong>选项控制 Hfxt和Hfxt Gui的行为。</p></li>
+<li><p><strong>外观</strong>控制Hfxt
+Gui在您的桌面或浏览器中的显示方式。</p></li>
+<li><p><strong>插件</strong>选项提供配置选项，以控制可用的
+Hfxt插件的行为。</p></li>
+<li><p><strong>系统变量</strong>允许您设置和配置 Hfxt全局变量。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="详细配置标签概述">详细配置标签概述</h2>
+<div>
+<h3 id="常规">常规</h3>
+<div>
+<p>常规配置标签允许您配置 Hfxt的核心选项。</p>
+</div>
+<table style="width:96%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hfxt配置文件名</td>
+<td><div>
+<div>
+<p>Hfxt将存储配置 文件的位置。此配置文 件将包含您的项目和环
+境信息以及全局变量。</p>
+</div>
+<div>
+<h2 id="section">– —-</h2>
+<h2 id="section-1">——————–</h2>
+<h2 id="section-2">——————–</h2>
+<pre><code> 设置</code></pre>
+<p>环境变量 <code>HFXT_CONFI G_FOLDER</code> 可动态设置
+此位置，以便在不同的 Hfxt版本和安装之间 轻松切换。 了解更多 – —- ——————–
+——————– ——————– ——————– ——————–</p>
+</div>
+</div></td>
+<td><code>&lt;INS TALLATION_PATH&gt;/conf ig/hfxt-config.json</code></td>
+</tr>
+<tr>
+<td>预览数据批大小</td>
+<td><div>
+<div>
+<p>通过管道运行工具栏 或转换预览对话框进行 预览时将显示的行数。</p>
+</div>
+<div>
+<p>注意：此设置是对 原生本地管道运行配置 中使用的预览选项
+的补充，在成功运行后 ，可通过转换右下角的</p>
+<p><code>预览数据</code> 图标访问该配置。</p>
+</div>
+</div></td>
+<td>1000</td>
+</tr>
+<tr>
+<td>使用数据库缓存</td>
+<td>启用关系数据库的缓存</td>
+<td>是</td>
+</tr>
+<tr>
+<td>启动时打开上次的文件</td>
+<td>在Hfxt GUI启动时重 新打开上次使用的文件 并选择上次使用的文件</td>
+<td>是</td>
+</tr>
+<tr>
+<td>自动保存更改的文件</td>
+<td>自动保存更 改的工作流和管道文件</td>
+<td>是</td>
+</tr>
+<tr>
+<td>自动拆分跳连接</td>
+<td><div>
+<div>
+<p>当在跳连接 上放置新的转换或操作 时，自动拆分跳连接。</p>
+</div>
+<div>
+<h2 id="section-3">– ————–</h2>
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;">当可以在跳连</td>
+</tr>
+<tr>
+<td style="text-align: center;">接上放置转换或操作时</td>
+</tr>
+<tr>
+<td style="text-align: center;">，跳连接将以粗体显示</td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-4">——————–</h2>
+</div>
+</div></td>
+<td>是</td>
+</tr>
+<tr>
+<td>显示复制或分发对话框</td>
+<td>显示一个弹出对话 框，询问用户是否应将 数据复制或分发（轮询
+）到管道中的后续转换</td>
+<td>是</td>
+</tr>
+<tr>
+<td>退出时询问用户</td>
+<td>显示一个弹出对话 框，让用户在退出Hfxt GUI之前进行确认</td>
+<td>是</td>
+</tr>
+<tr>
+<td>清除自定 义参数（转换/插件）</td>
+<td>删除 转换和插件对话框中的 所有自定义标志和参数</td>
+<td>点击时</td>
+</tr>
+<tr>
+<td>自动折叠调色板树</td>
+<td>折叠或展开 上下文对话框中的类别</td>
+<td>否（展开）</td>
+</tr>
+<tr>
+<td>显示工具提示</td>
+<td>在Hfxt GUI中可 用的地方显示工具提示</td>
+<td>是</td>
+</tr>
+<tr>
+<td>显示帮助工具提示</td>
+<td>在Hfxt GUI中可用的 地方显示帮助工具提示</td>
+<td>是</td>
+</tr>
+<tr>
+<td>在画布上使用双击？</td>
+<td><p>例如 在转换和操作对话框上 使用双击而不是单击。</p>
+<p>启 用：双击转换或操作图 标以打开其属性。单击 图标打开上下文对话框
+。禁用（默认）：单击 转换或操作图标打开上 下文对话框。单击转换
+或操作名称打开其属性</p></td>
+<td>否</td>
+</tr>
+<tr>
+<td>在画布上 的名称周围绘制边框？</td>
+<td>如果启用此选项， 将在画布上的转换和操 作名称周围绘制边框。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>在文件 对话框中使用全局书签</td>
+<td>文 件对话框中的书签默认 是全局的（跨项目）。
+启用可使其特定于项目</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<h3 id="外观">外观</h3>
+<div>
+<p><code>外观</code>配置选项允许您配置Hfxt GUI行为的各个方面。</p>
+</div>
+<table style="width:92%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 36%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认字体</td>
+<td>Hfxt GUI中使用的默认字体</td>
+<td>Noto Sans - 10</td>
+</tr>
+<tr>
+<td>固定宽度字体</td>
+<td>Hfxt GUI中 使用的默认固定宽度字体</td>
+<td>Monospace - 10</td>
+</tr>
+<tr>
+<td>工作区字体</td>
+<td>工作区中使用的字体</td>
+<td>Noto Sans - 10</td>
+</tr>
+<tr>
+<td>注释字体</td>
+<td>工作流 和管道注释中使用的字体</td>
+<td>Noto Sans - 10</td>
+</tr>
+<tr>
+<td>工作区图标大小</td>
+<td>工作流和管道中操 作和转换图标的默认大小</td>
+<td>32</td>
+</tr>
+<tr>
+<td>工作区线条宽度</td>
+<td>工作流和操作 中跳连接使用的线条宽度</td>
+<td>1</td>
+</tr>
+<tr>
+<td>对话框中间百分比</td>
+<td>用于 确定对话框位置的百分比</td>
+<td>35</td>
+</tr>
+<tr>
+<td>UI缩放级别</td>
+<td>Hfxt GUI中工作流和 管道使用的默认缩放级别</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>画布网格大小</td>
+<td>Hfxt GUI编辑器中工作流和 管道使用的默认网格大小</td>
+<td>16</td>
+</tr>
+<tr>
+<td>显示画布网格</td>
+<td>在Hfxt GUI中显示工作 流和管道的网格（虚线）</td>
+<td>否</td>
+</tr>
+<tr>
+<td>隐藏菜单栏</td>
+<td>不显 示菜单栏。如果启用（默 认），菜单选项可从Hfxt GUI左上角的
+Hfxt图标中获取。</td>
+<td>是</td>
+</tr>
+<tr>
+<td>在表格上方显示工具栏</td>
+<td>在表格视图（ 例如预览对话框、转换配 置选项）中显示一个带有
+剪切/复制/粘贴、向上/向 下移动行等选项的工具栏</td>
+<td>是</td>
+</tr>
+<tr>
+<td>暗黑模式</td>
+<td>使用 暗黑模式。此选项为只读 （不可更改）。默认使用
+您操作系统的主题设置。</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>首选语言</td>
+<td><div>
+<div>
+<p>Hfxt GUI中使用的默认语言。</p>
+</div>
+<div>
+<ul>
+<li><h2 id="section-5">- ———————</h2>
+查看 翻译贡献指南， 将 Hfxt翻译成您的母语。</li>
+<li><h2 id="section-6">- ———————</h2></li>
+</ul>
+</div>
+</div></td>
+<td>英语（美国）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="插件">插件</h3>
+<div>
+<p>插件标签包含 Hfxt中各种</p>
+</div>
+</div>
+</body>
+</html>

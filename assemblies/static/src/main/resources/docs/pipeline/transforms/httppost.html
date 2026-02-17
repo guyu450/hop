@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>httppost.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="http-post请求">HTTP POST请求</h1>
+<h2 id="描述">描述</h2>
+<p>HTTP POST转换使用HTTP POST命令通过URL提交表单数据。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规标签页">常规标签页</h3>
+<div>
+<p>常规标签页用于定义要使用的RSS/Atom
+URL，也可以选择指定包含这些URL的字段。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">URL</td>
+<td style="text-align: left;">要提交到的Web服务URL。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段接受URL？</td>
+<td
+style="text-align: left;">如果勾选此选项，则必须指定从哪个字段检索URL。</td>
+</tr>
+<tr>
+<td style="text-align: left;">URL字段名称</td>
+<td
+style="text-align: left;">如果勾选了上一个选项，则在此处指定URL字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td style="text-align: left;">正在访问的文件的编码标准。</td>
+</tr>
+<tr>
+<td style="text-align: left;">请求实体字段</td>
+<td
+style="text-align: left;">将包含POST请求的字段名称。启用此选项后，“上传文件”选项将检索此字段中指定名称的文件，并提交该文件的内容。</td>
+</tr>
+<tr>
+<td style="text-align: left;">上传文件</td>
+<td
+style="text-align: left;">如果在”请求实体字段”中定义了一个文件，并且勾选了此选项，则将上传该文件的内容。目前，为了使”上传文件”功能生效，必须填写”请求实体字段”。如果选择了”上传文件”并在”正文参数”下指定了一个字段，但没有为”请求实体字段”（文件名所在位置）选择一个值，操作将悄然失败。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用多部分上传</td>
+<td
+style="text-align: left;">这将以多部分请求的形式将数据发送到服务器，在上传文件时此功能很有用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接超时</td>
+<td
+style="text-align: left;">定义连接尝试出错时的超时时间（默认值为10000），单位为毫秒。</td>
+</tr>
+<tr>
+<td style="text-align: left;">套接字超时</td>
+<td
+style="text-align: left;">定义套接字出错时的超时时间（默认值为10000），单位为毫秒。</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接关闭等待时间</td>
+<td
+style="text-align: left;">定义连接关闭后的等待时间，单位为毫秒。默认值-1表示使用操作系统的默认等待时间（通常为2分钟）。背景信息：每一行都会打开一个连接，并在所谓的TIME-WAIT状态下保持特定的时间。大量（可能数千个）处于TIME-WAIT状态的连接会带来显著的内存开销。此选项可以通过减少将关闭的连接保持在TIME-WAIT状态的时间来减少这种内存开销。</td>
+</tr>
+<tr>
+<td style="text-align: left;">结果字段名称</td>
+<td style="text-align: left;">要将结果输出发布到的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP状态码字段名称</td>
+<td style="text-align: left;">要将状态码输出发布到的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">响应时间（毫秒）字段名称</td>
+<td
+style="text-align: left;">要将响应时间（以毫秒为单位）发布到的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP登录名</td>
+<td
+style="text-align: left;">如果此表单需要身份验证，此字段应包含用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP密码</td>
+<td
+style="text-align: left;">如果此表单需要身份验证，此字段应包含与用户名对应的密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理主机</td>
+<td
+style="text-align: left;">如果使用代理服务器，则为代理服务器的主机名或IP地址。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理端口</td>
+<td
+style="text-align: left;">如果使用代理服务器，则为代理服务器的端口号。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段标签页正文头部参数">字段标签页：正文（头部）参数</h3>
+<div>
+<p>字段标签页用于定义HTTP请求头部和正文的参数。如果已在常规标签页中填写了URL和其他必要详细信息，则可以使用”获取值”按钮在此处预先填充字段。正文参数用于POST和PUT操作。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">#</td>
+<td style="text-align: left;">此参数传递给Web应用程序的顺序。</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">包含要映射到参数的值的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">参数</td>
+<td style="text-align: left;">要将”名称”的值映射到的参数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">放入头部？</td>
+<td style="text-align: left;">如果设置为Y，则该参数将放入请求头部。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段标签页查询参数">字段标签页：查询参数</h3>
+<div>
+<p>字段标签页用于定义HTTP请求头部和正文的参数。如果已在常规标签页中填写了URL和其他必要详细信息，则可以使用”获取值”按钮在此处预先填充字段。查询参数在URL中指定，可用于任何HTTP方法。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">#</td>
+<td style="text-align: left;">此参数传递给Web应用程序的顺序。</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">包含要映射到参数的值的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">值</td>
+<td style="text-align: left;">要映射到参数的值。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

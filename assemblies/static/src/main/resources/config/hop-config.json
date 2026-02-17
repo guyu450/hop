@@ -16,5 +16,7 @@
         "configFilename": "project-config.json"
       }
     ]
-  }
+  },
+  "LocaleDefault": "zh_CN",
+  "doNotShowWelcomeDialog" : true
 }

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>addxml.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="添加xml">添加XML</h1>
+<h2 id="描述">描述</h2>
+<p>“添加XML”转换允许您将一行中多个字段的内容编码为XML。此XML以字符串字段的形式添加到该行中。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="内容选项卡">内容选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td
+style="text-align: left;">要使用的编码；此编码在XML文件的头部指定</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出值</td>
+<td style="text-align: left;">包含XML的新字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">根XML元素</td>
+<td style="text-align: left;">生成元素中的根元素名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">省略XML头部</td>
+<td style="text-align: left;">启用此选项可在输出中不包含XML头部。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从XML结果中省略空值</td>
+<td
+style="text-align: left;">不添加具有空值的元素或属性。这通常用于限制目标XML的大小。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段选项卡">字段选项卡</h3>
+<div>
+<p>“字段”选项卡用于配置输出字段及其格式。下表描述了字段的每个可用属性。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段名称</td>
+<td style="text-align: left;">字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">元素名称</td>
+<td style="text-align: left;">XML文件中要使用的元素名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">字段类型可以是字符串、日期或数字</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td style="text-align: left;">选择要应用于字段值的日期或数字格式</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td
+style="text-align: left;">如果指定了此长度，则输出字符串将填充到此长度</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td style="text-align: left;">用于显示浮点数的小数位数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币符号</td>
+<td
+style="text-align: left;">用于表示货币的符号，如$10,000.00或€5,000.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数点</td>
+<td
+style="text-align: left;">用于表示浮点数中小数点的符号，通常是”.”（10.75）或”,“（5,25）</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组符号</td>
+<td
+style="text-align: left;">用于表示千位分隔符的符号，通常是”,“（10,000.00）或”.”（5.000,00）</td>
+</tr>
+<tr>
+<td style="text-align: left;">空值</td>
+<td style="text-align: left;">字段值为空时要使用的字符串。</td>
+</tr>
+<tr>
+<td style="text-align: left;">属性</td>
+<td
+style="text-align: left;">如果为”是”，则使此字段成为一个属性。否则，使其成为一个元素。</td>
+</tr>
+<tr>
+<td style="text-align: left;">属性父元素名称</td>
+<td
+style="text-align: left;">如果上一个参数”属性”设置为”是”，则可以指定要添加属性的父元素名称。如果未指定父元素名称，则将属性设置在父元素中。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="用例">用例</h2>
+<div>
+<div>
+<p>以下是各种类别的数据，需要以XML格式存储在数据库中。您需要将原始数据转换为以下数据库布局。</p>
+</div>
+<h3 id="原始数据">原始数据</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">形状</th>
+<th style="text-align: left;">颜色</th>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">X</th>
+<th style="text-align: left;">Y</th>
+<th style="text-align: left;">半径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">圆形</td>
+<td style="text-align: left;">蓝色</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">圆形</td>
+<td style="text-align: left;">红色</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">圆形</td>
+<td style="text-align: left;">蓝色</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">圆形</td>
+<td style="text-align: left;">蓝色</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">圆形</td>
+<td style="text-align: left;">红色</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">5</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">形状</th>
+<th style="text-align: left;">颜色</th>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">X</th>
+<th style="text-align: left;">Y</th>
+<th style="text-align: left;">长度</th>
+<th style="text-align: left;">宽度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">矩形</td>
+<td style="text-align: left;">蓝色</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">矩形</td>
+<td style="text-align: left;">红色</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">矩形</td>
+<td style="text-align: left;">蓝色</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">矩形</td>
+<td style="text-align: left;">红色</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">矩形</td>
+<td style="text-align: left;">蓝色</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="输出示例">输出示例</h3>
+<p>ID</p>
+</div>
+<p>X</p>
+<p>Y</p>
+<p>类数据</p>
+<p>3</p>
+</body>
+</html>

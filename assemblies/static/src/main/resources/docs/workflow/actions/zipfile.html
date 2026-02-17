@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>zipfile.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="zip文件">ZIP文件</h1>
+<h2 id="描述">描述</h2>
+<p>“ZIP文件”操作会使用您在对话框中指定的选项创建一个标准的ZIP存档。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“<code>ZIP文件</code>”操作会使用您在对话框中指定的选项创建一个标准的ZIP存档。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>源文件</td>
+<td></td>
+</tr>
+<tr>
+<td>从先前操作获取参数</td>
+<td><div>
+<div>
+<p>此复选框从先前工作流操作的结果行中
+获取文件名规范。这是将从行中获取的内容。</p>
+</div>
+<div>
+<ul>
+<li><p>第一个字段必须包含文件名或文件夹。</p></li>
+<li><p>第二个字段应包含包含通配符</p></li>
+<li><p>第三个字段应包含排除通配符。</p></li>
+<li><p>第四个字段 应包含目标ZIP文件（每个文件可以不同）。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>源目录/文件</td>
+<td>要压缩的文件的源目录</td>
+</tr>
+<tr>
+<td>包含通配符（正则表达式）</td>
+<td>要包含 在ZIP存档中的文件的通配符（正则表达式）</td>
+</tr>
+<tr>
+<td>排除通配符（正则表达式）</td>
+<td>要从Z IP存档中排除的文件的通配符（正则表达式）</td>
+</tr>
+<tr>
+<td>包含子文件夹</td>
+<td>启用此选项可在子文件夹中搜索文件</td>
+</tr>
+<tr>
+<td>ZIP文件</td>
+<td></td>
+</tr>
+<tr>
+<td>ZIP文件名</td>
+<td>目标存档的完整名称</td>
+</tr>
+<tr>
+<td>创建父文件夹</td>
+<td>如果父文件夹不存在，则创建它</td>
+</tr>
+<tr>
+<td>在文件名中包含日期</td>
+<td>将日期添加到文件名</td>
+</tr>
+<tr>
+<td>在文件名中包含时间</td>
+<td>将时间添加到文件名</td>
+</tr>
+<tr>
+<td>指定日期时间格式</td>
+<td>允许您指定日期/时间格式掩码，</td>
+</tr>
+<tr>
+<td>日期时间格式</td>
+<td>日期时间格式掩码，如yyyy/MM/dd HHmmss</td>
+</tr>
+<tr>
+<td>显示文件名</td>
+<td>根据您指定的选项显示示例文件名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="高级选项卡">高级选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高级</td>
+<td></td>
+</tr>
+<tr>
+<td>压缩</td>
+<td><div>
+<div>
+<p>要使用的压缩级别。选项有 * 默认 * 最佳压缩 * 最快速度</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>如果ZIP文件已存在</td>
+<td><div>
+<div>
+<p>当目标位置已有文件时要采取的操作。选项有</p>
+</div>
+<div>
+<ul>
+<li><p>创建具有唯一名称的新文件</p></li>
+<li><p>追加到现有文件</p></li>
+<li><p>不执行任何操作（默认）</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>压缩后</td>
+<td><div>
+<div>
+<p>压缩后要采取的操作。选项有</p>
+</div>
+<div>
+<ul>
+<li><p>不执行任何操作（默认）</p></li>
+<li><p>删除文件</p></li>
+<li><p>移动文件</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>移动文件到</td>
+<td>压缩后将源文件移动到的目标目录</td>
+</tr>
+<tr>
+<td>创建文件夹</td>
+<td>创建要移动到的文件夹</td>
+</tr>
+<tr>
+<td>存储的源路径深度</td>
+<td><div>
+<div>
+<p>这 是源文件路径中在ZIP文件存档结构中沿用的部分。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>结果文件名</td>
+<td></td>
+</tr>
+<tr>
+<td>将ZIP文件添加到结果</td>
+<td>启用此选项可将目标ZIP文件添加到结果中</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

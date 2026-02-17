@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>databases.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="数据库插件">数据库插件</h1>
+<div>
+<div>
+<div>
+<p>Hfxt对多种数据库类型提供了优化支持。如果您使用的是不受支持的数据库，始终可以创建通用连接。</p>
+</div>
+<div>
+<p>要创建数据库连接，请转到元数据透视图，右键单击
+<code>关系数据库连接</code> 并选择 <code>新建</code>。</p>
+</div>
+<div>
+<p>连接保存在一个中央位置，然后可供所有管道和工作流使用。如果您已将项目设置为与Hfxt一起使用，数据库信息将位于
+<code>${PROJECT_HOME}/metadata/rdbms</code>
+文件夹中。对于每个连接，此文件夹中将生成一个单独的 .json
+文件。此json文件将使用连接的名称，并包含所有连接信息。</p>
+</div>
+</div>
+</div>
+<h2 id="添加jdbc驱动程序">添加JDBC驱动程序</h2>
+<div>
+<div>
+<p>Hfxt包含适用于所有在与公共许可证兼容的许可下提供驱动程序的数据库的JDBC驱动程序。
+Hfxt附带的所有JDBC驱动程序都可以在您的 Hfxt安装文件夹中的
+<code>lib/jdbc</code> 中找到。</p>
+</div>
+<div>
+<p>以下小节中各种数据库类型的文档将向您展示是否包含您的数据库的驱动程序。如果包含，连接编辑器还将显示安装的驱动程序的版本。如果未包含驱动程序，文档将指导您前往下载位置。</p>
+</div>
+<div>
+<p>将 <code>HFXT_SHARED_JDBC_FOLDERS</code>
+环境变量设置为包含您的其他JDBC文件夹的文件夹。将它们放在一个中央文件夹中有助于您轻松升级或更改
+Hfxt安装，而无需每次都添加JDBC驱动程序。此变量接受以逗号分隔的列表以指向多个目录，未设置时的默认值是
+<code>lib/jdbc</code>，例如
+<code>&lt;PATH_TO_YOUR_HFXT_INSTALLATION&gt;/lib/jdbc,&lt;PATH_TO_YOUR_JDBC_FOLDER&gt;</code>。</p>
+</div>
+<div>
+<p>为避免冲突，请确保每个数据库只有一个驱动程序，并且确保不要有驱动程序的多个副本，例如，不要同时在
+<code>HFXT_SHARED_JDBC_FOLDERS</code> 和 <code>hfxt/lib/jdbc</code>
+文件夹中都有。</p>
+</div>
+</div>
+<h2 id="通用连接">通用连接</h2>
+<div>
+<div>
+<p>如果您要使用的数据库尚无特定的数据库类型可用，您可以使用通用连接。要使用通用连接，您必须将jdbc驱动程序复制到
+<code>&lt;PATH_TO_YOUR_HFXT_INSTALLATION&gt;/lib/jdbc</code> 文件夹或
+<code>HFXT_SHARED_JDBC_FOLDERS</code> 文件夹中。</p>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<p>查看您的数据库的驱动程序类和URL语法的文档以创建连接。</p>
+</div>
+<div>
+<p>在”驱动程序类”字段中指定驱动程序类，例如，如果您使用PostgreSQL，类是
+<code>org.postgresql.Driver</code>。</p>
+</div>
+</div>
+<h2 id="高级属性">高级属性</h2>
+<div>
+<div>
+<p>“高级”选项卡允许您为数据库连接指定一些其他属性。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">支持布尔数据类型</td>
+<td style="text-align: left;">是否支持布尔类型？</td>
+</tr>
+<tr>
+<td style="text-align: left;">支持时间戳数据类型</td>
+<td style="text-align: left;">是否支持时间戳类型？</td>
+</tr>
+<tr>
+<td style="text-align: left;">在数据库中引用所有标识符</td>
+<td
+style="text-align: left;">为生成的SQL语句中的所有标识符添加引号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">强制所有标识符为小写</td>
+<td
+style="text-align: left;">将生成的SQL语句中的所有标识符更改为小写。</td>
+</tr>
+<tr>
+<td style="text-align: left;">强制所有标识符为大写</td>
+<td
+style="text-align: left;">将生成的SQL语句中的所有标识符更改为大写。</td>
+</tr>
+<tr>
+<td style="text-align: left;">保留保留字的大小写</td>
+<td
+style="text-align: left;">对于生成的SQL语句，不要更改所有保留字的大小写。</td>
+</tr>
+<tr>
+<td style="text-align: left;">首选模式名称</td>
+<td style="text-align: left;">默认使用的模式名称（可以被覆盖）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接后运行的SQL语句（以;分隔）</td>
+<td style="text-align: left;">连接创建后需要执行的以分号 (';')
+分隔的SQL语句列表。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<div>
+<p>“选项”表包含可添加到JDBC驱动程序的键/值对列表。请查看您的数据库JDBC驱动程序文档以获取正确的语法。</p>
+</div>
+<div>
+<p>例如，要向MS
+SQL数据库添加其他选项，您可以添加选项以实现如下所示的JDBC URL。
+Hfxt将在后台处理这些属性，通常无需手动修改JDBC URL（但您 <em>可以</em>
+修改，并且在 <code>通用</code> 连接中，您 <em>必须</em> 修改）。</p>
+</div>
+<div>
+<div>
+<pre><code>jdbc:sqlserver://localhost:1433;&quot; +
+     &quot;databaseName=AdventureWorks;integratedSecurity=true;&quot; +
+     &quot;encrypt=true;trustServerCertificate=true</code></pre>
+</div>
+</div>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">integratedSecurity</td>
+<td style="text-align: left;">true</td>
+</tr>
+<tr>
+<td style="text-align: left;">encrypt</td>
+<td style="text-align: left;">true</td>
+</tr>
+<tr>
+<td style="text-align: left;">trustCertificateCertificate</td>
+<td style="text-align: left;">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

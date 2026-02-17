@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>getfilenames.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="获取文件名">获取文件名</h1>
+<h2 id="描述">描述</h2>
+<p>“获取文件名”转换允许您获取与文件系统上的文件名相关的信息。有关检索到的文件的信息将作为行添加到流中。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>此转换的输出字段如下：</p>
+</div>
+<div>
+<ul>
+<li><p>filename -
+完整的文件名，包括路径（/tmp/hfxt/somefile.txt）</p></li>
+<li><p>short_filename - 仅文件名，不包括路径（somefile.txt）</p></li>
+<li><p>path - 仅路径（/tmp/hfxt/）</p></li>
+<li><p>type</p></li>
+<li><p>exists</p></li>
+<li><p>ishidden</p></li>
+<li><p>isreadable</p></li>
+<li><p>iswriteable</p></li>
+<li><p>lastmodifiedtime</p></li>
+<li><p>size</p></li>
+<li><p>extension</p></li>
+<li><p>uri</p></li>
+<li><p>rooturi</p></li>
+</ul>
+</div>
+</div>
+<h2 id="文件选项卡">文件选项卡</h2>
+<div>
+<div>
+<p>此选项卡定义要检索文件名的文件位置。有关指定文件位置的更多信息，请参阅”文本文件输入”转换中的”使用正则表达式选择文件”部分。</p>
+</div>
+<div>
+<p>示例：您有一个静态目录c:\temp，预计会在其中放置扩展名为.dat的文件。在”文件/目录”下，您应指定c:\temp，在”通配符”下，您应使用类似.*\.dat$的正则表达式。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">文件名是否在字段中定义？</td>
+<td
+style="text-align: left;">指示要加载的文件是否在您可以指定的字段中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段获取文件名</td>
+<td style="text-align: left;">从中加载文件名的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含通配符字段（正则表达式）</td>
+<td
+style="text-align: left;">如果要加载多个文件，请定义一个与要加载的文件名匹配的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">排除通配符字段（正则表达式）</td>
+<td
+style="text-align: left;">定义一个与要从转换中排除的文件匹配的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含子文件夹？</td>
+<td style="text-align: left;">指示表达式是否考虑子文件夹中的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件或目录</td>
+<td
+style="text-align: left;">如果文件不是由字段定义的，请指定文件名或要从中加载多个文件的目录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">添加</td>
+<td
+style="text-align: left;">点击将指定的文件、目录和正则表达式添加到选定文件列表中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">浏览</td>
+<td style="text-align: left;">点击选择一个文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含通配符（正则表达式）</td>
+<td
+style="text-align: left;">如果要加载多个文件，这是一个与要加载的文件名匹配的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">排除通配符（正则表达式）</td>
+<td
+style="text-align: left;">定义一个与要从转换中排除的文件匹配的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">选定文件</td>
+<td
+style="text-align: left;">列出选定的文件以及为它们定义的包含/排除表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除</td>
+<td style="text-align: left;">点击从”选定文件”列表中删除一个文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编辑</td>
+<td style="text-align: left;">点击修改”选定文件”列表中的一个文件。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="过滤器">过滤器</h2>
+<div>
+<div>
+<p>“过滤器”选项卡允许您根据以下条件过滤检索到的文件名：</p>
+</div>
+<div>
+<ul>
+<li><p>所有文件和文件夹</p></li>
+<li><p>仅文件</p></li>
+<li><p>仅文件夹</p></li>
+</ul>
+</div>
+<div>
+<p>它还为您提供：</p>
+</div>
+<div>
+<ul>
+<li><p>在输出中包含行号的功能</p></li>
+<li><p>限制返回行数的功能。限制参数将作用于返回的总行数，而不仅仅是返回的文件数。</p></li>
+<li><p>将文件名添加到结果列表的功能</p></li>
+<li><p>在未找到文件/文件夹时打印错误消息而不停止处理的功能</p></li>
+<li><p>在未找到文件/文件夹时引发异常并停止处理的功能。</p></li>
+</ul>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">过滤类型</td>
+<td
+style="text-align: left;">选择过滤所应用的对象。选择所有文件和文件夹、仅文件或仅文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在输出中包含行号？</td>
+<td
+style="text-align: left;">指示行号是否作为一个字段包含在输出中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">行号字段名</td>
+<td style="text-align: left;">报告行号的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">不报告错误</td>
+<td
+style="text-align: left;">指示如果没有文件或文件夹与过滤条件匹配，管道是否安静地失败。如果未选中，如果没有可用的文件或文件夹，则会报告错误。</td>
+</tr>
+<tr>
+<td style="text-align: left;">引发异常并停止处理</td>
+<td
+style="text-align: left;">指示如果没有文件或文件夹与过滤条件匹配，是否会引发异常，这也会阻止管道继续运行。如果未选中，管道将在没有文件的情况下继续运行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制</td>
+<td style="text-align: left;">输出中包含的文件和文件夹数量。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果？</td>
+<td
+style="text-align: left;">指示文件名是否作为一个字段添加到输出中。</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="未找到文件时引发异常的详细信息">未找到文件时引发异常的详细信息</h3>
+<div>
+<p>如上所述，如果您在”过滤器”选项卡中启用该开关，Hfxt将在未找到文件的情况下引发异常并停止处理。</p>
+</div>
+<div>
+<p>在这种情况下，我们需要注意，根据您选择识别要查找的文件集的方式，异常会以两种不同的方式引发。</p>
+</div>
+<div>
+<ul>
+<li><p>如果您在”选定文件”表中将文件（或包含/排除表达式）指定为一组，则会一次性考虑指定的整个集合来执行文件检索，如果未找到文件，则会引发异常。</p></li>
+<li><p>如果您通过”字段中的文件名”选项指定文件，则我们要检索的文件的详细信息来自传入的行。这意味着检索是逐行进行的，一旦用于指定搜索文件的任何一个详细信息失败，就会引发异常。因此，在这种情况下，触发异常的评估是在评估每个传入行之后进行的，而不是评估传入行中找到的详细信息返回和生成的整个数据集。</p></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

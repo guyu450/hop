@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>neo4j-connection.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="neo4j连接">Neo4j连接</h1>
+<h2 id="描述">描述</h2>
+<p>可以使用徽标（点击可编辑）以及在各个Neo4j对话框中每条连接线路右侧的下拉菜单（向下箭头）来创建和编辑连接。也可以在Hfxt
+GUI的元数据透视图中对其进行管理。Neo4j连接在Hfxt元数据文件夹的
+<code>metadata/neo4j-connection/</code> 下序列化为JSON格式。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>可以使用徽标（点击可编辑）以及在各个Neo4j对话框中每条连接线路右侧的下拉菜单（向下箭头）来创建和编辑连接。</p>
+</div>
+<div>
+<p>也可以在Hfxt GUI的元数据透视图中对其进行管理。</p>
+</div>
+<div>
+<p>Neo4j连接在Hfxt元数据文件夹的</p>
+</div>
+<div>
+<p><code>metadata/neo4j-connection/</code></p>
+</div>
+</div>
+<h2 id="用户界面">用户界面</h2>
+<div>
+<div>
+<p>在大多数情况下，Neo4j 驱动程序
+可以自动确定协议和安全选项，让您能够专注于最基本的选项：服务器、端口、用户名和密码。和往常一样，我们建议您切勿硬编码任何设置，而是使用可以在环境配置文件中定义的环境变量。这样，同一个Neo4j连接可以在多个环境中使用，而无需更改管道或工作流。</p>
+</div>
+</div>
+<h2 id="基本选项">基本选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">连接名称</td>
+<td style="text-align: left;">用于唯一标识连接的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">自动检测？</td>
+<td
+style="text-align: left;">如果启用此选项，您是要求驱动程序自动确定加密和路由等协议选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">服务器或IP地址</td>
+<td
+style="text-align: left;">用于连接Neo4j服务器的IP地址或主机名。如果要指定多个服务器地址，请使用逗号分隔的主机列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据库名称</td>
+<td
+style="text-align: left;">要使用的数据库（默认为neo4j）。这是Neo4j服务器4.0或更高版本中可用的功能。</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据库端口</td>
+<td
+style="text-align: left;">要连接的Neo4j数据库端口。如果留空，将使用默认端口号：7687。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">用于登录Neo4j数据库的用户</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">要使用的密码</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="协议选项">协议选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">是否为4版本数据库？</td>
+<td
+style="text-align: left;">启用此选项可帮助我们为您生成最优化的Cypher语句。</td>
+</tr>
+<tr>
+<td style="text-align: left;">浏览器端口</td>
+<td style="text-align: left;">仅供参考。Neo4j浏览器运行的端口</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用路由，neo4j:// 协议？</td>
+<td style="text-align: left;">启用此选项可使用bolt+routing协议</td>
+</tr>
+<tr>
+<td style="text-align: left;">路由策略</td>
+<td style="text-align: left;">要使用的bolt+routing策略</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用加密？</td>
+<td
+style="text-align: left;">除非您生成并配置了正确的SSL密钥，否则请禁用此选项。请务必查看我们的v4升级说明</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="neo4j-aura云服务">Neo4j Aura云服务</h2>
+<div>
+<div>
+<p>要连接到Aura 4或5版本的数据库，可以使用以下选项：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">自动检测？</td>
+<td style="text-align: left;">已启用</td>
+</tr>
+<tr>
+<td style="text-align: left;">协议</td>
+<td style="text-align: left;"><code>neo4j+s</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">服务器或IP地址</td>
+<td style="text-align: left;">提供的…….neo4j.io主机名</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">neo4j</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">提供的密码</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="高级选项">高级选项</h2>
+<div>
+<h3 id="连接活跃性检查超时时间毫秒">连接活跃性检查超时时间（毫秒）</h3>
+<div>
+<p>在连接池中闲置时间超过此超时时间的池化连接，在再次使用之前将进行测试，以确保它们仍然可用。如果此选项设置得过低，获取连接时将产生额外的网络调用，从而导致性能下降。</p>
+</div>
+<div>
+<p>如果设置得过高，您可能会收到由不再活跃的连接支持的会话，这将导致应用程序出现异常。假设数据库正在运行，如果您重试获取会话，这些异常将会消失。</p>
+</div>
+<div>
+<p>因此，此参数用于在应用程序遇到连接问题的可能性和性能之间进行权衡。</p>
+</div>
+<div>
+<p>通常情况下，您无需调整此参数。默认情况下不进行连接活跃性检查。值为0表示将始终测试连接的有效性，负值表示永远不会测试连接。</p>
+</div>
+<h3 id="最大连接生存期毫秒">最大连接生存期（毫秒）</h3>
+<div>
+<p>超过此阈值的池化连接将被关闭并从连接池中移除。这种丢弃操作在获取连接时进行，以确保新会话永远不会由旧连接支持。将此选项设置为较低的值将导致较高的连接更替率，并可能导致性能下降。</p>
+</div>
+<div>
+<p>建议将最大生存期设置为略小于网络设备（负载均衡器、代理、防火墙等也可能限制最大连接生存期）中配置的值。</p>
+</div>
+<div>
+<p>此设置也可以与连接活跃性检查超时时间（毫秒）值结合使用。在这种情况下，建议将活跃性检查设置为小于网络设备设置的值，并将最大生存期设置为一个合理的较大值，以便偶尔”更新”连接。</p>
+</div>
+<div>
+<p>默认的最大连接生存期为1小时。值为零和负数将导致不检查生存期。</p>
+</div>
+<h3 id="最大池大小">最大池大小</h3>
+<div>
+<p>配置到单个数据库的连接池中连接的最大数量。当在为”bolt”方案的URI创建的直接驱动程序中使用时，此设置限制连接池中的连接总数。当在为”neo4j”方案的URI创建的路由驱动程序中使用时，它将限制每个集群成员的连接数量。</p>
+</div>
+<div>
+<p>当达到限制时，将最多尝试配置的超时时间”连接获取超时时间（毫秒）“来获取连接。</p>
+</div>
+<div>
+<p>默认值为100。允许负值，这将导致池大小无限制。不允许值为0。</p>
+</div>
+<h3 id="连接获取时间毫秒">连接获取时间（毫秒）</h3>
+<div>
+<p>配置连接获取操作从连接池中获取连接的最长尝试时间。只有当所有现有连接都在使用且由于达到最大连接池大小而无法创建新连接时，此超时才会生效。如果在配置的时间内无法获取连接，将抛出错误。</p>
+</div>
+<div>
+<p>默认值为60秒。允许负值，这将导致获取超时无限制。允许值为0，这将导致无超时，并且在连接不可用时立即失败。</p>
+</div>
+<h3 id="最大事务重试时间毫秒">最大事务重试时间（毫秒）</h3>
+<div>
+<p>指定通过会话读和写事务允许事务重试的最长时间。这些方法将在出现ServiceUnavailableException、SessionExpiredException和TransientException时，使用1秒的初始延迟以指数退避的方式重试给定的工作单元。默认值为30秒。</p>
+</div>
+<h3 id="手动url">手动URL</h3>
+<div>
+<p>您可以指定手动连接URL列表，以便能够使用任何高级、旧版、前沿……您可能需要的功能。有关Bolt连接URI的更多信息，请参阅此处：https://neo4j.com/docs/driver-manual/current/client-applications/</p>
+</div>
+</div>
+</body>
+</html>

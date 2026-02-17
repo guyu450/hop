@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>stringoperations.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="字符串操作">字符串操作</h1>
+<h2 id="描述">描述</h2>
+<p>字符串操作转换可以对传入的跃点字段执行以下字符串操作：</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输入流字段</td>
+<td style="text-align: left;">指定要转换的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出流字段</td>
+<td style="text-align: left;">指定要创建的字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">修剪类型</td>
+<td style="text-align: left;">指定修剪类型：无、左、右或两边。</td>
+</tr>
+<tr>
+<td style="text-align: left;">小写/大写</td>
+<td style="text-align: left;">指定大写或小写。</td>
+</tr>
+<tr>
+<td style="text-align: left;">填充</td>
+<td style="text-align: left;">指定左填充或右填充。</td>
+</tr>
+<tr>
+<td style="text-align: left;">填充字符</td>
+<td style="text-align: left;">指定填充字符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">填充长度</td>
+<td style="text-align: left;">指定填充的长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">首字母大写</td>
+<td style="text-align: left;">转换为首字母大写。</td>
+</tr>
+<tr>
+<td style="text-align: left;">转义</td>
+<td
+style="text-align: left;">定义转义或取消转义XML、HTML，使用CDATA或转义SQL。</td>
+</tr>
+<tr>
+<td style="text-align: left;">数字</td>
+<td
+style="text-align: left;">指定是返回、移除数字还是对数字不做任何操作。</td>
+</tr>
+<tr>
+<td style="text-align: left;">移除特殊字符</td>
+<td style="text-align: left;">指定要移除的特殊字符。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="元数据注入支持">元数据注入支持</h2>
+<div>
+<div>
+<p>此转换的所有字段都支持元数据注入。你可以将此转换与ETL元数据注入一起使用，以便在运行时将元数据传递到管道中。</p>
+</div>
+<div>
+<p>元数据注入的值</p>
+</div>
+<table style="width:47%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入流字段</td>
+<td>源字段列表</td>
+</tr>
+<tr>
+<td>输出流字段</td>
+<td>目标字段列表</td>
+</tr>
+<tr>
+<td>修剪类型</td>
+<td>0 = 无<br />
+1 = 左<br />
+2 = 右<br />
+3 = 两边</td>
+</tr>
+<tr>
+<td>小写/大写</td>
+<td>0 = 无<br />
+1 = 小写<br />
+2 = 大写</td>
+</tr>
+<tr>
+<td>填充</td>
+<td>0 = 无<br />
+1 = 左<br />
+2 = 右</td>
+</tr>
+<tr>
+<td>填充字符</td>
+<td>用于填充的字符</td>
+</tr>
+<tr>
+<td>填充长度</td>
+<td>填充的长度</td>
+</tr>
+<tr>
+<td>首字母大写</td>
+<td>0 = 否<br />
+1 = 是</td>
+</tr>
+<tr>
+<td>转义</td>
+<td>0 = 无<br />
+1 = 转义XML<br />
+2 = CDATA<br />
+3 = 取消转义XML<br />
+4 = 转义SQL<br />
+5 = 转义HTML<br />
+6 = 取消转义HTML</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>0 = 无<br />
+1 = 仅保留数字<br />
+2 = 移除数字</td>
+</tr>
+<tr>
+<td>移除特殊字符</td>
+<td>0 = 无<br />
+1 = 回车符<br />
+2 = 换行符<br />
+3 = 回车换行符<br />
+4 = 制表符<br />
+5 = 空格</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

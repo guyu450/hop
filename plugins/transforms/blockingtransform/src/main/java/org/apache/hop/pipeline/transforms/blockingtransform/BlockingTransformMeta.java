@@ -72,7 +72,7 @@ public class BlockingTransformMeta
 
   public BlockingTransformMeta() {
     passAllRows = false;
-    directory = "${java.io.tmpdir}";
+    directory = System.getProperty("java.io.tmpdir");
     prefix = "block";
     cacheSize = CACHE_SIZE;
     compressFiles = true;

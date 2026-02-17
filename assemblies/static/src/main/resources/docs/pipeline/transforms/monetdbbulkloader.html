@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>monetdbbulkloader.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="monetdb批量加载器">MonetDB批量加载器</h1>
+<h2 id="描述">描述</h2>
+<p>MonetDB批量加载器将数据批量加载到MonetDB中。这显著加快了向MonetDB加载数据的速度。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">指定管道中MongoDB输出转换的唯一名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接</td>
+<td style="text-align: left;">选择您的MonetDB数据库连接</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常规设置选项卡">常规设置选项卡</h3>
+<div>
+<p>此选项卡包含目标设置、缓冲区大小和日志文件的位置。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">目标模式</td>
+<td style="text-align: left;">指定要使用的数据库模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标表</td>
+<td
+style="text-align: left;">指定数据库表，使用此字段旁边的”浏览”按钮通过菜单选择表和模式</td>
+</tr>
+<tr>
+<td style="text-align: left;">缓冲区大小（行）</td>
+<td
+style="text-align: left;">指定在传输到MonetDB之前将在内存中保留多少行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">日志文件</td>
+<td
+style="text-align: left;">指定从MonetDB返回的批量命令日志的位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;">截断表</td>
+<td
+style="text-align: left;">在加载数据之前从目标表中删除所有数据。</td>
+</tr>
+<tr>
+<td style="text-align: left;">完全引用所有SQL语句</td>
+<td style="text-align: left;">在执行时强制在所有对象周围加上引号。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="monetdb设置选项卡">MonetDB设置选项卡</h3>
+<div>
+<p>此选项卡包含有关为加载数据而生成的临时文件的信息。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段分隔符</td>
+<td
+style="text-align: left;">这是在批量复制命令中使用的分隔符，输入数据中不允许有此字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段包围符</td>
+<td style="text-align: left;">用于包围值的字符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">空值表示形式</td>
+<td
+style="text-align: left;">空值将转换为此字符串，这允许区分空字符串和空值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td style="text-align: left;">为复制语句生成文件时使用的文件编码。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="输出字段选项卡">输出字段选项卡</h3>
+<div>
+<p>此选项卡包含源到目标的映射。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标表字段</td>
+<td>包含目标表中字段名称的字段</td>
+</tr>
+<tr>
+<td>传入流字段</td>
+<td>包含我们要插入到目标表中的值的字段</td>
+</tr>
+<tr>
+<td>格式正确</td>
+<td><p>如果传入流的字段根据目标数据类型格式正确，则设置为Y。</p>
+<p><strong>注意：</strong></p>
+<p>仅在应用延迟转换时才评估此设置。</p>
+<p>例如：假设您从文本文件中获取值，传入数据包含数字或日
+期，并且在输入转换中启用了延迟转换。在这种情况下，数据
+不会在内部转换为目标数据类型，而是由Hfxt作为字符串处理
+。通过将此标志设置为Y，我们是在告诉Hfxt，根据目标数据
+类型，传入数据的值已经是目标数据库能够清楚理解的格式。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

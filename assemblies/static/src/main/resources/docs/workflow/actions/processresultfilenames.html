@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>processresultfilenames.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="处理结果文件名">处理结果文件名</h1>
+<h2 id="描述">描述</h2>
+<p>“处理结果文件名”操作允许您将多个文件和/或文件夹复制、移动或删除到文件系统中的其他位置。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“<code>处理结果文件名</code>”操作允许您将多个文件和/或文件夹复制、移动或删除到文件系统中的其他位置。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作流操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>操作</td>
+<td><div>
+<div>
+<p>从以下选项中选择一个</p>
+</div>
+<div>
+<ul>
+<li><p>复制（默认）</p></li>
+<li><p>移动</p></li>
+<li><p>删除</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>目标文件夹</td>
+<td>定义目标文件夹</td>
+</tr>
+<tr>
+<td>创建目标文件夹</td>
+<td>当目标文件夹不存在时，使用此选项创建它</td>
+</tr>
+<tr>
+<td>替换现有文件</td>
+<td>使用此选项覆盖现有文件</td>
+</tr>
+<tr>
+<td>从结果中移除源文件名</td>
+<td>使用此 选项从结果文件名列表中移除已处理的文件名</td>
+</tr>
+<tr>
+<td>将目标文件名添加到结果</td>
+<td>使用此选项将 已处理的目标文件名添加到结果文件名列表中</td>
+</tr>
+<tr>
+<td>在文件名中添加日期</td>
+<td>将日期添加到目标文件名中，例如 yyyyMMdd</td>
+</tr>
+<tr>
+<td>在文件名中添加时间</td>
+<td>将时间添加到目标文件名中，例如 HHmmss</td>
+</tr>
+<tr>
+<td>指定日期时间格式</td>
+<td>允许您指定自己的日期时间格式，例如 yyyyMMdd_HHmmss</td>
+</tr>
+<tr>
+<td>在扩展名前添加日期</td>
+<td>如果不选中 此选项，日期/时间将附加在文件扩展名之后</td>
+</tr>
+<tr>
+<td>限制于</td>
+<td></td>
+</tr>
+<tr>
+<td>操作限制于</td>
+<td>定义包含和排除通配符</td>
+</tr>
+<tr>
+<td>通配符（正则表达式）</td>
+<td>用于包含文件的正则表达式通配符</td>
+</tr>
+<tr>
+<td>排除通配符（正则表达式）</td>
+<td>用于排除文件的正则表达式通配符</td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td></td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td><div>
+<div>
+<p>成功条件：从以下选项中选择一个：</p>
+</div>
+<div>
+<ul>
+<li><p>所有操作正常时成功</p></li>
+<li><p>至少移动 x 个文件时成功（在下面的限制字段中指定 x）</p></li>
+<li><p>错误数量小于（在
+下面的限制字段中指定最大错误数量）时成功</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>错误数量小于</td>
+<td>上述”<code>成 功条件</code>“选项中指定的错误数量或文件数量。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

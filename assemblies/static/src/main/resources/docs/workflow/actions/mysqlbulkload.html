@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mysqlbulkload.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="批量加载到mysql">批量加载到MySQL</h1>
+<h2 id="描述">描述</h2>
+<p>“批量加载到MySQL”操作将文本文件中的数据加载到MySQL表中。此操作使用MySQL的LOAD
+DATA命令。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>批量加载到MySQL</code>操作将文本文件中的数据加载到MySQL表中。</p>
+</div>
+<div>
+<p>此操作使用MySQL的 <code>LOAD DATA</code> 命令。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>要使用的到MySQL数据库的连接。</td>
+</tr>
+<tr>
+<td>目标模式</td>
+<td>要加载的表的模式。</td>
+</tr>
+<tr>
+<td>目标表名</td>
+<td>要加载到的表的名称。</td>
+</tr>
+<tr>
+<td>源文件名</td>
+<td>要加载的文件的名称。</td>
+</tr>
+<tr>
+<td>本地</td>
+<td>如果文件是本地文件，请勾选此项。</td>
+</tr>
+<tr>
+<td>优先级</td>
+<td><div>
+<div>
+<p>加载文件时的优先级。可用选项如下：</p>
+</div>
+<div>
+<ul>
+<li><p>NORMAL（默认）：在 <code>LOAD DATA</code>
+命令上不设置优先级</p></li>
+<li><p>LOW PRIORITY：使用LOW_PRIORITY修饰符时，LOAD
+DATA语句的执行会延迟， 直到没有其他客户端从该表读取数据。这仅影响仅使用
+表级锁定的存储引擎（如MyISAM、MEMORY和MERGE）。</p></li>
+<li><p>CONCURRENT：使用CONCURRENT修饰符且MyISAM表
+满足并发插入条件（即表中间没有空闲块）时，在LOAD
+DATA执行期间，其他线程可以从该表检索数据。
+即使没有其他线程同时使用该表，此修饰符也会对LOAD
+DATA的性能产生一点影响。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>字段终止符</td>
+<td>要使用的字段终止符。</td>
+</tr>
+<tr>
+<td>字段包围符</td>
+<td>要使用的字段包围符。</td>
+</tr>
+<tr>
+<td>字段转义符</td>
+<td>要使用的转义字符。</td>
+</tr>
+<tr>
+<td>行起始符</td>
+<td>要使用的行起始字符串。</td>
+</tr>
+<tr>
+<td>行终止符</td>
+<td>要使用的行终止字符串。</td>
+</tr>
+<tr>
+<td>字段</td>
+<td>要加载的字段，用逗号 (,) 分隔。</td>
+</tr>
+<tr>
+<td>替换数据</td>
+<td>如果要替换目标数据中的数据，请勾选此选项。</td>
+</tr>
+<tr>
+<td>忽略前 …… 行</td>
+<td>忽略文本文件中的前 …… 行。</td>
+</tr>
+<tr>
+<td>将文件添加到结果</td>
+<td>如果要在后续工作
+流操作中重复使用文本文件的文件名，请勾选此选项。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

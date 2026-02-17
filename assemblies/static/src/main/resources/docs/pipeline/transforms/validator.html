@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>validator.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="数据验证器">数据验证器</h1>
+<h2 id="描述">描述</h2>
+<p>数据验证器转换允许您添加数据验证规则，这些规则可以分别验证输入行中各个字段的输入数据。如果检测到某一输入行未能通过此转换中定义的一个或多个验证规则，验证器将抛出错误（异常）。要获取所有验证错误的列表，您可以从此转换定义一个错误处理跳转。</p>
+<h2 id="选项">选项</h2>
+<div>
+<div>
+<p>您可以使用”新建验证”按钮添加新的验证规则，使用”删除验证”按钮删除选定的验证规则。在对话框左侧选择一个验证规则后，您可以为每个数据验证指定以下属性：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">此转换的名称，该名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">报告所有错误，而非仅第一个错误</td>
+<td
+style="text-align: left;">启用此选项后，将为每个输入行报告0个、1个或多个错误。</td>
+</tr>
+<tr>
+<td style="text-align: left;">输出一行，用分隔符连接错误信息</td>
+<td
+style="text-align: left;">如果启用此选项，错误代码和描述将用指定的分隔符字符串连接起来。</td>
+</tr>
+<tr>
+<td style="text-align: left;">验证描述</td>
+<td style="text-align: left;">您可以在此处选择描述要测试的内容。</td>
+</tr>
+<tr>
+<td style="text-align: left;">要验证的字段名称</td>
+<td style="text-align: left;">选择要验证的输入字段名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误代码</td>
+<td
+style="text-align: left;">定义一个唯一的错误代码，以便在错误处理输出中识别问题所在。</td>
+</tr>
+<tr>
+<td style="text-align: left;">错误描述</td>
+<td
+style="text-align: left;">指定一个错误描述，以便在错误处理输出中识别问题所在。</td>
+</tr>
+<tr>
+<td style="text-align: left;">验证数据类型</td>
+<td style="text-align: left;">如果要进行数据类型验证，请启用此选项</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据类型</td>
+<td style="text-align: left;">输入字段所需的数据类型</td>
+</tr>
+<tr>
+<td style="text-align: left;">转换掩码</td>
+<td style="text-align: left;">预期的转换掩码</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数点符号</td>
+<td style="text-align: left;">预期的小数点符号</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组符号</td>
+<td style="text-align: left;">预期的小数点符号</td>
+</tr>
+<tr>
+<td style="text-align: left;">允许为空？</td>
+<td style="text-align: left;">如果不允许空值，请禁用此选项</td>
+</tr>
+<tr>
+<td style="text-align: left;">仅允许空值？</td>
+<td style="text-align: left;">如果只期望空值，请启用此选项</td>
+</tr>
+<tr>
+<td style="text-align: left;">仅预期数值数据</td>
+<td
+style="text-align: left;">如果需要输入字段为数值类型（整数、数字、大数字）或仅包含数字（0-9）的字符串，请启用此选项</td>
+</tr>
+<tr>
+<td style="text-align: left;">最大字符串长度</td>
+<td style="text-align: left;">转换为字符串后输入字段的最大长度</td>
+</tr>
+<tr>
+<td style="text-align: left;">最小字符串长度</td>
+<td style="text-align: left;">转换为字符串后输入字段的最小长度</td>
+</tr>
+<tr>
+<td style="text-align: left;">最大值</td>
+<td style="text-align: left;">输入允许的最大值</td>
+</tr>
+<tr>
+<td style="text-align: left;">最小值</td>
+<td style="text-align: left;">输入允许的最小值</td>
+</tr>
+<tr>
+<td style="text-align: left;">预期起始字符串</td>
+<td
+style="text-align: left;">转换为字符串后，输入字段预期以此值开头</td>
+</tr>
+<tr>
+<td style="text-align: left;">预期结束字符串</td>
+<td
+style="text-align: left;">转换为字符串后，输入字段预期以此值结尾</td>
+</tr>
+<tr>
+<td style="text-align: left;">不允许的起始字符串</td>
+<td
+style="text-align: left;">转换为字符串后，输入字段不应以此值开头</td>
+</tr>
+<tr>
+<td style="text-align: left;">不允许的结束字符串</td>
+<td
+style="text-align: left;">转换为字符串后，输入字段不应以此值结尾</td>
+</tr>
+<tr>
+<td style="text-align: left;">预期匹配的正则表达式</td>
+<td
+style="text-align: left;">您可以指定一个正则表达式，输入字段的值应与之匹配</td>
+</tr>
+<tr>
+<td style="text-align: left;">不允许匹配的正则表达式</td>
+<td
+style="text-align: left;">您可以指定一个正则表达式，输入字段的值不允许与之匹配</td>
+</tr>
+<tr>
+<td style="text-align: left;">允许的值</td>
+<td
+style="text-align: left;">您可以指定此输入字段允许的可能值列表。使用右侧的”添加”和”删除”按钮编辑此列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从另一个转换读取允许的值</td>
+<td
+style="text-align: left;">如果要从另一个转换读取输入数据，请启用此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">要读取的转换</td>
+<td style="text-align: left;">从此转换读取此字段允许值的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">要读取的字段</td>
+<td style="text-align: left;">从此字段读取此字段允许值的名称。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

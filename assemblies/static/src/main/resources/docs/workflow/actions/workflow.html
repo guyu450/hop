@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>workflow.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="工作流">工作流</h1>
+<h2 id="描述">描述</h2>
+<p>“工作流”操作会将先前定义的工作流作为当前工作流的子工作流来执行。为方便使用，也可以在对话框中通过点击”新建工作流”按钮来创建新的工作流。使用”工作流”操作来执行先前定义的工作流。这使您能够进行”功能分解”。也就是说，您可以用它们将工作流分解为更易于管理的单元。例如，不应使用包含500个操作的单个工作流来编写数据仓库加载任务。更好的做法是创建较小的工作流并将它们组合起来。另请参阅：</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>工作流</code>
+操作会将先前定义的工作流作为当前工作流的子工作流来执行。</p>
+</div>
+<div>
+<p>为方便使用，也可以在对话框中通过点击”新建工作流”按钮来创建新的工作流。</p>
+</div>
+<div>
+<p>使用”工作流”操作来执行先前定义的工作流。</p>
+</div>
+<div>
+<p>这使您能够进行”功能分解”。也就是说，您可以用它们将工作流分解为更易于管理的单元。</p>
+</div>
+<div>
+<p>例如，不应使用包含500个操作的单个工作流来编写数据仓库加载任务。</p>
+</div>
+<div>
+<p>更好的做法是创建较小的工作流并将它们组合起来。</p>
+</div>
+<div>
+<p>另请参阅：</p>
+</div>
+<div>
+<ul>
+<li><p>管道操作，它从工作流中执行管道。</p></li>
+<li><p>工作流执行器转换，它从管道中执行工作流。</p></li>
+<li><p>管道执行器转换，它从管道中执行子管道。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="主要工作流选项">主要工作流选项</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>操作的名称。</td>
+</tr>
+<tr>
+<td>工作流文件名</td>
+<td><div>
+<div>
+<p>指定要执行的工作流的XML文件名。点击可浏览本地文件。</p>
+</div>
+<div>
+<p>选定的工作流将自动转换为相对于 <code>${PROJECT_HOME}</code>
+的路径。</p>
+</div>
+<div>
+<p>例如，如果您的 <code>${PROJECT_HOME}</code> 是
+<code>/home/admin/hfxt/project/</code>，而您选择的工作流是
+<code>/home/admin/h fxt/project/subfolder/sub.hwf</code>，那么路径将自动转换为
+<code>${PROJECT_HOME}/subfolder/sub.hwf</code>。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>运行配置</td>
+<td><div>
+<div>
+<p>此工作流操作要使用的 工作流运行配置。</p>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="选项标签">选项标签</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">对每一行输入执行？</td>
+<td
+style="text-align: left;">实现循环；如果上一个工作流操作返回一组结果行，此工作流将为找到的每一行执行一次。每次执行时会将一行传递给工作流。例如，您可以为目录中找到的每个文件执行一个工作流。</td>
+<td style="text-align: left;">false</td>
+</tr>
+<tr>
+<td style="text-align: left;">等待远程工作流完成？</td>
+<td
+style="text-align: left;">启用此选项可阻止操作，直到Hfxt服务器上的工作流完成</td>
+<td style="text-align: left;">true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日志记录设置标签">日志记录设置标签</h3>
+<div>
+<p>默认情况下，如果您未设置日志记录，Hfxt将获取正在生成的日志操作，并在工作流内创建一个日志记录。</p>
+</div>
+<div>
+<p>例如，假设一个工作流要运行三个管道，而您未设置日志记录。这些管道不会将日志信息输出到其他文件、位置或特殊配置中。</p>
+</div>
+<div>
+<p>在这种情况下，工作流执行并将日志信息放入其主工作流日志中。</p>
+</div>
+<div>
+<p>在大多数情况下，工作流日志中提供日志信息是可以接受的。<br />
+例如，如果您要加载维度，您希望加载维度运行的日志显示在工作流日志中。如果管道中存在错误，它们将显示在工作流日志中。但是，如果您希望将所有日志信息保存在一个位置，则必须设置日志记录。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">指定日志文件？</td>
+<td
+style="text-align: left;">启用此选项可为此工作流的执行指定一个单独的日志文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">日志文件名</td>
+<td style="text-align: left;">日志文件的目录和基本名称；例如
+<code>C:\logs</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">日志文件扩展名</td>
+<td style="text-align: left;">文件名扩展名；例如，log或txt</td>
+</tr>
+<tr>
+<td style="text-align: left;">日志级别</td>
+<td
+style="text-align: left;">指定工作流执行的日志记录级别。有关更多详细信息，请参阅
+日志记录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">追加到日志文件？</td>
+<td
+style="text-align: left;">启用此选项可追加到日志文件，而不是创建新文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建父文件夹</td>
+<td
+style="text-align: left;">如果日志文件的父文件夹不存在，则创建它</td>
+</tr>
+<tr>
+<td style="text-align: left;">在日志文件名中包含日期？</td>
+<td
+style="text-align: left;">将系统日期以YYYYMMDD格式（例如20051231）添加到文件名中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在日志文件名中包含时间？</td>
+<td
+style="text-align: left;">将系统时间以HHMMSS格式（例如235959）添加到文件名中。另请参阅”日志记录”中的日志窗口。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参数标签">参数标签</h3>
+<div>
+<p>指定要传递给子工作流的参数：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>将结果复制到参数</td>
+<td>上一个工作 流或管道的结果会传递到此工作流操作的参数中</td>
+</tr>
+<tr>
+<td>将参数值传递给子工作流</td>
+<td>启用 此选项可将工作流的所有参数传递给子工作流。</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>指定要传递给工作流的参数名称。</td>
+</tr>
+<tr>
+<td>流列名称</td>
+<td>允许您将结果集传入记录的字段捕获为参数。</td>
+</tr>
+<tr>
+<td>值</td>
+<td><div>
+<div>
+<p>允许您为子工作流 的参数指定值。您可以通过以下方式进行操作：</p>
+</div>
+<div>
+<ul>
+<li><p>手动输入一些文本（例如：ETL工作流）</p></li>
+<li><p>使用参数设
+置值（例如：<code>${Internal.workflow.Name}</code>）</p></li>
+<li><p>使用手动指定的文本和参数值的组合（
+例如：<code>${FILE_PREFIX}_${FILE_DATE}.txt</code>）</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

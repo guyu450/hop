@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>sqlfileoutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="sql文件输出">SQL文件输出</h1>
+<h2 id="描述">描述</h2>
+<p>SQL文件输出转换将输入数据以一组SQL语句的形式写入文本文件。SQL语句是按照所选数据库的方言生成的。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td><div>
+<div>
+<ul>
+<li><p>连接：选择
+要为其生成SQL的数据库。连接中的信息用于选择合适的方言。</p></li>
+<li><p>目标模式：要为其生成SQL的表的模式</p></li>
+<li><p>目标表：要为其生成SQL的表的名称</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>输出文件</td>
+<td><div>
+<div>
+<ul>
+<li><p>添加创建表语句：如果希望生成的SQL中包含”CREATE
+TABLE”语句，请选中此项</p></li>
+<li><p>添加截断表
+语句：如果预期表已存在，并且希望生成的SQL中包含”TRUNCATE
+TABLE”语句，请选 中此项。请注意，根据数据库方言的不同，这也可能是”DELETE
+FROM”语句。</p></li>
+<li><p>每条语句另起一行：启用此选项可提高文件的可读性</p></li>
+<li><p>文件名：文件名（不含文件扩展名）</p></li>
+<li><p>创建父文件夹：如果指
+定文件的父文件夹尚不存在，希望创建该文件夹，请选中此项。</p></li>
+<li><p>开始
+时不创建空文件：如果在没有输入行的情况下不希望创建空文件</p></li>
+<li><p>扩展名：所需的文件扩展名（默认值为”sql”）</p></li>
+<li><p>在文件名中包含
+转换编号：在输出文件名中包含转换编号（在运行多个副本时）</p></li>
+<li><p>在文件名中包含
+日期：在输出文件名中包含格式为yyyyMMdd（20081231）的日期</p></li>
+<li><p>在文件名中
+包含时间：在输出文件名中包含格式为HHmmss（235959）的时间</p></li>
+<li><p>追加：将生成的SQL追加到现有文件</p></li>
+<li><p>每……行
+拆分：通过每……行开始一个新文件来限制单个文件的大小。</p></li>
+<li><p>显示文件名：点击此按钮可查看组装各个部
+分（文件名、扩展名、转换编号、日期和时间）后的完整文件名</p></li>
+<li><p>将文件添加到结果：将写入
+的文件名添加到此管道的结果中。内存中会保留一个唯一列表，
+可在工作流的下一个工作流操作中使用，例如在另一个管道中。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容选项卡">内容选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">日期格式</td>
+<td style="text-align: left;">允许您指定日期格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编码</td>
+<td style="text-align: left;">允许您指定文本文件的编码</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

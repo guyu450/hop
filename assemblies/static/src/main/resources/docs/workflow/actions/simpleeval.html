@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>simpleeval.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="简单评估">简单评估</h1>
+<h2 id="描述">描述</h2>
+<p>简单评估操作会评估结果流中变量或字段的内容或值。使用简单评估的输出连接两个操作。如果条件评估成功，将调用绿色（成功）分支；如果条件评估不成功，将调用红色（失败）分支。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>简单评估</code>操作会评估结果流中变量或字段的内容或值。</p>
+</div>
+<div>
+<p>使用简单评估的输出连接两个操作。</p>
+</div>
+<div>
+<p>如果条件评估成功，将调用绿色（成功）分支；如果条件评估不成功，将调用红色（失败）分支。</p>
+</div>
+</div>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<ul>
+<li><p>空值与空字符串相同。例如，要检测任何数据类型的空值，将类型设置为字符串，将成功条件设置为”如果值等于”，并将值文本框留空。</p></li>
+<li><p>简单评估操作有一定限制。如需了解更复杂的条件，请参阅：https://hfxt.apache.org/manual/latest/workflow/actions/eval.html</p></li>
+</ul>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:58%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>源</td>
+<td></td>
+</tr>
+<tr>
+<td>评估</td>
+<td>评估类型：字段或变量。</td>
+</tr>
+<tr>
+<td>字段名称</td>
+<td>要评估的字段</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>数据类型。</td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td></td>
+</tr>
+<tr>
+<td>成功条件</td>
+<td><div>
+<div>
+<ul>
+<li><p>如果值等于</p></li>
+<li><p>如果值不等于</p></li>
+<li><p>如果值包含</p></li>
+<li><p>如果值不包含</p></li>
+<li><p>如果值以……开头</p></li>
+<li><p>如果值不以……开头</p></li>
+<li><p>如果值以……结尾</p></li>
+<li><p>如果值不以……结尾</p></li>
+<li><p>如果值是有效的正则表达式</p></li>
+<li><p>如果值在列表中</p></li>
+<li><p>如果值不在列表中</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>值</td>
+<td>要比较的值。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="提示">提示</h2>
+<div>
+<div>
+<p><strong>评估变量</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">值</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">源：评估</td>
+<td style="text-align: left;">变量</td>
+<td style="text-align: left;">选择此项以评估之前设置的变量</td>
+</tr>
+<tr>
+<td style="text-align: left;">源：变量名称</td>
+<td style="text-align: left;">例如 ${VAR1}</td>
+<td style="text-align: left;">使用常规语法输入变量名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">源：类型</td>
+<td style="text-align: left;">字符串、数字等</td>
+<td style="text-align: left;">变量的类型</td>
+</tr>
+<tr>
+<td style="text-align: left;">成功条件：变量设置时成功</td>
+<td style="text-align: left;"></td>
+<td
+style="text-align: left;">选择此选项后，当变量设置时将遵循真路径。注意：工作流操作会检查变量是否已定义，因此空值或null值也视为真。在Hfxt中测试此功能时，需要在”执行工作流”窗口的变量部分删除包含该变量的行。请记住：一旦设置了此变量，即使从列表中删除它，该变量仍将存在。</td>
+</tr>
+<tr>
+<td style="text-align: left;">成功条件：成功条件</td>
+<td style="text-align: left;">等于/不等于/等等</td>
+<td style="text-align: left;">选择成功结果需满足的条件</td>
+</tr>
+<tr>
+<td style="text-align: left;">成功条件：值</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">用于与变量进行比较的值</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>评估字段</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">值</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">源：评估</td>
+<td style="text-align: left;">上一结果中的字段</td>
+<td
+style="text-align: left;">选择此项以评估字段值（由使用”复制行到结果”的管道生成）</td>
+</tr>
+<tr>
+<td style="text-align: left;">源：字段名称</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">输入结果行中的字段名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">源：类型</td>
+<td style="text-align: left;">字符串、数字等</td>
+<td style="text-align: left;">字段的类型</td>
+</tr>
+<tr>
+<td style="text-align: left;">成功条件：成功条件</td>
+<td style="text-align: left;">等于/不等于/等等</td>
+<td style="text-align: left;">选择成功结果需满足的条件</td>
+</tr>
+<tr>
+<td style="text-align: left;">成功条件：值</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">用于与字段进行比较的值</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

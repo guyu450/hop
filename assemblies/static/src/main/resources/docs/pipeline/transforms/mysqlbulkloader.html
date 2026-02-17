@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mysqlbulkloader.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="mysql批量加载器">MySQL批量加载器</h1>
+<h2 id="描述">描述</h2>
+<p>MySQL批量加载器转换使用复制命令来加载数据，而不是发送单个插入语句。它将创建一个本地文件，然后使用LOAD
+DATA命令加载该文件。更多信息在此处</p>
+<h2 id="选项">选项</h2>
+<div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">在客户端连接中，服务器和客户端都必须启用批量加载。添加以下选项
+<code>allowLoadLocalInfile=true</code>。在服务器端，以下查询应返回”ON”
+<code>show global variables like 'local_infile';</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="常规">常规</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">连接</td>
+<td style="text-align: left;">批量加载时要使用的数据库连接</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标模式</td>
+<td style="text-align: left;">（可选）包含要加载表的模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标表</td>
+<td style="text-align: left;">要加载的表的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">FIFO文件</td>
+<td style="text-align: left;">临时文件位置</td>
+</tr>
+<tr>
+<td style="text-align: left;">分隔符</td>
+<td style="text-align: left;">用于确定字段的分隔符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">包围符</td>
+<td
+style="text-align: left;">你可以指定一个包围字符串，当它放在一个值周围时，允许该值中存在分隔符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">转义字符</td>
+<td
+style="text-align: left;">为了在值中包含分隔符字符，有时会使用转义字符串，如反斜杠、双反斜杠等。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字符集（加载命令）</td>
+<td style="text-align: left;">加载命令中使用的字符集（可选）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字符集（文件创建）</td>
+<td style="text-align: left;">创建文件时使用的字符集（可选）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">批量大小（行数）</td>
+<td style="text-align: left;">这将把数据加载分成多个块。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用替换子句</td>
+<td
+style="text-align: left;">使用REPLACE时，与现有行中唯一键值具有相同值的新行将替换现有行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用忽略子句</td>
+<td
+style="text-align: left;">使用IGNORE时，与现有行在唯一键值上重复的新行将被丢弃。</td>
+</tr>
+<tr>
+<td style="text-align: left;">本地数据</td>
+<td
+style="text-align: left;">如果未指定LOCAL，则文件必须位于服务器主机上。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段">字段</h3>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表字段</td>
+<td>表中的字段名称。</td>
+</tr>
+<tr>
+<td>流字段</td>
+<td>流中的字段名称。</td>
+</tr>
+<tr>
+<td>字段格式是否正确？</td>
+<td><div>
+<div>
+<p>你可以决定是否应保留格式（不更改格式）或更改格式：</p>
+</div>
+<div>
+<ul>
+<li><p>格式化为日期（yyyy-MM-dd）</p></li>
+<li><p>格式化为时间戳（yyyy-MM-dd HH:mm:ss）</p></li>
+<li><p>格式化为数字（分组符号为”,” - 小数为”.”）</p></li>
+<li><p>找到包围字符时进行转义</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>combinationlookup.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="组合查找更新">组合查找/更新</h1>
+<h2 id="描述">描述</h2>
+<p>组合查找 -
+更新转换允许您将信息存储在一个垃圾维度表中。该转换也可能用于维护金博尔（Kimball）纯类型1维度。此转换将……
+此转换根据具有业务键的数据创建/维护一个技术键。经过此转换后，维度表中所有剩余的数据更改都可以作为更新进行，因为业务键对应的行要么已经存在，要么已经创建。此转换仅维护键信息。您必须更新维度表中的非键信息，例如，在组合更新/查找转换之后放置一个（基于技术键的）更新转换。阿帕奇霍普（
+Hfxt）将信息存储在一个表中，该表的主键是表中业务键字段的组合。由于如果字段数量众多，此过程可能会很慢，因此支持一个
+“哈希码”
+字段，该字段以数值形式表示维度中的所有字段。这可以显著提高查找性能，同时将索引字段限制为仅一个字段。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>维度表所在的数据库连接名称。</td>
+</tr>
+<tr>
+<td>目标模式</td>
+<td>这允许您指定一个模式名称。</td>
+</tr>
+<tr>
+<td>目标表</td>
+<td>维度表的名称。</td>
+</tr>
+<tr>
+<td>提交大小</td>
+<td>定义提交大小，例如
+，将此设置为10将每10次插入或更新生成一次提交。</td>
+</tr>
+<tr>
+<td>缓存行数</td>
+<td><p>这是将保留在内存中的缓存行
+数，通过减少与数据库的往返次数来加快查找速度。</p>
+<p>缓存大小为0时，将尽可 能多地缓存行，直到您的JVM内存不足。对于不会增
+长过大的维度，请明智地使用此选项。缓存大小为 - 1表示禁用缓存。</p></td>
+</tr>
+<tr>
+<td>键字段</td>
+<td>指定流 中和维度表中的键名称。这将使转换能够进行查找。</td>
+</tr>
+<tr>
+<td>技术键字段</td>
+<td>这表示维度的主键。它也被称为代理键。</td>
+</tr>
+<tr>
+<td>技术键的创建</td>
+<td><div>
+<div>
+<p>指定 技术键的生成方式，您的连接不可用的选项将变灰：</p>
+</div>
+<div>
+<ul>
+<li><p>使用表最大值 + 1：将根
+据表中的最大键创建一个新的技术键。请注意，新的
+最大值始终被缓存，因此无需为每一行计算最大值。</p></li>
+<li><p>使用序列 ：如果您想在表连接上使用数据库序列来生成技术键
+（例如，这在Oracle中很常见），请指定序列名称。</p></li>
+<li><p>使用自动递增字段：使用数据库表中的自动
+递增字段来生成技术键（例如，DB2支持此方式）。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>是否移除查找字段？</td>
+<td>如果您想在输出中从输入流中移除所有查找字段，
+请启用此选项。然后添加的唯一额外字段是技术键。</td>
+</tr>
+<tr>
+<td>使用哈希码</td>
+<td>此选项允许 您生成一个哈希码，以数值形式（有符号64位整数）
+表示键字段中的所有值。此哈希码必须存储在表中。</td>
+</tr>
+<tr>
+<td>最后更新日期字段</td>
+<td>必要时，指定要 从源系统复制到数据仓库的最后更新日期字段（时间
+戳）。例如，当您有一个没有主键的地址时。该字段
+将不属于查找字段（也不参与哈希码计算）。该值仅
+写入一次，因为任何更改都会导致写入一条新记录。</td>
+</tr>
+<tr>
+<td>获取字段按钮</td>
+<td>填充输入流中除您指定的键之外的所有可用字段。</td>
+</tr>
+<tr>
+<td>SQL按钮</td>
+<td>生成用于构建维度的SQL，并允许您执行此SQL。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

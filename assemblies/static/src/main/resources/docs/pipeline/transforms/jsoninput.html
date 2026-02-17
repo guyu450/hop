@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>jsoninput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="json输入">JSON输入</h1>
+<h2 id="描述">描述</h2>
+<p>JSON输入转换通过JSONPath表达式从JSON结构、文件或传入字段中读取数据，以提取数据并输出行。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件标签">文件标签</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>源来自上一个转换</td>
+<td><div>
+<div>
+<p>选择从此前定义 的字段中检索源。选择此选项后，以下字段可用：</p>
+</div>
+<div>
+<ul>
+<li><p>选择字段</p></li>
+<li><p>将字段用作文件名</p></li>
+<li><p>将源读取为URL</p></li>
+<li><p>不将字段传递到下游</p></li>
+</ul>
+</div>
+<div>
+<p>清除此选项后，以下字段可用：</p>
+</div>
+<div>
+<ul>
+<li><p>文件或目录</p></li>
+<li><p>正则表达式</p></li>
+<li><p>排除正则表达式</p></li>
+<li><p>选定文件</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>选择字段</td>
+<td>指定要用作上一个转换源的字段名称。</td>
+</tr>
+<tr>
+<td>将字段用作文件名</td>
+<td>选择此选项以表明源是一个文件名。</td>
+</tr>
+<tr>
+<td>将源读取为URL</td>
+<td>选择此选项以表明源是否应作为URL访问。</td>
+</tr>
+<tr>
+<td>不将字段传递到下游</td>
+<td>选择此选项可从输出流中移除源字段。对于大
+型JSON字段，此操作可提高性能并减少内存使用。</td>
+</tr>
+<tr>
+<td>文件或目录</td>
+<td><div>
+<div>
+<p>如果源未在字段中定义，请指定源位置。</p>
+</div>
+<div>
+<ul>
+<li><p>点击”浏览”以导航到源文件或目录。</p></li>
+<li><p>点击”添加”以将源包含在”选定文件”表中。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>正则表达式</td>
+<td>指定 一个正则表达式，用于匹配指定目录中的文件名。</td>
+</tr>
+<tr>
+<td>排除正则表达式</td>
+<td>指定 一个正则表达式，用于排除指定目录中的文件名。</td>
+</tr>
+<tr>
+<td>文件/目录</td>
+<td>在”文件或目录 “中指定源位置后，点击”添加”所指示的源位置。</td>
+</tr>
+<tr>
+<td>通配符（正则表达式）</td>
+<td>在”正则表达式”中指定的通配符。</td>
+</tr>
+<tr>
+<td>排除通配符</td>
+<td>在”排除正则表达式”中指定的排除通配符。</td>
+</tr>
+<tr>
+<td>必需</td>
+<td>输入所需的源位置。</td>
+</tr>
+<tr>
+<td>包含子文件夹</td>
+<td>源位置是否包含子文件夹。</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>从表中移除一个源</td>
+</tr>
+<tr>
+<td>编辑</td>
+<td>从表 中移除一个源，并将其返回到”文件或目录”选项。</td>
+</tr>
+<tr>
+<td>显示文件名</td>
+<td>显示成功连接到JSON输入转换的源文件名。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容标签">内容标签</h3>
+<div>
+<p>“内容”标签包含以下用于配置要检索的数据的选项：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">忽略空文件</td>
+<td
+style="text-align: left;">选择此选项可跳过空文件。清除此选项后，空文件将导致进程失败并停止。</td>
+</tr>
+<tr>
+<td style="text-align: left;">无文件时不引发错误</td>
+<td
+style="text-align: left;">选择此选项可在没有可用文件进行处理时继续执行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">忽略缺失路径</td>
+<td
+style="text-align: left;">选择此选项可在出现以下错误时继续处理文件：（1）没有字段与JSON路径匹配；（2）所有值均为null。清除此选项后，出现错误时将不再处理更多行。</td>
+</tr>
+<tr>
+<td style="text-align: left;">默认路径叶为空值</td>
+<td style="text-align: left;">选择此选项可将缺失路径返回空值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制</td>
+<td
+style="text-align: left;">指定从此转换生成的记录数限制。设置为零时，结果不受限制。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在输出中包含文件名</td>
+<td
+style="text-align: left;">选择此选项可在结果中添加一个包含文件名的字符串字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在输出中包含行号</td>
+<td
+style="text-align: left;">选择此选项可在结果中添加一个包含行号的整数字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果</td>
+<td
+style="text-align: left;">选择此选项可将处理后的文件添加到结果文件列表中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字段标签">字段标签</h3>
+<div>
+<p>“字段”标签显示从JSON结构中提取值的字段定义。此标签中的表包含以下列：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名称</td>
+<td
+style="text-align: left;">映射到JSON输入流中相应字段的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">路径</td>
+<td
+style="text-align: left;">JSON输入流中字段名称的完整路径。Hfxt使用JayWay库处理JSON路径表达式，文档位于
+https://github.com/json-path/JsonPath。通过在路径中添加星号 *
+可以检索所有记录。例如，$.mydata.*</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">输入字段的数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">格式</td>
+<td
+style="text-align: left;">用于转换原始字段格式的可选掩码。有关此转换中可使用的常见有效日期和数字格式的信息，请参阅”通用格式”。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">字段的长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td style="text-align: left;">数字类型字段的浮点数位数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">货币</td>
+<td style="text-align: left;">货币符号（例如 $ 或 €）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">小数</td>
+<td style="text-align: left;">小数点可以是 .（例如 5,000.00）或 ,（例如
+5.000,00）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组</td>
+<td style="text-align: left;">分组可以是 ,（例如 10,000.00）或 .（例如
+5.000,00）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">修剪类型</td>
+<td style="text-align: left;">应用于字符串的修剪方法。</td>
+</tr>
+<tr>
+<td style="text-align: left;">重复</td>
+<td style="text-align: left;">如果某行为空，则重复上一行的相应值。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>选择字段</strong></p>
+</div>
+<div>
+<p>点击”字段”标签中的”选择字段”按钮，打开”选择字段”窗口。选中源文件中要包含在输出中的每个字段旁边的复选框。此转换中选择的所有字段都会添加到表中。您可以在”搜索”框中输入字段名称来搜索字段。</p>
+</div>
+<div>
+<p><strong>从代码片段选择字段</strong></p>
+</div>
+<div>
+<p>点击”从代码片段选择字段”按钮，粘贴整个JSON文本，它将填充”字段”标签中的”名称”、“路径”、“类型”列。例如：从以前的REST客户端输出结果复制JSON时，此功能很有用。</p>
+</div>
+<div>
+<p><strong>日期和时间戳</strong></p>
+</div>
+<div>
+<p>对于Hfxt类型的日期和时间戳，使用”格式”列指定传入格式。例如，对于日期：yyyy-MM-dd</p>
+</div>
+</div>
+</body>
+</html>

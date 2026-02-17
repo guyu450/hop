@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>rowgenerator.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="行生成器">行生成器</h1>
+<h2 id="描述">描述</h2>
+<p>要使用字段，你必须有一个数据行。某些转换（如表格输入，前提是你运行了预览）会自动生成一个数据行。如果不存在数据行，请添加一个”生成行”转换来创建一行或多行，以便使用字段、打印变量或参数等。“生成行”转换会输出指定数量的空行或带有一组硬编码字段的行。默认情况下，这些行是空的；不过，它们可以包含一些静态字段。此转换主要用于测试目的。它对于生成固定数量的行可能很有用，例如，你恰好需要为12个月生成12行。有时，你可以使用”生成行”来生成一行作为管道的起始点。例如，你可以生成一行，其中包含两三个字段值，你可以用这些值来参数化你的SQL，然后再生成实际的行。示例：*
+要生成一行示例数据，向管道中添加两个操作项。添加一个”生成行”转换并连接到”添加常量”。在”添加常量”中，你可以添加要生成的字段。在”生成行”中，你可以限制行数。*
+要遍历100行，你可以向管道中添加一个”生成行”和一个”添加序列”操作，并在管道上连接它们。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">此转换的名称，该名称在单个管道中必须唯一</td>
+</tr>
+<tr>
+<td style="text-align: left;">限制</td>
+<td style="text-align: left;">设置你要生成的最大行数</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段</td>
+<td
+style="text-align: left;">在此表中配置要生成的行的结构和值（可选）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">永不停止生成行</td>
+<td
+style="text-align: left;">此选项适用于你永远不想停止运行管道的实时用例。然后，此转换的输出用于驱动重复任务，如从文件、队列、数据库等进行轮询。</td>
+</tr>
+<tr>
+<td style="text-align: left;">间隔（毫秒）</td>
+<td
+style="text-align: left;">生成的行之间的间隔时间（以毫秒为单位）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">当前行时间字段名称</td>
+<td
+style="text-align: left;">包含当前行生成时间的日期字段的*可选*字段名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">上一行时间字段名称</td>
+<td
+style="text-align: left;">包含上一行生成时间的日期字段的*可选*字段名称</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

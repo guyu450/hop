@@ -1784,17 +1784,18 @@ public class Const {
     // Get the implementation version:
     // Temporary build: 2.4.0-SNAPSHOT (2023-02-13 08.50.52)
     // Release version: 2.4.0
-    String version = Const.class.getPackage().getImplementationVersion();
-
-    // Check if implementation version is a SNAPHOT build or if version is not known.
-    if (version == null || version.contains("SNAPSHOT")) {
-      version = "next";
-    } else {
-      // Only keep until first space to remove the build date
-      version = version.split(" ")[0];
-    }
-
-    return url + version + "/";
+    //    String version = Const.class.getPackage().getImplementationVersion();
+    //
+    //    // Check if implementation version is a SNAPHOT build or if version is not known.
+    //    if (version == null || version.contains("SNAPSHOT")) {
+    //      version = "next";
+    //    } else {
+    //      // Only keep until first space to remove the build date
+    //      version = version.split(" ")[0];
+    //    }
+    //
+    //    return url + version + "/";
+    return url;
   }
 
   /**
@@ -1813,7 +1814,12 @@ public class Const {
         docUrl = uri;
       } else {
         // the uri provided needs to be assembled
-        docUrl = uri.startsWith("/") ? docUrl + uri.substring(1) : docUrl + uri;
+        //        docUrl = uri.startsWith("/") ? docUrl + uri.substring(1) : docUrl + uri;
+        if (uri.startsWith(docUrl)) {
+          docUrl = uri;
+        } else {
+          docUrl = uri.startsWith("/") ? docUrl + uri.substring(1) : docUrl + uri;
+        }
       }
     }
     return docUrl;

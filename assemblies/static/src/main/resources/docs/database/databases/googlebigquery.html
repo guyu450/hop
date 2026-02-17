@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>googlebigquery.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="谷歌大数据查询google-bigquery">谷歌大数据查询（Google
+BigQuery）</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">关系型</td>
+</tr>
+<tr>
+<td style="text-align: left;">驱动程序</td>
+<td style="text-align: left;">驱动程序链接</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含的版本</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hfxt依赖项</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">文档</td>
+<td style="text-align: left;">文档链接</td>
+</tr>
+<tr>
+<td style="text-align: left;">JDBC链接</td>
+<td
+style="text-align: left;">jdbc:bigquery://[主机]:[端口];项目ID=[项目];OAuth类型=[认证值]</td>
+</tr>
+<tr>
+<td style="text-align: left;">驱动程序文件夹</td>
+<td style="text-align: left;">&lt;Hfxt安装目录&gt;/lib/jdbc</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>Simba驱动程序打包为一个.zip文件，其中包含许多JAR文件。使用
+Hfxt的Bigquery
+JDBC时，仅需要驱动程序中包含的一部分JAR文件。此外，某些JAR文件可能与Hfxt打包的文件冲突，<strong>必须</strong>排除。</p>
+</div>
+<div>
+<p><strong>要排除的SIMBA驱动程序JAR文件（这些JAR文件包含在SIMBA驱动程序中，但与Hfxt库冲突，必须排除）</strong></p>
+</div>
+<div>
+<div>
+<pre><code>grpc-alts-&lt;版本&gt;.jar
+grpc-api-&lt;版本&gt;.jar
+grpc-core-&lt;版本&gt;.jar
+grpc-netty-shaded-&lt;版本&gt;.jar</code></pre>
+</div>
+</div>
+<div>
+<p><strong>要包含的SIMBA驱动程序JAR文件</strong>（仅包含这些JAR文件以进行最小化的Bigquery驱动程序安装）：</p>
+</div>
+<div>
+<div>
+<pre><code>api-common-&lt;版本&gt;.jar
+gax-&lt;版本&gt;.jar
+gax-grpc-&lt;版本&gt;.jar
+google-api-services-bigquery-v2-&lt;版本&gt;.jar
+GoogleBigQueryJDBC42.jar
+google-cloud-bigquerystorage-&lt;版本&gt;.jar
+grpc-google-cloud-bigquerystorage-v1-&lt;版本&gt;.jar
+grpc-google-cloud-bigquerystorage-v1beta1-&lt;版本&gt;.jar
+grpc-google-cloud-bigquerystorage-v1beta2-&lt;版本&gt;.jar
+json-&lt;版本&gt;.jar
+proto-google-cloud-bigquerystorage-v1-&lt;版本&gt;.jar
+proto-google-cloud-bigquerystorage-v1beta1-&lt;版本&gt;.jar
+proto-google-cloud-bigquerystorage-v1beta2-&lt;版本&gt;.jar
+threetenbp-&lt;版本&gt;.jar</code></pre>
+</div>
+</div>
+<div>
+<p>* 使用Hfxt 2.5.0和Simba
+1.3.3.1004进行了测试。并非所有认证方法都进行了测试，因此此列表可能不完整。</p>
+</div>
+</body>
+</html>

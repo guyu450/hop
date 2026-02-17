@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>script.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="脚本">脚本</h1>
+<h2 id="描述">描述</h2>
+<p>“脚本”转换允许您使用JSR -
+223标准支持的任何语言编写代码。默认情况下，Hfxt项目附带以下语言支持：</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>此转换的名称，该名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td>脚本引擎</td>
+<td>您可以从下拉列表中选择任何检测到的JSR - 223脚本引擎。</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td><p>您可以添加一个或多个脚
+本。有不同类型的脚本，您可以通过右键单击脚本标签来更改。</p>
+<p><code>转换</code> ：每行读取后将执行该脚本。 <code>开始</code>
+：在转换开始时将执行一次该脚本。 <code>结束</code>
+：读取最后一行后将执行该脚本</p></td>
+</tr>
+<tr>
+<td>字段</td>
+<td>在 此处，您可以指定每行之后从转换脚本的上下文中检索的字段。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="变量绑定">变量绑定</h2>
+<div>
+<div>
+<p>为了让您能够处理输入字段值或周围的Java生态系统，Hfxt公开了一系列变量绑定。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr>
+<th>变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>input</td>
+<td>所有输入字段都以其自身名称存在
+。请注意，某些脚本语言对变量的允许名称有限制。
+请确保使用”选择值”转换重命名不合适的字段名称。</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>这是对父转换类 Script 的引用。您可以
+使用此引用来记录某些重要事件或写入额外的输出行</td>
+</tr>
+<tr>
+<td><code>pipeline_status</code></td>
+<td><p>这个特殊变量可以设置为以下任何值：</p>
+<p><code>CONTINUE_PIPELINE</code> ：处理当前行并生成输出（默认值）
+<code>SKIP_PIPELINE</code> ：不写入输出行 <code>STOP_PIPELINE</code>
+：导致管道停止处理行 <code>ERROR_PIPELINE</code>
+：导致管道因错误而中止</p></td>
+</tr>
+<tr>
+<td><code>rowNumber</code></td>
+<td>这是当前行号，从1开始。</td>
+</tr>
+<tr>
+<td><code>rowMeta</code></td>
+<td>输入行元数据。它是一个值元数据列表。</td>
+</tr>
+<tr>
+<td><code>row</code></td>
+<td><p>一个对象数组，包含当前的字段值集。请确保使用 <code>rowMeta</code>
+来访问这些值，以确保进行适当的数据转换。</p>
+<p>例如，使用 <code>rowMeta.getString(row, 0)</code>
+从输入行中获取第一个字符串值。</p></td>
+</tr>
+<tr>
+<td><code>previousRow</code></td>
+<td>上一行，如果 <code>row</code> 是第一行输入行，则为null。</td>
+</tr>
+<tr>
+<td><code>transformName</code></td>
+<td>转换的名称</td>
+</tr>
+<tr>
+<td><code>pipelineName</code></td>
+<td>管道的名称</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="生成行">生成行</h2>
+<div>
+<div>
+<p>以下是使用3种不同脚本引擎中的简单循环生成10个输出行的脚本。此操作会发生3次，输出相同。对于这3个示例，您需要定义2个输出字段：</p>
+</div>
+<div>
+<ul>
+<li><p><code>id</code> ：整数</p></li>
+<li><p><code>name</code> ：字符串</p></li>
+</ul>
+</div>
+<h3 id="ecmascript">ECMAScript</h3>
+<div>
+<div>
+<pre><code>var Long = Packages.java.lang.Long;
+var RowDataUtil = Packages.org.apache.hfxt.core.row.RowDataUtil;
+
+var START=100000;
+var COUNT=10;
+var END=START+COUNT;
+var id=START;
+
+for (var id=START;id&lt;END;id++) {
+  var outputRow = RowDataUtil.allocateRowData(rowMeta.size());
+  outputRow[0] = new Long(id);
+  outputRow[1] = &quot; Hfxt &quot;+id;
+  transform.putRow(outputRowMeta, outputRow);
+}
+
+pipeline_status=SKIP_PIPELINE;</code></pre>
+</div>
+</div>
+<h3 id="groovy">Groovy</h3>
+<div>
+<div>
+<pre><code>def COUNT=10;
+
+id = 100000L;
+(1..COUNT).each {
+ outputRow = RowDataUtil.allocateRowData(rowMeta.size());
+ outputRow[0] = id;
+ outputRow[1] = &quot; Hfxt &quot;+id
+ transform.putRow(outputRowMeta, outputRow);
+
+ id++;
+}
+
+pipeline_status=SKIP_PIPELINE;</code></pre>
+</div>
+</div>
+<h3 id="python">Python</h3>
+<div>
+<div>
+<pre><code>import java.lang.Long as Long
+
+START=100000
+COUNT=10
+END=START+COUNT
+id=START
+
+for id in range(START,END):
+    outputRow = RowDataUtil.allocateRowData(rowMeta.size())
+    outputRow[0] = Long(id)
+    outputRow[1] = &quot; Hfxt &quot;+str(id)
+    transform.putRow(outputRowMeta, outputRow)
+
+pipeline_status=SKIP_PIPELINE</code></pre>
+</div>
+</div>
+</div>
+<h2 id="聚合行">聚合行</h2>
+<div>
+<div>
+<p>以下是对不同组的行进行聚合的脚本。数据按字段 <code>group</code>
+排序，并包含一个 <code>value</code> 字段，该字段的值将累加到字段
+<code>sum</code> 中。在开始脚本中，我们定义变量 <code>sum = 0</code> 和
+<code>previousGroup = ""</code>。</p>
+</div>
+<div>
+<p>对于这3个示例，您需要定义1个输出字段：</p>
+</div>
+<div>
+<ul>
+<li><code>sum</code> ：整数</li>
+</ul>
+</div>
+<h3 id="ecmascript-1">ECMAScript</h3>
+<div>
+<div>
+<pre><code>if (group!==previousGroup) {
+  sum=value;
+  previousGroup=group;
+} else {
+  sum+=value;
+}
+
+if (nextGroup==null) {
+  pipeline_status=CONTINUE_PIPELINE;
+} else {
+  pipeline_status=SKIP_PIPELINE;
+}</code></pre>
+</div>
+</div>
+<h3 id="groovy-1">Groovy</h3>
+<div>
+<div>
+<pre><code>if (!group.equalsIgnoreCase(previousGroup)) {
+  sum=value;
+  previousGroup=group;
+} else {
+  sum+=value;
+}
+
+if (nextGroup==null) {
+  pipeline_status=CONTINUE_PIPELINE;
+} else {
+  pipeline_status=SKIP_PIPELINE;
+}</code></pre>
+</div>
+</div>
+<h3 id="python-1">Python</h3>
+<div>
+<div>
+<pre><code>if group!=previousGroup:
+  sum=value
+  previousGroup=group
+else:
+  sum=sum+value
+
+if nextGroup is None:
+  pipeline_status=CONTINUE_PIPELINE
+else:
+  pipeline_status=SKIP_PIPELINE;</code></pre>
+</div>
+</div>
+</div>
+<h2 id="添加脚本语言">添加脚本语言</h2>
+<div>
+<div>
+<p>您可以通过将所需的库添加到 <code>plugins/transforms/script/lib</code>
+文件夹中来添加其他脚本语言。</p>
+</div>
+<div>
+<p>例如，要添加对Ruby脚本语言的支持，您需要添加以下 JRuby库：</p>
+</div>
+<div>
+<ul>
+<li><p><code>jruby-stdlib-&lt;version&gt;.jar</code></p></li>
+<li><p><code>jruby-core-&lt;version&gt;.jar</code></p></li>
+</ul>
+</div>
+<div>
+<p>要添加Javascript支持，请下载 Nashorn Core jar</p>
+</div>
+<div>
+<ul>
+<li><code>nashorn-core-15.4.jar</code></li>
+</ul>
+</div>
+<div>
+<p>重新启动 Hfxt GUI后，您会注意到”脚本引擎”下拉框中有一个
+<code>ruby</code> 或 <code>Javascript</code> 条目。</p>
+</div>
+</div>
+</body>
+</html>

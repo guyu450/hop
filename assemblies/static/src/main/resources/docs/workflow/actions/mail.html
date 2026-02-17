@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mail.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="邮件">邮件</h1>
+<h2 id="描述">描述</h2>
+<p>“邮件”操作可发送纯文本或HTML格式的电子邮件，并可选择添加文件附件。此操作可在工作流运行结束时使用，用于宣布运行成功或发送有关工作流失败的通知。例如，在成功加载结束时，向分发列表发送一封电子邮件，宣布加载成功并附上日志文件，这种情况并不少见。如果出现错误，可以发送电子邮件提醒分发列表中的人员。“邮件”操作需要一个SMTP服务器。在连接时可以使用身份验证和安全措施，但必须拥有SMTP凭证。可以将文件（如错误日志和常规日志）附加到电子邮件中。此外，为方便起见，可将日志压缩成一个存档文件。“邮件”操作既可以使用自身定义的邮件服务器配置，也可以从”邮件服务器连接”元数据类型获取服务器连接。在后一种情况下，操作自身的服务器配置将被忽略。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“邮件”操作可发送纯文本或HTML格式的电子邮件，并可选择添加文件附件。</p>
+</div>
+<div>
+<p>此操作可在工作流运行结束时使用，用于宣布运行成功或发送有关工作流失败的通知。</p>
+</div>
+<div>
+<p>例如，在成功加载结束时，向分发列表发送一封电子邮件，宣布加载成功并附上日志文件，这种情况并不少见。</p>
+</div>
+<div>
+<p>如果出现错误，可以发送电子邮件提醒分发列表中的人员。</p>
+</div>
+<div>
+<p>“邮件”操作需要一个SMTP服务器。</p>
+</div>
+<div>
+<p>在连接时可以使用身份验证和安全措施，但必须拥有SMTP凭证。</p>
+</div>
+<div>
+<p>可以将文件（如错误日志和常规日志）附加到电子邮件中。</p>
+</div>
+<div>
+<p>此外，为方便起见，可将日志压缩成一个存档文件。</p>
+</div>
+<div>
+<p>“邮件”操作既可以使用自身定义的邮件服务器配置，也可以从
+“邮件服务器连接”
+元数据类型获取服务器连接。在后一种情况下，操作自身的服务器配置将被忽略。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="地址标签页">地址标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作名称</td>
+<td style="text-align: left;">工作流操作的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>收件人</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">目标地址</td>
+<td
+style="text-align: left;">电子邮件的目标地址；如果要指定多个地址，请用空格分隔。</td>
+</tr>
+<tr>
+<td style="text-align: left;">抄送</td>
+<td
+style="text-align: left;">邮件的相同副本也会发送到”抄送”字段中列出的所有地址。要在”抄送”字段中输入多个地址，请用空格分隔。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密送</td>
+<td
+style="text-align: left;">发送给邮件中不显示其电子邮件地址的收件人</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>发件人</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">发件人姓名</td>
+<td style="text-align: left;">发送电子邮件的人的姓名</td>
+</tr>
+<tr>
+<td style="text-align: left;">发件人地址</td>
+<td style="text-align: left;">发送电子邮件的人的电子邮件地址</td>
+</tr>
+<tr>
+<td style="text-align: left;">回复至</td>
+<td style="text-align: left;">回复邮件应发送到的人的电子邮件地址</td>
+</tr>
+<tr>
+<td style="text-align: left;">联系人</td>
+<td style="text-align: left;">要显示在电子邮件中的联系人姓名</td>
+</tr>
+<tr>
+<td style="text-align: left;">联系电话</td>
+<td style="text-align: left;">要显示在电子邮件中的联系电话号码</td>
+</tr>
+</tbody>
+</table>
+<h3 id="服务器标签页">服务器标签页</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>邮件服务器连接</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">邮件连接</td>
+<td
+style="text-align: left;">如果在此处选择了邮件服务器连接，则此标签页的其余部分将被忽略。服务器配置将从
+“邮件服务器连接” 元数据项中获取。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SMTP服务器</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">SMTP服务器</td>
+<td style="text-align: left;">SMTP服务器地址</td>
+</tr>
+<tr>
+<td style="text-align: left;">端口</td>
+<td style="text-align: left;">SMTP服务器运行的端口</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>身份验证</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">使用身份验证</td>
+<td style="text-align: left;">启用此选项可对SMTP服务器使用身份验证</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用XOAuth2</td>
+<td
+style="text-align: left;">如果选中此选项，将使用XOAuth2对服务器进行身份验证。</td>
+</tr>
+<tr>
+<td style="text-align: left;">身份验证用户</td>
+<td style="text-align: left;">SMTP用户账户名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">身份验证密码</td>
+<td style="text-align: left;">SMTP用户账户密码</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用安全身份验证？</td>
+<td style="text-align: left;">启用此选项可使用安全身份验证</td>
+</tr>
+<tr>
+<td style="text-align: left;">安全连接类型</td>
+<td style="text-align: left;">选择身份验证类型（SSL、TLS、TLS 1.2）</td>
+</tr>
+<tr>
+<td style="text-align: left;">检查服务器身份？</td>
+<td style="text-align: left;">是否检查服务器身份？</td>
+</tr>
+<tr>
+<td style="text-align: left;">受信任主机</td>
+<td style="text-align: left;">用空格分隔的受信任主机列表，例如：“host1
+host2 host3”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="电子邮件消息标签页">电子邮件消息标签页</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在消息中包含日期？</td>
+<td>启用此选项可在消息中包含当前日期</td>
+</tr>
+<tr>
+<td>仅在邮件正文中发送注释？</td>
+<td>如果未启用此选项，电子邮件除了注释
+外，还将包含有关工作流及其执行情况的信息</td>
+</tr>
+<tr>
+<td>在邮件正文中使用HTML</td>
+<td>消息将以HTML格式发送</td>
+</tr>
+<tr>
+<td>编码</td>
+<td>选择用于HTML格式的字符编码类型</td>
+</tr>
+<tr>
+<td>管理优先级</td>
+<td><div>
+<div>
+<p>启用此 选项可设置消息的优先级和敏感度。通常，失
+败通知可能会比成功通知设置更高的优先级。
+注意：此标志的支持情况取决于邮件服务器。</p>
+</div>
+<div>
+<ul>
+<li><p>优先级：低、正常或高</p></li>
+<li><p>重要性：低、正常或高</p></li>
+<li><p>敏感度：正常、个人、私密或机密</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>主题</td>
+<td>在此字段中输入邮件的主题。</td>
+</tr>
+<tr>
+<td>注释</td>
+<td>在此字段中输入邮件正文中的注释。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="附件标签页">附件标签页</h3>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>向消息附加文件？</p>
+<p>启用此选项可向电子邮件消息附加文件</p>
+<p>选择文件类型</p>
+<div>
+<div>
+<p>要发送的文件在内部文件结果集中定义。此列表中的每个文件都标记有文件类型，您可以选择要发送的文件类型（另请参阅本文档末尾的提示）：</p>
+</div>
+<div>
+<ul>
+<li><p>常规</p></li>
+<li><p>日志</p></li>
+<li><p>错误行</p></li>
+<li><p>错误</p></li>
+<li><p>警告</p></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

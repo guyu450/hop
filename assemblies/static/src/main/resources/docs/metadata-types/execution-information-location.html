@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>execution-information-location.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="执行信息存储位置">执行信息存储位置</h1>
+<h2 id="描述">描述</h2>
+<p>执行信息存储位置决定了
+Hfxt可以将执行信息发送到何处。执行完成后，可以从”执行信息视角”查看此信息。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>执行信息存储位置决定了 Hfxt可以将执行信息发送到何处。</p>
+</div>
+<div>
+<p>执行完成后，可以从 执行信息视角 查看此信息。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;">此执行信息存储位置使用的名称</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">描述</td>
+<td style="text-align: left;">此执行信息存储位置的描述</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据记录延迟（毫秒）</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2000</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据记录间隔（毫秒）</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">5000</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据记录大小（行数）</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1000</td>
+</tr>
+<tr>
+<td style="text-align: left;">存储位置类型</td>
+<td
+style="text-align: left;">要写入的存储位置插件类型。根据类型不同，你可以输入更多特定于插件的选项。</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="存储位置类型特定选项">存储位置类型特定选项</h2>
+<div>
+<h3 id="文件存储位置">文件存储位置</h3>
+<div>
+<p>使用文件存储位置，你可以将执行信息写入本地文件系统路径中的文件。</p>
+</div>
+<div>
+<p>选项：</p>
+</div>
+<div>
+<ul>
+<li><strong>根文件夹</strong>：写入执行信息的文件夹。</li>
+</ul>
+</div>
+<h3 id="缓存文件存储位置">缓存文件存储位置</h3>
+<div>
+<p>与文件存储位置类似，执行信息被写入一个文件夹。不同之处在于，信息是按管道或工作流写入的。所需的所有信息都聚合到这些顶级JSON文件中。实现方式是将执行信息在内存缓存中保留一段可配置的时间。好处是对文件系统的压力小得多。缺点是会额外占用一些内存。例如，GUI中的某些导航操作（如查找相关执行）将需要读取更多数据。</p>
+</div>
+<div>
+<p>选项：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>根文件夹</strong>：将执行信息存储为JSON文件的文件夹</p></li>
+<li><p><strong>持久化延迟</strong>：这是在将执行信息写入磁盘之前等待的最长时间，以毫秒为单位。</p></li>
+<li><p><strong>最大缓存时间</strong>：这是在清除执行信息之前，将其保留在内存中的最长时间，以毫秒为单位。建议将此时间设置为低于工作流或管道的预期持续时间。</p></li>
+</ul>
+</div>
+<h3 id="远程存储位置">远程存储位置</h3>
+<div>
+<p>远程存储位置允许你将执行信息写入Hfxt服务器。</p>
+</div>
+<div>
+<p>选项：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>Hfxt服务器</strong>：要将执行信息写入的远程Hfxt服务器。</p></li>
+<li><p><strong>执行信息存储位置</strong>：远程Hfxt服务器上要使用的执行信息存储位置。</p></li>
+</ul>
+</div>
+<h3 id="neo4j存储位置">Neo4j存储位置</h3>
+<div>
+<p>使用此存储位置类型，你可以将执行信息存储在 Neo4j
+图形数据库中。有关此插件的更多信息，请参阅 Neo4j存储位置类型 文档。</p>
+</div>
+<h3 id="elastic存储位置">Elastic存储位置</h3>
+<div>
+<p>Elastic存储位置类型将信息存储在Elastic索引中。请参阅
+Elastic存储位置类型</p>
+</div>
+<h3 id="清理">清理</h3>
+<div>
+<p>如果你想自动从图形数据库中删除执行信息，可以使用管道或工作流来实现。</p>
+</div>
+</div>
+</body>
+</html>

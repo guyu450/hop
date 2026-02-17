@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>getpop.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="获取邮件pop3imap">获取邮件（POP3/IMAP）</h1>
+<h2 id="描述">描述</h2>
+<p>“获取邮件（POP3/IMAP）”操作可从POP3或IMAP服务器检索邮件，并将其存储到一个或多个文件中。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p>“<code>获取邮件（POP3/IMAP）</code>”操作可从POP3或IMAP服务器检索邮件，并将其存储到一个或多个文件中。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>邮件服务器连接</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>邮件连接</td>
+<td>如果在此处选择了邮件服务器连接，
+则此选项卡的其余部分将被忽略。服务器配置将从 邮件服务器连接
+元数据项中获取。</td>
+</tr>
+<tr>
+<td>服务器设置</td>
+<td></td>
+</tr>
+<tr>
+<td>工作流操作名称</td>
+<td>工作流操作的名称。</td>
+</tr>
+<tr>
+<td>源主机</td>
+<td>pop服务器的主机名或IP地址。</td>
+</tr>
+<tr>
+<td>使用SSL</td>
+<td>如果选中，将使用安全连接与服务器进行通信。</td>
+</tr>
+<tr>
+<td>使用XOAuth2</td>
+<td>如 果选中，将使用XOAuth2对服务器进行身份验证。</td>
+</tr>
+<tr>
+<td>端口</td>
+<td>运行SSL POP3或IMAP连接的端口。</td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>用于登录的用户名。</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>用于登录的密码。</td>
+</tr>
+<tr>
+<td>使用代理</td>
+<td>勾选以启用代理身份验证</td>
+</tr>
+<tr>
+<td>代理用户名</td>
+<td>代理授权用户（仅在勾选 <code>使用代理</code> 时可用）</td>
+</tr>
+<tr>
+<td>协议</td>
+<td><div>
+<div>
+<p>在以下选项中选择</p>
+</div>
+<div>
+<ul>
+<li><p>POP3</p></li>
+<li><p>IMAP</p></li>
+<li><p>MBOX</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>测试连接</td>
+<td>点击此按钮可测试提供的设置</td>
+</tr>
+<tr>
+<td>目标文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>目标目录</td>
+<td>要将邮件文件放入的目录。</td>
+</tr>
+<tr>
+<td>创建文件夹</td>
+<td>如果指定的目标目录不存在，则勾选此项以创建它</td>
+</tr>
+<tr>
+<td>目标文件名模式</td>
+<td>文件名模式（文件名开头）。默认模式为
+<code>name_{SYS|hhmmss_MMddyyyy|}_#IdFile#.mail</code></td>
+</tr>
+<tr>
+<td>保存邮件内容</td>
+<td>勾选 此项可保存检索到的电子邮件消息的邮件正文文本</td>
+</tr>
+<tr>
+<td>获取邮件附件</td>
+<td>勾选此项可保存检索到的电子邮件消息的附件</td>
+</tr>
+<tr>
+<td>附件保存到不同文件夹</td>
+<td>勾选此项可将检索到的电子
+邮件消息的附件保存到与邮件正文不同的文件夹中</td>
+</tr>
+<tr>
+<td>附件文件夹</td>
+<td>用于保 存检索到的电子邮件消息附件的文件夹（仅在勾选
+<code>附件保存到不同文件夹</code> 时可用）</td>
+</tr>
+<tr>
+<td>附件通配符</td>
+<td>用于保存检索到的电子邮件消息附件的通配符（无 = 全部）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设置选项卡">设置选项卡</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作</td>
+<td><p>此下拉框允 许您指定对检索到的电子邮件消息执行的操作：</p>
+<p>* 获取邮件 * 将邮件移动到文件夹（仅IM
+AP支持，因为POP3只知道一个文件夹”收件箱”） * 删除邮件</p></td>
+</tr>
+<tr>
+<td>POP3设置</td>
+<td></td>
+</tr>
+<tr>
+<td>检索</td>
+<td><div>
+<div>
+<p>选择要检索的电子邮件：</p>
+</div>
+<div>
+<ul>
+<li><p>所有邮件</p></li>
+<li><p>检索前……封邮件</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>检索前……封邮件数量</td>
+<td>如果选择”检索前… …封邮件”，则允许您指定要检索的邮件数量。</td>
+</tr>
+<tr>
+<td>检索后删除邮件</td>
+<td>勾选此项可在检索后删除pop服务器上的邮件。</td>
+</tr>
+<tr>
+<td>IMAP设置</td>
+<td></td>
+</tr>
+<tr>
+<td>选项</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>IMAP文件夹</td>
+<td>IMAP服务器上要从中检索邮件的文件夹</td>
+</tr>
+<tr>
+<td>包含子文件夹</td>
+<td>勾选此项 可从选定的IMAP文件夹中选择子文件夹中的邮件</td>
+</tr>
+<tr>
+<td>检索</td>
+<td><div>
+<div>
+<p>选择以下选项之一</p>
+</div>
+<div>
+<ul>
+<li><p>获取所有邮件</p></li>
+<li><p>获取新邮件</p></li>
+<li><p>获取旧邮件</p></li>
+<li><p>获取已读邮件</p></li>
+<li><p>获取未读邮件</p></li>
+<li><p>获取已标记邮件</p></li>
+<li><p>获取未标记邮件</p></li>
+<li><p>获取草稿邮件</p></li>
+<li><p>获取非草稿邮件</p></li>
+<li><p>获取已回复邮件</p></li>
+<li><p>获取未回复邮件</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>检索前……封邮件</td>
+<td>指定要检索的邮件数量</td>
+</tr>
+<tr>
+<td>检索后</td>
+<td><div>
+<div>
+<p>指定检索邮件后要对电子邮件消息执行的操作：</p>
+</div>
+<div>
+<ul>
+<li><p>不执行任何操作</p></li>
+<li><p>删除邮件</p></li>
+<li><p>将邮件移动到文件夹</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>移动到文件夹</td>
+<td>将检索到的邮件移 动到IMAP服务器上的另一个文件夹（如果选择了
+<code>将邮件移动到文件夹</code>）</td>
+</tr>
+<tr>
+<td>创建文件夹</td>
+<td>如果不存在，则在IMAP服务
+器上创建一个文件夹以将邮件移动到该文件夹。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="筛选器选项卡">筛选器选项卡</h3>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>邮件头</p>
+<p>发件人（FROM）</p>
+<p>将根据发件人对邮件进行筛选</p>
+<p>收件人（TO）</p>
+<p>将根据收件人对邮件进行筛选</p>
+<p>主题</p>
+<p>将根据主题对邮件进行筛选</p>
+<p>邮件内容</p>
+<p>选项</p>
+<p>描述</p>
+<p>正文</p>
+<p>将根据电子邮件正文中指定的文本对邮件进行筛选</p>
+<p>接收日期</p>
+<p>选项</p>
+<p>描述</p>
+<p>条件</p>
+<div>
+<div>
+<p>选择一个日期或日期范围。可用选项如下</p>
+</div>
+<div>
+<ul>
+<li><p>无（默认，不根据接收日期进行筛选）</p></li>
+<li><p>等于 <code>日期1</code></p></li>
+<li><p>小于 <code>日期1</code></p></li>
+<li><p>大于 <code>日期1</code></p></li>
+<li><p>介于 <code>日期1</code> 和 <code>日期2</code> 之间</p></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

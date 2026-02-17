@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pipeline-executor.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="管道执行器">管道执行器</h1>
+<h2 id="描述">描述</h2>
+<p>管道执行器转换允许您在一个管道内执行另一个Hfxt管道。它与工作流执行器转换类似，但作用于管道。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>默认情况下，管道执行器转换会将行逐个发送到子管道。此默认行为可以在
+“行分组” 选项卡中更改。</p>
+</div>
+<div>
+<p>可选地，您可以在管道中使用 “从结果获取行”
+转换，以从子管道获取先前的行。您无需在 “获取行”
+转换中定义任何字段即可检索所有数据行字段。</p>
+</div>
+<div>
+<p>您可以通过指定要执行的管道名称，为每一行运行相同的管道，也可以从传入字段（例如来自表的字段）接受管道名称。您可以启动多个此转换的副本以并行运行。</p>
+</div>
+<div>
+<p><strong>参数</strong>：可以将子管道参数映射到当前管道中的字段。如果启用
+“从管道继承所有变量”
+选项，则父管道中定义的所有参数/变量都会传递给该管道。但是，仅 “参数”
+选项卡上定义的参数会根据输入到管道的数据行进行设置。</p>
+</div>
+<div>
+<p><strong>输出跳连接选项</strong>：如果为管道执行器选择了错误的输出选项，可能无法返回预期的数据。</p>
+</div>
+<div>
+<ul>
+<li><p><strong>此输出将包含执行结果</strong>：返回执行统计信息，并且在输出中不限制字段、变量或参数。最好至少使用
+“执行结果”（ExecutionResult）、“执行退出状态”（ExecutionExitStatus）或
+“执行错误数”（ExecutionNrErrors）字段检查子管道中是否存在任何问题。</p></li>
+<li><p><strong>此输出将包含执行后的结果行</strong>：输出由子管道复制到内存中的行集，例如使用
+“将行复制到结果” 转换。使用管道执行器转换中的 “结果行”
+选项卡，指定期望从子管道接收哪些字段。如果在您的作用域内有效，此选项对于在下游设置变量以及在上游使用变量也是必需的。</p></li>
+<li><p><strong>输出将包含执行后的结果文件名</strong>：输出将包含复制到结果中的任何文件名的行集，例如使用
+“文本文件输入” 转换的 “内容” 选项卡中的 “将文件名添加到结果”。</p></li>
+<li><p><strong>输出将包含执行器转换的输入数据副本</strong>：输出管道执行器转换接收到的行集。</p></li>
+<li><p><strong>转换的主输出</strong>：输出模拟管道执行器转换输入的行集。</p></li>
+</ul>
+</div>
+<div>
+<p>根据您的需求，管道执行器转换可以配置为以下任何一种工作方式：</p>
+</div>
+<div>
+<ul>
+<li><p>默认情况下，为每个输入行执行一次指定的管道。您可以使用输入行设置参数和变量。然后，执行器转换将此行以结果行的形式传递给管道。</p></li>
+<li><p>您还可以根据字段中的值传递一组记录，以便当字段值动态变化时，执行指定的管道。在这些情况下，行组中的第一行用于设置管道中的参数或变量。</p></li>
+<li><p>您可以启动多个此转换的副本，以协助并行管道处理。</p></li>
+</ul>
+</div>
+<div>
+<p>另请参阅：</p>
+</div>
+<div>
+<ul>
+<li><p>工作流操作，它从工作流中执行子工作流。</p></li>
+<li><p>管道操作，它从工作流中执行管道。</p></li>
+<li><p>工作流执行器转换，它从管道中执行工作流。</p></li>
+<li><p>Hfxt中的循环 操作指南。</p></li>
+</ul>
+</div>
+<div>
+<p>示例（示例项目）：</p>
+</div>
+<div>
+<ul>
+<li>loops/pipeline-executor.hpl</li>
+</ul>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>转换名称</p>
+<p>转换的名称。</p>
+<p>管道</p>
+<div>
+<div>
+<p>使用此部分指定要执行的管道。您有以下选项来指定管道：</p>
+</div>
+<div>
+<ul>
+<li>使用文件作为管道：启用此选项后，您可以输入用作管道的.hpl文件。文件名可能包含变量（例如，您可以使用内置的Internal.Pipeline.Filename.Directory变量构造相对于当前管道的文件名），或者您可以使用
+“浏览” 按钮通过文件浏览器选择文件。</li>
+</ul>
+</div>
+</div>
+<p>管道来自字段？</p>
+<p>启用后可在输入流的字段中指定管道文件名。</p>
+<p>管道字段</p>
+<p>启用上一个选项后，您可以指定在运行时将包含管道文件名的字段。文件名可能包含变量。</p>
+<p><strong>注意</strong>：必须考虑到，通过使用此选项指定管道文件名，我们可能会遇到一些性能损失，因为要执行的管道将在运行时初始化，而不是像往常一样在初始化阶段初始化。另一方面，此选项在动态指定管道文件名方面提供了更大的灵活性，这对于许多用例可能很有用。</p>
+<p>运行配置</p>
+<p>指定用于执行的管道运行配置。</p>
+<h3 id="参数选项卡">参数选项卡</h3>
+<div>
+<p>在此选项卡中，您可以指定使用哪个字段来设置某个参数或变量值。如果将多行传递给工作流，则取第一行来设置参数或变量。提示：如果您保持
+“从管道继承所有变量”
+选项选中（默认情况下是选中的），则当前管道中定义的所有变量都会传递给子管道。</p>
+</div>
+<div>
+<p>您只能向下游传递
+<strong>参数和变量</strong>。除非重新启动，否则不能在管道之间传递参数/变量。例如，当在管道执行器中每行启动一次每个命名管道时，您可以在管道之间传递参数/变量。</p>
+</div>
+<div>
+<p>虽然您不能向上游（在嵌套或顺序管道中）传递参数和变量，但您可以通过以下模式将数据行传递回管道。请参阅项目：samples/loops/pipeline-executor.hpl</p>
+</div>
+<div>
+<ul>
+<li><p><strong>父管道执行器</strong> 在 “结果行”
+选项卡下指定子管道行中定义的行字段名称。父管道执行器的输出选项是
+“执行后的结果行”。</p></li>
+<li><p><strong>子管道</strong>：在子管道中生成一个数据行，其字段名称和类型与父管道执行器
+“结果行” 选项卡中定义的相同。子管道的最后一个转换是
+“将行复制到结果”。</p></li>
+</ul>
+</div>
+<div>
+<p>请记住，所有参数必须在每个管道或工作流中（在编辑管道/工作流属性时）至少定义一次。</p>
+</div>
+<p>选项</p>
+<p>描述</p>
+<p>变量 / 参数名称</p>
+<p>“参数” 选项卡允许您定义Hfxt变量或将其传递到管道中。</p>
+<p>要使用的字段</p>
+<p>指定使用哪个字段来设置某个参数或变量值。如果您指定使用输入字段，则不会使用静态输入值。</p>
+<p>静态输入值</p>
+<p>您可以在此处指定一个静态值，而不是使用字段。</p>
+<div>
+<p>选项卡右下角的 <code>获取参数</code>
+按钮将插入指定管道的所有已定义参数及其描述。</p>
+</div>
+<div>
+<p>选项卡右下角的 <code>映射参数</code>
+按钮可让您将当前管道中的字段映射到子管道中的参数。</p>
+</div>
+<h3 id="行分组选项卡">行分组选项卡</h3>
+<div>
+<p>在此选项卡中，您可以指定以结果行的形式传递给管道的输入行数。您可以在管道中的
+“从结果获取行” 转换中使用这些结果行。</p>
+</div>
+<p>选项</p>
+<p>描述</p>
+<p>发送到管道的行数</p>
+<p>每X行后将执行管道，并将这X行传递给管道</p>
+<p>用于分组行的字段</p>
+<p>只要字段值保持不变，行就会累积在一个组中。如果值发生变化，将执行管道，并将累积的行传递给管道。</p>
+<p>执行前等待收集行的时间</p>
+<p>这是转换在执行管道之前累积行所花费的时间（以毫秒为单位）。</p>
+<h3 id="执行结果选项卡">执行结果选项卡</h3>
+<div>
+<p>您可以指定结果字段以及将它们发送到哪个转换。如果您不需要某个结果，只需留空输入字段。</p>
+</div>
+<p>选项</p>
+<p>描述</p>
+<p>默认值</p>
+<p>执行结果的目标转换</p>
+<p>使用下拉菜单选择当前管道中的一个转换作为接收指定管道结果的目标转换。</p>
+<p>N/A</p>
+<p>执行时间（毫秒）</p>
+<p>指定管道执行时间的字段名称。</p>
+<p>ExecutionTime</p>
+<p>执行结果</p>
+<p>指定管道执行结果的字段名称。</p>
+<p>Execution</p>
+</body>
+</html>

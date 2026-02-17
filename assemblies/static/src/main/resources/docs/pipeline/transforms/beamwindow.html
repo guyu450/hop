@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>beamwindow.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="波束窗口">波束窗口</h1>
+<h2 id="描述">描述</h2>
+<p>波束窗口转换使用波束执行引擎添加基于事件时间的窗口函数。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名 称，此名称在单个管道中必须唯一。</td>
+</tr>
+<tr>
+<td>窗口类型</td>
+<td><div>
+<div>
+<ul>
+<li><p>固定</p></li>
+<li><p>滑动</p></li>
+<li><p>会话</p></li>
+<li><p>全局</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>窗口大小（以秒为单位的持续时间）</td>
+<td>设置窗口持续时间的 大小（以秒为单位），默认值为60。</td>
+</tr>
+<tr>
+<td>每x秒（滑动窗口）</td>
+<td>设置滑 动窗口的持续时间（以秒为单位）。</td>
+</tr>
+<tr>
+<td>窗口开始字段</td>
+<td>包含窗口开始时间的字段。</td>
+</tr>
+<tr>
+<td>窗口结束字段</td>
+<td>包含窗口结束时间的字段。</td>
+</tr>
+<tr>
+<td>窗口最大字段</td>
+<td>包含事件之间最大持续时间的字段。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="窗口类型">窗口类型</h2>
+<div>
+<h3 id="固定">固定</h3>
+<div>
+<p>固定或滚动窗口用于将数据重复分割成不同的时间段，且不重叠。事件不能属于多个窗口。</p>
+</div>
+<h3 id="滑动">滑动</h3>
+<div>
+<p>滑动窗口仅在事件发生时产生输出，并持续向前移动。每个窗口至少会有一个事件，并且可以重叠。事件可以属于多个窗口。</p>
+</div>
+<h3 id="会话">会话</h3>
+<div>
+<p>会话窗口将到达时间相近的事件分组，并过滤掉没有数据的时间段。</p>
+</div>
+<div>
+<p>窗口在第一个事件发生时开始，并扩展到在指定的超时时间内包含新事件。如果事件持续发生，窗口将持续扩展，直到达到最大持续时间。</p>
+</div>
+<h3 id="全局">全局</h3>
+<div>
+<p>全局窗口化是波束中的默认设置，它忽略事件时间（跨越所有事件时间），并使用触发器提供该窗口的快照。</p>
+</div>
+</div>
+</body>
+</html>

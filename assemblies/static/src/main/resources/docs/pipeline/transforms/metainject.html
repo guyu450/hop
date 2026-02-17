@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>metainject.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="元数据注入">元数据注入</h1>
+<h2 id="描述">描述</h2>
+<p>元数据注入使
+Hfxt用户能够在运行时为管道提供所需的元数据。这可以显著减少为基本相同的管道开发略有不同版本的需求。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>元数据注入转换（MDI转换）将数据和转换属性插入到在运行时动态配置的管道中。这通常用于提高管道的可重用性。</p>
+</div>
+<div>
+<p>例如用例：如果你有10种不同的CSV文件定义，并且不想为每个单独的文件创建10个管道，你可以使用ETL元数据注入。在配置好MDI转换（将数据和属性映射到模板/目标管道）后，在运行时它将动态填充目标管道中任何未配置的转换属性。例如，在模板文件中，如果你将”表输入数据库字段”留空，并且在MDI转换中进行了配置，它将动态填充”表字段”和”流字段”。</p>
+</div>
+<div>
+<p>基本上，ETL元数据注入转换会覆盖命名管道的默认行为。并非所有传入流都需要具有相同的布局。从具有不同布局的不同流为元数据注入转换提供输入是完全可行的。</p>
+</div>
+<div>
+<p><strong>示例文件：</strong></p>
+</div>
+<div>
+<ul>
+<li><p><strong>配置MDI：</strong> read-and-inject-metadata.hpl</p></li>
+<li><p><strong>读取并填充模板：</strong> read-file-template.hpl</p></li>
+</ul>
+</div>
+<div>
+<p>阅读更多关于元数据注入的内容</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>管道</td>
+<td><p>通过输入模板管道的路径来指定它。点
+击”浏览”，使用虚拟文件系统浏览器显示并输入路径详细信息。</p>
+<p>如果你选择的管道
+与当前管道具有相同的根路径，则变量${Internal.Transform.
+Current.Directory}将自动插入以代替公共根路径。例如，如果
+当前管道的路径是/home/admin/pipeline.hpl，而你选择的管道
+在/home/admin/path/sub.hpl文件夹中，那么路径将自动转换为
+${Internal.Transform.Current.Directory}/path/sub.hpl。</p></td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>ETL元数据注入转换有两个带有字段的选项卡。下面分别描述每个选项卡。</p>
+</div>
+<h3 id="注入元数据选项卡">注入元数据选项卡</h3>
+<div>
+<p>此选项卡显示目标/模板文件上在运行时将被修改的转换和属性。将每个属性映射到你希望动态填充的源。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">目标注入转换键</td>
+<td
+style="text-align: left;">列出模板管道中每个转换中可注入元数据的可用字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标描述</td>
+<td style="text-align: left;">描述目标字段与目标转换的关系。</td>
+</tr>
+<tr>
+<td style="text-align: left;">源转换</td>
+<td
+style="text-align: left;">列出与作为元数据注入到目标字段的字段相关联的转换。</td>
+</tr>
+<tr>
+<td style="text-align: left;">源字段</td>
+<td style="text-align: left;">列出作为元数据注入到目标字段的字段。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>要将源字段指定为要注入的元数据，请执行以下转换操作：</p>
+</div>
+<div>
+<ol type="1">
+<li><p>在”目标注入转换键”列中，双击要为其指定源字段的字段。将打开”源字段”对话框。</p></li>
+<li><p>选择一个源字段，然后点击”确定”。</p></li>
+<li><p>可选地，选择”使用常量值”，通过以下操作之一为注入的元数据指定常量值：</p>
+<div>
+<ul>
+<li><p>手动输入一个值。</p></li>
+<li><p>使用内部变量设置值（例如${Internal.transform.Unique.Count}）。</p></li>
+<li><p>使用手动指定的值和参数值的组合（例如${FILE_PREFIX}_${FILE_DATE}.txt）。</p></li>
+</ul>
+</div></li>
+</ol>
+</div>
+<div>
+<p>当为字段或文件名等分组值列表指定常量值时，请注意目前没有很好的解决方案。最佳实践是使用
+数据网格
+转换来注入一整套常量值。你可以在此元数据注入转换中映射这些值。它将尽力满足你的需求，允许你使用指定的常量值注入组中的单行。</p>
+</div>
+<h4
+id="向etl元数据注入转换中注入元数据">向ETL元数据注入转换中注入元数据</h4>
+<div>
+<p>对于向ETL元数据注入转换本身注入元数据，适用以下例外情况：</p>
+</div>
+<div>
+<ul>
+<li><p>要注入一种指定字段的方法（例如通过文件名），请将PIPELINE_SPECIFICATION_METHOD常量设置到输入转换的字段。然后，你可以将该字段作为源映射到ETL元数据注入转换中的PIPELINE_SPECIFICATION_METHOD常量。</p></li>
+<li><p>将元数据插入原始注入的ETL元数据注入转换的目标字段由[组名称].[字段名称]定义。例如，如果组名称是”OUTPUT_FIELDS”，字段名称是”OUTPUT_FIELDNAME”，则应将目标字段设置为”OUTPUT_FIELDS.OUTPUT_FIELDNAME”。</p></li>
+</ul>
+</div>
+<h3 id="选项选项卡">选项选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">要读取的转换（可选）</td>
+<td
+style="text-align: left;">可选地，在模板管道中选择一个转换，以将数据直接传递到当前管道中ETL元数据注入转换之后的转换。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段名称</td>
+<td
+style="text-align: left;">如果选择了”要读取的转换”，请输入从模板管道中的转换直接传递的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td
+style="text-align: left;">如果选择了”要读取的转换”，请选择从模板管道中的转换直接传递的字段类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td
+style="text-align: left;">如果选择了”要读取的转换”，请输入从模板管道中的转换直接传递的字段长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td
+style="text-align: left;">如果选择了”要读取的转换”，请输入从模板管道中的转换直接传递的字段精度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">可选目标文件（注入后的hpl）</td>
+<td
+style="text-align: left;">对于初始管道开发或调试，请指定一个可选文件，用于在元数据注入发生后创建并保存模板管道。生成的管道将是已将元数据作为常量值注入的模板管道。</td>
+</tr>
+<tr>
+<td style="text-align: left;">流源转换</td>
+<td
+style="text-align: left;">在当前管道中选择一个源转换，以将数据直接传递到模板管道中的流目标转换。</td>
+</tr>
+<tr>
+<td style="text-align: left;">流目标转换</td>
+<td
+style="text-align: left;">在模板管道中选择目标转换，以直接接收来自流源转换的数据。</td>
+</tr>
+<tr>
+<td style="text-align: left;">运行生成的管道</td>
+<td
+style="text-align: left;">选择注入元数据并运行模板管道。如果未选择此选项，则会发生元数据注入，但模板管道不会运行。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>故障排除</strong></p>
+</div>
+<div>
+<ul>
+<li>在”可选目标文件（注入后的hpl）“中输入管道文件名，以便在注入后生成一个文件。此管道将包含注入后的所有属性，可用于查看和执行测试。</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

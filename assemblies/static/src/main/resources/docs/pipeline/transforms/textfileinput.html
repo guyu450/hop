@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>textfileinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="文本文件输入">文本文件输入</h1>
+<h2 id="描述">描述</h2>
+<p>文本文件输入转换可从多种文本文件类型中读取数据，包括电子表格生成的格式和固定宽度的平面文件。该转换的功能允许您从文件或目录列表中读取数据，使用正则表达式形式的通配符，并接受来自先前转换的通用文件名。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称。此名称在单个管道中必须是唯一的。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件标签">文件标签</h3>
+<div>
+<p>下表详细介绍了文件标签上可用的功能：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">文件或目录</td>
+<td
+style="text-align: left;">此字段指定输入文本文件的位置和/或名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">添加</td>
+<td
+style="text-align: left;">点击将文件和通配符添加到”选定文件”列表中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">浏览</td>
+<td style="text-align: left;">点击从文件浏览器中选择文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">正则表达式</td>
+<td
+style="text-align: left;">指定要用于在先前选项中指定的目录中选择文件的正则表达式。例如，您要处理所有扩展名为.txt的文件。（请参阅下面的”使用正则表达式选择文件”）</td>
+</tr>
+<tr>
+<td style="text-align: left;">排除正则表达式</td>
+<td
+style="text-align: left;">指定要用于从指定目录中排除文件的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">选定文件</td>
+<td
+style="text-align: left;">此表包含选定文件（或通配符选择）的列表，以及一个指定文件是否为必需的属性。如果一个文件是必需的但未找到，则会生成一个错误。否则，将跳过该文件名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除</td>
+<td style="text-align: left;">点击从列表中删除选定的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编辑</td>
+<td style="text-align: left;">点击修改列表中选定的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件名...</td>
+<td
+style="text-align: left;">显示根据当前选定文件定义将加载的所有文件的列表。</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件内容</td>
+<td style="text-align: left;">显示选定文件的内容。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从第一数据行显示内容</td>
+<td style="text-align: left;">仅显示选定文件第一数据行的内容。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>使用正则表达式选择文件</strong></p>
+</div>
+<div>
+<p>文本文件输入转换可以通过正则表达式形式的通配符搜索文件。正则表达式比使用”*“和”？“通配符更复杂。以下是一些正则表达式的示例：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">文件名</th>
+<th style="text-align: left;">正则表达式</th>
+<th style="text-align: left;">选定的文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">/dirA/</td>
+<td style="text-align: left;">.userdata.\.txt</td>
+<td
+style="text-align: left;">在/dirA/中查找所有名称包含userdata且以.txt结尾的文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">/dirB/</td>
+<td style="text-align: left;">AAA.*</td>
+<td style="text-align: left;">在/dirB/中查找所有名称以AAA开头的文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">/dirC/</td>
+<td style="text-align: left;">[ENG:A-Z][ENG:0-9].*</td>
+<td
+style="text-align: left;">在/dirC/中查找所有名称以大写字母开头并后跟一个数字（A0
+- Z9）的文件</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><strong>接受来自先前转换的文件名</strong></p>
+</div>
+<div>
+<p>此选项允许您在另一个转换（如”获取文件名”）中构造文件名，然后将其传递给此转换，可以作为输入流中的一个字段，也可以直接从其他转换的输出中读取。这使您可以使用来自任何源的文件名，包括文本文件和数据库表。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">接受来自先前转换的文件名</td>
+<td style="text-align: left;">启用从此前转换获取文件名的选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">传递先前转换的字段</td>
+<td
+style="text-align: left;">启用此选项可将进入转换的所有先前字段添加到转换输出中。这类似于连接选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从中读取文件名的转换</td>
+<td style="text-align: left;">从中读取文件名的转换的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用作文件名的输入字段</td>
+<td style="text-align: left;">指定输入流中包含文件名的字段。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容标签">内容标签</h3>
+<div>
+<p>内容标签允许您指定正在读取的文本文件的格式。以下是与此标签关联的选项列表：</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>文件类型</p>
+<p>文件中包含的文本类型。可以是CSV或固定长度。选择CSV并不要求您的数据用逗号分隔，它表示文件有一个必须定义的分隔符。根据此选择，当您在最后一个”字段”标签中按下”获取字段”按钮时，Hfxt将启动一个不同的辅助图形用户界面。</p>
+<p>分隔符</p>
+<p>用于分隔文本单行中各个字段的一个或多个字符。通常是”;“或制表符。特殊字符（例如CHAR
+ASCII HEX01）可以使用格式$[值]设置，例如$[01]或$[6F,FF,00,1F]。</p>
+<p>插入制表符</p>
+<p>点击在”分隔符”框中插入一个制表符。</p>
+<p>包围符</p>
+<p>可选地，用于成对封装字段值的字符。包围符应出现在字符串的开头和结尾。但是，如果在字符串中间使用相同的字符，则该值将被拆分为两个字段值。为防止这种情况并确保值保持完整，您可以在字符串中间将包围符加倍，这将充当转义字符，并且该值不会被拆分。例如，如果您的包围符是'，而您有一个字段值'six
+o’clock'，这将被拆分为两个字段值”six
+o”和”clock”。如果您在中间将包围符加倍，变为'six
+o''clock'，那么o’clock中的'将不会被解释为包围符，并且值”six
+o’clock”将出现在结果集中。特殊字符（例如CHAR ASCII
+HEX01）可以使用格式$[值]设置，例如$[01]或$[6F,FF,00,1F]。</p>
+<p>允许包围字段中换行？</p>
+<p>如果启用，包围字段中的换行不会导致字段值结束。如果禁用，或者如果换行出现在非包围字段中，则字段值在换行处结束，这可能会影响转换的输出。如果您使用”获取字段”按钮，并且其中一个字段由于换行而结束，则该字段是”获取字段”功能识别的最后一个字段。</p>
+<p>转义字符</p>
+<p>指定用于标识在字段值中应按原样显示的字符的一个或多个字符，这些字符可能会被解释为控制或格式字符。例如，如果您将\用作转义字符，文本'Not
+the nine o'clock news'（其中'是包围符）将被解析为Not the nine o’clock
+news，而不是拆分字段值。特殊字符（例如CHAR
+HEX01）可以使用格式$[值]设置，例如$[01]或$[6F,FF,00,1F]。</p>
+<p>在标题前添加文件名</p>
+<p>启用此选项可将文件名添加到文件中的每个字段。这在连接数据时很有帮助，因为它可以清楚地表明每个字段来自哪个文件。</p>
+<p>标题</p>
+<p>如果您的文本文件有标题行（文件的第一行），请启用此选项。这些通常确定转换中使用的列名。如果您在没有标题的文件上设置此选项，则第一行中的数据值将被解释为标题，这可能会产生意外的结果。在这种情况下，如果字段为空，它将被命名为EmptyField_n，其中n是该行中列的位置。始终检查字段集，以确保正确解释了列名和数据类型。</p>
+<p>标题行数</p>
+<p>指定文件中包含标题的行数。</p>
+<p>页脚</p>
+<p>如果您的文本文件有页脚行（文件的最后一行），请启用此选项。这些通常提供有关文件的其他数据，例如谁创建了它或创建日期。页脚通常不进行处理。</p>
+<p>页脚行数</p>
+<p>指定包含页脚的行数。</p>
+<p>行是否换行？</p>
+<p>如果您处理的数据行超过特定页面限制而换行，请启用此选项。标题和页脚永远不被视为换行。</p>
+<p>换行次数</p>
+<p>指定一个值可以换行的行数。超过此值的部分将被视为单独的数据值。</p>
+<p>分页布局（打印输出）？</p>
+<p>如果此文本文件将被打印，请启用此选项。</p>
+<p>每页行数</p>
+<p>指定每页将打印的最大行数。最后一页可能包含的行数少于此数。</p>
+<p>文档标题行数</p>
+</body>
+</html>

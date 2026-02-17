@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>userdefinedjavaexpression.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="用户定义的java表达式">用户定义的Java表达式</h1>
+<h2 id="描述">描述</h2>
+<p>此转换允许您输入Java表达式，这些表达式用于计算新值或替换字段中的值。表达式所依赖的任何自定义JAR库都需要放置在plugins/transforms/janino/lib文件夹中。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>如果您有一个Java表达式，例如：</p>
+</div>
+<div>
+<div>
+<pre><code>C=A+B</code></pre>
+</div>
+</div>
+<div>
+<p>那么您可以在对话框中直接输入表达式的右侧：</p>
+</div>
+<div>
+<div>
+<pre><code>A+B</code></pre>
+</div>
+</div>
+<div>
+<p>这些值作为其对应的Java对象暴露给表达式：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">数据类型</th>
+<th style="text-align: left;">Java类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">大数字</td>
+<td style="text-align: left;">BigDecimal</td>
+</tr>
+<tr>
+<td style="text-align: left;">二进制</td>
+<td style="text-align: left;">byte[]</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期</td>
+<td style="text-align: left;">java.util.Date</td>
+</tr>
+<tr>
+<td style="text-align: left;">整数</td>
+<td style="text-align: left;">java.lang.Long</td>
+</tr>
+<tr>
+<td style="text-align: left;">数字</td>
+<td style="text-align: left;">java.lang.Double</td>
+</tr>
+<tr>
+<td style="text-align: left;">字符串</td>
+<td style="text-align: left;">java.lang.String</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">为此转换指定一个名称。在管道中此名称必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">新字段</td>
+<td
+style="text-align: left;">数据流中的新字段，该字段包含表达式的结果。如果要覆盖现有字段，则需要在此处和”替换值”选项中定义相同的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">Java表达式</td>
+<td style="text-align: left;">要计算的Java表达式。请参阅以下示例。</td>
+</tr>
+<tr>
+<td style="text-align: left;">值类型</td>
+<td style="text-align: left;">字段的数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">新字段中字符串的最大长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td style="text-align: left;">用于表示数字的小数位数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">替换值</td>
+<td
+style="text-align: left;">当您要替换现有字段中的值时，将此设置为与”新字段”名称相同。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p><strong>将两个整数A和B相加</strong></p>
+</div>
+<div>
+<div>
+<pre><code>A+B</code></pre>
+</div>
+</div>
+<div>
+<p><strong>连接两个字符串：firstname和name，并在中间添加一个空格</strong></p>
+</div>
+<div>
+<div>
+<pre><code>firstname+&quot; &quot;+name</code></pre>
+</div>
+</div>
+<div>
+<p>或者，如果您真的很在意性能，下面这个可能会更快：</p>
+</div>
+<div>
+<div>
+<pre><code>new StringBuffer(firstname).append(&quot; &quot;).append(name).toString()</code></pre>
+</div>
+</div>
+<div>
+<p><strong>使用原生Java和API函数</strong></p>
+</div>
+<div>
+<div>
+<pre><code>System.getProperty(&quot;os.name&quot;)</code></pre>
+</div>
+</div>
+<div>
+<p><strong>业务规则（If / Then / Else）</strong></p>
+</div>
+<div>
+<div>
+<pre><code>a&lt;c?true:false</code></pre>
+</div>
+</div>
+<div>
+<p>这个可以更复杂</p>
+</div>
+<div>
+<div>
+<pre><code>a&lt;c?(a==1?1:2):3</code></pre>
+</div>
+</div>
+<div>
+<p>甚至可以使用OR、AND和其他运算符及函数</p>
+</div>
+<div>
+<p><strong>使用常量</strong></p>
+</div>
+<div>
+<p>如果使用常量，在某些表达式中可能需要定义正确的类型，否则可能会抛出错误。例如，如果使用”0”，它是”int”类型，但
+Hfxt中的”Integer”是”java.lang.Long”类型，所以会得到一个异常：</p>
+</div>
+<div>
+<p>表达式类型”int”和”java.lang.Long”不兼容</p>
+</div>
+<div>
+<p>要解决这个问题，可以使用：</p>
+</div>
+<div>
+<div>
+<pre><code>test == null? new Long(0) : test</code></pre>
+</div>
+</div>
+<div>
+<p>上面的表达式检查”test”是否为null，如果是，则用一个长整型的零替换它。否则，返回不变的”test”。</p>
+</div>
+<div>
+<p><strong>从字符串末尾截取并测试是否为null和最小长度</strong></p>
+</div>
+<div>
+<p>假设您有像这样的输入字符串”location”</p>
+</div>
+<div>
+<div>
+<pre><code>Orlando FL
+New York NY</code></pre>
+</div>
+</div>
+<div>
+<p>并且您想分离州和城市。您可以使用以下表达式：</p>
+</div>
+<div>
+<p>对于州（获取最后两个字符）：</p>
+</div>
+<div>
+<div>
+<pre><code>location != null &amp;&amp; location.length()&gt;2? location.substring(location.length()-2, location.length()) : null</code></pre>
+</div>
+</div>
+<div>
+<p>对于城市（获取开头部分，不包括最后两个字符并去除首尾空格）：</p>
+</div>
+<div>
+<div>
+<pre><code>location != null &amp;&amp; location.length()&gt;2? location.substring(0, location.length()-2).trim() : location</code></pre>
+</div>
+</div>
+<div>
+<p><strong>LIKE运算符的功能（包含字符串）</strong></p>
+</div>
+<div>
+<p>以下示例在源字符串中包含abc时返回1，否则返回2。当源字符串为null时也返回2。如果您希望返回值为Integer类型的值，请使用”new
+Long(1)“和”new Long(2)“。</p>
+</div>
+<div>
+<div>
+<pre><code>samplestr != null &amp;&amp; samplestr.indexOf(&quot;abc&quot;)&gt;-1? 1 : 2</code></pre>
+</div>
+</div>
+</div>
+<h2 id="阻止特定代码">阻止特定代码</h2>
+<div>
+<div>
+<p>作为一项简单的安全措施，您可以阻止包含特定字符串的代码执行。这可以通过在位于/plugins/transforms/janino的<code>codeExclusions.xml</code>文件中添加排除项来实现。</p>
+</div>
+<div>
+<p>示例：</p>
+</div>
+<div>
+<div>
+<pre><code>    &lt;exclusions&gt;
+        &lt;exclusion&gt;System.&lt;/exclusion&gt;
+        &lt;exclusion&gt;HfxtVfs.&lt;/exclusion&gt;
+    &lt;/exclusions&gt;</code></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

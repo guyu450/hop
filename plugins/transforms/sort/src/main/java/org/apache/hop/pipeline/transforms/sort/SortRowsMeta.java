@@ -142,7 +142,7 @@ public class SortRowsMeta extends BaseTransformMeta<SortRows, SortRowsData>
 
   @Override
   public void setDefault() {
-    directory = "${java.io.tmpdir}";
+    directory = System.getProperty("java.io.tmpdir");
     prefix = "out";
     sortSize = "1000000";
     freeMemoryLimit = null;

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mssqlnative.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="ms-sqlserver原生">MS SqlServer（原生）</h1>
+<div>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">关系型</td>
+</tr>
+<tr>
+<td style="text-align: left;">驱动程序</td>
+<td style="text-align: left;">驱动程序链接</td>
+</tr>
+<tr>
+<td style="text-align: left;">包含的版本</td>
+<td style="text-align: left;">12.8.1.jre11</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hfxt依赖项</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">文档</td>
+<td style="text-align: left;">文档链接</td>
+</tr>
+<tr>
+<td style="text-align: left;">JDBC URL</td>
+<td
+style="text-align: left;">jdbc:sqlserver://[serverName[\instanceName][:portNumber]][;property=value[;property=value]]</td>
+</tr>
+<tr>
+<td style="text-align: left;">驱动程序文件夹</td>
+<td style="text-align: left;">&lt;Hfxt安装目录&gt;/lib/jdbc</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2
+id="集成身份验证基于windows的身份验证">集成身份验证/基于Windows的身份验证</h2>
+<div>
+<div>
+<p>原生的Microsoft SQL JDBC驱动程序附带了额外的文件，可使用当前的MS
+Windows凭据进行身份验证。当你从Microsoft网站下载JDBC驱动程序并解压后，会有如下目录结构：</p>
+</div>
+<div>
+<p>sqljdbc_11.2\enu\auth\x64 â†? 64位身份验证支持文件。<br />
+sqljdbc_11.2\enu\auth\x86 â†? 32位身份验证支持文件。</p>
+</div>
+<div>
+<p><strong>复制Microsoft身份验证dll文件：</strong><br />
+<strong>源路径：</strong>
+sqljdbc_11.2\enu\auth\x64\mssql-jdbc_auth-11.2.3.x64.dll<br />
+<strong>目标路径：</strong>
+hfxt\lib\mssql-jdbc_auth-11.2.3.x64.dll<br />
+<strong>以及你的Java安装文件夹，以我的为例：</strong><br />
+C:\Program Files\Microsoft\jdk-17.0.6.10-hotspot\bin<br />
+C:\Program Files\Microsoft\jdk-17.0.6.10-hotspot\lib</p>
+</div>
+<div>
+<p><strong>复制JDBC驱动程序：</strong><br />
+<strong>源路径：</strong>
+sqljdbc_11.2\enu\mssql-jdbc-11.2.3.jre11.jar<br />
+<strong>目标路径：</strong>
+\hfxt\plugins\databases\mssqlnative\lib，替换已有的任何版本。</p>
+</div>
+<h3
+id="连接到关系型数据库和jdbc驱动程序">连接到关系型数据库和JDBC驱动程序</h3>
+<div>
+<ul>
+<li><p>确保安装了正确的JDBC驱动程序（请参阅安装部分）</p></li>
+<li><p>在”元数据”按钮上，双击”关系型数据库连接”</p></li>
+<li><p><strong>常规”选项卡：</strong>更改连接类型以连接到数据库类型</p></li>
+</ul>
+</div>
+<h3 id="连接到sql-server-sql数据库">连接到SQL Server SQL数据库</h3>
+<div>
+<ul>
+<li><p>要连接到SQL
+Server，首先安装任何必要的JDBC驱动程序（请参阅Hfxt安装文档）</p>
+<div>
+<ul>
+<li>如果你使用集成的SQL Server，请确保”选项”下的trustServerCertificate =
+true。可能还需要设置encrypt = true。</li>
+</ul>
+</div></li>
+<li><p>打开元数据，并在”关系型数据库连接”下添加一个新项目，创建到SQL
+Server的连接</p></li>
+</ul>
+</div>
+<div>
+<p><strong>对于本地SQL Server数据库（集成安全性）</strong></p>
+</div>
+<div>
+<ul>
+<li><p><strong>连接名称：</strong>给它一个名称，例如”本地SQL
+Server”（保存之前需要一个名称）</p></li>
+<li><p><strong>常规”选项卡：</strong>更改连接类型以连接到SQL
+Server等。</p>
+<div>
+<ul>
+<li><p><strong>连接类型：</strong>MS SQL Server（原生）</p></li>
+<li><p><strong>SQL Server实例名称：</strong>请参阅SQL
+Server配置管理器或查看Windows服务获取实例名称。在大多数情况下，它是”MSSQLSERVER”</p>
+<div>
+<ul>
+<li><strong>打开SQL Server配置管理器：</strong>
+C:\Windows\System32\SQLServerManager15.msc</li>
+</ul>
+</div></li>
+</ul>
+</div></li>
+</ul>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<ul>
+<li><strong>选项”选项卡：</strong></li>
+</ul>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<h3 id="通过tcpip连接到原生sql-server的故障排除">通过TCP/IP连接到原生SQL
+Server的故障排除</h3>
+<div>
+<p>https://stackoverflow.com/questions/18841744/jdbc-connection-failed-error-tcp-ip-connection-to-host-failed</p>
+</div>
+<div>
+<p><strong>打开SQL Server配置管理器并设置TCP/IP和端口1433</strong></p>
+</div>
+<div>
+<ul>
+<li><p>打开SQL Server配置管理器，然后展开”SQL Server网络配置”。</p></li>
+<li><p>点击”实例名称的协议”，然后确保右面板中的TCP/IP已启用，并双击TCP/IP。</p></li>
+<li><p>在”协议”选项卡上，注意”全部侦听”项的值。</p></li>
+<li><p>点击”IP地址”选项卡（如下所示图像）：如果”全部侦听”的值为”是”，则此SQL
+Server实例的TCP/IP端口号是”IPAll”下”TCP动态端口”项的值。如果”全部侦听”的值为”否”，则此SQL
+Server实例的TCP/IP端口号是特定IP地址的”TCP动态端口”项的值。</p></li>
+</ul>
+</div>
+<div>
+<div>
+
+</div>
+</div>
+<div>
+<ul>
+<li><p>确保TCP端口为1433，点击”确定”</p></li>
+<li><p>进行任何更改或新设置后，必须重新启动SQLSERVER服务</p></li>
+<li><p>如果你看到Windows SQL Server / SQL Server浏览器 / SQL
+Server代理服务状态为”已停止”，右键单击SQL Server / SQL
+Server浏览器，然后点击”启动”。</p></li>
+<li><p>我经常使用的一个好方法是使用telnet，例如在Windows命令提示符下运行：telnet
+127.0.0.1 1433</p>
+<div>
+<ul>
+<li>如果你得到一个空白屏幕，则表示网络连接已成功建立，这不是网络问题。如果你得到”无法打开到主机的连接”，那么这就是网络问题</li>
+</ul>
+</div></li>
+<li><p>或者，你可以使用netstat -a查找打开并正在监听的端口</p>
+<div>
+<ul>
+<li><p>netstat -ab | find "1433"</p></li>
+<li><p>netstat -abn |Select-String -Pattern sql -Context 0,1</p></li>
+</ul>
+</div></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

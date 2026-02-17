@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pipeline-unit-test.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="管道单元测试">管道单元测试</h1>
+<h2 id="描述">描述</h2>
+<p>描述了对管道的测试。在测试期间，使用替代数据集作为给定转换的输入，并将测试输出与黄金数据集进行对比。当管道执行产生的结果集与预期结果（黄金数据集）匹配时，测试成功。如果生成的结果与预期不符，测试失败。为了获得更多灵活性，在测试时可以绕过或移除管道中的特定转换。此外，单元测试可以批量执行。有关更多详细信息，请查看”管道单元测试”^。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+
+</div>
+<div>
+<p>描述了对管道的测试。在测试期间，使用替代数据集作为给定转换的输入，并将测试输出与黄金数据集进行对比。</p>
+</div>
+<div>
+<p>当管道执行产生的结果集与预期结果（黄金数据集）匹配时，测试成功。如果生成的结果与预期不符，测试失败。</p>
+</div>
+<div>
+<p>为了获得更多灵活性，在测试时可以绕过或移除管道中的特定转换。</p>
+</div>
+<div>
+<p>此外，单元测试可以批量执行。</p>
+</div>
+<div>
+<p>有关更多详细信息，请查看 管道单元测试^。</p>
+</div>
+</div>
+<h2 id="相关插件">相关插件</h2>
+<div>
+<div>
+<p>无/全部</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名称</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">此单元测试使用的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">描述</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">此单元测试使用的描述</td>
+</tr>
+<tr>
+<td style="text-align: left;">测试类型</td>
+<td style="text-align: left;">开发</td>
+<td style="text-align: left;">'开发' 或 '单元测试'</td>
+</tr>
+<tr>
+<td style="text-align: left;">要测试的管道</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">此单元测试将测试的管道</td>
+</tr>
+<tr>
+<td style="text-align: left;">测试管道文件名（可选）</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">基础测试路径（或使用
+HFXT_UNIT_TESTS_FOLDER）</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">自动选择此测试</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">用另一个数据库连接替换一个数据库连接</td>
+<td style="text-align: left;"></td>
+<td
+style="text-align: left;">要测试的管道中的数据库连接列表（原始数据库），将被此单元测试中的数据库连接（替换数据库）替换</td>
+</tr>
+<tr>
+<td style="text-align: left;">变量</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">此测试要使用的变量名称和值列表</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<div>
+<pre><code>无</code></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>rest.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="rest客户端">REST客户端</h1>
+<h2 id="描述">描述</h2>
+<p>REST客户端转换使您能够使用RESTful服务。表述性状态转移（REST）是一种关键的设计习惯用法，它采用无状态的客户端
+-
+服务器架构，其中Web服务被视为资源，并可以通过其URL进行标识。REST客户端转换可以使用预定义的REST连接，也可以直接使用完整的URL。使用REST连接时，URL（硬编码或从字段接受）将被视为相对于REST连接中定义的基础URL的路径。在转换的”标头”选项卡中指定的标头值将覆盖REST连接中定义的任何同名标头。不使用REST连接时，需要指定完整的URL。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<div>
+<p>“常规”选项卡用于输入访问资源的基本连接信息。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">此转换在管道工作区中显示的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">REST连接</td>
+<td
+style="text-align: left;">用于基础URL以及身份验证/授权标头名称和值的（可选）REST连接。</td>
+</tr>
+<tr>
+<td style="text-align: left;">URL</td>
+<td style="text-align: left;">指示资源的路径</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段接受URL</td>
+<td style="text-align: left;">表示资源的路径是从字段定义的</td>
+</tr>
+<tr>
+<td style="text-align: left;">URL字段名称</td>
+<td style="text-align: left;">指示定义资源路径的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP方法</td>
+<td style="text-align: left;">指示转换与资源的交互方式 -
+选项为GET、PUT、DELETE、POST、HEAD或OPTIONS</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段获取方法</td>
+<td style="text-align: left;">表示GET方法是从字段定义的</td>
+</tr>
+<tr>
+<td style="text-align: left;">方法字段名称</td>
+<td style="text-align: left;">指示定义GET方法的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">主体字段</td>
+<td
+style="text-align: left;">包含POST、PUT和DELETE方法的请求主体。主体字段仅接受先前的字段，不接受硬编码值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">应用类型</td>
+<td style="text-align: left;">指定资源的应用类型 - 选项为TEXT
+PLAIN、XML、JSON、OCTET STREAM、XHTML、FORM URLENCODED、ATOM XML、SVG
+XML或TEXT XML</td>
+</tr>
+<tr>
+<td style="text-align: left;">连接超时</td>
+<td style="text-align: left;">指示建立连接的超时时间（毫秒）</td>
+</tr>
+<tr>
+<td style="text-align: left;">读取超时</td>
+<td style="text-align: left;">指示等待读取数据的超时时间（毫秒）</td>
+</tr>
+<tr>
+<td style="text-align: left;">结果字段名称</td>
+<td style="text-align: left;">指定结果输出字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP状态码字段名称</td>
+<td style="text-align: left;">指定HTTP状态码字段的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">响应时间（毫秒）字段名称</td>
+<td style="text-align: left;">指定响应时间字段的名称</td>
+</tr>
+</tbody>
+</table>
+<h3 id="身份验证选项卡">身份验证选项卡</h3>
+<div>
+<p>如有必要，在”身份验证”选项卡中输入资源的身份验证详细信息。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">Hfxt允许对HTTP登录和HTTP密码使用NULL参数/变量。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">HTTP登录</td>
+<td style="text-align: left;">指示访问资源所需的用户名</td>
+</tr>
+<tr>
+<td style="text-align: left;">HTTP密码</td>
+<td style="text-align: left;">指示与提供的HTTP登录用户名关联的密码</td>
+</tr>
+<tr>
+<td style="text-align: left;">抢先式</td>
+<td
+style="text-align: left;">在服务器给出未经授权的响应之前发送身份验证凭据的选项。由于
+错误#4196，目前始终为true。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理主机</td>
+<td style="text-align: left;">指示代理主机的名称</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理端口</td>
+<td style="text-align: left;">指示代理主机的端口号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ssl选项卡">SSL选项卡</h3>
+<div>
+<p>“SSL”选项卡用于提供访问需要SSL证书身份验证的资源的身份验证详细信息。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">信任库文件</td>
+<td style="text-align: left;">指示信任库文件的位置</td>
+</tr>
+<tr>
+<td style="text-align: left;">信任库密码</td>
+<td style="text-align: left;">指示与提供的信任库文件关联的密码</td>
+</tr>
+</tbody>
+</table>
+<h3 id="标头选项卡">标头选项卡</h3>
+<div>
+<p>“标头”选项卡使您能够使用现有字段定义任何HTTP标头的内容。通过单击”获取字段”按钮填充字段列表。</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">要确定需要哪些标头，可以使用Postman并尽可能多地删除标头，以使请求仍能正常工作。在Postman中，您不需要使用值为”&lt;请求发送时计算&gt;“的标头。如果使用了”身份验证”选项卡，则无需手动添加”Authorization”标头。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段</td>
+<td
+style="text-align: left;">传入Hfxt流中包含标头信息的字段。将标头值字段名称添加到”字段”列中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">名称</td>
+<td
+style="text-align: left;">此转换的传出Hfxt字段的名称。将标头键字段名称添加到”名称”列中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参数选项卡">参数选项卡</h3>
+<div>
+<p>“参数”选项卡使您能够为POST、PUT和DELETE请求定义参数值。GET参数应直接作为URL的一部分。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">参数</td>
+<td style="text-align: left;">传入Hfxt流中包含参数信息的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">参数</td>
+<td style="text-align: left;">此转换的传出Hfxt字段的名称</td>
+</tr>
+</tbody>
+</table>
+<h3 id="矩阵参数选项卡">矩阵参数选项卡</h3>
+<div>
+<p>使用”矩阵参数”选项卡为POST、PUT、DELETE和PATCH请求定义矩阵参数值。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">参数</td>
+<td style="text-align: left;">传入Hfxt流中包含矩阵参数信息的字段</td>
+</tr>
+<tr>
+<td style="text-align: left;">参数</td>
+<td style="text-align: left;">此转换的传出Hfxt字段的名称</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

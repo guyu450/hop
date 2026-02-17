@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>javascript.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="javascript">JavaScript</h1>
+<h2 id="描述">描述</h2>
+<p>JavaScript转换提供了一个用户界面，用于构建可用于修改数据的JavaScript表达式。在脚本区域输入的代码会针对每一行输入数据执行一次。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>JavaScript转换提供了一个用户界面，用于构建可用于修改数据的JavaScript表达式。在脚本区域输入的代码会针对每一行输入数据执行一次。</p>
+</div>
+<div>
+<p>该转换允许在单个转换实例中使用多个脚本。</p>
+</div>
+<div>
+<p>Javascript转换不是输入转换，因此需要来自管道的输入流。</p>
+</div>
+<div>
+<p>尽量减少脚本编写对于保持数据集成解决方案的可维护性非常重要。尽量避免使用JavaScript。</p>
+</div>
+<div>
+
+</div>
+</div>
+<h2 id="故障排除">故障排除</h2>
+<div>
+<div>
+<ul>
+<li><p>Hfxt使用的是较旧版本的JavaScript（Rhino引擎），它支持ECMA
+5以及部分ECMA 6。有关Rhino对ES2015/ES6、ES2016和ES2017的支持，请参阅
+https://mozilla.github.io/rhino/compat/engines.html</p></li>
+<li><p>“获取变量”按钮可能并不总是有效，因此请手动输入变量。</p></li>
+<li><p>JavaScript转换在空白字符和换行符较少的情况下运行得更好，尤其是在使用GraphQL时。避免使用多行表达式或语句。</p></li>
+<li><p>确保为输出的JavaScript字段选择正确的类型。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>例如，使用JavaScript创建4个新字段：</p>
+</div>
+<div>
+<div>
+<pre><code>var myVar = incomingFieldFromHfxt;
+var myTestString = &quot;my test&quot;;
+var myDate = str2date(&quot;2020-12-31&quot;, &quot;yyyy-MM-dd&quot;);
+var myDateTime = new Date(&quot;2023-10-01T01:40:26.210&quot;);</code></pre>
+</div>
+</div>
+<div>
+<p>例如，使用JavaScript展平JSON键：</p>
+</div>
+<div>
+<div>
+<pre><code>//var input_json = {
+//    &quot;c-102&quot;: &quot;AIDS Healthcare&quot;,
+//    &quot;c-105&quot;: &quot;AIDS Healthcare Direct&quot;,
+//    &quot;c-75&quot;: &quot;Allied Physicians (ALIP)&quot;,
+//    &quot;c-59&quot;: &quot;Asheville Endocrinology&quot;};
+
+var input_json = JSON.parse(incomingJSONFromHfxt);
+var output_json = [];
+
+for (var key in input_json) {
+    var value = input_json[key];
+    output_json.push({field1: key, field2: value });
+}
+
+var flattened_json = JSON.stringify(output_json);</code></pre>
+</div>
+</div>
+</div>
+<h2 id="javascript函数面板">Javascript函数面板</h2>
+<div>
+<div>
+
+</div>
+<div>
+<p>Javascript函数面板包含脚本、常量、函数、输入字段和输出字段的树状视图，如下所述。</p>
+</div>
+<div>
+<p>双击任何脚本、常量、函数或字段，即可将其添加到脚本中。</p>
+</div>
+<div>
+<dl>
+<dt>转换脚本</dt>
+<dd>
+<p>您在该转换中创建的脚本。</p>
+</dd>
+<dt>转换常量</dt>
+<dd>
+<p>一些预定义的静态常量，用于控制数据行的处理方式。<br />
+要使用这些常量，必须在脚本开头将pipeline_Status变量设置为CONTINUE_PIPELINE，以便将变量赋值应用于正在处理的第一行。否则，对pipeline_Status变量的任何后续赋值将被忽略。<br />
+可用的常量如下：</p>
+<div>
+<ul>
+<li><p>SKIP_PIPELINE：将当前行排除在输出行集之外，并继续处理下一行。</p></li>
+<li><p>ERROR_PIPELINE：将当前行排除在输出行集之外，生成错误，并且不再处理任何剩余行。</p></li>
+<li><p>CONTINUE_PIPELINE：将当前行包含在输出行集中。</p></li>
+<li><p>ABORT_PIPELINE：将当前行排除在输出行集之外，并且不再处理任何剩余行，但不生成错误。</p></li>
+</ul>
+</div>
+</dd>
+<dt>转换函数</dt>
+<dd>
+<p>可在脚本中使用的字符串、数值、日期、逻辑、特殊和文件函数。这些包含的函数用Java实现，执行速度比JavaScript函数快。每个函数都有一个示例脚本，演示其用法。双击函数可将其添加到Javascript面板中。右键单击并选择”示例”可将示例添加到Javascript面板中。</p>
+</dd>
+<dt>输入字段</dt>
+<dd>
+<p>该转换的输入字段。</p>
+</dd>
+<dt>输出字段</dt>
+<dd>
+<p>该转换的输出字段。</p>
+</dd>
+</dl>
+</div>
+</div>
+<h2 id="javascript面板">Javascript面板</h2>
+<div>
+<div>
+<p>Javascript面板是编写代码的编辑区域。您可以通过双击要插入的节点，或使用拖放操作将对象放置到Javascript面板上，从左侧的Javascript函数面板中插入常量、函数、输入字段和输出字段。</p>
+</div>
+<div>
+<p>Javascript面板底部的位置显示光标所在的行号和位置。</p>
+</div>
+<div>
+<p>“优化级别”选择JavaScript的优化级别。取值如下：</p>
+</div>
+<div>
+<ul>
+<li><p>1：JavaScript以解释模式运行。</p></li>
+<li><p>0：不执行任何优化。</p></li>
+<li><p>1 -
+9：执行所有优化。9执行的优化最多，脚本执行速度更快，但编译速度较慢。默认值为9。</p></li>
+</ul>
+</div>
+</div>
+<h2 id="脚本类型">脚本类型</h2>
+<div>
+<div>
+
+</div>
+<div>
+<p>您可以右键单击Javascript面板中的标签，打开包含以下命令的上下文菜单：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>添加新脚本</strong> – 添加一个新的脚本标签。</p></li>
+<li><p><strong>添加副本</strong> –
+在新标签中添加现有脚本的副本。</p></li>
+<li><p><strong>设置转换脚本</strong> -
+指定为每一行传入数据执行的脚本。只能将一个标签设置为转换脚本。默认情况下，第一个标签是转换脚本。</p></li>
+<li><p><strong>设置起始脚本</strong> -
+指定在处理第一行数据之前执行的脚本。</p></li>
+<li><p><strong>设置结束脚本</strong> –
+指定在处理完最后一行数据之后执行的脚本。</p></li>
+<li><p><strong>移除脚本类型</strong> -
+指定不执行该脚本。脚本标签不会被移除。要移除脚本标签，请单击关闭按钮（红色”X”），然后选择”是”以删除脚本标签。</p></li>
+</ul>
+</div>
+<div>
+<p>脚本类型的图标显示在标签上，以表示标签上脚本的类型。要重命名脚本标签，请右键单击Javascript函数面板”转换脚本”部分中的标签名称，选择”重命名”，然后输入新名称。</p>
+</div>
+</div>
+<h2 id="字段表">字段表</h2>
+<div>
+<div>
+<p>字段表包含脚本中的变量列表，并使您能够为字段添加元数据，如描述性名称。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">字段名称</td>
+<td style="text-align: left;">指定传入字段的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">重命名为</td>
+<td style="text-align: left;">为传入字段指定一个新名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型</td>
+<td style="text-align: left;">为输出字段指定数据类型。</td>
+</tr>
+<tr>
+<td style="text-align: left;">长度</td>
+<td style="text-align: left;">指定输出字段的长度。</td>
+</tr>
+<tr>
+<td style="text-align: left;">精度</td>
+<td style="text-align: left;">指定输出字段的精度值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">替换值’字段名称’或’重命名为’</td>
+<td
+style="text-align: left;">指定是用另一个值替换所选字段的值还是重命名字段。取值为Y（是）和N（否）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">获取变量</td>
+<td
+style="text-align: left;">从脚本中检索Javascript变量列表。由于”获取变量”按钮可能并不总是有效，您可以手动添加变量。</td>
+</tr>
+<tr>
+<td style="text-align: left;">测试脚本</td>
+<td
+style="text-align: left;">测试脚本的语法，并显示”生成行”对话框，其中包含一组用于测试的行。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="javascript内部api对象">Javascript内部API对象</h2>
+<div>
+<div>
+<p>您可以使用以下内部API对象（有关参考，请参阅源代码中的类）：</p>
+</div>
+<div>
+<ul>
+<li><p><strong><em>管道名称</em></strong>：一个包含管道名称的字符串</p></li>
+<li><p><strong><em>转换</em></strong>：此转换的实际转换实例（org.apache.hfxt.pipeline.transforms.javascript.ScriptValues）</p></li>
+<li><p><strong>行元数据</strong>：org.apache.hfxt.core.row.IRowMeta的实际实例</p></li>
+<li><p><strong>行</strong>：数据对象数组Object[]的实际实例</p></li>
+</ul>
+</div>
+</div>
+<h2 id="示例-1">示例</h2>
+<div>
+<h3 id="检查行中字段的存在性">检查行中字段的存在性：</h3>
+<div>
+<div>
+<pre><code>var idx = getInputRowMeta().indexOfValue(&quot;lookup&quot;);
+if ( idx &lt; 0 )
+{
+   var lookupValue = 0;
+}
+else
+{
+   var lookupValue = row[idx];
+}</code></pre>
+</div>
+</div>
+<h3 id="在行中添加新字段">在行中添加新字段</h3>
+<div>
+<p>为保持行结构的一致性，必须按相同顺序向行中添加字段。</p>
+</div>
+<div>
+<p>要添加字段，请在Javascript面板中将其定义为var，并在字段表中将其作为字段添加。</p>
+</div>
+<h3 id="数值">数值</h3>
+<div>
+<p>在JavaScript中分配的大多数值默认情况下都是浮点值，即使您认为自己分配的是整数值。如果在对已知为整数的值使用
+== 或switch/case时遇到问题，请使用以下结构：</p>
+</div>
+<div>
+<div>
+<pre><code>switch(parseInt(valuename))
+{
+case 1:
+case 2:
+case 3:
+ strvalueswitch = &quot;one, two, three&quot;;
+ break;
+case 4:
+ strvalueswitch = &quot;four&quot;;
+ break;
+default:
+ strvalueswitch = &quot;five&quot;;
+}</code></pre>
+</div>
+</div>
+<h3 id="过滤行">过滤行</h3>
+<div>
+<p>要过滤行（例如从输出中删除行），请按如下方式设置pipeline_Status变量：</p>
+</div>
+<div>
+<div>
+<pre><code>pipeline_Status = CONTINUE_PIPELINE
+if (/* your condition here */) pipeline_Status = SKIP_PIPELINE</code></pre>
+</div>
+</div>
+<div>
+<p>所有符合指定条件的行都将从输出中删除。</p>
+</div>
+<h3 id="使用包含空格的字段名称">使用包含空格的字段名称</h3>
+<div>
+<p>Javascript不允许您创建变量名中包含空格的变量。但是，您 <em>可以</em>
+使用包含空格的字段名称。</p>
+</div>
+<div>
+<p>例如，要将字段”field name with
+spaces”中的所有空格替换为下划线，请使用语法
+<code>this["field name with spaces"]</code>。</p>
+</div>
+</div>
+</body>
+</html>

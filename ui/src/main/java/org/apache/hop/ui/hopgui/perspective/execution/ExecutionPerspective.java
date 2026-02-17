@@ -67,7 +67,6 @@ import org.apache.hop.ui.hopgui.file.empty.EmptyHopFileTypeHandler;
 import org.apache.hop.ui.hopgui.perspective.HopPerspectivePlugin;
 import org.apache.hop.ui.hopgui.perspective.IHopPerspective;
 import org.apache.hop.ui.hopgui.perspective.TabClosable;
-import org.apache.hop.ui.hopgui.perspective.TabCloseHandler;
 import org.apache.hop.ui.hopgui.perspective.TabItemHandler;
 import org.apache.hop.workflow.WorkflowMeta;
 import org.eclipse.swt.SWT;
@@ -283,7 +282,7 @@ public class ExecutionPerspective implements IHopPerspective, TabClosable {
     int height = toolBar.computeSize(SWT.DEFAULT, SWT.DEFAULT).y;
     tabFolder.setTabHeight(Math.max(height, tabFolder.getTabHeight()));
 
-    new TabCloseHandler(this);
+    //    new TabCloseHandler(this);
 
     // Support reorder tab item
     //

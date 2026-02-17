@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>getfilesrowcount.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="获取文件行数">获取文件行数</h1>
+<h2 id="描述">描述</h2>
+<p>“获取文件行数”转换操作可统计一个或一组文件中的行数。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="文件选项卡">文件选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td style="text-align: left;">转换的名称。在管道中必须唯一。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从字段获取文件名</td>
+<td style="text-align: left;">是否从指定字段获取文件名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">字段中的文件名</td>
+<td style="text-align: left;">指定从中读取文件名的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件或目录</td>
+<td style="text-align: left;">指定要统计行数的文件或文件路径。</td>
+</tr>
+<tr>
+<td style="text-align: left;">添加</td>
+<td
+style="text-align: left;">点击可将指定的文件、目录和正则表达式添加到”选定文件”列表中。</td>
+</tr>
+<tr>
+<td style="text-align: left;">浏览</td>
+<td style="text-align: left;">点击可选择一个文件或目录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">正则表达式</td>
+<td
+style="text-align: left;">如果要加载多个文件，输入匹配所需文件的表达式。</td>
+</tr>
+<tr>
+<td
+style="text-align: left;">!GetFilesRowsDialog.ExcludeFileMask.Label!</td>
+<td
+style="text-align: left;">如果要排除目录中的文件，输入匹配要排除文件的表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">选定文件</td>
+<td
+style="text-align: left;">列出为此转换选定使用的文件，包括每个文件的位置以及用于匹配或排除文件的正则表达式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">删除</td>
+<td style="text-align: left;">点击可从列表中删除选定的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">编辑</td>
+<td style="text-align: left;">点击可修改列表中选定的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">显示文件名</td>
+<td style="text-align: left;">点击可查看将使用的所有文件。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="内容选项卡">内容选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">行数计数字段名</td>
+<td style="text-align: left;">存储行数的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">行分隔符类型</td>
+<td
+style="text-align: left;">选择定义行尾的字符类型，即回车符、换行符、制表符或自定义字符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">行分隔符</td>
+<td
+style="text-align: left;">如果使用自定义字符，指定定义行尾的字符。</td>
+</tr>
+<tr>
+<td style="text-align: left;">执行智能计数</td>
+<td
+style="text-align: left;">如果未选中，计数返回文件中的分隔符数量。如果选中，将额外进行一次遍历以尝试返回实际行数。在行分隔符与列值分隔符相同或文件包含空行的情况下可使用此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在输出中包含文件计数？</td>
+<td style="text-align: left;">是否在输出的字段中包含文件计数。</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件计数字段名</td>
+<td style="text-align: left;">存储输出文件计数的字段名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果中</td>
+<td
+style="text-align: left;">是否将文件名作为输出中的一个字段包含在内。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

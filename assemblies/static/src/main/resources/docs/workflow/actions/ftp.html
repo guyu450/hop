@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ftp.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="通过ftp获取文件">通过FTP获取文件</h1>
+<h2 id="描述">描述</h2>
+<p>“通过FTP获取文件”操作可从FTP服务器检索一个或多个文件。此工作流操作不会”遍历”系统。例如，它不会访问远程目录并进入其他目录以查找与通配符匹配的文件。此工作流仅从一个目录检索文件。</p>
+<h2 id="描述-1">描述</h2>
+<div>
+<div>
+<p><code>通过FTP获取文件</code>操作可从FTP服务器检索一个或多个文件。</p>
+</div>
+<div>
+<p>此工作流操作不会”遍历”系统。</p>
+</div>
+<div>
+<p>例如，它不会访问远程目录并进入其他目录以查找与通配符匹配的文件。</p>
+</div>
+<div>
+<p>此工作流仅从一个目录检索文件。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规选项卡">常规选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">操作名称</td>
+<td style="text-align: left;">工作流操作的名称。</td>
+</tr>
+<tr>
+<td style="text-align: left;">服务器</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">FTP服务器名称/IP地址</td>
+<td style="text-align: left;">服务器名称或IP地址。</td>
+</tr>
+<tr>
+<td style="text-align: left;">服务器端口</td>
+<td style="text-align: left;">FTP服务器的端口号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">与FTP服务器账户关联的用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">与FTP服务器账户关联的密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理主机</td>
+<td style="text-align: left;">代理服务器主机名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理端口</td>
+<td style="text-align: left;">代理服务器端口号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理用户名</td>
+<td style="text-align: left;">代理服务器账户用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">代理密码</td>
+<td style="text-align: left;">代理服务器账户密码。</td>
+</tr>
+<tr>
+<td style="text-align: left;">高级</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">二进制模式</td>
+<td
+style="text-align: left;">如果文件必须以二进制模式传输，请启用此选项。</td>
+</tr>
+<tr>
+<td style="text-align: left;">超时</td>
+<td style="text-align: left;">FTP服务器超时时间（以秒为单位）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">使用主动FTP连接</td>
+<td
+style="text-align: left;">如果使用主动模式连接到FTP服务器，请启用此选项；您必须设置防火墙以接受对FTP客户端将打开的端口的连接。默认模式为被动模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">控制编码</td>
+<td
+style="text-align: left;">在检索包含特殊字符的文件名时，编码很重要。对于西欧和美国，ISO-8859-1通常就足够了。请选择对您的服务器有效的编码。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件选项卡">文件选项卡</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">远程</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">远程目录</td>
+<td style="text-align: left;">FTP服务器上从中获取文件的远程目录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">通配符（正则表达式）</td>
+<td
+style="text-align: left;">当您要选择多个文件时使用的正则表达式。例如：.txt$
+：获取所有文本文件 A.ENG:0-9.txt
+：以A开头、以数字结尾且扩展名为.txt的文件</td>
+</tr>
+<tr>
+<td style="text-align: left;">检索后删除文件</td>
+<td
+style="text-align: left;">在所有选定文件成功传输后，删除FTP服务器上的文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">检索后移动文件</td>
+<td
+style="text-align: left;">在所有选定文件成功传输后，将FTP服务器上的文件移动到下面指定的文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">移动到文件夹</td>
+<td style="text-align: left;">将文件移动到服务器上指定的文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">创建文件夹</td>
+<td style="text-align: left;">创建将包含文件的文件夹。</td>
+</tr>
+<tr>
+<td style="text-align: left;">本地</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">目标目录</td>
+<td style="text-align: left;">您要将检索到的文件放置的目录。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含日期</td>
+<td style="text-align: left;">将系统日期添加到文件名（_20101231）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在文件名中包含时间</td>
+<td style="text-align: left;">将系统时间添加到文件名（_235959）。</td>
+</tr>
+<tr>
+<td style="text-align: left;">指定日期时间格式</td>
+<td
+style="text-align: left;">启用此选项可提供您自己的日期/时间格式；默认格式为yyyyMMdd'_'HHmmss</td>
+</tr>
+<tr>
+<td style="text-align: left;">日期时间格式</td>
+<td style="text-align: left;">选择日期时间格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;">在扩展名前添加日期</td>
+<td style="text-align: left;">在文件名的扩展名前添加日期。</td>
+</tr>
+<tr>
+<td style="text-align: left;">不覆盖文件</td>
+<td
+style="text-align: left;">如果目标目录中已存在同名文件，启用此选项可跳过、重命名或失败。</td>
+</tr>
+<tr>
+<td style="text-align: left;">如果文件存在</td>
+<td
+style="text-align: left;">如果目标目录中已存在同名文件，要采取的操作。</td>
+</tr>
+<tr>
+<td style="text-align: left;">将文件名添加到结果</td>
+<td
+style="text-align: left;">启用此选项可将读取的文件名添加到此工作流的结果中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="高级选项卡">高级选项卡</h3>
+<table style="width:67%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>成功条件</td>
+<td><div>
+<div>
+<p>设置成功条件。可用选项如下：</p>
+</div>
+<div>
+<ul>
+<li><p>一切正常（默认）</p></li>
+<li><p>至少获取x个文件</p></li>
+<li><p>错误数量少于</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>限制文件数量</td>
+<td>设置与成功条件相关的文件数量。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="socks代理">Socks代理</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">主机</td>
+<td style="text-align: left;">Socks代理主机名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">端口</td>
+<td style="text-align: left;">Socks代理端口号。</td>
+</tr>
+<tr>
+<td style="text-align: left;">用户名</td>
+<td style="text-align: left;">与Socks代理账户关联的用户名。</td>
+</tr>
+<tr>
+<td style="text-align: left;">密码</td>
+<td style="text-align: left;">与Socks代理账户关联的密码。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

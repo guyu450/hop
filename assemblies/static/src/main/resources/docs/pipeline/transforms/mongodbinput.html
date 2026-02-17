@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mongodbinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="mongodb输入">MongoDB输入</h1>
+<h2 id="描述">描述</h2>
+<p>MongoDB输入转换功能使您能够从MongoDB中的集合中检索文档或记录。有关MongoDB的更多信息，请参阅MongoDB文档。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<div>
+<p>转换名称：在管道中指定MongoDB输入转换的唯一名称。预览按钮：显示此转换生成的行。输入您要预览的最大记录数，然后单击”确定”。预览数据将显示在”检查预览数据”窗口中。</p>
+</div>
+<h3 id="输入选项标签">输入选项标签</h3>
+<div>
+<p>“输入选项”标签使您能够指定要从中检索信息的连接和集合。</p>
+</div>
+<div>
+<p>在”输入选项”字段中输入以下信息：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">MongoDB连接</td>
+<td style="text-align: left;">用于此MongoDB输入转换的 MongoDB连接。</td>
+</tr>
+<tr>
+<td style="text-align: left;">集合</td>
+<td
+style="text-align: left;">要从中检索数据的集合名称。单击”获取集合”，用数据库中的集合列表填充下拉菜单。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="查询标签">查询标签</h3>
+<div>
+<p>“查询”标签使您能够优化读取请求。此标签在两种不同的查询模式下运行：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>查询表达式</strong> 模式（默认）</p></li>
+<li><p><strong>聚合管道规范</strong> 模式。</p></li>
+</ul>
+</div>
+<div>
+<p><strong>查询为聚合管道</strong>
+选项可在这两种模式之间切换。查询表达式使用MongoDB类似JSON的查询语言和查询运算符来执行
+查询操作。<strong>聚合管道规范</strong> 字段使用MongoDB的 聚合框架
+来转换和组合集合中的文档。聚合管道将多个 管道表达式
+连接在一起，前一个表达式的输出成为下一个表达式的输入。</p>
+</div>
+<div>
+<p>在”查询”字段中输入以下信息：</p>
+</div>
+<p>字段/选项</p>
+</div>
+<p>定义</p>
+<p>查询表达式（JSON）</p>
+<p>在此字段中输入查询表达式以限制输出。</p>
+<p>聚合管道规范（JSON）</p>
+<p>选择 <strong>查询为聚合管道</strong> 选项以显示
+<strong>聚合管道规范（JSON）</strong>
+字段。然后输入管道表达式以执行聚合或选择操作。方法名称（包括您在”输入选项”标签中选择的数据库的集合名称）将显示在此字段标签之后。</p>
+<p>查询为聚合管道</p>
+<p>选择此选项以使用聚合管道框架。</p>
+<p>为每行执行</p>
+<p>选择此选项以对每行数据执行查询。</p>
+<p>字段表达式（JSON）</p>
+<p>输入一个参数以控制查询的投影（要返回的字段）。如果为空，则返回所有字段。此字段仅适用于查询表达式。</p>
+<h3 id="字段标签">字段标签</h3>
+<div>
+<p>使用”字段”标签为导出字段定义属性。“字段”标签在两种不同的模式下运行：</p>
+</div>
+<div>
+<ol type="1">
+<li><p>将所有字段包含在单个JSON字段中</p></li>
+<li><p>在输出中包含选定的字段。</p></li>
+</ol>
+</div>
+<div>
+<p>如果将输出存储在单个JSON字段中，可以使用JSON输入转换或用户定义的Java类转换来解析此JSON。</p>
+</div>
+<div>
+<p><strong>注意：</strong>
+当选择”输出单个JSON字段”时，“字段”标签中的所有字段（除了”JSON输出字段名称”）均处于非活动状态。当未选择”输出单个JSON字段”时，“JSON输出字段名称”处于非活动状态。</p>
+</div>
+<div>
+<p>常规选项：</p>
+</div>
+<div>
+<ul>
+<li><p><strong>获取字段按钮</strong>：单击它以生成一组示例文档。您可以编辑示例中每个字段的字段名称、路径和数据类型列表。</p></li>
+<li><p><strong>输出单个JSON字段</strong>：指定查询结果为具有字符串数据类型（默认）的单个JSON字段。</p></li>
+<li><p><strong>JSON输出字段名称</strong>：指定包含服务器JSON输出的字段名称。</p></li>
+</ul>
+</div>
+<div>
+<p>如果要输出不同的字段，请在表中输入以下信息：</p>
+</div>
+<p>选项</p>
+<p>定义</p>
+<p>#</p>
+<p>此条目在列表中的顺序。</p>
+<p>名称</p>
+<p>基于”路径”字段中的值的字段名称。此处显示的名称将管道中显示的字段名称与MongoDB数据库中显示的字段进行映射。您可以编辑该名称。</p>
+<p>路径</p>
+<div>
+<div>
+<p>指示MongoDB中字段的JSON路径。</p>
+</div>
+<div>
+<p>如果显示的路径是一个数组，您可以通过在数组的括号部分传递键值来指定数组的特定元素。</p>
+</div>
+<div>
+<p>例如：</p>
+</div>
+<div>
+<ul>
+<li><p><code>$.emails[0]</code>
+表示您希望结果显示数组中的第一个值。</p></li>
+<li><p>要显示所有数组值，请使用星号作为键，如下所示
+<code>$.email[*]</code>。</p></li>
+<li><p>如果数组包含记录，而不仅仅是字符串，您可以指定要显示的记录，如下所示：
+<code>$.emails[].sender</code>。</p></li>
+</ul>
+</div>
+</div>
+<p>类型</p>
+<p>指示数据类型。</p>
+<p>索引值</p>
+<p>为字符串字段指定用逗号分隔的合法值列表。当您在此字段中指定值时，Hfxt索引数据类型将应用于数据。如果未指定值，则应用字符串数据类型。通常，只有在使用Weka元数据处理标称字段时，才需要修改此字段。</p>
+<p>示例：数组最小：最大索引</p>
+<p>指示示例文档中索引的最小值和最大值。</p>
+<p>示例：出现次数/文档数</p>
+<p>指示字段出现的频率和处理的文档数。</p>
+<p>示例：不同类型</p>
+<p>指示在示例文档中，相同字段是否由不同的数据类型填充。当对多个文档进行采样且相同字段包含不同的数据类型时，“示例：不同类型”字段将填充为”Y”，“类型”字段将显示字符串数据类型。此字段的Hfxt类型将设置为字符串数据类型，以处理不同的输出值类型。</p>
+<h2 id="示例">示例</h2>
+<div>
+<div>
+<p>以下部分包含查询表达式和聚合管道的示例。</p>
+</div>
+<h3 id="查询表达式">查询表达式</h3>
+<div>
+<p>MongoDB允许您使用特定字段和值在集合中选择和过滤文档。MongoDB扩展JSON
+文档详细介绍了如何使用查询。 Hfxt仅支持此页面上讨论的功能。</p>
+</div>
+<div>
+<p>下表显示了一些可用于从MongoDB请求数据的查询语法和结构示例：</p>
+</div>
+<p>查询表达式</p>
+</div>
+<p>描述</p>
+<p><code>{ name : "MongoDB" }</code></p>
+<p>查询所有”name”字段值等于”MongoDB”的记录。</p>
+<p><code>{ name : { '$regex' : "m.*", '$options' : "i" } }</code></p>
+<p>使用正则表达式查找以”m”开头的”name”字段，不区分大小写。</p>
+<p><code>{ name : { '$gt' : "M" } }</code></p>
+<p>搜索所有大于”M”的字符串。</p>
+<p><code>{ name : { '$lte' : "T" } }</code></p>
+<p>搜索所有小于或等于”T”的字符串。</p>
+<p><code>{ name : { '$in' : [ "MongoDB", "MySQL" ] } }</code></p>
+<p>查找所有名称为”MongoDB”或”MySQL”的记录（引用）。</p>
+<p><code>{ name : { '$nin' : [ "MongoDB", "MySQL" ] } }</code></p>
+<p>查找所有名称既不是”MongoDB”也不是”MySQL”的记录，或者该字段未设置的记录。</p>
+</body>
+</html>

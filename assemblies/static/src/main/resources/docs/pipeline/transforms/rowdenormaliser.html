@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>rowdenormaliser.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="行反规范化器">行反规范化器</h1>
+<h2 id="描述">描述</h2>
+<p>反规范化器转换允许您通过查找键值对来对数据进行反规范化，并可选择在过程中转换数据类型。
+注意：请务必查看《Beam入门》文档中关于此转换的说明。</p>
+<h2 id="选项">选项</h2>
+<div>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">转换名称</td>
+<td
+style="text-align: left;">转换的名称。此名称在单个管道中必须是唯一的。</td>
+</tr>
+<tr>
+<td style="text-align: left;">键字段</td>
+<td style="text-align: left;">定义输出行键的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">分组字段</td>
+<td style="text-align: left;">在此处指定构成分组的字段。</td>
+</tr>
+<tr>
+<td style="text-align: left;">目标字段</td>
+<td
+style="text-align: left;">通过为键字段指定字符串值（见上文）来选择要反规范化的字段。提供了转换数据类型的选项。字符串作为键值对最为常见，因此您通常必须转换为整数、数字或日期。如果出现键值对冲突（为指定的组指定的键不唯一），请指定要使用的聚合方法。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="元数据注入支持">元数据注入支持</h2>
+<div>
+<div>
+<p>您可以将支持元数据注入的字段与ETL元数据注入转换一起使用，以便在运行时将元数据传递到管道中。所有字段都可以注入，用于聚合字段的值如下</p>
+</div>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">键</td>
+<td style="text-align: left;">值</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_NONE</td>
+<td style="text-align: left;">不进行聚合</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_SUM</td>
+<td style="text-align: left;">对所有值求和</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_AVERAGE</td>
+<td style="text-align: left;">计算平均值</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_MIN</td>
+<td style="text-align: left;">取组中的最小值</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_MAX</td>
+<td style="text-align: left;">取组中的最大值</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_COUNT_ALL</td>
+<td style="text-align: left;">计算行数</td>
+</tr>
+<tr>
+<td style="text-align: left;">TYPE_AGGR_CONCAT_COMMA</td>
+<td style="text-align: left;">聚合用逗号分隔的值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="示例">示例</h2>
+<div>
+<h3 id="输入数据">输入数据</h3>
+<div>
+<p>输入数据必须按分组键排序（在此示例中为<strong>记录ID</strong>），如有需要，请使用
+排序行 转换：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">记录ID</th>
+<th style="text-align: left;">键</th>
+<th style="text-align: left;">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">345-12-0000</td>
+<td style="text-align: left;">名字</td>
+<td style="text-align: left;">米切尔</td>
+</tr>
+<tr>
+<td style="text-align: left;">345-12-0000</td>
+<td style="text-align: left;">姓氏</td>
+<td style="text-align: left;">鲁诺尔夫斯多蒂尔</td>
+</tr>
+<tr>
+<td style="text-align: left;">345-12-0000</td>
+<td style="text-align: left;">城市</td>
+<td style="text-align: left;">杰里赛德</td>
+</tr>
+<tr>
+<td style="text-align: left;">976-67-7113</td>
+<td style="text-align: left;">名字</td>
+<td style="text-align: left;">埃尔登</td>
+</tr>
+<tr>
+<td style="text-align: left;">976-67-7113</td>
+<td style="text-align: left;">姓氏</td>
+<td style="text-align: left;">韦尔奇</td>
+</tr>
+<tr>
+<td style="text-align: left;">976-67-7113</td>
+<td style="text-align: left;">城市</td>
+<td style="text-align: left;">贾马尔湖</td>
+</tr>
+<tr>
+<td style="text-align: left;">824-21-0000</td>
+<td style="text-align: left;">名字</td>
+<td style="text-align: left;">罗里</td>
+</tr>
+<tr>
+<td style="text-align: left;">824-21-0000</td>
+<td style="text-align: left;">姓氏</td>
+<td style="text-align: left;">莱德纳</td>
+</tr>
+<tr>
+<td style="text-align: left;">824-21-0000</td>
+<td style="text-align: left;">城市</td>
+<td style="text-align: left;">斯科蒂维尤</td>
+</tr>
+</tbody>
+</table>
+<h3 id="反规范化数据">反规范化数据</h3>
+<div>
+<p>设置 <strong>键字段</strong> = “键”，并在
+<strong>构成分组的字段</strong> 中添加
+<strong>记录ID</strong>。按如下方式编制 <strong>目标字段</strong>
+表：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">目标字段名</th>
+<th style="text-align: left;">值字段名</th>
+<th style="text-align: left;">键值</th>
+<th style="text-align: left;">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">名字</td>
+<td style="text-align: left;">值</td>
+<td style="text-align: left;">名字</td>
+<td style="text-align: left;">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left;">姓氏</td>
+<td style="text-align: left;">值</td>
+<td style="text-align: left;">姓氏</td>
+<td style="text-align: left;">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left;">城市</td>
+<td style="text-align: left;">值</td>
+<td style="text-align: left;">城市</td>
+<td style="text-align: left;">字符串</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p>结果如下：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">记录ID</th>
+<th style="text-align: left;">名字</th>
+<th style="text-align: left;">姓氏</th>
+<th style="text-align: left;">城市</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">345-12-0000</td>
+<td style="text-align: left;">米切尔</td>
+<td style="text-align: left;">鲁诺尔夫斯多蒂尔</td>
+<td style="text-align: left;">杰里赛德</td>
+</tr>
+<tr>
+<td style="text-align: left;">976-67-7113</td>
+<td style="text-align: left;">埃尔登</td>
+<td style="text-align: left;">韦尔奇</td>
+<td style="text-align: left;">贾马尔湖</td>
+</tr>
+<tr>
+<td style="text-align: left;">824-21-0000</td>
+<td style="text-align: left;">罗里</td>
+<td style="text-align: left;">莱德纳</td>
+<td style="text-align: left;">斯科蒂维尤</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

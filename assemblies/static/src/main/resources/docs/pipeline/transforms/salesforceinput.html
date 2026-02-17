@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>salesforceinput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="salesforce输入">Salesforce输入</h1>
+<h2 id="描述">描述</h2>
+<p>Salesforce输入转换使用Salesforce
+Web服务直接从Salesforce读取数据。你还可以使用以下转换以各种方式修改你的Salesforce数据库：</p>
+<h2 id="常规">常规</h2>
+<div>
+<div>
+<p>在转换名称字段中输入以下信息：</p>
+</div>
+<div>
+<ul>
+<li>转换名称：指定画布上Salesforce输入转换的唯一名称。你可以自定义名称，也可以保留默认名称。</li>
+</ul>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">如果你的组织启用了”我的域名”，当你尝试使用默认URL时，在Salesforce登录历史记录中可能会看到”受限域名”，如
+此处 所述。有关选项，请参阅下文。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="连接">连接</h3>
+<div>
+<p>在以下转换选项中输入连接信息：</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 63%" />
+</colgroup>
+<tbody>
+<tr>
+<td>选项</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>Salesforce Web服务URL</td>
+<td><div>
+<div>
+<p>指定Salesforce Web服务的URL。<br />
+</p>
+</div>
+<div>
+<p>默认值： https: //login.salesforce.com/services/Soap/u/50.0</p>
+</div>
+<div>
+<p>如果你的公司在Salesforce上
+使用”我的域名”，可能需要更新此URL。如果是这
+样，请向Salesforce管理员询问URL。通常格式为 https://NAME.my.sa
+lesforce.com/services/Soap/u/50.0。你也可以
+在此处使用沙盒的URL来访问沙盒。强烈建议使用 变量 来填充这些值。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>指定用于向Salesforce进行身份验证的用户名</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>指定用于向Salesforce进 行身份验证的密码。输入你的密码，后跟安全令
+牌。例如，如果你的密码是PASSWORD，安全令牌
+是TOKEN，你应在此字段中输入PASSWORDTOKEN。</td>
+</tr>
+<tr>
+<td>测试连接</td>
+<td>点击以验证是否可以连接到你指定的Salesforce Web服务URL。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="设置">设置</h2>
+<div>
+<div>
+<p>在此面板中，你可以设置要查询的模块以及查询条件。</p>
+</div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指定查询</td>
+<td>选中此复选框，以便根据你自己的SOQL语句手动执行查询。</td>
+</tr>
+<tr>
+<td>模块</td>
+<td><div>
+<div>
+<p>选择要从中检索数据的模块（表）。<br />
+</p>
+</div>
+<div>
+<h2 id="section">– ————–</h2>
+<pre><code> 使用&quot;测试连接</code></pre>
+<p>“按钮成功向Salesforce进行身份验证后，此列表将填充内容。 – ————–
+——————————————————–</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>查询条件</td>
+<td><div>
+<div>
+<p>输入要应用的 任何查询过滤器。允许使用变量。例如，'fieldname=myvalue
+AND fieldname2=myvalue2'。<br />
+</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: left;">你的条件语句中无需包含WHERE。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="内容标签页">内容标签页</h2>
+<div>
+<div>
+<p>内容标签页允许你在结果集中选择性地包含其他描述性字段。</p>
+</div>
+<h3 id="高级">高级</h3>
+<div>
+<p>使用这些选项进一步细化在”设置”标签页中指定的查询返回的数据。例如，你可能只想查询指定日期范围内的已删除记录。“高级”面板包含以下字段：</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>检索</p>
+<p>选择要检索的记录，以进一步定义你的数据集。你可以选择”全部”、“已更新”或”已删除”。</p>
+<p>查询所有记录</p>
+<p>选中此复选框以查询要检索的所有记录。清除此复选框以使用（以下）日期字段定义要查询的记录范围。</p>
+<p>开始日期</p>
+<p>指定在日期范围内检索记录的开始日期。格式为'yyyy-MM-dd HH:mm:ss'。</p>
+<p>结束日期</p>
+<p>指定在日期范围内检索记录的结束日期。格式为'yyyy-MM-dd HH:mm:ss'。</p>
+<h3 id="其他字段">其他字段</h3>
+<div>
+<p>此面板包含以下字段：</p>
+</div>
+<p>选项</p>
+<p>描述</p>
+<p>在输出中包含URL？&amp; URL字段名称</p>
+<p>选中此复选框，然后输入用于检索数据的URL。</p>
+<p>在输出中包含模块？&amp; 模块字段名称</p>
+<p>选中此复选框，然后输入从中检索数据的模块名称。</p>
+<p>在输出中包含SQL？&amp; SQL字段名称</p>
+<p>选中此复选框，然后输入用于生成结果集的SQL。</p>
+<p>在输出中包含时间戳？&amp; 时间戳字段名称</p>
+<p>选中此复选框，然后输入检索记录的时间戳。</p>
+<p>在输出中包含行号？&amp; 行号字段名称</p>
+<p>选中此复选框，然后输入检索到的每条记录的行号。</p>
+<p>在输出中包含删除日期？&amp; 删除日期字段名称</p>
+<div>
+<div>
+<p>选中此复选框，然后输入记录被删除的日期。<br />
+</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">仅当”高级”&gt;“检索”选项设置为”已删除”时，这组字段才启用。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3 id="其他字段-1">其他字段</h3>
+<div>
+<p>在内容标签页上为其余字段输入信息。</p>
+</div>
+<p>选项</p>
+<p>描述</p>
+<p>超时</p>
+<p>指定转换超时前的超时时间间隔（以毫秒为单位）。</p>
+<p>使用压缩</p>
+<p>选择在Hfxt和Salesforce之间连接时压缩（.gzip）数据。</p>
+<p>限制</p>
+<div>
+<div>
+<p>指定要检索的最大记录数。<br />
+</p>
+</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td
+style="text-align: left;">当你将限制设置为'0'时，检索的记录数量没有限制。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="字段标签页">字段标签页</h2>
+<div>
+<div>
+<p>字段标签页显示从”设置”标签页中选择的Salesforce模块读取的字段。在预览返回的行之前，你需要转到字段标签页并按下”获取字段”按钮，以填充返回的字段。</p>
+</div>
+<div>
+<p>字段标签页中显示的属性如下：</p>
+</div>
+<p>选项</p>
+</div>
+</body>
+</html>

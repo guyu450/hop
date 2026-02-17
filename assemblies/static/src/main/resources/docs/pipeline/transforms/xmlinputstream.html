@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>xmlinputstream.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="xml输入流stax">XML输入流（StAX）</h1>
+<h2 id="描述">描述</h2>
+<p>XML输入流（StAX）转换使用XML流API（StAX）解析器从XML文件读取数据。</p>
+<h2 id="用法">用法</h2>
+<div>
+<div>
+<p>此转换对于快速处理大型复杂数据结构最为适用。</p>
+</div>
+<div>
+<p>与使用内存处理且可能需要清除文件部分内容的 从XML获取数据
+转换不同，XML输入流（StAX）转换将处理逻辑转移到管道中。</p>
+</div>
+<div>
+<p>该转换本身提供原始XML数据流以及额外的处理信息。</p>
+</div>
+<div>
+<p>当您在使用其他转换存在限制，或者在以下情况下需要解析XML时，建议使用此流转换：</p>
+</div>
+<div>
+<ul>
+<li><p>您需要快速加载数据，且数据加载与内存无关，无论文件大小如何。</p></li>
+<li><p>您需要以不同方式灵活读取XML文件的各个部分，并且不想重复解析文件。</p></li>
+</ul>
+</div>
+<div>
+<p>由于某些XML文件的处理逻辑可能很复杂，因此在使用此转换时，您应该对现有的Hfxt转换有充分的了解。</p>
+</div>
+</div>
+<h2 id="选项">选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>文件名</td>
+<td>输入XML文件的文件 名。通过输入路径或点击”浏览”指定
+文件名。如果您连接到XML输入流转 换之前的一个转换，“浏览”按钮将隐
+藏，文本框将变为一个下拉菜单，其 中填充有前一个转换的字段。从下拉
+菜单中选择一个值作为XML文件的路 径。您可以使用内部变量指定路径。</td>
+</tr>
+<tr>
+<td>源来自前一个转换</td>
+<td>接受 来自前一个转换中某个字段的数据。</td>
+</tr>
+<tr>
+<td>源字段名称</td>
+<td>从前一个 转换中选择一个字段用作XML数据。</td>
+</tr>
+<tr>
+<td>是否将文件名添加到结果中？</td>
+<td>通过 将XML输入文件的文件名作为每个结 果行上的值传递，将处理后的XML文
+件名添加到此管道的结果中。然后， 您可以在后续转换中使用它，在这些
+转换中您希望将文件名用作一个值。</td>
+</tr>
+<tr>
+<td>跳过（元素/属性）</td>
+<td>应跳过的元素或属性数量。使用此字 段在文件中的特定位置开始处理。解
+析器仍将加载文件，但不会生成行。</td>
+</tr>
+<tr>
+<td>限制（元素/属性）</td>
+<td>限制要处理的元素或属性 数量。通过”跳过”和”限制”属性，您
+可以启用在外循环中定义的块加载。</td>
+</tr>
+<tr>
+<td>默认字符串长度</td>
+<td>XML数 据名称和值字段的默认字符串长度。</td>
+</tr>
+<tr>
+<td>编码</td>
+<td>以指 定的编码对XML文件数据进行编码。</td>
+</tr>
+<tr>
+<td>是否添加命名空间信息？</td>
+<td>将XML数据类型NAMESPA CE添加到流中。您可以添加一个可选
+前缀（在XML数据名称中定义）和UR I信息（在XML数据值中定义）。例如
+，此选项会将ELEMENT数据类型中定 义的前缀添加到XML数据名称中，如
+prefix:product。由于额外的命名空 间处理，此选项会降低处理吞吐量。</td>
+</tr>
+<tr>
+<td>是否修剪字符串？</td>
+<td>修剪所有名称/值元素 和属性。它会消除字符串开头和结尾
+的空格、制表符、回车符和换行符。</td>
+</tr>
+<tr>
+<td>是 否在输出中包含文件名？/字段名称</td>
+<td>将处理后 的文件名添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否在输出中包含行号？/字段名称</td>
+<td>将处理后的行号（从 1开始）添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否在输出中包 含XML数据类型（数字）？/字段名称</td>
+<td><div>
+<div>
+<p>将处理后的数据类型以 数字格式添加到指定的字段名称中。</p>
+</div>
+<div>
+<p>定义了以下数据类型：</p>
+</div>
+<div>
+<ul>
+<li><p>0 - “UNKNOWN”（保留）</p></li>
+<li><p>1 - “START_ELEMENT”</p></li>
+<li><p>2 - “END_ELEMENT”</p></li>
+<li><p>3 -</p></li>
+</ul>
+<p>“PROCESSING_INSTRUCTION”（保留）</p>
+<ul>
+<li><p>4 - “CHARACTERS”</p></li>
+<li><p>5 - “COMMENT”（保留）</p></li>
+<li><p>6 - “SPACE”（保留）</p></li>
+<li><p>7 - “START_DOCUMENT”</p></li>
+<li><p>8 - “END_DOCUMENT”</p></li>
+<li><p>9 - “ENTITY_REFERENCE”（保留）</p></li>
+<li><p>10 - “ATTRIBUTE”</p></li>
+<li><p>11 - “DTD”（保留）</p></li>
+<li><p>12 - “CDATA”（保留）</p></li>
+<li><p>13 - ” NAMESPACE”（选择命名空间信息时）</p></li>
+<li><p>14 -</p></li>
+</ul>
+<p>“NOTATION_DECLARATION”（保留）</p>
+<ul>
+<li>15 -</li>
+</ul>
+<p>“ENTITY_DECLARATION”（保留）。</p>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>是否在输出中包 含XML数据类型（描述）？/字段名称</td>
+<td><p>将处理后的数据类型以文本格 式添加到指定的字段名称中。为了使
+管道更具可读性，应使用此选项而非 数字数据类型。有关值列表，请参阅
+上面的XML数据类型（数字）描述。</p>
+<p>由于 此选项可能会导致字符串处理速度变
+慢并消耗额外内存，因此对于大数据
+加载，建议使用数字数据类型格式。</p></td>
+</tr>
+<tr>
+<td>是否 在输出中包含XML位置行？/字段名称</td>
+<td>将处理后的源X ML位置行添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否 在输出中包含XML位置列？/字段名称</td>
+<td>将处理后的源X ML位置列添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否 在输出中包含XML元素ID？/字段名称</td>
+<td>将处 理后的元素编号（从'0'开始）添 加到指定的字段名称中。与添加行号
+不同，此字段编号按每个新元素的计 数递增，而不是按行号递增。这种编
+号方式可确保各级之间的嵌套正确。</td>
+</tr>
+<tr>
+<td>是否在 输出中包含XML父元素ID？/字段名称</td>
+<td>将父元素编号添加到 指定的字段名称中。当您将XML元素
+ID与XML父元素ID一起使用时，可获 得完整的XML元素树以供后续使用。</td>
+</tr>
+<tr>
+<td>是否在 输出中包含XML元素级别？/字段名称</td>
+<td>将处理后的元素 级别添加到指定的字段名称中，根S
+TART_和END_DOCUMENT从'0'开始。</td>
+</tr>
+<tr>
+<td>是 否在输出中包含XML路径？/字段名称</td>
+<td>将处理后的 XML路径添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否 在输出中包含XML父路径？/字段名称</td>
+<td>将处理后的X ML父路径添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否在 输出中包含XML数据名称？/字段名称</td>
+<td>将处理后 的元素、属性和可选命名空间前缀的
+数据名称添加到指定的字段名称中。</td>
+</tr>
+<tr>
+<td>是否 在输出中包含XML数据值？/字段名称</td>
+<td>将处理 后的元素、属性和可选命名空间URIs
+的数据值添加到指定的字段名称中。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

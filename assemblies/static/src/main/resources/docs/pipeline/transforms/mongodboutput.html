@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mongodboutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="mongodb输出">MongoDB输出</h1>
+<h2 id="描述">描述</h2>
+<p>MongoDB输出转换可以将数据输出到MongoDB数据库集合中。有关MongoDB的更多信息，请参阅MongoDB文档。</p>
+<h2 id="选项">选项</h2>
+<div>
+<h3 id="常规">常规</h3>
+<div>
+<p>转换名称：在管道中指定MongoDB输出转换的唯一名称。</p>
+</div>
+<h3 id="输出选项标签">输出选项标签</h3>
+<div>
+<p>“输出选项”标签提供了将数据插入MongoDB集合的控件。如果指定的集合不存在，将在插入文档之前创建该集合。</p>
+</div>
+<div>
+<p>在此标签的字段中输入以下信息：</p>
+</div>
+<p>选项</p>
+</div>
+<p>描述</p>
+<p>MongoDB连接</p>
+<p>此MongoDB输出转换要使用的 MongoDB连接。</p>
+<p>集合</p>
+<p>指定输出的目标集合。设置有效的主机名和端口后，您可以单击”获取集合”以检索所选数据库中现有集合的名称。如果指定的集合不存在，将在插入数据之前创建该集合。</p>
+<p>批量插入大小</p>
+<p>指定批量插入操作的批量大小。默认值为100行。</p>
+<p>截断集合</p>
+<p>选择在插入新数据之前删除目标集合中的现有数据。</p>
+<p>更新</p>
+<p>设置指定数据库和集合的更新写入方法。</p>
+<p><strong>除非选择了”更新”字段，否则”插入或更新”和”修饰符更新”选项不可用。</strong></p>
+<p>插入或更新</p>
+<p>选择将写入方法从插入更改为插入或更新。插入或更新方法会根据Mongo文档字段标签中指定的所有传入字段，用全新记录替换匹配的记录。如果更新的匹配条件不成立，则会创建一条新记录。</p>
+<p>多次更新</p>
+<p>选择对每次更新或插入或更新操作更新所有匹配的文档。</p>
+<p>修饰符更新</p>
+<p>选择启用修饰符（$运算符）来修改匹配文档中的各个字段。选择”多次更新”选项后，将更新所有匹配的文档。</p>
+<p>要更新多个匹配文档，请选择”修饰符更新”和”插入或更新”。选择”修饰符更新”、“插入或更新”和”多次更新”将更新应用于所有匹配文档，而不仅仅是第一个。</p>
+<p>写入操作的重试次数</p>
+<p>指定写入操作尝试的次数。</p>
+<p>重试尝试之间的延迟（以秒为单位）</p>
+<p>指定下次重试前等待的秒数。</p>
+<h3 id="mongo文档字段标签">Mongo文档字段标签</h3>
+<div>
+<p>使用”Mongo文档字段”标签定义进入转换的字段值如何写入Mongo文档。“修饰符策略”列控制修饰符操作的执行何时影响特定字段。当一个Mongo文档的数据分散在多个传入的Hfxt行中，或者无法同时执行影响同一字段的不同修饰符操作时，可以使用修饰符策略。</p>
+</div>
+<div>
+<p>有2个辅助按钮可供使用： *
+<strong>获取字段</strong>：用传入字段的名称填充表的”名称”列。 *
+<strong>预览文档结构</strong>：打开一个对话框，以JSON格式显示将写入MongoDB的结构。</p>
+</div>
+<div>
+<p>在此标签的字段中输入以下信息：</p>
+</div>
+<p>列</p>
+<p>字段描述</p>
+<p>名称</p>
+<p>传入字段的名称。</p>
+<p>Mongo文档路径</p>
+<p>以点号表示法格式表示的文档中字段的分层路径。</p>
+<p>使用字段名称</p>
+<p>是否使用传入字段名称作为路径中的最后一项。值为Y（使用传入字段名称）和N（不使用传入字段名称）。设置为Y时，假定前面有一个句点（.）。</p>
+<p>NULL值</p>
+<p>指定是否在数据库中插入空值。值为：</p>
+<p>- 插入NULL</p>
+<p>- 忽略</p>
+<p>JSON</p>
+<p>表示传入值是一个JSON文档。</p>
+<p>更新匹配字段</p>
+<p>表示在执行插入或更新操作时是否匹配字段。集合中与该列中标记为Y的所有字段匹配的第一个文档将被使用所有定义字段路径的传入值构造的新文档替换。如果不存在匹配文档，则会在集合中插入一个新文档。</p>
+<p>修饰符操作</p>
+<p>指定对现有文档字段的就地修改。</p>
+<p>修饰符有：</p>
+<p>- 不适用</p>
+<p>- <code>$set</code>：设置字段的值。</p>
+<p>-
+<code>$inc</code>：如果字段不存在，则设置字段的值。如果字段存在，则增加（或使用负值减少）字段的值。</p>
+<p>-
+<code>$push</code>：如果字段不存在，则设置字段的值。如果字段存在，则追加字段的值。</p>
+<p>- <code>$</code>：（数组内匹配的位置运算符）。</p>
+<p>修饰符策略</p>
+<p>控制修饰符操作的执行何时影响字段。值为：</p>
+<p>-
+<code>插入并更新</code>：无论集合中是否存在匹配项，都会执行操作（默认）。“插入并更新”修饰符策略（插入或更新）允许您在执行插入或更新操作时指定要匹配的字段。插入或更新仅替换第一个匹配文档。修饰符插入或更新可用于替换多个文档中的某些字段值。</p>
+<p>- <code>插入</code>：仅在插入时执行操作（当匹配条件不成立时）</p>
+<p>- <code>更新</code>：当匹配条件成立时执行操作。</p>
+<h4 id="示例">示例</h4>
+<div>
+<p>以下是如何定义具有任意层次结构的文档结构的示例。使用以下输入数据和文档字段定义在MongoDB中创建示例文档结构：</p>
+</div>
+<h5 id="输入数据">输入数据</h5>
+<div>
+<div>
+<pre><code>first, last, address, age
+Bob, Jones ,&quot;13 Bob Street&quot;, 34
+Fred, Flintstone, &quot;10 Rock Street&quot;,50
+Zaphod, Beeblebrox, &quot;Beetlejuice 1&quot;, 356
+Noddy,Puppet,&quot;Noddy Land&quot;,5</code></pre>
+</div>
+</div>
+<h5 id="文档字段定义">文档字段定义</h5>
+<p>名称</p>
+<p>Mongo文档路径</p>
+<p>使用字段名称</p>
+<p>NULL值</p>
+<p>JSON</p>
+<p>更新匹配字段</p>
+<p>修饰符操作</p>
+<p>修饰符策略</p>
+<p>first</p>
+<p>top1</p>
+<p>Y</p>
+<p>N</p>
+<p>N</p>
+<p>N/A</p>
+<p>插入并更新</p>
+<p>last</p>
+<p>array[O]</p>
+<p>Y</p>
+<p>N</p>
+<p>N</p>
+<p>N/A</p>
+<p>插入并更新</p>
+<p>address</p>
+<p>array[O]</p>
+<p>Y</p>
+<p>N</p>
+<p>N</p>
+<p>N/A</p>
+<p>插入并更新</p>
+<p>age</p>
+<p>array[O]</p>
+<p>&lt;</p>
+</body>
+</html>

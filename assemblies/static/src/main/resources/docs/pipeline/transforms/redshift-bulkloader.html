@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>redshift-bulkloader.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="redshift批量加载器">Redshift批量加载器</h1>
+<h2 id="描述">描述</h2>
+<p>Redshift批量加载器转换使用COPY命令将数据从 Hfxt加载到AWS
+Redshift。</p>
+<h2 id="常规选项">常规选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转换名称</td>
+<td>转换的名称。</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>目标表所在的数据库连接名称。</td>
+</tr>
+<tr>
+<td>目标模式</td>
+<td>写入数据的目标模式名称。</td>
+</tr>
+<tr>
+<td>目标表</td>
+<td>写入数据的目标表名称。</td>
+</tr>
+<tr>
+<td>AWS身份验证</td>
+<td><div>
+<div>
+<p>选择与COPY命令一起使用的身份验
+证方法。支持的选项有”AWS凭证”和”IAM角色”。<br />
+</p>
+</div>
+<div>
+<ul>
+<li><p>查看基于密钥的访问控制（基于密钥的
+访问控制），了解有关”凭证”选项的更多信息。</p></li>
+<li><p>查看IAM角色文档（I
+AM角色），了解有关”IAM角色”选项的更多信息。</p></li>
+</ul>
+</div>
+</div></td>
+</tr>
+<tr>
+<td>使用AWS系统变量</td>
+<td>（仅”凭证”！）从操作系统的环境变量中获取AWS
+_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY的值。</td>
+</tr>
+<tr>
+<td>AWS_ACCESS_KEY_ID</td>
+<td>（如果选择”凭证”且未选中”使用AWS系统变
+量”）为AWS_ACCESS_KEY_ID指定一个值或变量。</td>
+</tr>
+<tr>
+<td>AWS_SECRET_ACCESS_KEY</td>
+<td>（如果选择”凭证”且未选中”使用AWS系统变量”
+）为AWS_SECRET_ACCESS_KEY指定一个值或变量。</td>
+</tr>
+<tr>
+<td>IAM角色</td>
+<td>（如果选 择”IAM角色”）指定要使用的IAM角色，语法为ar
+n:aws:iam::&lt;aws-账户ID&gt;:role/&lt;角色名称&gt;</td>
+</tr>
+<tr>
+<td>截断表</td>
+<td>在加载数据之前截断目标表。</td>
+</tr>
+<tr>
+<td>在第一行数据时截断</td>
+<td>在加载 数据之前截断目标表，但仅在接收到第一行数据
+时进行（当管道运行空流（0行）时不会截断）。</td>
+</tr>
+<tr>
+<td>指定数据库字段</td>
+<td>指定数据库和流字段的映射</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="主要选项">主要选项</h2>
+<div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">将流写入S3 CSV</td>
+<td
+style="text-align: left;">在执行COPY加载之前，将当前管道流写入S3存储桶中的CSV文件。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从现有文件加载</td>
+<td
+style="text-align: left;">不流式传输当前管道的内容，而是从S3中的现有文件执行COPY加载。支持的格式有”CSV”（逗号分隔）和”Parquet”。</td>
+</tr>
+<tr>
+<td style="text-align: left;">从现有文件复制到Redshift</td>
+<td style="text-align: left;">要从其COPY加载数据的S3文件路径。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="数据库字段">数据库字段</h2>
+<div>
+<div>
+<p>将当前流字段映射到Redshift表的列。</p>
+</div>
+</div>
+</body>
+</html>

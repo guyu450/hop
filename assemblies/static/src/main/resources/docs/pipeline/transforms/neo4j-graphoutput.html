@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>neo4j-graphoutput.html</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="neo4j图输出">Neo4j图输出</h1>
+<h2 id="描述">描述</h2>
+<p>图输出转换功能可让您将输入字段自动映射到图模型。用于更新图的算法会考虑映射到节点主属性的字段的空值。这些空值不会在这些节点上合并，也不会创建或更新与这些节点的关系。</p>
+<h2 id="限制">限制</h2>
+<div>
+<div>
+<ul>
+<li>不支持跨未知节点 <code>()--()</code> 的更新</li>
+</ul>
+</div>
+</div>
+<h2 id="建模提示">建模提示</h2>
+<div>
+<div>
+<ul>
+<li><p>尝试使用像 Cypher Workbench 或 Arrows
+这样的建模工具，并将结果导入到图模型中。</p></li>
+<li><p>尽量使您的模型保持简单。</p></li>
+<li><p>确保每个定义的节点都有一个主键字段</p></li>
+<li><p>每个节点限制使用一个主键字段</p></li>
+</ul>
+</div>
+</div>
+<h2 id="执行提示">执行提示</h2>
+<div>
+<div>
+<ul>
+<li>确保每个节点主键都有一个索引。使用图模型编辑器中提供的按钮来生成Neo4j索引和约束操作，它将为您处理此问题。</li>
+</ul>
+</div>
+</div>
+<h2 id="重要选项">重要选项</h2>
+<div>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 65%" />
+</colgroup>
+<tbody>
+<tr>
+<td>选项</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>转换名称</td>
+<td>此转换在管道中的名称</td>
+</tr>
+<tr>
+<td>Neo4j连接</td>
+<td>用于写入图的Neo4j连接</td>
+</tr>
+<tr>
+<td>图模型</td>
+<td>要使用的 Neo4j图模型</td>
+</tr>
+<tr>
+<td>批处理大小（行数）</td>
+<td>用于向Neo4j写入数据的批处理大小</td>
+</tr>
+<tr>
+<td>创建索引？</td>
+<td>在运行此转换之前创建Neo4j索引</td>
+</tr>
+<tr>
+<td>返回图数据？</td>
+<td>返回Neo4j返回的图数据</td>
+</tr>
+<tr>
+<td>图输出字段名称</td>
+<td>将图数据写入的字段名称（如果启用了 <code>返回图数据？</code>）</td>
+</tr>
+<tr>
+<td>根据模型验证？</td>
+<td>根据模型验证数据。这将检查是否为
+标记为主键/索引的字段创建了索引，查看在更新
+节点时标记为必需的属性是否可用等等。唯一性最
+好通过对属性的约束来验证。使用提供的按钮生成 “Neo4j约束” 操作。</td>
+</tr>
+<tr>
+<td>允许乱序更新？</td>
+<td>如果允许乱序更新，此转 换将生成展开语句。否则，将使用标准批处理更新
+。更新将按每个不同的生成Cypher语句进行分组。</td>
+</tr>
+<tr>
+<td>字段到属性映射标签页</td>
+<td>在此标签页上，您可以指定希望输入字段在
+图中的最终位置。根据您对此映射的选择，将执行
+相应的Cypher合并语句。您可以将字段映射到节点
+和关系属性。对于非常特殊的情况，即您希望在具
+有相同标签的两个节点之间创建关系（自关系），
+您可以指定映射到哪个节点：源节点或目标节点。</td>
+</tr>
+<tr>
+<td>字段到关系映射标签页</td>
+<td><p>有时您希望根据 输入数据在图模型中选择一个关系。以下是您可以
+应用的4种不同类型的关系映射，以引导此行为：</p>
+<p>* <code>无映射</code>：该行将被忽略</p>
+<p>* <code>不更新指定节点之间的关系</code>：您可
+以指定不想更新任何关系的源节点和目标节点标签</p>
+<p>* <code>使用字段值更新特定关系</code>：您可以
+指定要查看的字段以及要选择的关系要考虑的值。</p>
+<p>*
+<code>更新指定节点之间的所有关系（ 默认）</code>：图模型中定义的指定源节点和目标节点
+之间的所有关系都将被更新（合并并更新属性）。</p></td>
+</tr>
+<tr>
+<td>节点标签映射标签页</td>
+<td><p>如果您 想从图模型中指定的标签中选择特定标签，可以在
+此标签页中创建映射条目。以下是节点映射类型：</p>
+<p>* <code>选择所有定义的标签（默认）</code>：
+匹配/合并节点时，将选择图模型中的所有标签。</p>
+<p>* <code>使用字段值选择特定标签</code>
+：对于指定的节点，我们查看您喜欢的输入字段，
+如果它与值匹配，则选择该标签进行匹配/合并。</p>
+<p>* <code>如果 字段包含特定值，则添加指定标签</code>：对于选定的
+节点，如果字段包含特定值，则设置选定的标签。</p>
+<p>* <code>选择第一个标签</code>：对于指定的节点，我
+们仅使用图模型中的第一个标签进行匹配/合并。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
