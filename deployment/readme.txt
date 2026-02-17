@@ -1,3 +1,6 @@
+feature/2.16.2:
+    2.16.1 : 将2.14.1 合并到2.16.1 时候发生了【去除多余plugins】的pom文件 assemblies/plugins/pom.xml 合并错误；
+    新增2.16.2: 启始于2.16.0 ， 将2.14.1 和2.16.1 的修改合并到2.16.2
 
 feature/2.16.1:
 修改1:升级2.14.0 到2.16.0
@@ -41,21 +44,11 @@ feature/2.16.1:
                 "WorkflowLog.name",
                 "workflow-run-configuration",
                 "WorkflowLog.name"
-恢复3: 恢复feature中对多余plugins的删除 17个
-    hop-transform-systemdata
-    hop-transform-tablecompare
-    hop-transform-tableexists
-    hop-transform-tableinput
-    hop-transform-tableoutput
-    hop-transform-terafast
-    hop-transform-tika
-    hop-transform-tokenreplacement
-    hop-transform-update
-    hop-transform-valuemapper
-    hop-transform-verticabulkloader
-    hop-transform-webserviceavailable
-    hop-transform-webservices
-    hop-transform-workflowexecutor
-    hop-transform-writetolog
-    hop-transform-yamlinput
-    hop-transform-zipfile
+
+
+
+feature/2.14.1
+功能1: 汉化
+功能2: 去除多余plugins
+功能3: 帮助文档汉化翻译
+功能3: 许可证生成和验证
