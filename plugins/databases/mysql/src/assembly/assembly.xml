@@ -39,5 +39,12 @@
             </includes>
             <outputDirectory>plugins/databases/mysql</outputDirectory>
         </dependencySet>
+        <dependencySet>
+            <scope>runtime</scope>
+            <includes>
+                <include>com.mysql:mysql-connector-j:jar</include>
+            </includes>
+            <outputDirectory>lib/jdbc</outputDirectory>
+        </dependencySet>
     </dependencySets>
 </assembly>

@@ -44,5 +44,12 @@
             </includes>
             <outputDirectory>plugins/databases/mariadb</outputDirectory>
         </dependencySet>
+        <dependencySet>
+            <scope>runtime</scope>
+            <includes>
+                <include>org.mariadb.jdbc:mariadb-java-client:jar</include>
+            </includes>
+            <outputDirectory>lib/jdbc</outputDirectory>
+        </dependencySet>
     </dependencySets>
 </assembly>

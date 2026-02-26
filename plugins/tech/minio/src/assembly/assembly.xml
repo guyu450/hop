@@ -60,7 +60,7 @@
                 <exclude>org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar</exclude>
                 <exclude>org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar</exclude>
                 <exclude>org.jetbrains.kotlin:kotlin-stdlib:jar</exclude>
-                <exclude>org.jetbrains:annotations:jar</exclude>
+<!--                <exclude>org.jetbrains:annotations:jar</exclude>-->
                 <exclude>org.checkerframework:checker-qual:jar</exclude>
                 <exclude>org.xerial.snappy:snappy-java:jar</exclude>
                 <exclude>com.squareup.okhttp3:okhttp:jar</exclude>
@@ -71,6 +71,7 @@
             <scope>runtime</scope>
             <includes>
                 <include>io.minio:minio:jar</include>
+                <include>com.squareup.okio::jar</include>
             </includes>
             <outputDirectory>lib/core</outputDirectory>
         </dependencySet>

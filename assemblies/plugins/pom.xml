@@ -36,9 +36,48 @@
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
+        <!--databases依赖-->
+        <dependency>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-databases-duckdb</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hop</groupId>-->
+        <!--            <artifactId>hop-databases-mariadb</artifactId>-->
+        <!--            <version>${project.version}</version>-->
+        <!--            <type>zip</type>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-databases-mysql</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-metadata-filter-plugin</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
         <dependency>
             <groupId>org.apache.hop</groupId>
             <artifactId>hop-misc-static-schema</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <!--tech依赖-->
+        <dependency>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-tech-minio</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-tech-parquet</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
@@ -214,6 +253,12 @@
         <dependency>
             <groupId>org.apache.hop</groupId>
             <artifactId>hop-transform-metadata</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-transform-mongodb</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
