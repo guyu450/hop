@@ -48,7 +48,7 @@ build-hfxt:
 build-hfxt-image:
 	@echo "build hfxt image"
 	@docker buildx build \
-		-t ${REGISTRY}/${SERVICE_REPOSITORY}:${TAG} \
+		-t ${REGISTRY}/${SERVICE_REPOSITORY}:${TAG} -t ${REGISTRY}/${SERVICE_REPOSITORY}:latest\
 	    -f ${HFXT_HOME}/docker/Dockerfile \
 		${HFXT_HOME}
 #	@docker buildx build --platform linux/amd64 --load \
@@ -101,7 +101,7 @@ publish-hfxt-web-image: build-hfxt
 	@echo "====docker login"
 	@docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
 	@docker buildx build --platform linux/amd64 --load \
-		-t registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt-web:${VERSION} \
+		-t registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt-web:${VERSION} -t registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt-web:latest\
 		-f docker/Dockerfile.web \
 		.	\
 		--push \

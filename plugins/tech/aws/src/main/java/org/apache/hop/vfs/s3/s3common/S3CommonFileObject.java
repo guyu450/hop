@@ -108,7 +108,7 @@ public abstract class S3CommonFileObject extends AbstractFileObject {
 
     // fix cases where the path doesn't include the final delimiter
     String realKey = key;
-    if (!realKey.endsWith(DELIMITER) && !realKey.isEmpty()) {
+    if (!realKey.endsWith(DELIMITER)) {
       realKey += DELIMITER;
     }
 
