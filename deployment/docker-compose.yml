@@ -1,13 +1,13 @@
-
 version: '3.8'
 
 services:
   hfxt-web:
-    image: hfxt-web:latest
+    image: registry.cn-hangzhou.aliyuncs.com/hfxt/hfxt-web:2.16.2
     ports:
       - "9003:8080"
     volumes:
       - ./hop-data/lic:/etc/lic
-      - ./hop-data/config:/usr/local/tomcat/webapps/ROOT/config
-      - ./hop-data/audit:/usr/local/tomcat/webapps/ROOT/audit
+#      - ./hop-data/config:/usr/local/tomcat/webapps/ROOT/config
+#      - ./hop-data/audit:/usr/local/tomcat/webapps/ROOT/audit
+      - ./hop-data/pwd:/usr/local/tomcat/pwd
     restart: unless-stopped

@@ -17,6 +17,7 @@
 
 package org.apache.hop.www;
 
+import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Servlet;
 import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
@@ -24,6 +25,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.EnumSet;
 import java.util.List;
 import org.apache.hop.core.Const;
 import org.apache.hop.core.HopEnvironment;
@@ -245,6 +247,15 @@ public class WebServer {
     ServletContextHandler root =
         new ServletContextHandler(GetRootServlet.CONTEXT_PATH, ServletContextHandler.SESSIONS);
     contexts.addHandler(root);
+
+    // Add LoginFilter to root context for session-based authentication
+    // This filter works alongside the existing Basic Auth for API compatibility
+    LoginFilter loginFilter = new LoginFilter();
+    root.addFilter(
+        new org.eclipse.jetty.ee11.servlet.FilterHolder(loginFilter),
+        "/*",
+        EnumSet.of(DispatcherType.REQUEST));
+
     GetRootServlet rootServlet = new GetRootServlet();
     rootServlet.setJettyMode(true);
 
@@ -288,6 +299,14 @@ public class WebServer {
     root.setInitParameter(DefaultServlet.CONTEXT_INIT + "dirAllowed", "true");
     root.setInitParameter(DefaultServlet.CONTEXT_INIT + "pathInfoOnly", "true");
     root.addServlet(staticHolder, "/static/*");
+
+    // Register LoginServlet
+    LoginServlet loginServlet = new LoginServlet();
+    root.addServlet(new ServletHolder(loginServlet), "/login/*");
+
+    // Register LogoutServlet
+    LogoutServlet logoutServlet = new LogoutServlet();
+    root.addServlet(new ServletHolder(logoutServlet), "/logout");
 
     root.addServlet(new ServletHolder(rootServlet), "/*");
 

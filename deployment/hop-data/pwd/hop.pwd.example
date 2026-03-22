@@ -1,0 +1,23 @@
+# Hop Web Server Password File for Docker Deployment
+#
+# This file contains the username and password combinations for accessing the Hop Server.
+#
+# Format: username: password,role
+#
+# Password can be:
+# - Plain text: password
+# - Obfuscated: OBF:obfuscated_string
+# - MD5 hash: MD5:hashed_string
+# - Crypt: CRYPT:encrypted_string
+#
+# To generate an obfuscated password, use Hop's built-in encryption tool:
+#   cd /usr/local/tomcat/webapps/ROOT
+#   ./hop-encrypt.sh
+#
+# Default user for Hop Server:
+cluster: OBF:1v8w1uh21z7k1ym71z7i1ugo1v9q,default
+
+# Example users (uncomment and modify as needed):
+#admin: OBF:1v8w1uh21z7k1ym71z7i1ugo1v9q,default
+#guest: password,default
+#user: MD5:5f4dcc3b5aa765d61d8327deb882cf90,default

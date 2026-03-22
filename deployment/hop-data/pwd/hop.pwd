@@ -1,0 +1,4 @@
+# Hop Web Server Password File
+# Default username: cluster
+# Default password: cluster
+cluster: cluster,default
