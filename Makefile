@@ -18,7 +18,7 @@
 # s2:
 #	 echo s2
 HFXT_HOME :=  "."
-VERSION ?= "2.16.2"
+VERSION ?= "2.16.2.1"
 
 #REGISTRY ?= "192.168.8.210:8080/library"
 REGISTRY ?= "registry.cn-hangzhou.aliyuncs.com"
@@ -27,7 +27,7 @@ SERVICE_REPOSITORY ?= "${REPOSITORY_PREF}"
 WEB_REPOSITORY ?= "${REPOSITORY_PREF}-web"
 
 #$ sudo docker login --username=lijuan.zlj@1774306087113395 registry.cn-hangzhou.aliyuncs.com
-TAG ?= 2.16.2
+TAG ?= 2.16.2.1
 COMMIT_ID := $(shell git rev-parse HEAD)
 
 default: build-all-image
@@ -94,8 +94,8 @@ publish-hfxt-image: build-hfxt
         .	\
         --push \
 
-publish-hfxt-web-image: build-hfxt
-#publish-hfxt-web-image:
+#publish-hfxt-web-image: build-hfxt
+publish-hfxt-web-image:
 	@echo "build and push hfxt-web image"
 	@sh docker/hop_web_docker_before.sh
 	@echo "====docker login"

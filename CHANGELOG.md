@@ -1,5 +1,11 @@
 # Changelog
 本地化修改会记录在案
+## [2.16.2.1] - 2026-05-26
+### Added
+- 增加了登陆页面功能
+### Fixed
+-
+
 ## [2.16.2] - 2026-02-27
 ### Added
 - 
@@ -12,6 +18,7 @@
 ### Added
 - 增加UI界面中metadata的列表控制方法：config 目录下的metadata-filter-config.json 配置 excluded 和 included；对应实现类：ConfigurableMetadataFilter；
   jar包依旧会加载；
+- 添加了metadata-filter-config.json 配置文件，格式如下：
   {
   "included": [
   "rdbms",
@@ -19,7 +26,7 @@
   ],
   "excluded":[]
   }
-  下方为完整key
+- 完整key值如下
   "async-web-service",
   "AzureConnectionDefinition",
   "cassandra-connection",

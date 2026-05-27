@@ -25,15 +25,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import org.apache.hop.core.Const;
 import org.apache.hop.core.encryption.Encr;
 import org.apache.hop.core.logging.ILogChannel;
 import org.apache.hop.core.logging.LogChannel;
 import org.apache.hop.core.util.Utils;
-import org.eclipse.jetty.util.security.Password;
 
 /**
  * Servlet to handle user login via form POST request. Validates credentials against HopServerMeta
@@ -144,26 +147,35 @@ public class LoginServlet extends HttpServlet {
    */
   private boolean validateCredentials(String username, String password) {
     if (Utils.isEmpty(username) || Utils.isEmpty(password)) {
+      log.logBasic("用户名或密码为空");
       return false;
     }
+
+    log.logBasic("=== 密码验证开始 ===");
+    log.logBasic("用户名: " + username);
 
     // First check HopServerMeta configuration
     if (serverConfig != null && serverConfig.getHopServer() != null) {
       String configUsername = serverConfig.getHopServer().getUsername();
       String configPassword = serverConfig.getHopServer().getPassword();
 
+      log.logBasic("HopServerMeta 配置用户名: " + configUsername);
+
       if (!Utils.isEmpty(configPassword)) {
         // Validate against HopServerMeta
         String decryptedPassword = Encr.decryptPasswordOptionallyEncrypted(configPassword);
+        log.logBasic("HopServerMeta 密码" + password + " ; 解密密码: " + decryptedPassword);
         if (username.equals(configUsername) && password.equals(decryptedPassword)) {
           return true;
         }
         // If HopServerMeta has password configured, don't check pwd file
+        log.logBasic("HopServerMeta 密码不匹配，不检查 pwd 文件");
         return false;
       }
     }
 
     // Check pwd/hop.pwd file
+    log.logBasic("检查 pwd/hop.pwd 文件");
     return validateFromPwdFile(username, password);
   }
 
@@ -177,6 +189,9 @@ public class LoginServlet extends HttpServlet {
   private boolean validateFromPwdFile(String username, String password) {
     String passwordFile = Const.getHopLocalServerPasswordFile();
     Path pwdPath = Paths.get(passwordFile);
+
+    log.logBasic("密码文件路径: " + passwordFile);
+    log.logBasic("密码文件存在: " + Files.exists(pwdPath));
 
     if (!Files.exists(pwdPath)) {
       if (log.isDetailed()) {
@@ -194,36 +209,101 @@ public class LoginServlet extends HttpServlet {
         }
 
         // Parse line: username: password,roles
-        String[] parts = line.split(":");
+        // Use limit=2 to split only on first ':' to preserve "SHA256:" prefix
+        String[] parts = line.split(":", 2);
         if (parts.length >= 2) {
           String fileUsername = parts[0].trim();
+          log.logBasic("检查用户: " + fileUsername + " (匹配: " + fileUsername.equals(username) + ")");
+
           if (fileUsername.equals(username)) {
             String credentials = parts[1].trim();
             // Split password and roles
             String[] credParts = credentials.split(",");
             String storedPassword = credParts[0].trim();
 
-            // Check if password is obfuscated (OBF:, MD5:, CRYPT:)
-            if (storedPassword.startsWith("OBF:")) {
-              // Jetty OBF password - deobfuscate and compare
-              Password pwd = new Password(storedPassword);
-              return pwd.toString().equals(password);
-            } else if (storedPassword.startsWith("MD5:") || storedPassword.startsWith("CRYPT:")) {
-              // Hashed passwords - use Jetty Password to check
-              Password pwd = new Password(storedPassword);
-              return pwd.equals(password);
+            log.logBasic("存储的密码哈希: " + storedPassword);
+
+            // Support multiple password formats:
+            // 1. SHA-256:<hex> - Jetty SHA-256 hash (hex format, compatible with Jetty Basic Auth)
+            // 2. SHA256:<base64> - SHA-256 hash (base64 format, Hop custom format)
+            // 3. Encrypted <hex> - Hop legacy encryption
+            // 4. Plain text - for backward compatibility
+
+            if (storedPassword.startsWith("SHA-256:")) {
+              // Jetty SHA-256 format: SHA-256:hex (64 hex characters)
+              String hexHash = storedPassword.substring(8); // Remove "SHA-256:" prefix
+              String inputHash = encryptPasswordSha256Hex(password);
+              log.logBasic("存储的密码哈希 (Jetty格式): " + storedPassword);
+              log.logBasic("计算的密码哈希 (十六进制): " + inputHash);
+              log.logBasic("哈希匹配: " + hexHash.equalsIgnoreCase(inputHash));
+              boolean result = hexHash.equalsIgnoreCase(inputHash);
+              log.logBasic("=== 密码验证结果: " + (result ? "成功" : "失败") + " ===");
+              return result;
+            } else if (storedPassword.startsWith("SHA256:")) {
+              // Hop SHA-256 format: SHA256:base64
+              String inputHash = encryptPasswordSha256Base64(password);
+              log.logBasic("存储的密码哈希 (Hop格式): " + storedPassword);
+              log.logBasic("计算的密码哈希 (Base64): " + inputHash);
+              log.logBasic("哈希匹配: " + storedPassword.equals(inputHash));
+              boolean result = storedPassword.equals(inputHash);
+              log.logBasic("=== 密码验证结果: " + (result ? "成功" : "失败") + " ===");
+              return result;
+            } else if (storedPassword.startsWith("Encrypted ")) {
+              // Hop legacy encryption
+              String decryptedPassword = Encr.decryptPasswordOptionallyEncrypted(storedPassword);
+              log.logBasic("解密后密码: " + decryptedPassword);
+              log.logBasic("密码匹配: " + decryptedPassword.equals(password));
+              boolean result = decryptedPassword.equals(password);
+              log.logBasic("=== 密码验证结果: " + (result ? "成功" : "失败") + " ===");
+              return result;
             } else {
-              // Plain text password
-              return storedPassword.equals(password);
+              // Plain text comparison (backward compatibility)
+              log.logBasic("明文密码匹配: " + storedPassword.equals(password));
+              boolean result = storedPassword.equals(password);
+              log.logBasic("=== 密码验证结果: " + (result ? "成功" : "失败") + " ===");
+              return result;
             }
           }
         }
       }
+      log.logBasic("未找到匹配的用户: " + username);
     } catch (IOException e) {
       log.logError("Error reading password file: " + passwordFile, e);
     }
 
+    log.logBasic("=== 密码验证结束 (失败) ===");
     return false;
+  }
+
+  /** Encrypt password using SHA-256 + Hex Format: SHA-256:<hex_hash> (Jetty compatible) */
+  private String encryptPasswordSha256Hex(String password) {
+    try {
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+      // Convert to hexadecimal string
+      StringBuilder hexString = new StringBuilder();
+      for (byte b : hash) {
+        String hex = Integer.toHexString(0xff & b);
+        if (hex.length() == 1) {
+          hexString.append('0');
+        }
+        hexString.append(hex);
+      }
+      return hexString.toString();
+    } catch (NoSuchAlgorithmException e) {
+      return password; // Fallback to plain text
+    }
+  }
+
+  /** Encrypt password using SHA-256 + Base64 Format: SHA256:<base64_hash> (Hop custom format) */
+  private String encryptPasswordSha256Base64(String password) {
+    try {
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+      return "SHA256:" + Base64.getEncoder().encodeToString(hash);
+    } catch (NoSuchAlgorithmException e) {
+      return password; // Fallback to plain text
+    }
   }
 
   @Override

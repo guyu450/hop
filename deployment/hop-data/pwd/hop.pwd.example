@@ -1,23 +1,15 @@
-# Hop Web Server Password File for Docker Deployment
 #
-# This file contains the username and password combinations for accessing the Hop Server.
+# 1. 密码的配置：
+# 位置：容器内 pwd/hop.pwd
+# hop.pwd内容格式: username:type:password,role 多密码则回车换行。其中类型可以是: SHA256或者为空(为明文)。
 #
-# Format: username: password,role
 #
-# Password can be:
-# - Plain text: password
-# - Obfuscated: OBF:obfuscated_string
-# - MD5 hash: MD5:hashed_string
-# - Crypt: CRYPT:encrypted_string
+# 2.密码的生成：使用线下传递的encrypt-password.sh脚本生成
 #
-# To generate an obfuscated password, use Hop's built-in encryption tool:
-#   cd /usr/local/tomcat/webapps/ROOT
-#   ./hop-encrypt.sh
-#
-# Default user for Hop Server:
-cluster: OBF:1v8w1uh21z7k1ym71z7i1ugo1v9q,default
+# 3. hop.pwd 配置样例：
+# 3.1 明文配置
+hftx:htfx@2016!,default
 
-# Example users (uncomment and modify as needed):
-#admin: OBF:1v8w1uh21z7k1ym71z7i1ugo1v9q,default
-#guest: password,default
-#user: MD5:5f4dcc3b5aa765d61d8327deb882cf90,default
+# 3.2 SHA256 hftx:htfx@2016!,default
+htfx:SHA256:EaHBb37OkB6f6AnFQDBMG89KXOAokjkA6IjPE05zMAU=,default
+

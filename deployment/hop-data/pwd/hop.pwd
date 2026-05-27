@@ -1,4 +1,2 @@
-# Hop Web Server Password File
-# Default username: cluster
-# Default password: cluster
-cluster: cluster,default
+htfx: SHA256:EaHBb37OkB6f6AnFQDBMG89KXOAokjkA6IjPE05zMAU=,default
+htfx-hex:SHA-256:7f35c56438068af274a05dd88c352c6c936d605acc2a690309ccd2503d48a20a,default
